@@ -31,8 +31,8 @@ public class Serialization {
 		}
 	}
 
-	//J'étais ICI
 	public static Deck jsonToDeck(String dest) {
+		Deck result = null;
 		try (BufferedReader br = new BufferedReader(new FileReader(dest + ".json"))) {
 			String fromFile = "";
 
@@ -42,8 +42,10 @@ public class Serialization {
 				tmp = br.readLine();
 			}
 
+			result = new Gson().fromJson(fromFile, Deck.class);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		return result;
 	}
 }
