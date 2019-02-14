@@ -6,7 +6,7 @@ import java.util.List;
 
 import exceptions.QuestionAlreadyPresentException;
 
-public class Deck implements Serializable {
+public class Deck{
 	private static final long serialVersionUID = 6638000761501455L;
 	private List<Question> questions;
 

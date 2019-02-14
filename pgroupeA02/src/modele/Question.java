@@ -9,7 +9,7 @@ import exceptions.AnswerAlreadyPresentException;
 import exceptions.RightAnswerAlreadyPresentException;
 import exceptions.TooMuchAnswersException;
 
-public class Question implements Serializable{
+public class Question{
 	private String author;
 	private String statement;
 	private Round round;
@@ -24,20 +24,20 @@ public class Question implements Serializable{
 
 	public void addChoice(String answer, boolean value)
 			throws TooMuchAnswersException, AnswerAlreadyPresentException, RightAnswerAlreadyPresentException {
-		// Propage une excption s'il y a déjà les 4 réponses possibles à la question
+		//Throw an exception if the question has already 4 answers 
 		if (choices.size() > 3)
 			throw new TooMuchAnswersException(statement);
 
-		// Propage une exception si cette réponse est déjà présente pour la question
+		//Throw an exception if the passed argument "answer" is already contained by the question
 		if (choices.containsKey(answer))
 			throw new AnswerAlreadyPresentException(statement, answer);
 
-		// Propage une exception s'il y a déjà la bonne réponse à la question
+		//Throw an exception it the question alreay has it's right answer
 		if (value)
 			if (choices.containsValue(true))
 				throw new RightAnswerAlreadyPresentException(statement);
 		
-		//Ajout de la réponse à la question
+		//Add the answer to the question
 		choices.put(answer, value);
 
 	}
