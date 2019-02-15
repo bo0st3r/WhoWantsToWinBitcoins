@@ -1,9 +1,9 @@
 package modele;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.NotAllAnswersException;
 import exceptions.QuestionAlreadyPresentException;
 
 public class Deck {
@@ -14,13 +14,26 @@ public class Deck {
 		questions = new ArrayList<>();
 	}
 
-	public boolean addQuestion(Question question) throws QuestionAlreadyPresentException {
+	/*
+	 * This method adds a question to the deck if it's not yet in.
+	 * 
+	 * @param question A Question object
+	 * 
+	 * @throws QuestionAlreadyPresentException Occurs if the question is already in
+	 * the deck.
+	 * 
+	 * @throws NotAllAnswersException Occurs if the question has less than 4
+	 * possible answers.
+	 */
+	public boolean addQuestion(Question question) throws QuestionAlreadyPresentException, NotAllAnswersException {
 		if (questions.contains(question))
 			throw new QuestionAlreadyPresentException(question.getStatement());
 
+		if (question.getNbAnswers() < 4)
+			throw new NotAllAnswersException(question.getStatement());
+
 		return questions.add(question.clone());
 	}
-
 
 	public String toString() {
 		String result = "Here's the questions of this deck :\n";
