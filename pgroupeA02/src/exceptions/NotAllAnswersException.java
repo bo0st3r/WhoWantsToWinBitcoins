@@ -1,6 +1,7 @@
 package exceptions;
 
 public class NotAllAnswersException extends Exception {
+	private static final long serialVersionUID = 2813524328554145130L;
 	private String statement;
 	
 	public NotAllAnswersException(String statement) {

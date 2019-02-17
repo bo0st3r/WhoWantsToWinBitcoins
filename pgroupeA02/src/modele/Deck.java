@@ -7,7 +7,6 @@ import exceptions.NotAllAnswersException;
 import exceptions.QuestionAlreadyPresentException;
 
 public class Deck {
-	private static final long serialVersionUID = 6638000761501455L;
 	private List<Question> questions;
 
 	public Deck() {
@@ -35,8 +34,12 @@ public class Deck {
 		return questions.add(question.clone());
 	}
 
+	public boolean removeQuestion(Question question) {
+		return questions.remove(question);
+	}
+
 	public String toString() {
-		String result = "Here's the questions of this deck :\n";
+		String result = "\tHere's the questions of this deck :\n";
 
 		for (Question q : questions) {
 			result += q.toString() + "\n";

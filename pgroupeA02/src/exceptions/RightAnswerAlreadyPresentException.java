@@ -1,6 +1,7 @@
 package exceptions;
 
 public class RightAnswerAlreadyPresentException extends Exception {
+	private static final long serialVersionUID = -1672384036925512943L;
 	private String statement;
 
 	public RightAnswerAlreadyPresentException(String statement) {
@@ -9,6 +10,6 @@ public class RightAnswerAlreadyPresentException extends Exception {
 	}
 
 	public String getMessage() {
-		return super.getMessage() + statement + "\" already has the right answer.";
+		return super.getMessage() + statement + "\" already has it's right answer.";
 	}
 }

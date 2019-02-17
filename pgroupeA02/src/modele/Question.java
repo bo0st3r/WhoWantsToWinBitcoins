@@ -7,7 +7,11 @@ import java.util.Set;
 
 import enumerations.Round;
 import exceptions.AnswerAlreadyPresentException;
+import exceptions.NeedRightAnswerException;
+import exceptions.NoRightAnswerException;
+import exceptions.NotARoundException;
 import exceptions.RightAnswerAlreadyPresentException;
+import exceptions.StatementTooShortException;
 import exceptions.TooMuchAnswersException;
 
 public class Question {
@@ -25,11 +29,29 @@ public class Question {
 	 * @param statement The statement of the question, as a String.
 	 * 
 	 * @param round The game round of the question.
+	 * 
+	 * @throws StatementTooShortException If the statement is less than 15
+	 * characters long.
+	 * 
+	 * @throws NotARoundException If the round param passed is not from Round enum.
 	 */
-	public Question(String author, String statement, Round round) {
-		this.author = author;
-		this.statement = statement;
-		this.round = round;
+	public Question(String author, String statement, Round round)
+			throws StatementTooShortException, NotARoundException {
+		if (statement.length() < 15)
+			throw new StatementTooShortException(statement);
+		else
+			this.statement = statement;
+
+		if (!(round instanceof Round))
+			throw new NotARoundException();
+		else
+			this.round = round;
+
+		if (author.isEmpty())
+			this.author = "Anonymous";
+		else
+			this.author = author;
+
 		choices = new HashMap<String, Boolean>();
 	}
 
@@ -47,9 +69,13 @@ public class Question {
 	 * 
 	 * @throws RightAnswerAlreadyPresentException If we passed "value" param as true
 	 * and the right answer is already present.
+	 * 
+	 * @throws NeedRightAnswerException If we passed the fourth choice with "value"
+	 * as false and there's already 3 false answers. (Cause we need the right
+	 * answer)
 	 */
-	public void addChoice(String answer, boolean value)
-			throws TooMuchAnswersException, AnswerAlreadyPresentException, RightAnswerAlreadyPresentException {
+	public void addChoice(String answer, boolean value) throws TooMuchAnswersException, AnswerAlreadyPresentException,
+			RightAnswerAlreadyPresentException, NeedRightAnswerException {
 		if (choices.size() > 3)
 			throw new TooMuchAnswersException(statement);
 
@@ -60,19 +86,81 @@ public class Question {
 			if (choices.containsValue(true))
 				throw new RightAnswerAlreadyPresentException(statement);
 
-		// Add the answer to the question
+		if (choices.size() == 3)
+			if (!value)
+				if (!choices.containsValue(true))
+					throw new NeedRightAnswerException(statement, answer);
+
+		// Adds the answer to the question
 		choices.put(answer, value);
 	}
 
+	/*
+	 * Remove the answer related to the statement.
+	 * 
+	 * @param statement The statement of the answer to remove.
+	 */
+	public boolean removeChoice(String statement) {
+		return choices.remove(statement);
+	}
+
+	/*
+	 * If the question already has it's right answer, removes it from the choices.
+	 */
+	public void removeRightAnswer() {
+		if (choices.containsValue(true)) {
+			Set<Entry<String, Boolean>> entries = choices.entrySet();
+			for (Entry<String, Boolean> entry : entries) {
+				if ((boolean) entry.getValue())
+					choices.remove(entry.getKey());
+			}
+		}
+	}
+
+	/*
+	 * If the question already has it's right answer, returns it.
+	 * 
+	 * @throws NoRightAnswerException If there is no right answer yet.
+	 */
+	public String getRightAnswer() throws NoRightAnswerException {
+		if (choices.containsValue(true)) {
+			Set<Entry<String, Boolean>> entries = choices.entrySet();
+			for (Entry<String, Boolean> entry : entries) {
+				if ((boolean) entry.getValue())
+					return (String) entry.getKey();
+			}
+		}
+
+		throw new NoRightAnswerException(statement);
+	}
+	
+	public void clearChoices() {
+		choices.clear();
+	}
+
 	public Question clone() {
-		return new Question(author, statement, round);
+		Question clone = null;
+		try {
+			clone = new Question(author, statement, round);
+		} catch (StatementTooShortException | NotARoundException e) {
+			e.printStackTrace();
+		}
+
+		if (!choices.isEmpty()) {
+			Set<Entry<String, Boolean>> entries = choices.entrySet();
+			for (Entry<String, Boolean> entry : entries) {
+				clone.choices.put(entry.getKey(), entry.getValue());
+			}
+		}
+
+		return clone;
 	}
 
 	public String toString() {
 		String result = "Statement : " + statement + "\nAnswers :\n";
 
 		Set<Entry<String, Boolean>> entries = choices.entrySet();
-		for (Entry entry : entries) {
+		for (Entry<String, Boolean> entry : entries) {
 			result += "- " + entry.getKey() + "\n";
 		}
 
@@ -102,6 +190,12 @@ public class Question {
 		} else if (!statement.equals(other.statement))
 			return false;
 		return true;
+	}
+
+	public void setStatement(String statement) throws StatementTooShortException {
+		if (statement.length() < 15)
+			throw new StatementTooShortException(statement);
+		this.statement = statement;
 	}
 
 	public int getNbAnswers() {
