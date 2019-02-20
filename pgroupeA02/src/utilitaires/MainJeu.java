@@ -119,7 +119,8 @@ public class MainJeu {
 		
 		System.out.println(d);
 		
-		System.out.println("Elsa");
+	
+		
 
 	}
 }
