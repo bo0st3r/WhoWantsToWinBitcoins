@@ -48,7 +48,7 @@ public class Question {
 			this.round = round;
 
 		if (author.isEmpty())
-			this.author = "Anonymous";
+			this.author = "Satoshi";
 		else
 			this.author = author;
 
