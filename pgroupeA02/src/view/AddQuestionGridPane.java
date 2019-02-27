@@ -1,9 +1,11 @@
 package view;
 
+import enumerations.Round;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -12,12 +14,16 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
 public class AddQuestionGridPane extends GridPane {
+	private TextField txtAuthor;
 	private TextField txtStatement;
 	private TextField txtAnswer[];
 
+	private Label lblAuthor;
 	private Label lblStatement;
 	private Label lblChoices;
 	private Label lblRight;
+
+	private ComboBox<Round> cboBoxRound;
 
 	private RadioButton rdoAnswer[];
 
@@ -37,27 +43,67 @@ public class AddQuestionGridPane extends GridPane {
 		col.setPercentWidth(17);
 		this.getColumnConstraints().addAll(col, col, col, col, col, col);
 
+		// Author
+		this.add(getLblAuthor(), 0, 0);
+		this.add(getTxtAuthor(), 0, 1, 4, 1);
+
+		// Round
+		this.add(getCboBoxRound(), 4, 1, 2, 1);
+		GridPane.setHalignment(getCboBoxRound(), HPos.RIGHT);
+
 		// Statement
-		this.add(getLblStatement(), 0, 0);
-		this.add(getTxtStatement(), 0, 1, 6, 2);
+		this.add(getLblStatement(), 0, 2);
+		this.add(getTxtStatement(), 0, 3, 6, 1);
 
 		// Choices
-		this.add(getLblChoices(), 1, 3, 4, 1);
+		this.add(getLblChoices(), 1, 5, 4, 1);
 		GridPane.setHalignment(getLblChoices(), HPos.CENTER);
-		this.add(getLblRight(), 5, 3);
+		this.add(getLblRight(), 5, 5);
 		GridPane.setHalignment(getLblRight(), HPos.CENTER);
 
 		// Adding the TextFields for answers and the RadioButtons to select the right
 		// answer
 		for (int i = 0; i <= 3; i++) {
-			this.add(getTxtAnswer(i), 1, i + 4, 4, 1);
-			this.add(getRdoAnswer(i), 5, i + 4);
+			this.add(getTxtAnswer(i), 1, i + 6, 4, 1);
+			this.add(getRdoAnswer(i), 5, i + 6);
 			GridPane.setHalignment(getRdoAnswer(i), HPos.CENTER);
 		}
 
-		this.add(getBtnOk(), 2, 10, 2, 1);
+		getBtnOk().setMinWidth(getWidth());
+		this.add(getBtnOk(), 0, 12, 6, 1);
 		GridPane.setHalignment(getBtnOk(), HPos.CENTER);
 
+	}
+
+	public ComboBox<Round> getCboBoxRound() {
+		if (cboBoxRound == null) {
+			cboBoxRound = new ComboBox<Round>();
+			cboBoxRound.getItems().setAll(Round.values());
+			cboBoxRound.setValue(Round.values()[0]);
+		}
+
+		return cboBoxRound;
+	}
+
+	public TextField getTxtAnswer(int index) {
+		if (txtAnswer == null)
+			txtAnswer = new TextField[4];
+
+		if (txtAnswer[index] == null) {
+			txtAnswer[index] = new TextField();
+			txtAnswer[index].setPromptText("Enter choice number " + (index + 1));
+		}
+
+		return txtAnswer[index];
+	}
+
+	public TextField getTxtAuthor() {
+		if (txtAuthor == null) {
+			txtAuthor = new TextField();
+			txtAuthor.setPromptText("Enter author's name");
+		}
+
+		return txtAuthor;
 	}
 
 	public TextField getTxtStatement() {
@@ -75,6 +121,14 @@ public class AddQuestionGridPane extends GridPane {
 		}
 
 		return lblStatement;
+	}
+	
+	public Label getLblAuthor() {
+		if (lblAuthor == null) {
+			lblAuthor = new Label("Author :");
+		}
+
+		return lblAuthor;
 	}
 
 	public Label getLblChoices() {
@@ -101,18 +155,6 @@ public class AddQuestionGridPane extends GridPane {
 		return tglTrue;
 	}
 
-	public TextField getTxtAnswer(int index) {
-		if (txtAnswer == null)
-			txtAnswer = new TextField[4];
-
-		if (txtAnswer[index] == null) {
-			txtAnswer[index] = new TextField();
-			txtAnswer[index].setPromptText("Enter choice number " + (index + 1));
-		}
-
-		return txtAnswer[index];
-	}
-
 	public RadioButton getRdoAnswer(int index) {
 		if (rdoAnswer == null)
 			rdoAnswer = new RadioButton[4];
@@ -122,7 +164,8 @@ public class AddQuestionGridPane extends GridPane {
 			// Groups the 4 radio buttons that states which answer is right together
 			rdoAnswer[index].setToggleGroup(getTglTrue());
 
-			// Automaticaly sets the first answer as right so we can't add a question without right answer
+			// Automatically sets the first answer as right so we can't add a question
+			// without right answer
 			if (index == 0) {
 				rdoAnswer[index].setSelected(true);
 			}
@@ -137,4 +180,5 @@ public class AddQuestionGridPane extends GridPane {
 
 		return btnOk;
 	}
+
 }

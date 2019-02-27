@@ -1,4 +1,4 @@
-package utilitaires;
+package utilities;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import com.google.gson.Gson;
 
-import modele.Deck;
+import model.Deck;
 
 public class Serialization {
 
