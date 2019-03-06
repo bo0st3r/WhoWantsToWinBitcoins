@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 public class AddQuestionGridPane extends GridPane {
 	private TextField txtAuthor;
@@ -36,7 +37,7 @@ public class AddQuestionGridPane extends GridPane {
 		this.setPadding(new Insets(10));
 		this.setHgap(5);
 		this.setVgap(5);
-//		this.setGridLinesVisible(true);
+		this.setGridLinesVisible(true);
 
 		// Defines 6 columns of 17% for the grid
 		ColumnConstraints col = new ColumnConstraints();
@@ -69,10 +70,10 @@ public class AddQuestionGridPane extends GridPane {
 			GridPane.setHalignment(getRdoAnswer(i), HPos.CENTER);
 		}
 
-		getBtnOk().setMinWidth(getWidth());
 		this.add(getBtnOk(), 0, 12, 6, 1);
 		GridPane.setHalignment(getBtnOk(), HPos.CENTER);
-
+		getBtnOk().setPrefWidth(Integer.MAX_VALUE);
+		System.out.println(Integer.MAX_VALUE);
 	}
 
 	public ComboBox<Round> getCboBoxRound() {

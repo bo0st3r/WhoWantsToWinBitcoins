@@ -144,7 +144,7 @@ public class MainJeu extends Application {
 			lgp.setId("pane");
 			
 			Scene scene = new Scene(lgp, 570, 350);
-			primaryStage.setResizable(false);
+//			primaryStage.setResizable(false);
 			primaryStage.setTitle("Add a question");
 
 			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
