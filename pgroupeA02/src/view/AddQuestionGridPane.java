@@ -12,9 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 
 public class AddQuestionGridPane extends GridPane {
+	// No need to initialize the singleton at program's start because it's a rarely used pane
+	private static AddQuestionGridPane SINGLETON = null;
+
 	private TextField txtAuthor;
 	private TextField txtStatement;
 	private TextField txtAnswer[];
@@ -32,12 +34,12 @@ public class AddQuestionGridPane extends GridPane {
 
 	private ToggleGroup tglTrue;
 
-	public AddQuestionGridPane() {
+	private AddQuestionGridPane() {
 		this.setAlignment(Pos.BASELINE_CENTER);
 		this.setPadding(new Insets(10));
 		this.setHgap(5);
 		this.setVgap(5);
-		this.setGridLinesVisible(true);
+//		this.setGridLinesVisible(true);
 
 		// Defines 6 columns of 17% for the grid
 		ColumnConstraints col = new ColumnConstraints();
@@ -46,7 +48,7 @@ public class AddQuestionGridPane extends GridPane {
 
 		// Author
 		this.add(getLblAuthor(), 0, 0);
-		this.add(getTxtAuthor(), 0, 1, 4, 1);
+		this.add(getTxtAuthor(), 0, 1, 3, 1);
 
 		// Round
 		this.add(getCboBoxRound(), 4, 1, 2, 1);
@@ -70,10 +72,17 @@ public class AddQuestionGridPane extends GridPane {
 			GridPane.setHalignment(getRdoAnswer(i), HPos.CENTER);
 		}
 
-		this.add(getBtnOk(), 0, 12, 6, 1);
+		this.add(getBtnOk(), 2, 12, 2, 1);
 		GridPane.setHalignment(getBtnOk(), HPos.CENTER);
 		getBtnOk().setPrefWidth(Integer.MAX_VALUE);
 		System.out.println(Integer.MAX_VALUE);
+	}
+
+	public static AddQuestionGridPane getSingleton() {
+		if(SINGLETON == null) {
+			SINGLETON = new AddQuestionGridPane();
+		}
+		return SINGLETON;
 	}
 
 	public ComboBox<Round> getCboBoxRound() {
@@ -123,7 +132,7 @@ public class AddQuestionGridPane extends GridPane {
 
 		return lblStatement;
 	}
-	
+
 	public Label getLblAuthor() {
 		if (lblAuthor == null) {
 			lblAuthor = new Label("Author :");

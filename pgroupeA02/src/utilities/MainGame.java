@@ -1,14 +1,10 @@
 package utilities;
 
-import enumerations.Round;
 import exceptions.AnswerAlreadyPresentException;
 import exceptions.NeedRightAnswerException;
-import exceptions.NoRightAnswerException;
-import exceptions.NotARoundException;
 import exceptions.NotAllAnswersException;
 import exceptions.QuestionAlreadyPresentException;
 import exceptions.RightAnswerAlreadyPresentException;
-import exceptions.StatementTooShortException;
 import exceptions.TooMuchAnswersException;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -17,7 +13,7 @@ import model.Deck;
 import model.Question;
 import view.AddQuestionGridPane;
 
-public class MainJeu extends Application {
+public class MainGame extends Application {
 	public static void addChoiceToAQuestion(Question q, String answer, boolean value) {
 		try {
 			q.addChoice(answer, value);
@@ -140,10 +136,10 @@ public class MainJeu extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			AddQuestionGridPane lgp = new AddQuestionGridPane();
+			AddQuestionGridPane lgp = AddQuestionGridPane.getSingleton();
 			lgp.setId("pane");
 			
-			Scene scene = new Scene(lgp, 570, 350);
+			Scene scene = new Scene(lgp, 570, 305);
 //			primaryStage.setResizable(false);
 			primaryStage.setTitle("Add a question");
 
