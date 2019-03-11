@@ -1,3 +1,40 @@
 #pane{
 	-fx-background-color: #a5a5a5;
 }
+
+
+
+/* HOME */
+#Home{
+	
+	-fx-font-family : 'Georgia';
+	/*-fx-font-size: 20px ;*/
+	/*-fx-background-image: url("bitcoin.png");*/
+	-fx-background-repeat: round;
+	
+
+}
+#Play{
+	-fx-background-color: #fef9e7;
+	-fx-border-color: #f9e79f;
+	-fx-border-width: 5px;
+	-fx-font-size: 40px;
+	
+}
+#otherButton{
+	-fx-background-color: #fef9e7;
+	-fx-border-color: #f9e79f;
+	-fx-font-size: 20px;
+	
+}
+#Profile{
+	-fx-background-color: null;
+	-fx-text-fill: #fdfefe;
+	-fx-font-size: 20px;
+}
+
+#Title{
+	
+	-fx-text-fill: #fef9e7;
+	-fx-font-size: 50px;
+}

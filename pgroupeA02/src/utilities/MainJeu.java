@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import model.Deck;
 import model.Question;
 import view.AddQuestionGridPane;
+import view.HomeGridPane;
 
 public class MainJeu extends Application {
 	public static void addChoiceToAQuestion(Question q, String answer, boolean value) {
@@ -136,16 +137,27 @@ public class MainJeu extends Application {
 		launch(args);
 	}
 
+
+
 	// GUI
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws Exception {
 		try {
 			AddQuestionGridPane lgp = new AddQuestionGridPane();
 			lgp.setId("pane");
 			
-			Scene scene = new Scene(lgp, 570, 350);
-			primaryStage.setResizable(false);
-			primaryStage.setTitle("Add a question");
+//			Scene scene = new Scene(lgp, 570, 350);
+//			primaryStage.setResizable(false);
+//			primaryStage.setTitle("Add a question");
+			
+			//test Home
+			HomeGridPane home = new HomeGridPane();
+			Scene scene = new Scene(home);
+			primaryStage.setTitle(" Accueil ");
+			primaryStage.setMaximized(true);
+			primaryStage.setMinHeight(600);
+			primaryStage.setMinWidth(1000);
+			home.setId("Home");
 
 			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 			primaryStage.setScene(scene);
