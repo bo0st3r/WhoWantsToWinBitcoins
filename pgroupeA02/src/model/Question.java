@@ -48,7 +48,7 @@ public class Question {
 			this.round = round;
 
 		if (author.isEmpty())
-			this.author = "Satoshi";
+			this.author = "Satoshi Nakamoto";
 		else
 			this.author = author;
 
@@ -111,7 +111,7 @@ public class Question {
 		if (choices.containsValue(true)) {
 			Set<Entry<String, Boolean>> entries = choices.entrySet();
 			for (Entry<String, Boolean> entry : entries) {
-				if ((boolean) entry.getValue())
+				if (entry.getValue())
 					choices.remove(entry.getKey());
 			}
 		}
@@ -126,14 +126,14 @@ public class Question {
 		if (choices.containsValue(true)) {
 			Set<Entry<String, Boolean>> entries = choices.entrySet();
 			for (Entry<String, Boolean> entry : entries) {
-				if ((boolean) entry.getValue())
+				if (entry.getValue())
 					return (String) entry.getKey();
 			}
 		}
 
 		throw new NoRightAnswerException(statement);
 	}
-	
+
 	public void clearChoices() {
 		choices.clear();
 	}
@@ -200,6 +200,10 @@ public class Question {
 
 	public int getNbAnswers() {
 		return choices.size();
+	}
+
+	public Map<String, Boolean> getChoices() {
+		return choices;
 	}
 
 	public String getAuthor() {
