@@ -138,6 +138,13 @@ public class HomeGridPane extends GridPane {
 	public Button getBtnPlay() {
 		if(btnPlay==null)
 			btnPlay = new Button("Play");
+			btnPlay.setOnAction(new EventHandler<ActionEvent>() {
+				
+					@Override
+					public void handle(ActionEvent event) {
+						
+					}
+			});
 		return btnPlay;
 	}
 
