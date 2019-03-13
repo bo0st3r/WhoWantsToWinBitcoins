@@ -38,3 +38,13 @@
 	-fx-text-fill: #fef9e7;
 	-fx-font-size: 50px;
 }
+
+/* PlayingGridPane */
+#IdQuestion{
+	-fx-background-color: red;
+	-fx-alignment: center;
+}
+
+#AnswerA, #AnswerB, #AnswerC, #AnswerD{
+	-fx-alignment: left;
+}

@@ -8,11 +8,13 @@ import exceptions.RightAnswerAlreadyPresentException;
 import exceptions.TooMuchAnswersException;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Deck;
 import model.Question;
 import view.AddQuestionGridPane;
 import view.HomeGridPane;
+import view.PlayingGridPane;
 
 public class MainGame extends Application {
 	public static void addChoiceToAQuestion(Question q, String answer, boolean value) {
@@ -144,15 +146,28 @@ public class MainGame extends Application {
 ////			primaryStage.setResizable(false);
 //			primaryStage.setTitle("Add a question");
 
-			// test Home
-			HomeGridPane home = new HomeGridPane();
-			Scene scene = new Scene(home);
-			primaryStage.setTitle(" Accueil ");
-			primaryStage.setMaximized(true);
-			primaryStage.setMinHeight(600);
-			primaryStage.setMinWidth(1000);
-			home.setId("Home");
+		// test Home
+//			HomeGridPane home = new HomeGridPane();
+//			Scene scene = new Scene(home);
+//			primaryStage.setTitle(" Accueil ");
+//			primaryStage.setMaximized(true);
+//			primaryStage.setMinHeight(600);
+//			primaryStage.setMinWidth(1000);
+//			home.setId("Home");
 
+		//PlayingGridPane
+			BorderPane root = new BorderPane();
+			PlayingGridPane pgp = new PlayingGridPane();
+			
+			Scene scene = new Scene(root,400,400); // 400,400 --> Taille de la fen�tre
+			
+			scene = new Scene(pgp);
+			pgp.setId("pgp");
+			
+			primaryStage.setTitle("Who want to win Bitcoins");
+			primaryStage.setMaximized(true);
+
+			
 			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
