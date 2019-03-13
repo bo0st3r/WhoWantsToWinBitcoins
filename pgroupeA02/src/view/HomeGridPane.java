@@ -248,8 +248,4 @@ public class HomeGridPane extends GridPane {
 		return lblTitle;
 	}
 
-
-	
-	
-
 }

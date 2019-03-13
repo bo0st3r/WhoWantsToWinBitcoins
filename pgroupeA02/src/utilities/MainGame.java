@@ -139,12 +139,12 @@ public class MainGame extends Application {
 		try {
 			AddQuestionGridPane lgp = AddQuestionGridPane.getSingleton();
 			lgp.setId("pane");
-			
+
 //			Scene scene = new Scene(lgp, 570, 305);
 ////			primaryStage.setResizable(false);
 //			primaryStage.setTitle("Add a question");
-			
-			//test Home
+
+			// test Home
 			HomeGridPane home = new HomeGridPane();
 			Scene scene = new Scene(home);
 			primaryStage.setTitle(" Accueil ");

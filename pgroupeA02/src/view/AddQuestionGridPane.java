@@ -63,6 +63,7 @@ public class AddQuestionGridPane extends GridPane {
 		GridPane.setHalignment(getLblChoices(), HPos.CENTER);
 		this.add(getLblRight(), 5, 5);
 		GridPane.setHalignment(getLblRight(), HPos.CENTER);
+		
 
 		// Adding the TextFields for answers and the RadioButtons to select the right
 		// answer
