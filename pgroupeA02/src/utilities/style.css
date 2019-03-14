@@ -9,7 +9,7 @@
 	
 	-fx-font-family : 'Georgia';
 	/*-fx-font-size: 20px ;*/
-	/*-fx-background-image: url("bitcoin.png");*/
+	-fx-background-image: url("bitcoin.png");
 	-fx-background-repeat: round;
 	
 
@@ -41,7 +41,7 @@
 
 /* PlayingGridPane */
 #IdQuestion{
-	-fx-background-color: red;
+	-fx-background-color: yellow;
 	-fx-alignment: center;
 }
 

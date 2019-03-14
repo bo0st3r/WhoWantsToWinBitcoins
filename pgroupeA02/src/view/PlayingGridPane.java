@@ -25,7 +25,7 @@ public class PlayingGridPane extends GridPane{
 		//add columns
 		ColumnConstraints c = new ColumnConstraints();
 		c.setPercentWidth(10);
-		this.getColumnConstraints().addAll(c,c,c,c,c,c,c,c,c,c);
+		this.getColumnConstraints().addAll(c,c,c,c,c,c,c,c,c,c,c);
 				
 		//add rows
 		RowConstraints r = new RowConstraints();
@@ -38,7 +38,7 @@ public class PlayingGridPane extends GridPane{
 		
 		this.setGridLinesVisible(true);
 		
-		this.add(getLblStatement(), 1, 6, 8, 1);
+		this.add(getLblStatement(), 1, 5, 8, 2);
 		this.add(getBtnA(), 1, 7, 4, 1);
 		this.add(getBtnB(), 1, 8, 4, 1);
 		this.add(getBtnC(), 5, 7, 4, 1);
