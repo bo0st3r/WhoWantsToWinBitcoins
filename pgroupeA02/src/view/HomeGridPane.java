@@ -172,8 +172,8 @@ public class HomeGridPane extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					
-//					setVisible(false);
-//					((ProjStackPane)getParent().getParent()).getAboutBorderPane.setVisible(true);
+					setVisible(false);
+					((ProjStackPane)getParent().getParent()).getAboutGridPane().setVisible(true);
 					
 				}
 			});
@@ -214,7 +214,8 @@ public class HomeGridPane extends GridPane {
 				
 				@Override
 				public void handle(ActionEvent event) {
-					//AddquestionGridpane
+					setVisible(false);
+					((ProjStackPane)getParent().getParent()).getAqGridPane().setVisible(true);
 					
 				}
 			});
