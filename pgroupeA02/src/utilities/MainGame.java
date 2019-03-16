@@ -1,5 +1,6 @@
 package utilities;
 
+
 import exceptions.AnswerAlreadyPresentException;
 import exceptions.NeedRightAnswerException;
 import exceptions.NotAllAnswersException;
@@ -9,12 +10,15 @@ import exceptions.TooMuchAnswersException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.Deck;
 import model.Question;
 import view.AddQuestionGridPane;
 import view.HomeGridPane;
 import view.PlayingGridPane;
+import view.ProjStackPane;
+import view.PyramideVbox;
 
 public class MainGame extends Application {
 	public static void addChoiceToAQuestion(Question q, String answer, boolean value) {
@@ -133,6 +137,7 @@ public class MainGame extends Application {
 
 		// Run GUI
 		launch(args);
+		
 	}
 
 	// GUI
@@ -156,21 +161,30 @@ public class MainGame extends Application {
 //			home.setId("Home");
 
 		//PlayingGridPane
-			BorderPane root = new BorderPane();
-			PlayingGridPane pgp = new PlayingGridPane();
-			
-			Scene scene = new Scene(root,400,400); // 400,400 --> Taille de la fen�tre
-			
-			scene = new Scene(pgp);
-			pgp.setId("pgp");
-			
-			primaryStage.setTitle("Who want to win Bitcoins");
-			primaryStage.setMaximized(true);
+//			BorderPane root = new BorderPane();
+//			PlayingGridPane pgp = new PlayingGridPane();
+//			
+//			Scene scene = new Scene(root,400,400); // 400,400 --> Taille de la fen�tre
+//			
+//			scene = new Scene(pgp);
 
+//			
+//			primaryStage.setTitle("Who want to win Bitcoins");
+//			primaryStage.setMaximized(true);
+//TEST STACKPANE
+		
+			ProjStackPane psp = new ProjStackPane();
+			Scene scene = new Scene(psp);
+			primaryStage.setTitle(" Jeu ");
+			primaryStage.setMaximized(true);
+			primaryStage.setMinHeight(600);
+			primaryStage.setMinWidth(1000);
 			
+
 			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
 		} catch (Exception e) {
 
 		}

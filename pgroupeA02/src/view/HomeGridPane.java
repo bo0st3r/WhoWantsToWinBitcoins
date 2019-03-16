@@ -118,8 +118,7 @@ public class HomeGridPane extends GridPane {
 		//getBtnPrevious().setVisible(false);
 		
 	}
-	
-	
+		
 //	private void hideAllComponent() {
 //		for(Node node :getStackPane().getChildren()) {
 //			node.setVisible(false);
@@ -127,17 +126,19 @@ public class HomeGridPane extends GridPane {
 //	}
 	
 	//getters
-//	public StackPane getStackPane() {
-//		if (stackPane==null)
-//			stackPane = new StackPane();
-//		
-//		stackPane.getChildren().addAll(
-//		return stackPane;
-//	}
 
 	public Button getBtnPlay() {
 		if(btnPlay==null)
 			btnPlay = new Button("Play");
+			btnPlay.setOnAction(new EventHandler<ActionEvent>() {
+				
+					@Override
+					public void handle(ActionEvent event) {
+						
+						setVisible(false);
+						((ProjStackPane)getParent().getParent()).getPlayingGridPane().setVisible(true);
+					}
+			});
 		return btnPlay;
 	}
 
@@ -171,9 +172,8 @@ public class HomeGridPane extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					
-
-					//show about
-					
+					setVisible(false);
+					((ProjStackPane)getParent().getParent()).getAboutGridPane().setVisible(true);
 					
 				}
 			});
@@ -214,7 +214,8 @@ public class HomeGridPane extends GridPane {
 				
 				@Override
 				public void handle(ActionEvent event) {
-					//AddquestionGridpane
+					setVisible(false);
+					((ProjStackPane)getParent().getParent()).getAqGridPane().setVisible(true);
 					
 				}
 			});
