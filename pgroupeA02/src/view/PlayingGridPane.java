@@ -1,15 +1,11 @@
 package view;
 
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.util.converter.PercentageStringConverter;
 
 public class PlayingGridPane extends GridPane{
 	
@@ -77,28 +73,28 @@ public class PlayingGridPane extends GridPane{
 
 	public Button getBtnA() {
 		if(btnA == null) {
-			btnA = new Button("Réponse A");
+			btnA = new Button("Rï¿½ponse A");
 		}
 		return btnA;
 	}
 
 	public Button getBtnB() {
 		if(btnB == null) {
-			btnB = new Button("Réponse B");
+			btnB = new Button("Rï¿½ponse B");
 		}
 		return btnB;
 	}
 
 	public Button getBtnC() {
 		if(btnC == null) {
-			btnC = new Button("Réponse C");
+			btnC = new Button("Rï¿½ponse C");
 		}
 		return btnC;
 	}
 
 	public Button getBtnD() {
 		if(btnD == null) {
-			btnD = new Button("Réponse D");
+			btnD = new Button("Rï¿½ponse D");
 		}
 		return btnD;
 	}
