@@ -1,11 +1,12 @@
-#pane{
-	-fx-background-color: #a5a5a5;
+#projStackPane{
+	-fx-background-color: #33322e;
 }
 
 
 
+
 /* HOME */
-#Home{
+#homePane{
 	
 	-fx-font-family : 'Georgia';
 	/*-fx-font-size: 20px ;*/
@@ -14,37 +15,45 @@
 	
 
 }
-#Play{
+
+#playBtn{
 	-fx-background-color: #fef9e7;
 	-fx-border-color: #f9e79f;
-	-fx-border-width: 5px;
-	-fx-font-size: 40px;
-	
-}
-#otherButton{
-	-fx-background-color: #fef9e7;
-	-fx-border-color: #f9e79f;
-	-fx-font-size: 20px;
-	
-}
-#Profile{
-	-fx-background-color: null;
-	-fx-text-fill: #fdfefe;
-	-fx-font-size: 20px;
+	-fx-border-width: 5.0px;
+	-fx-font-size: 40.0px;
+	-fx-border-width:0;	
 }
 
-#Title{
+#classicBtn, #about{
+	-fx-background-color: #fef9e7;
+	-fx-border-color: #f9e79f;
+	-fx-font-size: 20.0px;
+	
+}
+
+#profile{
+	-fx-background-color: null;
+	-fx-text-fill: #fdfefe;
+	-fx-font-size: 20.0px;
+}
+
+#titleHome{
 	
 	-fx-text-fill: #fef9e7;
-	-fx-font-size: 50px;
+	-fx-font-size: 50.0px;
 }
 
 /* PlayingGridPane */
-#IdQuestion{
-	-fx-background-color: yellow;
+#idQuestion{
+	-fx-background-color: #f2c926;
 	-fx-alignment: center;
 }
 
-#AnswerA, #AnswerB, #AnswerC, #AnswerD{
-	-fx-alignment: left;
+#answers{
+	-fx-alignment: center-left;
+}
+
+/* AddQuestionGridPane */
+#addQuestionPane{
+	-fx-background-color: #a5a5a5;
 }

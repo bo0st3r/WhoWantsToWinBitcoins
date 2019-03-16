@@ -1,6 +1,5 @@
 package utilities;
 
-
 import exceptions.AnswerAlreadyPresentException;
 import exceptions.NeedRightAnswerException;
 import exceptions.NotAllAnswersException;
@@ -9,16 +8,11 @@ import exceptions.RightAnswerAlreadyPresentException;
 import exceptions.TooMuchAnswersException;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.Deck;
 import model.Question;
 import view.AddQuestionGridPane;
-import view.HomeGridPane;
-import view.PlayingGridPane;
 import view.ProjStackPane;
-import view.PyramideVbox;
 
 public class MainGame extends Application {
 	public static void addChoiceToAQuestion(Question q, String answer, boolean value) {
@@ -137,30 +131,30 @@ public class MainGame extends Application {
 
 		// Run GUI
 		launch(args);
-		
+
 	}
 
 	// GUI
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			AddQuestionGridPane lgp = AddQuestionGridPane.getSingleton();
-			lgp.setId("pane");
+//			AddQuestionGridPane lgp = AddQuestionGridPane.getSingleton();
+//			lgp.setId("pane");
 
-//			Scene scene = new Scene(lgp, 570, 305);
+//			Scene scene = new Scene(lgp, 570, 355);
 ////			primaryStage.setResizable(false);
 //			primaryStage.setTitle("Add a question");
 
-		// test Home
+			// test Home
 //			HomeGridPane home = new HomeGridPane();
 //			Scene scene = new Scene(home);
 //			primaryStage.setTitle(" Accueil ");
 //			primaryStage.setMaximized(true);
 //			primaryStage.setMinHeight(600);
 //			primaryStage.setMinWidth(1000);
-//			home.setId("Home");
+//			home.setId("homePane");
 
-		//PlayingGridPane
+			// PlayingGridPane
 //			BorderPane root = new BorderPane();
 //			PlayingGridPane pgp = new PlayingGridPane();
 //			
@@ -172,19 +166,19 @@ public class MainGame extends Application {
 //			primaryStage.setTitle("Who want to win Bitcoins");
 //			primaryStage.setMaximized(true);
 //TEST STACKPANE
-		
+
 			ProjStackPane psp = new ProjStackPane();
+			psp.setId("projStackPane");
 			Scene scene = new Scene(psp);
-			primaryStage.setTitle(" Jeu ");
+			primaryStage.setTitle("Jeu");
 			primaryStage.setMaximized(true);
 			primaryStage.setMinHeight(600);
 			primaryStage.setMinWidth(1000);
-			
 
 			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
+
 		} catch (Exception e) {
 
 		}

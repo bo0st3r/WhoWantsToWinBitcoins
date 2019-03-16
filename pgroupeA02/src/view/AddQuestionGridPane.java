@@ -16,7 +16,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
 public class AddQuestionGridPane extends GridPane {
-	// No need to initialize the singleton at program's start because it's a rarely used pane
+	// No need to initialize the singleton at program's start because it's a rarely
+	// used pane
 	private static AddQuestionGridPane SINGLETON = null;
 
 	private TextField txtAuthor;
@@ -28,7 +29,7 @@ public class AddQuestionGridPane extends GridPane {
 	private Label lblChoices;
 	private Label lblRight;
 
-	private ComboBox<Round> cboBoxRound;
+	private ComboBox<String> cboBoxRound;
 
 	private RadioButton rdoAnswer[];
 
@@ -65,7 +66,6 @@ public class AddQuestionGridPane extends GridPane {
 		GridPane.setHalignment(getLblChoices(), HPos.CENTER);
 		this.add(getLblRight(), 5, 5);
 		GridPane.setHalignment(getLblRight(), HPos.CENTER);
-		
 
 		// Adding the TextFields for answers and the RadioButtons to select the right
 		// answer
@@ -82,17 +82,24 @@ public class AddQuestionGridPane extends GridPane {
 	}
 
 	public static AddQuestionGridPane getSingleton() {
-		if(SINGLETON == null) {
+		if (SINGLETON == null) {
 			SINGLETON = new AddQuestionGridPane();
+			//CSS Id
+			SINGLETON.setId("addQuestionPane");
 		}
 		return SINGLETON;
 	}
 
-	public ComboBox<Round> getCboBoxRound() {
+	public ComboBox<String> getCboBoxRound() {
 		if (cboBoxRound == null) {
-			cboBoxRound = new ComboBox<Round>();
-			cboBoxRound.getItems().setAll(Round.values());
-			cboBoxRound.setValue(Round.values()[0]);
+			cboBoxRound = new ComboBox<String>();
+
+			for (Round r : Round.values()) {
+				cboBoxRound.getItems().add(r.getRoundStatement());
+			}
+
+//			cboBoxRound.getItems().setAll(Round.values());
+			cboBoxRound.setValue(Round.values()[0].getRoundStatement());
 		}
 
 		return cboBoxRound;
@@ -190,14 +197,14 @@ public class AddQuestionGridPane extends GridPane {
 	public Button getBtnOk() {
 		if (btnOk == null)
 			btnOk = new Button("Add");
-			btnOk.setOnAction(new EventHandler<ActionEvent>() {
-				
-				@Override
-				public void handle(ActionEvent event) {
-					setVisible(false);
-					((ProjStackPane)getParent().getParent()).getHomeGridPane().setVisible(true);
-				}
-			});
+		btnOk.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				setVisible(false);
+				((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+			}
+		});
 
 		return btnOk;
 	}
