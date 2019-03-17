@@ -1,5 +1,7 @@
 package utilities;
 
+import java.awt.PageAttributes;
+
 import exceptions.AnswerAlreadyPresentException;
 import exceptions.NeedRightAnswerException;
 import exceptions.NotAllAnswersException;
@@ -10,6 +12,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Deck;
+import model.Party;
 import model.Question;
 import view.AddQuestionGridPane;
 
@@ -123,13 +126,15 @@ public class MainGame extends Application {
 //		// Transform a Deck to a JSON file
 //		Serialization.deckToJson(d, "test");
 //
-//		// Transform a JSON file to a Deck
-//		Deck fromJson = Serialization.jsonToDeck("test");
+		// Transform a JSON file to a Deck
+		Deck fromJson = Serialization.jsonToDeck("test");
 //		System.out.println("\t\tRetrieved from JSON file :");
 //		System.out.println(fromJson);
-
+		System.out.println(fromJson);
+		Party p = new Party(fromJson.getQuestions());
+		System.out.println(p);
 		// Run GUI
-		launch(args);
+//		launch(args);
 	}
 
 	// GUI
