@@ -1,3 +1,59 @@
-#pane{
+#projStackPane{
+	-fx-background-color: #33322e;
+}
+
+
+
+
+/* HOME */
+#homePane{
+	
+	-fx-font-family : 'Georgia';
+	/*-fx-font-size: 20px ;*/
+	-fx-background-image: url("bitcoin.png");
+	-fx-background-repeat: round;
+	
+
+}
+
+#playBtn{
+	-fx-background-color: #fef9e7;
+	-fx-border-color: #f9e79f;
+	-fx-border-width: 5.0px;
+	-fx-font-size: 40.0px;
+	-fx-border-width:0;	
+}
+
+#classicBtn, #about{
+	-fx-background-color: #fef9e7;
+	-fx-border-color: #f9e79f;
+	-fx-font-size: 20.0px;
+	
+}
+
+#profile{
+	-fx-background-color: null;
+	-fx-text-fill: #fdfefe;
+	-fx-font-size: 20.0px;
+}
+
+#titleHome{
+	
+	-fx-text-fill: #fef9e7;
+	-fx-font-size: 50.0px;
+}
+
+/* PlayingGridPane */
+#idQuestion{
+	-fx-background-color: #f2c926;
+	-fx-alignment: center;
+}
+
+#answers{
+	-fx-alignment: center-left;
+}
+
+/* AddQuestionGridPane */
+#addQuestionPane{
 	-fx-background-color: #a5a5a5;
 }

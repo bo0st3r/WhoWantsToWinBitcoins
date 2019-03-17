@@ -1,6 +1,8 @@
 package view;
 
 import enumerations.Round;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,7 +30,7 @@ public class AddQuestionGridPane extends GridPane {
 	private Label lblChoices;
 	private Label lblRight;
 
-	private ComboBox<Round> cboBoxRound;
+	private ComboBox<String> cboBoxRound;
 
 	private RadioButton rdoAnswer[];
 
@@ -83,15 +85,22 @@ public class AddQuestionGridPane extends GridPane {
 	public static AddQuestionGridPane getSingleton() {
 		if (SINGLETON == null) {
 			SINGLETON = new AddQuestionGridPane();
+			//CSS Id
+			SINGLETON.setId("addQuestionPane");
 		}
 		return SINGLETON;
 	}
 
-	public ComboBox<Round> getCboBoxRound() {
+	public ComboBox<String> getCboBoxRound() {
 		if (cboBoxRound == null) {
-			cboBoxRound = new ComboBox<Round>();
-			cboBoxRound.getItems().setAll(Round.values());
-			cboBoxRound.setValue(Round.values()[0]);
+			cboBoxRound = new ComboBox<String>();
+
+			for (Round r : Round.values()) {
+				cboBoxRound.getItems().add(r.getRoundStatement());
+			}
+
+//			cboBoxRound.getItems().setAll(Round.values());
+			cboBoxRound.setValue(Round.values()[0].getRoundStatement());
 		}
 
 		return cboBoxRound;
@@ -189,6 +198,14 @@ public class AddQuestionGridPane extends GridPane {
 	public Button getBtnOk() {
 		if (btnOk == null)
 			btnOk = new Button("Add");
+		btnOk.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				setVisible(false);
+				((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+			}
+		});
 
 		return btnOk;
 	}

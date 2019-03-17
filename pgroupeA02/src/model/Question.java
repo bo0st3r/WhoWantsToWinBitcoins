@@ -159,7 +159,7 @@ public class Question {
 	}
 
 	public String toString() {
-		String result = "Statement : " + statement + "\nRound : " + round.toString() + "\nAnswers :\n";
+		String result = "Statement : " + statement + "\nRound : " + round.getRoundStatement() + "\nAnswers :\n";
 
 		Set<Entry<String, Boolean>> entries = choices.entrySet();
 		for (Entry<String, Boolean> entry : entries) {
@@ -198,6 +198,12 @@ public class Question {
 		if (statement.length() < 15)
 			throw new StatementTooShortException(statement);
 		this.statement = statement;
+	}
+
+	public void setRound(Round round) {
+		if (round != null) {
+			this.round = round;
+		}
 	}
 
 	public int getNbAnswers() {
