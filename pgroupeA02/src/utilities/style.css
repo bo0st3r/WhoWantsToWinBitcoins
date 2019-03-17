@@ -53,7 +53,17 @@
 	-fx-alignment: center-left;
 }
 
+/* Validation */
+#validationText{
+	-fx-font-size: 50.0px;	
+	-fx-alignment: center;
+} 
+#btnValidation{
+	-fx-font-size: 30.0px;	
+}
+
 /* AddQuestionGridPane */
 #addQuestionPane{
 	-fx-background-color: #a5a5a5;
 }
+

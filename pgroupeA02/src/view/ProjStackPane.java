@@ -10,6 +10,7 @@ public class ProjStackPane extends BorderPane {
 	private HomeGridPane homeGridPane;
 	private PlayingGridPane playingGridPane;
 	private AboutGridPane aboutGridPane;
+	private ValidationGridPane validationGridPane;
 
 	public ProjStackPane() {
 
@@ -55,6 +56,13 @@ public class ProjStackPane extends BorderPane {
 			aboutGridPane = new AboutGridPane();
 		}
 		return aboutGridPane;
+	}
+	
+	public ValidationGridPane getValidationGridPane() {
+		if(validationGridPane == null) {
+			validationGridPane = new ValidationGridPane();
+		}
+		return validationGridPane;
 	}
 
 }
