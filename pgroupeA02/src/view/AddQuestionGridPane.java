@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import model.Question;
 
 public class AddQuestionGridPane extends GridPane {
 	// No need to initialize the singleton at program's start because it's a rarely
@@ -69,7 +70,7 @@ public class AddQuestionGridPane extends GridPane {
 
 		// Adding the TextFields for answers and the RadioButtons to select the right
 		// answer
-		for (int i = 0; i <= 3; i++) {
+		for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
 			this.add(getTxtAnswer(i), 1, i + 6, 4, 1);
 			this.add(getRdoAnswer(i), 5, i + 6);
 			GridPane.setHalignment(getRdoAnswer(i), HPos.CENTER);
@@ -107,7 +108,7 @@ public class AddQuestionGridPane extends GridPane {
 
 	public TextField getTxtAnswer(int index) {
 		if (txtAnswer == null)
-			txtAnswer = new TextField[4];
+			txtAnswer = new TextField[Question.NB_ANSWERS];
 
 		if (txtAnswer[index] == null) {
 			txtAnswer[index] = new TextField();
@@ -177,7 +178,7 @@ public class AddQuestionGridPane extends GridPane {
 
 	public RadioButton getRdoAnswer(int index) {
 		if (rdoAnswer == null)
-			rdoAnswer = new RadioButton[4];
+			rdoAnswer = new RadioButton[Question.NB_ANSWERS];
 
 		if (rdoAnswer[index] == null) {
 			rdoAnswer[index] = new RadioButton();

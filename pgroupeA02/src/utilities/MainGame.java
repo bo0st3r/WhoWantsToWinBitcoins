@@ -1,18 +1,21 @@
 package utilities;
 
+import enumerations.Round;
 import exceptions.AnswerAlreadyPresentException;
 import exceptions.NeedRightAnswerException;
+import exceptions.NoRightAnswerException;
+import exceptions.NotARoundException;
 import exceptions.NotAllAnswersException;
 import exceptions.QuestionAlreadyPresentException;
 import exceptions.RightAnswerAlreadyPresentException;
+import exceptions.StatementTooShortException;
 import exceptions.TooMuchAnswersException;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Deck;
+import model.Earning;
+import model.Party;
 import model.Question;
-import view.AddQuestionGridPane;
-import view.ProjStackPane;
 
 public class MainGame extends Application {
 	public static void addChoiceToAQuestion(Question q, String answer, boolean value) {
@@ -119,19 +122,42 @@ public class MainGame extends Application {
 //		addQuestionToADeck(d, q3);
 //
 //		System.out.println(d);
-//
+
 //		System.out.println("\n-----------------------------------------------------");
 //		// Transform a Deck to a JSON file
 //		Serialization.deckToJson(d, "test");
 //
-//		// Transform a JSON file to a Deck
+//		 Transform a JSON file to a Deck
 //		Deck fromJson = Serialization.jsonToDeck("test");
 //		System.out.println("\t\tRetrieved from JSON file :");
 //		System.out.println(fromJson);
+//		System.out.println(fromJson);
 
+//		try {
+//			Question q4 = new Question("", "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST", Round.LAST_ROUND);
+//			q4.addChoice("A", false);
+//			q4.addChoice("A2", false);
+//			q4.addChoice("A3", false);
+//			q4.addChoice("A4", true);
+//			addQuestionToADeck(d, q4);
+//		} catch (StatementTooShortException | NotARoundException | TooMuchAnswersException | AnswerAlreadyPresentException | RightAnswerAlreadyPresentException | NeedRightAnswerException e1) {
+//			e1.printStackTrace();
+//		}
+//		
+//		try {
+//			q3.setRound(Round.SECOND_ROUND);
+//			q3.setStatement("TEST TEST TEST TEST TEST TEST TEST TEST ");
+//		} catch (StatementTooShortException e) {
+//			e.printStackTrace();
+//		}
+//		addQuestionToADeck(d, q3);
+//		
+//
+//		System.out.println("\n----------------------------------------------------");
+//		Party p = new Party(d.getQuestions());
+//		System.out.println(p);
 		// Run GUI
-		launch(args);
-
+//		launch(args);
 	}
 
 	// GUI
@@ -167,17 +193,17 @@ public class MainGame extends Application {
 //			primaryStage.setMaximized(true);
 //TEST STACKPANE
 
-			ProjStackPane psp = new ProjStackPane();
-			psp.setId("projStackPane");
-			Scene scene = new Scene(psp);
-			primaryStage.setTitle("Jeu");
-			primaryStage.setMaximized(true);
-			primaryStage.setMinHeight(600);
-			primaryStage.setMinWidth(1000);
-
-			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
+//			ProjStackPane psp = new ProjStackPane();
+//			psp.setId("projStackPane");
+//			Scene scene = new Scene(psp);
+//			primaryStage.setTitle("Jeu");
+//			primaryStage.setMaximized(true);
+//			primaryStage.setMinHeight(600);
+//			primaryStage.setMinWidth(1000);
+//
+//			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+//			primaryStage.setScene(scene);
+//			primaryStage.show();
 
 		} catch (Exception e) {
 

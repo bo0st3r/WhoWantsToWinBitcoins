@@ -20,6 +20,8 @@ public class Question {
 	private Round round;
 	private Map<String, Boolean> choices;
 
+	public static final int NB_ANSWERS = 4;
+
 	/*
 	 * Constructor of Question class. The param "choices" just gets instantiated as
 	 * an empty HashMap<String,Boolean>.
@@ -157,7 +159,7 @@ public class Question {
 	}
 
 	public String toString() {
-		String result = "Statement : " + statement + "\nAnswers :\n";
+		String result = "Statement : " + statement + "\nRound : " + round.getRoundStatement() + "\nAnswers :\n";
 
 		Set<Entry<String, Boolean>> entries = choices.entrySet();
 		for (Entry<String, Boolean> entry : entries) {
@@ -196,6 +198,12 @@ public class Question {
 		if (statement.length() < 15)
 			throw new StatementTooShortException(statement);
 		this.statement = statement;
+	}
+
+	public void setRound(Round round) {
+		if (round != null) {
+			this.round = round;
+		}
 	}
 
 	public int getNbAnswers() {

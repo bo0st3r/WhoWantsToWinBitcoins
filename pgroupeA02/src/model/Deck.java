@@ -51,6 +51,19 @@ public class Deck {
 		return questions.size();
 	}
 
+	/*
+	 * Returns a clone of the questions List.
+	 */
+	public List<Question> getQuestions() {
+		List<Question> tmp = new ArrayList<Question>();
+
+		for (Question q : questions) {
+			tmp.add(q.clone());
+		}
+
+		return tmp;
+	}
+
 	public String toString() {
 		String result = "\tHere's the questions of this deck :\n";
 
