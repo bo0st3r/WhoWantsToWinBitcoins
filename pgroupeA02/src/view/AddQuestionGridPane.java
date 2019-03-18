@@ -1,8 +1,6 @@
 package view;
 
 import enumerations.Round;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -198,14 +196,6 @@ public class AddQuestionGridPane extends GridPane {
 	public Button getBtnOk() {
 		if (btnOk == null)
 			btnOk = new Button("Add");
-		btnOk.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				setVisible(false);
-				((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
-			}
-		});
 
 		return btnOk;
 	}

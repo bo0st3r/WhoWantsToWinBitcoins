@@ -1,7 +1,10 @@
 package view;
 
-import java.awt.Dialog.ModalExclusionType;
-
+import exceptions.DeckUnderFilledException;
+import exceptions.ExceedMaxStepsException;
+import exceptions.NotEnoughQuestionsException;
+import exceptions.QuestionsListIsEmptyException;
+import exceptions.TooMuchQuestionsException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -15,20 +18,21 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class HomeGridPane extends GridPane {
 
-	// general
+	// General
 	private Button btnPlay;
 	private Button btnScoreBoard;
 	private Button btnRules;
 	private Button btnAbout;
 	private Button btnConnect;
 	private Label lblTitle;
-	// admin button
+
+	// Admin button
 	private Button btnAddQuestion;
 	private int admin = 1;
+
 	// While connected buttons
 	private Button btnProfile;
 	private Button btnDisconnect;
@@ -36,7 +40,7 @@ public class HomeGridPane extends GridPane {
 //	private About about;
 
 	public HomeGridPane() {
-		this.setGridLinesVisible(true);
+//		this.setGridLinesVisible(true);
 
 		this.setPadding(new Insets(10));
 		this.setHgap(8);
@@ -56,29 +60,29 @@ public class HomeGridPane extends GridPane {
 		this.add(getLblTitle(), 2, 1, 6, 2);
 		GridPane.setHalignment(getLblTitle(), HPos.CENTER);
 		getLblTitle().setId("titleHome");
-		
+
 		// Play button
 		getBtnPlay().setPrefWidth(Integer.MAX_VALUE);
 		getBtnPlay().setPrefHeight(Integer.MAX_VALUE);
 		this.add(getBtnPlay(), 3, 4, 4, 2);
 		GridPane.setHalignment(getBtnPlay(), HPos.CENTER);
 		getBtnPlay().setId("playBtn");
-		
+
 		// Score button
 		getBtnScoreBoard().setPrefHeight(Integer.MAX_VALUE);
 		getBtnScoreBoard().setPrefWidth(Integer.MAX_VALUE);
 		this.add(getBtnScoreBoard(), 4, 6, 2, 1);
 		getBtnScoreBoard().setId("classicBtn");
-		
+
 		// Rule button
 		getBtnRules().setPrefHeight(Integer.MAX_VALUE);
 		getBtnRules().setPrefWidth(Integer.MAX_VALUE);
 		this.add(getBtnRules(), 4, 7, 2, 1);
 		getBtnRules().setId("classicBtn");
-		
+
 		// AddQuestion button
-//		getBtnAddQuestion().setPrefHeight(Integer.MAX_VALUE);
-//		getBtnAddQuestion().setPrefWidth(Integer.MAX_VALUE);
+		getBtnAddQuestion().setPrefHeight(Integer.MAX_VALUE);
+		getBtnAddQuestion().setPrefWidth(Integer.MAX_VALUE);
 		this.add(getBtnAddQuestion(), 4, 8, 2, 1);
 		getBtnAddQuestion().setId("classicBtn");
 		// hidden if not admin
@@ -104,39 +108,32 @@ public class HomeGridPane extends GridPane {
 		// hidden if not connected
 		getBtnDisconnect().setVisible(false);
 
-
 		// About button
 		this.add(getBtnAbout(), 0, 9);
 		getBtnAbout().setId("about");
-
-		// Previous button
-		// this.add(getBtnPrevious(), 4, 7);
-		// hidden if on home
-		// getBtnPrevious().setVisible(false);
-
 	}
 
-//	private void hideAllComponent() {
-//		for(Node node :getStackPane().getChildren()) {
-//			node.setVisible(false);
-//		}
-//	}
-
-	// getters
-
+	// Getters
 	public Button getBtnPlay() {
-		if (btnPlay == null)
-			btnPlay = new Button("Play");
+		if (btnPlay == null) {
+			btnPlay = new Button("Let's play");
 
-		btnPlay.setOnAction(new EventHandler<ActionEvent>() {
+			btnPlay.setOnAction(new EventHandler<ActionEvent>() {
 
-			@Override
-			public void handle(ActionEvent event) {
+				@Override
+				public void handle(ActionEvent event) {
 
-				setVisible(false);
-				((ProjStackPane) getParent().getParent()).getPlayingGridPane().setVisible(true);
-			}
-		});
+					try {
+						((ProjStackPane) getParent().getParent()).getPlayingGridPane().runNewParty("main_deck");
+					} catch (QuestionsListIsEmptyException | DeckUnderFilledException | NotEnoughQuestionsException
+							| TooMuchQuestionsException | ExceedMaxStepsException e) {
+						e.printStackTrace();
+					}
+					setVisible(false);
+					((ProjStackPane) getParent().getParent()).getPlayingGridPane().setVisible(true);
+				}
+			});
+		}
 
 		return btnPlay;
 	}
@@ -167,7 +164,7 @@ public class HomeGridPane extends GridPane {
 		if (btnAddQuestion == null) {
 			btnAddQuestion = new Button("Add a question");
 
-			Scene secondScene = new Scene(AddQuestionGridPane.getSingleton(), 570, 355);
+			Scene secondScene = new Scene(AddQuestionGridPane.getSingleton(), 570, 305);
 			btnAddQuestion.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override

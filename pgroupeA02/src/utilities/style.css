@@ -2,18 +2,11 @@
 	-fx-background-color: #33322e;
 }
 
-
-
-
 /* HOME */
 #homePane{
-	
 	-fx-font-family : 'Georgia';
 	/*-fx-font-size: 20px ;*/
-	-fx-background-image: url("bitcoin.png");
 	-fx-background-repeat: round;
-	
-
 }
 
 #playBtn{
@@ -21,7 +14,7 @@
 	-fx-border-color: #f9e79f;
 	-fx-border-width: 5.0px;
 	-fx-font-size: 40.0px;
-	-fx-border-width:0;	
+	-fx-border-width:0.0;	
 }
 
 #classicBtn, #about{

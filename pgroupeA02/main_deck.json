@@ -1,0 +1,20 @@
+{
+	"questions":
+	[
+		{"author":"Bastien","statement":"BITCOINZ BITCOINZ BITCOINZ BITCOINZ","round":"LAST_ROUND","choices":{"A":false,"B":false,"C":false,"right":true}},
+		{"author":"Bastien","statement":"ETHEREUMZ ETHEREUMZ ETHEREUMZ ETHEREUMZ","round":"SECOND_ROUND","choices":{"A":false,"B":false,"right":true,"D":false}},
+		{"author":"Paul","statement":"TEST1 TEST1 TEST1 TEST1 TEST1 TEST1 TEST1 ","round":"FIRST_ROUND","choices":{"A":false,"B":false,"right":true,"D":false}},
+		{"author":"Paul","statement":"TEST2 TEST2 TEST2 TEST2 TEST2 TEST2 TEST2 ","round":"SECOND_ROUND","choices":{"A":false,"B":false,"right":true,"D":false}},
+		{"author":"Marie","statement":"TEST3 TEST3 TEST3 TEST3 TEST3 TEST3 TEST3 ","round":"FIRST_ROUND","choices":{"A":false,"B":false,"right":true,"D":false}},
+		{"author":"Marie","statement":"TEST4 TEST4 TEST4 TEST4 TEST4 TEST4 TEST4 ","round":"LAST_ROUND","choices":{"A":false,"B":false,"C":false,"right":true}},
+		{"author":"Jean","statement":"TEST5 TEST5 TEST5 TEST5 TEST5 TEST5 TEST5 ","round":"FIRST_ROUND","choices":{"A":false,"B":false,"C":false,"right":true}},
+		{"author":"Jean","statement":"TEST6 TEST6 TEST6 TEST6 TEST6 TEST6 TEST6 ","round":"SECOND_ROUND","choices":{"A":false,"B":true,"C":false,"right":true}},
+		{"author":"Simon","statement":"TEST7 TEST7 TEST7 TEST7 TEST7 TEST7 TEST7 ","round":"LAST_ROUND","choices":{"A":false,"B":true,"C":false,"right":true}},
+		{"author":"Simon","statement":"TEST8 TEST8 TEST8 TEST8 TEST8 TEST8 TEST8 ","round":"SECOND_ROUND","choices":{"A":false,"right":true,"C":false,"D":false}},
+		{"author":"Simon","statement":"TEST9 TEST9 TEST9 TEST9 TEST9 TEST9 TEST9 ","round":"FIRST_ROUND","choices":{"A":false,"right":true,"C":false,"D":false}},
+		{"author":"Jean","statement":"TEST10 TEST10 TEST10 TEST10 TEST10 TEST10 TEST10 ","round":"LAST_ROUND","choices":{"right":true,"B":false,"C":false,"D":false}},
+		{"author":"Jean","statement":"TEST1& TEST1& TEST1& TEST1& TEST1& TEST1& TEST1& ","round":"SECOND_ROUND","choices":{"right":true,"B":false,"C":false,"D":false}},
+		{"author":"Simon","statement":"TEST13 TEST13 TEST13 TEST13 TEST13 TEST13 TEST13 ","round":"FIRST_ROUND","choices":{"right":true,"B":false,"C":false,"D":false}},
+		{"author":"Bastien","statement":"TEST12 TEST12 TEST12 TEST12 TEST12 TEST12 TEST12 ","round":"LAST_ROUND","choices":{"A":false,"B":false,"C":false,"right":true}}
+	]
+}

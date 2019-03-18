@@ -9,54 +9,51 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public class AboutGridPane extends GridPane {
-	
+
 	private Button btnPrevious;
 	private Label lblname;
-	
-	
+
 	public AboutGridPane() {
-		
-		//add columns
+		this.setGridLinesVisible(true);
+
+		// Set columns
 		ColumnConstraints c = new ColumnConstraints();
 		c.setPercentWidth(10);
-		this.getColumnConstraints().addAll(c,c,c,c,c,c,c,c,c,c);
-		
-		//add rows
+		this.getColumnConstraints().addAll(c, c, c, c, c, c, c, c, c, c);
+
+		// Set rows
 		RowConstraints r = new RowConstraints();
 		r.setPercentHeight(10);
-		this.getRowConstraints().addAll(r,r,r,r,r,r,r,r,r,r);
-		
-		//label 
-		this.add(getLblname(), 3, 1, 5,1);
-		
-		//button 
+		this.getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r);
+
+		// Label
+		this.add(getLblname(), 3, 1, 3, 1);
+
+		// Previous button
 		this.add(getBtnPrevious(), 4, 8, 2, 2);
-		
-		
+
 	}
 
 	public Button getBtnPrevious() {
-		if (btnPrevious==null) {
+		if (btnPrevious == null) {
 			btnPrevious = new Button("Previous");
 			btnPrevious.setOnAction(new EventHandler<ActionEvent>() {
-						
+
 				@Override
 				public void handle(ActionEvent event) {
-					
+
 					setVisible(false);
-					((ProjStackPane)getParent().getParent()).getHomeGridPane().setVisible(true);
-					
+					((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+
 				}
 			});
 		}
 		return btnPrevious;
 	}
 
-
-
 	public Label getLblname() {
-		if (lblname==null) {
-			lblname= new Label("De Bels Lieven , Decorte Bastien, Draux Elsa");
+		if (lblname == null) {
+			lblname = new Label("----De Bels Lieven , Decorte Bastien, Draux Elsa");
 		}
 		return lblname;
 	}

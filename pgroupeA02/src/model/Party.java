@@ -14,6 +14,7 @@ import exceptions.TooMuchQuestionsException;
 
 public class Party {
 	private List<Question> choosenQuestions;
+	private Earning earning;
 	private int actualStep = 1;
 	public static final int NB_STEPS = 15;
 	public static final int NB_STEPS_BY_ROUND = 5;
@@ -42,7 +43,6 @@ public class Party {
 			TooMuchQuestionsException {
 		if (deck.getQuestions() == null)
 			throw new QuestionsListIsEmptyException();
-
 		if (deck.getQuestions().size() < 15)
 			throw new DeckUnderFilledException(deck.getQuestions().size());
 
@@ -82,6 +82,10 @@ public class Party {
 
 		// Sort by rounds order
 		sortQuestionsByRounds();
+
+		earning = new Earning();
+
+		System.out.println(choosenQuestions);
 	}
 
 	/*
@@ -132,7 +136,8 @@ public class Party {
 	/*
 	 * Returns the Question for the next step and incremets actualStep by 1.
 	 * 
-	 * @throws ExceedMaxStepsException occurs if the actual step is higher than the Party.NB_STEPS
+	 * @throws ExceedMaxStepsException occurs if the actual step is higher than the
+	 * Party.NB_STEPS
 	 */
 	public Question getQuestionNextStep() throws ExceedMaxStepsException {
 		if (actualStep > NB_STEPS) {
@@ -140,13 +145,13 @@ public class Party {
 		}
 
 		actualStep++;
-		return (choosenQuestions.get(actualStep));
+		return (choosenQuestions.get(actualStep - 2));
 	}
 
 	/*
 	 * Returns the actual step.
 	 */
-	public int getStep() {
+	public int getActualStep() {
 		return actualStep;
 	}
 

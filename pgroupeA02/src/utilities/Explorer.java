@@ -6,6 +6,7 @@ public class Explorer {
 
 	public static Object getField(Object var0, String var1) {
 		Object var2 = null;
+		@SuppressWarnings("rawtypes")
 		Class var3 = var0.getClass();
 
 		try {

@@ -26,6 +26,7 @@ public class Serialization {
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(dest + ".json"))) {
 			bw.write(json);
+			bw.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -42,6 +43,7 @@ public class Serialization {
 				tmp = br.readLine();
 			}
 
+			br.close();
 			result = new Gson().fromJson(fromFile, Deck.class);
 		} catch (IOException e1) {
 			e1.printStackTrace();
