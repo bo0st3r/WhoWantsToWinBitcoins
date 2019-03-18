@@ -1,5 +1,5 @@
 #projStackPane{
-	-fx-background-color: #33322e;
+	-fx-background-color: #a5a5a5;
 }
 
 
@@ -65,5 +65,18 @@
 /* AddQuestionGridPane */
 #addQuestionPane{
 	-fx-background-color: #a5a5a5;
+}
+
+/*Timer */
+#timer{
+	-fx-font-size: 40px;
+	-fx-background-color: white, white;
+  	-fx-background-radius: 16.4, 15;
+  	-fx-background-insets: -1.4, 0;
+  	-fx-border-radius: 15;
+  	-fx-border-width: 2;
+  	-fx-border-color: dimgrey;
+  	-fx-padding: 0;
+
 }
 

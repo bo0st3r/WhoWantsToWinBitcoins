@@ -1,8 +1,13 @@
 package view;
 
+
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,17 +20,18 @@ import javafx.stage.Stage;
 public class PlayingGridPane extends GridPane {
 
 	private Label lblStatement;
+	
+	//time for timer
+	int nbSeconds=60;
 
 	private Button btnAnswer[];
-
-	public void setBtnAnswer(Button[] btnAnswer) {
-		this.btnAnswer = btnAnswer;
-	}
 
 	private Button btnExit;
 	private Button btnFriends;
 	private Button btnPublic;
 	private Button btn5050;
+	
+	private Label lblTimer;
 
 	public PlayingGridPane() {
 
@@ -68,6 +74,12 @@ public class PlayingGridPane extends GridPane {
 			getBtnAnswer(i).setPrefWidth(Integer.MAX_VALUE);
 			getBtnAnswer(i).setPrefHeight(Integer.MAX_VALUE);
 		}
+		
+		//timer (not in right position)
+		this.add(getLblTimer(), 5, 4, 2, 1);
+
+		
+		
 	}
 	
 	public Label getLblStatement() {
@@ -128,5 +140,40 @@ public class PlayingGridPane extends GridPane {
 	public Button getBtn5050() {
 		return btn5050;
 	}
+
+	//timer
+	public Label getLblTimer() {
+		if(lblTimer==null) {
+			lblTimer = new Label();
+			lblTimer.setId("timer");
+			
+				TimerTask timerTask = new TimerTask() {
+					
+					@Override
+					public void run() {
+							Platform.runLater(new Runnable() {
+								
+								@Override
+								public void run() {
+									
+									if(nbSeconds>=0) {
+									lblTimer.setText(nbSeconds+"s");
+									nbSeconds--;
+									}
+									else {
+										lblTimer.setText("Lost");
+									}
+								}
+							});
+							
+						}
+				};
+				Timer timer=new Timer(true);
+				timer.scheduleAtFixedRate(timerTask, 1000, 1000);
+			}
+
+		return lblTimer;
+	}
+	
 
 }

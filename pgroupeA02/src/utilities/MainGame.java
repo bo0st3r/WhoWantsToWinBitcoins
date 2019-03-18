@@ -11,11 +11,13 @@ import exceptions.RightAnswerAlreadyPresentException;
 import exceptions.StatementTooShortException;
 import exceptions.TooMuchAnswersException;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Deck;
 import model.Earning;
 import model.Party;
 import model.Question;
+import view.ProjStackPane;
 
 public class MainGame extends Application {
 	public static void addChoiceToAQuestion(Question q, String answer, boolean value) {
@@ -157,7 +159,7 @@ public class MainGame extends Application {
 //		Party p = new Party(d.getQuestions());
 //		System.out.println(p);
 		// Run GUI
-//		launch(args);
+		launch(args);
 	}
 
 	// GUI
@@ -193,17 +195,17 @@ public class MainGame extends Application {
 //			primaryStage.setMaximized(true);
 //TEST STACKPANE
 
-//			ProjStackPane psp = new ProjStackPane();
-//			psp.setId("projStackPane");
-//			Scene scene = new Scene(psp);
-//			primaryStage.setTitle("Jeu");
-//			primaryStage.setMaximized(true);
-//			primaryStage.setMinHeight(600);
-//			primaryStage.setMinWidth(1000);
-//
-//			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-//			primaryStage.setScene(scene);
-//			primaryStage.show();
+			ProjStackPane psp = new ProjStackPane();
+			psp.setId("projStackPane");
+			Scene scene = new Scene(psp);
+			primaryStage.setTitle("Jeu");
+			primaryStage.setMaximized(true);
+			primaryStage.setMinHeight(600);
+			primaryStage.setMinWidth(1000);
+
+			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
 
 		} catch (Exception e) {
 
