@@ -2,12 +2,15 @@ package view;
 
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import exceptions.DeckUnderFilledException;
 import exceptions.ExceedMaxStepsException;
 import exceptions.NotEnoughQuestionsException;
 import exceptions.QuestionsListIsEmptyException;
 import exceptions.TooMuchQuestionsException;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -29,12 +32,17 @@ public class PlayingGridPane extends GridPane {
 
 	private Label lblStatement;
 
+	// time for timer
+	int nbSeconds = 60;
+
 	private Button btnAnswer[];
 	private Button btnPrevious;
 	private Button btnExit;
 	private Button btnFriend;
 	private Button btnPublic;
 	private Button btn5050;
+
+	private Label lblTimer;
 
 	private int answerIndex;
 	private String rightAnswer;
@@ -85,6 +93,10 @@ public class PlayingGridPane extends GridPane {
 			getBtnAnswer(i).setPrefWidth(Integer.MAX_VALUE);
 			getBtnAnswer(i).setPrefHeight(Integer.MAX_VALUE);
 		}
+
+		// timer (not in right position)
+		this.add(getLblTimer(), 5, 4, 2, 1);
+
 	}
 
 	public void runNewParty(String dest) throws QuestionsListIsEmptyException, DeckUnderFilledException,
@@ -102,10 +114,10 @@ public class PlayingGridPane extends GridPane {
 			setVisible(false);
 			((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
 		}
-			
+
 	}
 
-	public void getNextQuestion() throws ExceedMaxStepsException  {
+	public void getNextQuestion() throws ExceedMaxStepsException {
 		// Gets the next question
 		Question actualQuestion = party.getQuestionNextStep();
 
@@ -205,6 +217,39 @@ public class PlayingGridPane extends GridPane {
 
 	public Button getBtn5050() {
 		return btn5050;
+	}
+
+	// timer
+	public Label getLblTimer() {
+		if (lblTimer == null) {
+			lblTimer = new Label();
+			lblTimer.setId("timer");
+
+			TimerTask timerTask = new TimerTask() {
+
+				@Override
+				public void run() {
+					Platform.runLater(new Runnable() {
+
+						@Override
+						public void run() {
+
+							if (nbSeconds >= 0) {
+								lblTimer.setText(nbSeconds + "s");
+								nbSeconds--;
+							} else {
+								lblTimer.setText("Lost");
+							}
+						}
+					});
+
+				}
+			};
+			Timer timer = new Timer(true);
+			timer.scheduleAtFixedRate(timerTask, 1000, 1000);
+		}
+
+		return lblTimer;
 	}
 
 }

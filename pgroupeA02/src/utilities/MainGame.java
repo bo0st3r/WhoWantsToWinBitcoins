@@ -197,6 +197,10 @@ public class MainGame extends Application {
 //			primaryStage.setMinHeight(600);
 //			primaryStage.setMinWidth(1000);
 			
+			primaryStage.setMaximized(true);
+			primaryStage.setMinHeight(600);
+			primaryStage.setMinWidth(1000);
+
 			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
