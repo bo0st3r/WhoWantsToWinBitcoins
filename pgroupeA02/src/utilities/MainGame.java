@@ -180,13 +180,7 @@ public class MainGame extends Application {
 //			primaryStage.setMaximized(true);
 //TEST STACKPANE
 
-			ProjStackPane psp = new ProjStackPane();
-			psp.setId("projStackPane");
-			Scene scene = new Scene(psp);
-			primaryStage.setTitle("Jeu");
-//			primaryStage.setMaximized(true);
-			primaryStage.setMinHeight(600);
-			primaryStage.setMinWidth(1000);
+			
 //
 			// test Home
 //			HomeGridPane home = new HomeGridPane();
@@ -197,14 +191,17 @@ public class MainGame extends Application {
 //			primaryStage.setMinHeight(600);
 //			primaryStage.setMinWidth(1000);
 			
-			primaryStage.setMaximized(true);
-			primaryStage.setMinHeight(600);
-			primaryStage.setMinWidth(1000);
+			ProjStackPane psp = new ProjStackPane();
+			psp.setId("projStackPane");
+			Scene scene = new Scene(psp);
+			primaryStage.setTitle("Jeu");
+			primaryStage.setMaximized(false);
+			primaryStage.setMinHeight(750);
+			primaryStage.setMinWidth(1350);
 
 			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
-
 		} catch (Exception e) {
 
 		}

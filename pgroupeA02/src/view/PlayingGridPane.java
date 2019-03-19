@@ -1,6 +1,11 @@
 package view;
 
 import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,14 +19,15 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Party;
 import model.Question;
@@ -107,9 +113,11 @@ public class PlayingGridPane extends GridPane {
 	}
 
 	public void verifyAnswer() throws ExceedMaxStepsException {
-		if (getBtnAnswer(answerIndex).getText().equals(rightAnswer))
+		System.out.println("Réponse " + getBtnAnswer(answerIndex).getText());
+		System.out.println("Bonne réponse " + rightAnswer);
+		if (getBtnAnswer(answerIndex).getText().equals(rightAnswer)) {
 			getNextQuestion();
-		else {
+		} else {
 			endParty();
 			setVisible(false);
 			((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
@@ -120,13 +128,13 @@ public class PlayingGridPane extends GridPane {
 	public void getNextQuestion() throws ExceedMaxStepsException {
 		// Gets the next question
 		Question actualQuestion = party.getQuestionNextStep();
-
 		// Sets new statement
 		getLblStatement().setText(actualQuestion.getStatement());
 
 		// Sets new answers
-		Set<Entry<String, Boolean>> choices = actualQuestion.getChoices().entrySet();
-
+		List<Map.Entry<String, Boolean>> choices = new ArrayList<>(actualQuestion.getChoices().entrySet());
+		Collections.shuffle(choices);
+		
 		int index = 0;
 		for (Entry<String, Boolean> choice : choices) {
 			String answer = choice.getKey();
@@ -151,33 +159,41 @@ public class PlayingGridPane extends GridPane {
 	}
 
 	public Button getBtnAnswer(int index) {
-		if (btnAnswer == null) {
+		if (btnAnswer == null)
 			btnAnswer = new Button[Question.NB_ANSWERS];
-			for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
-				btnAnswer[i] = new Button("");
-			}
 
-			for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
+		if (btnAnswer[index] == null) {
+			btnAnswer[index] = new Button("");
+//				Scene secondScene = new Scene(new ValidationGridPane(), 450, 180);
+			btnAnswer[index].setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent arg0) {
+					answerIndex = index;
+//						secondScene.getStylesheets().addAll(getScene().getStylesheets());
+//						Stage secondStage = new Stage();
+//						secondStage.setTitle("Validation");
+//						secondStage.setScene(secondScene);
+//						// Set the main Stage as it's owner
+//						secondStage.initOwner(getScene().getWindow());
+//						// Disable from acting on the owner stage while this window's open
+//						secondStage.initModality(Modality.WINDOW_MODAL);
+//						// Removes basic Windows style
+//						secondStage.initStyle(StageStyle.UNDECORATED);
+//						secondStage.show();
+					Alert alert = new Alert(AlertType.NONE, "Are you sure?", ButtonType.YES, ButtonType.NO);
+					alert.initModality(Modality.WINDOW_MODAL);
+					alert.initStyle(StageStyle.UNDECORATED);
+					alert.showAndWait();
 
-				Scene secondScene = new Scene(new ValidationGridPane(), 450, 180);
-				btnAnswer[i].setOnAction(new EventHandler<ActionEvent>() {
+					if (alert.getResult() == ButtonType.YES)
+						try {
+							verifyAnswer();
+						} catch (ExceedMaxStepsException e) {
+							e.printStackTrace();
+						}
 
-					@Override
-					public void handle(ActionEvent arg0) {
-						secondScene.getStylesheets().addAll(getScene().getStylesheets());
-						Stage secondStage = new Stage();
-						secondStage.setTitle("Validation");
-						secondStage.setScene(secondScene);
-						// Set the main Stage as it's owner
-						secondStage.initOwner(getScene().getWindow());
-						// Disable from acting on the owner stage while this window's open
-						secondStage.initModality(Modality.WINDOW_MODAL);
-						// Removes basic Windows style
-						secondStage.initStyle(StageStyle.UNDECORATED);
-						secondStage.show();
-					}
-				});
-			}
+				}
+			});
 		}
 		return btnAnswer[index];
 	}
