@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import model.Deck;
 import model.Question;
 import view.ProjStackPane;
+import view.PyramidVBox;
 
 public class MainGame extends Application {
 	public static void addChoiceToAQuestion(Question q, String answer, boolean value) {
@@ -191,6 +192,7 @@ public class MainGame extends Application {
 //			primaryStage.setMinHeight(600);
 //			primaryStage.setMinWidth(1000);
 			
+			
 			ProjStackPane psp = new ProjStackPane();
 			psp.setId("projStackPane");
 			Scene scene = new Scene(psp);
@@ -198,6 +200,8 @@ public class MainGame extends Application {
 			primaryStage.setMaximized(false);
 			primaryStage.setMinHeight(750);
 			primaryStage.setMinWidth(1350);
+			
+			
 
 			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 			primaryStage.setScene(scene);

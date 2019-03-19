@@ -14,7 +14,7 @@ import exceptions.TooMuchQuestionsException;
 
 public class Party {
 	private List<Question> choosenQuestions;
-	private Earning earning;
+	//private static Earning earning;
 	private int actualStep = 1;
 	public static final int NB_STEPS = 15;
 	public static final int NB_STEPS_BY_ROUND = 5;
@@ -83,7 +83,7 @@ public class Party {
 		// Sort by rounds order
 		sortQuestionsByRounds();
 
-		earning = new Earning();
+		//earning = new Earning();
 
 		System.out.println(choosenQuestions);
 	}
@@ -166,4 +166,9 @@ public class Party {
 
 		return tmp;
 	}
+
+//	public static Earning getEarning() {
+//		return earning;
+//	}
+	
 }

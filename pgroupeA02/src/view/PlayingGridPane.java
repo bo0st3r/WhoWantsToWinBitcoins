@@ -24,17 +24,24 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
+import model.Earning;
 import model.Party;
 import model.Question;
 import utilities.Serialization;
 
 public class PlayingGridPane extends GridPane {
+	private static Earning earning;
 	private Party party;
+	
 
 	private Label lblStatement;
 
@@ -52,8 +59,14 @@ public class PlayingGridPane extends GridPane {
 
 	private int answerIndex;
 	private String rightAnswer;
+	
+	private PyramidVBox pyramidVbox;
+	private Paint green = Color.rgb(100,255,100);
+	private Paint ActualStepColor = Color.rgb(255,255,100);
+	private int stepIndex = Party.NB_STEPS-1;
 
 	public PlayingGridPane() {
+		earning = new Earning();
 		this.setGridLinesVisible(true);
 
 		// Set columns
@@ -102,6 +115,9 @@ public class PlayingGridPane extends GridPane {
 
 		// timer (not in right position)
 		this.add(getLblTimer(), 5, 4, 2, 1);
+		
+		//Pyramid 
+		this.add(getPyramidVbox(), 9, 1, 2, 9);
 
 	}
 
@@ -110,19 +126,27 @@ public class PlayingGridPane extends GridPane {
 		party = new Party(Serialization.jsonToDeck(dest));
 
 		getNextQuestion();
+		getPyramidVbox().getGain(stepIndex).setBackground(new Background(new BackgroundFill(ActualStepColor, null, null)));
+		
 	}
 
 	public void verifyAnswer() throws ExceedMaxStepsException {
+		
 		System.out.println("Réponse " + getBtnAnswer(answerIndex).getText());
 		System.out.println("Bonne réponse " + rightAnswer);
+		
 		if (getBtnAnswer(answerIndex).getText().equals(rightAnswer)) {
-			getNextQuestion();
+			
+			getNextQuestion();		
+			getPyramidVbox().getGain(stepIndex).setBackground(new Background(new BackgroundFill(green, null, null)));
+			getPyramidVbox().getGain(stepIndex-1).setBackground(new Background(new BackgroundFill(ActualStepColor, null, null)));
+			stepIndex--;
+			
 		} else {
 			endParty();
 			setVisible(false);
 			((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
 		}
-
 	}
 
 	public void getNextQuestion() throws ExceedMaxStepsException {
@@ -139,12 +163,15 @@ public class PlayingGridPane extends GridPane {
 		for (Entry<String, Boolean> choice : choices) {
 			String answer = choice.getKey();
 			getBtnAnswer(index).setText(answer);
+			
 
 			if (choice.getValue())
 				rightAnswer = answer;
 
+			
 			index++;
 		}
+		
 	}
 
 	public void endParty() {
@@ -267,5 +294,21 @@ public class PlayingGridPane extends GridPane {
 
 		return lblTimer;
 	}
+
+	public PyramidVBox getPyramidVbox() {
+		
+		if (pyramidVbox==null) {
+			pyramidVbox = new PyramidVBox();
+		}
+		
+		return pyramidVbox;
+	}
+
+	public static Earning getEarning() {
+		return earning;
+	}
+	
+	
+	
 
 }

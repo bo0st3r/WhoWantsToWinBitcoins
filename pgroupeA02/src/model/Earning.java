@@ -40,7 +40,6 @@ public class Earning {
 		if (actualStep < 1 || actualStep > Party.NB_STEPS)
 			;
 		// MUST THROW AN EXCEPTION
-
 		return amounts.get(actualStep);
 	}
 
