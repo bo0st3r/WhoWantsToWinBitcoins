@@ -41,12 +41,8 @@ import utilities.Serialization;
 public class PlayingGridPane extends GridPane {
 	private static Earning earning;
 	private Party party;
-	
 
 	private Label lblStatement;
-
-	// time for timer
-	int nbSeconds = 60;
 
 	private Button btnAnswer[];
 	private Button btnPrevious;
@@ -55,15 +51,16 @@ public class PlayingGridPane extends GridPane {
 	private Button btnPublic;
 	private Button btn5050;
 
-	private Label lblTimer;
-
 	private int answerIndex;
 	private String rightAnswer;
-	
+
+	// for pyramid
 	private PyramidVBox pyramidVbox;
-	private Paint green = Color.rgb(100,255,100);
-	private Paint ActualStepColor = Color.rgb(255,255,100);
-	private int stepIndex = Party.NB_STEPS-1;
+	private Paint green = Color.rgb(100, 255, 100);
+	private Paint ActualStepColor = Color.rgb(255, 255, 100);
+	private int stepIndex = Party.NB_STEPS - 1;
+	// timer
+	private TimerFlowPane timerFlowPane;
 
 	public PlayingGridPane() {
 		earning = new Earning();
@@ -113,11 +110,11 @@ public class PlayingGridPane extends GridPane {
 			getBtnAnswer(i).setPrefHeight(Integer.MAX_VALUE);
 		}
 
-		// timer (not in right position)
-		this.add(getLblTimer(), 5, 4, 2, 1);
-		
-		//Pyramid 
+		// Pyramid
 		this.add(getPyramidVbox(), 9, 1, 2, 9);
+
+		// timer
+		this.add(getTimerFlowPane(), 4, 5);
 
 	}
 
@@ -126,22 +123,28 @@ public class PlayingGridPane extends GridPane {
 		party = new Party(Serialization.jsonToDeck(dest));
 
 		getNextQuestion();
-		getPyramidVbox().getGain(stepIndex).setBackground(new Background(new BackgroundFill(ActualStepColor, null, null)));
-		
+		getPyramidVbox().getGain(stepIndex)
+				.setBackground(new Background(new BackgroundFill(ActualStepColor, null, null)));
+
 	}
 
 	public void verifyAnswer() throws ExceedMaxStepsException {
-		
+
 		System.out.println("Réponse " + getBtnAnswer(answerIndex).getText());
 		System.out.println("Bonne réponse " + rightAnswer);
-		
+
 		if (getBtnAnswer(answerIndex).getText().equals(rightAnswer)) {
-			
-			getNextQuestion();		
+
+			getNextQuestion();
+			// Reset the timer
+			resetTimer();
+
+			// pyramid METHODE A PART !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			getPyramidVbox().getGain(stepIndex).setBackground(new Background(new BackgroundFill(green, null, null)));
-			getPyramidVbox().getGain(stepIndex-1).setBackground(new Background(new BackgroundFill(ActualStepColor, null, null)));
+			getPyramidVbox().getGain(stepIndex - 1)
+					.setBackground(new Background(new BackgroundFill(ActualStepColor, null, null)));
 			stepIndex--;
-			
+
 		} else {
 			endParty();
 			setVisible(false);
@@ -150,6 +153,7 @@ public class PlayingGridPane extends GridPane {
 	}
 
 	public void getNextQuestion() throws ExceedMaxStepsException {
+
 		// Gets the next question
 		Question actualQuestion = party.getQuestionNextStep();
 		// Sets new statement
@@ -158,20 +162,18 @@ public class PlayingGridPane extends GridPane {
 		// Sets new answers
 		List<Map.Entry<String, Boolean>> choices = new ArrayList<>(actualQuestion.getChoices().entrySet());
 		Collections.shuffle(choices);
-		
+
 		int index = 0;
 		for (Entry<String, Boolean> choice : choices) {
 			String answer = choice.getKey();
 			getBtnAnswer(index).setText(answer);
-			
 
 			if (choice.getValue())
 				rightAnswer = answer;
 
-			
 			index++;
 		}
-		
+
 	}
 
 	public void endParty() {
@@ -262,53 +264,28 @@ public class PlayingGridPane extends GridPane {
 		return btn5050;
 	}
 
-	// timer
-	public Label getLblTimer() {
-		if (lblTimer == null) {
-			lblTimer = new Label();
-			lblTimer.setId("timer");
-
-			TimerTask timerTask = new TimerTask() {
-
-				@Override
-				public void run() {
-					Platform.runLater(new Runnable() {
-
-						@Override
-						public void run() {
-
-							if (nbSeconds >= 0) {
-								lblTimer.setText(nbSeconds + "s");
-								nbSeconds--;
-							} else {
-								lblTimer.setText("Lost");
-							}
-						}
-					});
-
-				}
-			};
-			Timer timer = new Timer(true);
-			timer.scheduleAtFixedRate(timerTask, 1000, 1000);
-		}
-
-		return lblTimer;
-	}
-
 	public PyramidVBox getPyramidVbox() {
-		
-		if (pyramidVbox==null) {
+
+		if (pyramidVbox == null) {
 			pyramidVbox = new PyramidVBox();
 		}
-		
+
 		return pyramidVbox;
 	}
 
 	public static Earning getEarning() {
 		return earning;
 	}
-	
-	
-	
+
+	public void resetTimer() {
+		getTimerFlowPane().resetNbSecond();
+	}
+
+	public TimerFlowPane getTimerFlowPane() {
+		if (timerFlowPane == null) {
+			timerFlowPane = new TimerFlowPane();
+		}
+		return timerFlowPane;
+	}
 
 }

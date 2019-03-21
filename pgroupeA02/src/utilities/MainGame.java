@@ -197,7 +197,7 @@ public class MainGame extends Application {
 			psp.setId("projStackPane");
 			Scene scene = new Scene(psp);
 			primaryStage.setTitle("Jeu");
-			primaryStage.setMaximized(false);
+//			primaryStage.setMaximized(true);
 			primaryStage.setMinHeight(750);
 			primaryStage.setMinWidth(1350);
 			
