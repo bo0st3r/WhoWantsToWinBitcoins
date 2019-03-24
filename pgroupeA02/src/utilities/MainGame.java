@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import model.Deck;
 import model.Question;
 import view.ProjStackPane;
-import view.PyramidVBox;
 
 public class MainGame extends Application {
 	public static void addChoiceToAQuestion(Question q, String answer, boolean value) {

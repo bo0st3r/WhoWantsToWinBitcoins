@@ -10,14 +10,14 @@ public class Earning {
 		amounts = new ArrayList<Integer>();
 
 		// TEMPORARY
-		for (int i = 1; i <= 15; i++) {
+		for (int i = 1; i <= Party.NB_STEPS; i++) {
 			amounts.add(i * 42);
 		}
 	}
 
 	public Earning(List<Integer> amounts) {
 		super();
-		if (amounts.size() == 15) {
+		if (amounts.size() == Party.NB_STEPS) {
 			for (Integer amount : amounts) {
 				if (amount > 0)
 					amounts.add(amount);
@@ -36,6 +36,10 @@ public class Earning {
 		// MUST THROW AN EXCEPTION
 	}
 
+	/*
+	 * Returns the earnings corresponding to an index.
+	 * @param actualStep Index of the step for which we want to get the corresponding earnings.
+	 */
 	public int getAmount(int actualStep) {
 		if (actualStep < 1 || actualStep > Party.NB_STEPS)
 			;

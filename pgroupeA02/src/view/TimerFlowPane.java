@@ -4,18 +4,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.FlowPane;
-import javafx.stage.Modality;
-import javafx.stage.StageStyle;
 
 public class TimerFlowPane extends FlowPane {
-
 	private Label lblTimer;
-	// time for timer
+	// Time for timer
 	private int nbSeconds = 60;
 
 	public TimerFlowPane() {
@@ -65,9 +59,6 @@ public class TimerFlowPane extends FlowPane {
 		};
 		
 		timer.scheduleAtFixedRate(timerTask, 0, 1000);
-
-		
-	
 	}
 
 	public void resetNbSecond() {

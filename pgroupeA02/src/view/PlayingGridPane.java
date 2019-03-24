@@ -1,21 +1,16 @@
 package view;
 
-import java.util.Map.Entry;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Map.Entry;
 
 import exceptions.DeckUnderFilledException;
 import exceptions.ExceedMaxStepsException;
 import exceptions.NotEnoughQuestionsException;
 import exceptions.QuestionsListIsEmptyException;
 import exceptions.TooMuchQuestionsException;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -34,6 +29,8 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import model.Earning;
+import model.Joker;
+import model.JokerPublic;
 import model.Party;
 import model.Question;
 import utilities.Serialization;
@@ -47,23 +44,29 @@ public class PlayingGridPane extends GridPane {
 	private Button btnAnswer[];
 	private Button btnPrevious;
 	private Button btnExit;
-	private Button btnFriend;
-	private Button btnPublic;
-	private Button btn5050;
 
 	private int answerIndex;
 	private String rightAnswer;
 
-	// for pyramid
+	// Jokers
+	private Joker joker;
+	private Button btnJokerPublic;
+	private Button btnJokerFriend;
+	private Button btnJoker5050;
+
+	// Earnings pyramid
 	private PyramidVBox pyramidVbox;
-	private Paint green = Color.rgb(100, 255, 100);
-	private Paint ActualStepColor = Color.rgb(255, 255, 100);
-	private int stepIndex = Party.NB_STEPS - 1;
-	// timer
+	private Paint rgbGreen = Color.rgb(100, 255, 100);
+	private Paint rgbActualStepColor = Color.rgb(255, 255, 100);
+	private int pyramidActualStep;
+
+	// Timer
 	private TimerFlowPane timerFlowPane;
 
 	public PlayingGridPane() {
 		earning = new Earning();
+		joker = new Joker();
+		pyramidActualStep = Party.NB_STEPS - 1;
 		this.setGridLinesVisible(true);
 
 		// Set columns
@@ -110,10 +113,10 @@ public class PlayingGridPane extends GridPane {
 			getBtnAnswer(i).setPrefHeight(Integer.MAX_VALUE);
 		}
 
-		// Pyramid
-		this.add(getPyramidVbox(), 9, 1, 2, 9);
+		// Joker
+		this.add(getBtnJokerPublic(), 0, 1);
 
-		// timer
+		// Timer
 		this.add(getTimerFlowPane(), 4, 5);
 
 	}
@@ -121,30 +124,35 @@ public class PlayingGridPane extends GridPane {
 	public void runNewParty(String dest) throws QuestionsListIsEmptyException, DeckUnderFilledException,
 			NotEnoughQuestionsException, TooMuchQuestionsException, ExceedMaxStepsException {
 		party = new Party(Serialization.jsonToDeck(dest));
-
 		getNextQuestion();
-		getPyramidVbox().getGain(stepIndex)
-				.setBackground(new Background(new BackgroundFill(ActualStepColor, null, null)));
 
+		pyramidActualStep = Party.NB_STEPS - 1;
+		pyramidVbox = null;
+		getPyramidVbox().getGain(Party.NB_STEPS - 1)
+				.setBackground(new Background(new BackgroundFill(rgbActualStepColor, null, null)));
 	}
 
 	public void verifyAnswer() throws ExceedMaxStepsException {
-
-		System.out.println("Réponse " + getBtnAnswer(answerIndex).getText());
-		System.out.println("Bonne réponse " + rightAnswer);
-
-		if (getBtnAnswer(answerIndex).getText().equals(rightAnswer)) {
+		// Still playing
+		if (getBtnAnswer(answerIndex).getText().equals(rightAnswer) && party.getActualStep() <= Party.NB_STEPS) {
 
 			getNextQuestion();
 			// Reset the timer
 			resetTimer();
 
 			// pyramid METHODE A PART !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			getPyramidVbox().getGain(stepIndex).setBackground(new Background(new BackgroundFill(green, null, null)));
-			getPyramidVbox().getGain(stepIndex - 1)
-					.setBackground(new Background(new BackgroundFill(ActualStepColor, null, null)));
-			stepIndex--;
+			getPyramidVbox().getGain(pyramidActualStep)
+					.setBackground(new Background(new BackgroundFill(rgbGreen, null, null)));
+			getPyramidVbox().getGain(pyramidActualStep - 1)
+					.setBackground(new Background(new BackgroundFill(rgbActualStepColor, null, null)));
+			pyramidActualStep--;
 
+			// Won the party
+		} else if (party.getActualStep() > Party.NB_STEPS) {
+			endParty();
+			setVisible(false);
+			((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+			// Loosed
 		} else {
 			endParty();
 			setVisible(false);
@@ -152,8 +160,22 @@ public class PlayingGridPane extends GridPane {
 		}
 	}
 
-	public void getNextQuestion() throws ExceedMaxStepsException {
+	public Button getBtnJokerPublic() {
+		if (btnJokerPublic == null) {
+			btnJokerPublic = new Button("Call the public");
 
+			btnJokerPublic.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent arg0) {
+					joker.setStrategy(new JokerPublic());
+					joker.useJoker();
+				}
+			});
+		}
+		return btnJokerPublic;
+	}
+
+	public void getNextQuestion() throws ExceedMaxStepsException {
 		// Gets the next question
 		Question actualQuestion = party.getQuestionNextStep();
 		// Sets new statement
@@ -252,22 +274,10 @@ public class PlayingGridPane extends GridPane {
 		return btnExit;
 	}
 
-	public Button getBtnFriends() {
-		return btnFriend;
-	}
-
-	public Button getBtnPublic() {
-		return btnPublic;
-	}
-
-	public Button getBtn5050() {
-		return btn5050;
-	}
-
 	public PyramidVBox getPyramidVbox() {
-
 		if (pyramidVbox == null) {
 			pyramidVbox = new PyramidVBox();
+			this.add(pyramidVbox, 9, 1, 2, 9);
 		}
 
 		return pyramidVbox;
