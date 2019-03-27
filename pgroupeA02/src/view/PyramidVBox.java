@@ -28,6 +28,7 @@ public class PyramidVBox extends GridPane {
 
 	private List<Label> gain;
 	private Paint blanc = Color.rgb(255,255,255);
+	private Paint rouge = Color.rgb(255, 0, 0);
 
 	public PyramidVBox() {
 		
@@ -54,6 +55,10 @@ public class PyramidVBox extends GridPane {
 		//layout
 		this.setPrefWidth(Integer.MAX_VALUE);
 		this.setBackground(new Background(new BackgroundFill(blanc, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.getGain(5).setTextFill(rouge);
+		this.getGain(10).setTextFill(rouge);
+		this.getGain(5).setStyle("-fx-font-weight: bold;");
+		this.getGain(10).setStyle("-fx-font-weight: bold;");
 		
 		
 		

@@ -6,14 +6,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+
 import exceptions.DeckUnderFilledException;
 import exceptions.ExceedMaxStepsException;
 import exceptions.NotEnoughQuestionsException;
 import exceptions.QuestionsListIsEmptyException;
 import exceptions.TooMuchQuestionsException;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -27,12 +31,14 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Earning;
-import model.Joker;
-import model.JokerPublic;
+//import model.Joker;
+//import model.JokerPublic;
 import model.Party;
 import model.Question;
+import utilities.MainGame;
 import utilities.Serialization;
 
 public class PlayingGridPane extends GridPane {
@@ -49,7 +55,7 @@ public class PlayingGridPane extends GridPane {
 	private String rightAnswer;
 
 	// Jokers
-	private Joker joker;
+	//private Joker joker;
 	private Button btnJokerPublic;
 	private Button btnJokerFriend;
 	private Button btnJoker5050;
@@ -65,7 +71,7 @@ public class PlayingGridPane extends GridPane {
 
 	public PlayingGridPane() {
 		earning = new Earning();
-		joker = new Joker();
+		//joker = new Joker();
 		pyramidActualStep = Party.NB_STEPS - 1;
 		this.setGridLinesVisible(true);
 
@@ -119,6 +125,10 @@ public class PlayingGridPane extends GridPane {
 		// Timer
 		this.add(getTimerFlowPane(), 4, 5);
 
+		
+		
+		// Pyramid
+		this.add(getPyramidVbox(), 9, 1, 2, 9);
 	}
 
 	public void runNewParty(String dest) throws QuestionsListIsEmptyException, DeckUnderFilledException,
@@ -135,12 +145,19 @@ public class PlayingGridPane extends GridPane {
 	public void verifyAnswer() throws ExceedMaxStepsException {
 		// Still playing
 		if (getBtnAnswer(answerIndex).getText().equals(rightAnswer) && party.getActualStep() <= Party.NB_STEPS) {
-
+			//green color when OK
+			getBtnAnswer(answerIndex).setId("answerOk");
+			//NEED PAUSE 1SEC BETWEEN 2 QUESTIONS
+			
 			getNextQuestion();
 			// Reset the timer
 			resetTimer();
+			//reset color 
+			getBtnAnswer(answerIndex).setId("answers");
+			
 
 			// pyramid METHODE A PART !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 			getPyramidVbox().getGain(pyramidActualStep)
 					.setBackground(new Background(new BackgroundFill(rgbGreen, null, null)));
 			getPyramidVbox().getGain(pyramidActualStep - 1)
@@ -150,13 +167,19 @@ public class PlayingGridPane extends GridPane {
 			// Won the party
 		} else if (party.getActualStep() > Party.NB_STEPS) {
 			endParty();
-			setVisible(false);
-			((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+			alertPop("CONGRATS");
+			
 			// Loosed
 		} else {
 			endParty();
-			setVisible(false);
-			((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+			//button turn red if false
+			getBtnAnswer(answerIndex).setId("answerNotOk");
+			/* Mettre en vert la bonne réponse*/
+			
+			//alert with message
+			alertPop("Sorry, you're a looser\n"
+					+ "the right answer was\n\n "+rightAnswer);
+			
 		}
 	}
 
@@ -167,8 +190,8 @@ public class PlayingGridPane extends GridPane {
 			btnJokerPublic.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent arg0) {
-					joker.setStrategy(new JokerPublic());
-					joker.useJoker();
+					//joker.setStrategy(new JokerPublic());
+					//joker.useJoker();
 				}
 			});
 		}
@@ -215,36 +238,42 @@ public class PlayingGridPane extends GridPane {
 
 		if (btnAnswer[index] == null) {
 			btnAnswer[index] = new Button("");
-//				Scene secondScene = new Scene(new ValidationGridPane(), 450, 180);
+			
+				Scene secondScene = new Scene(new ValidationGridPane(), 450, 180);
 			btnAnswer[index].setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent arg0) {
+					
+					btnAnswer[index].setId("answerValue");
 					answerIndex = index;
-//						secondScene.getStylesheets().addAll(getScene().getStylesheets());
-//						Stage secondStage = new Stage();
-//						secondStage.setTitle("Validation");
-//						secondStage.setScene(secondScene);
-//						// Set the main Stage as it's owner
-//						secondStage.initOwner(getScene().getWindow());
-//						// Disable from acting on the owner stage while this window's open
-//						secondStage.initModality(Modality.WINDOW_MODAL);
-//						// Removes basic Windows style
-//						secondStage.initStyle(StageStyle.UNDECORATED);
-//						secondStage.show();
-					Alert alert = new Alert(AlertType.NONE, "Are you sure?", ButtonType.YES, ButtonType.NO);
-					alert.initModality(Modality.WINDOW_MODAL);
-					alert.initStyle(StageStyle.UNDECORATED);
-					alert.showAndWait();
+						secondScene.getStylesheets().addAll(getScene().getStylesheets());
+						Stage secondStage = new Stage();
+						secondStage.setTitle("Validation");
+						secondStage.setScene(secondScene);
+						// Set the main Stage as it's owner
+						secondStage.initOwner(getScene().getWindow());
+						// Disable from acting on the owner stage while this window's open
+						secondStage.initModality(Modality.WINDOW_MODAL);
+						// Removes basic Windows style
+						secondStage.initStyle(StageStyle.UNDECORATED);
+						secondStage.show();
+//					Alert alert = new Alert(AlertType.NONE, "Are you sure?", ButtonType.YES, ButtonType.NO);
+//					alert.initModality(Modality.WINDOW_MODAL);
+//					alert.initStyle(StageStyle.UNDECORATED);
+//					alert.showAndWait();
+//					btnAnswer[index].setId("answers");
+//					
 
-					if (alert.getResult() == ButtonType.YES)
-						try {
-							verifyAnswer();
-						} catch (ExceedMaxStepsException e) {
-							e.printStackTrace();
-						}
+//					if (alert.getResult() == ButtonType.YES)
+//						try {
+//							verifyAnswer();
+//						} catch (ExceedMaxStepsException e) {
+//							e.printStackTrace();
+//						}
 
 				}
 			});
+						
 		}
 		return btnAnswer[index];
 	}
@@ -277,7 +306,7 @@ public class PlayingGridPane extends GridPane {
 	public PyramidVBox getPyramidVbox() {
 		if (pyramidVbox == null) {
 			pyramidVbox = new PyramidVBox();
-			this.add(pyramidVbox, 9, 1, 2, 9);
+			
 		}
 
 		return pyramidVbox;
@@ -296,6 +325,18 @@ public class PlayingGridPane extends GridPane {
 			timerFlowPane = new TimerFlowPane();
 		}
 		return timerFlowPane;
+	}
+	
+	public Alert alertPop(String s) {
+		
+		Alert alert = new Alert(AlertType.NONE, s , ButtonType.OK);
+		alert.initModality(Modality.WINDOW_MODAL);
+		alert.showAndWait();
+		if (alert.getResult() == ButtonType.OK) {
+			setVisible(false);
+			((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+		}
+		return alert;
 	}
 
 }

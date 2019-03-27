@@ -44,6 +44,20 @@
 
 #answers{
 	-fx-alignment: center-left;
+	-fx-background-color: white;
+}
+#answerValue{
+	-fx-alignment: center-left;
+	-fx-background-color: #ABE5F0;
+}
+#answerOk{
+	-fx-alignment: center-left;
+	-fx-background-color: #ABF0BB;
+}
+#answerNotOk{
+	-fx-alignment: center-left;
+	-fx-background-color: #F6497D;
+	
 }
 
 /* Validation */
@@ -71,5 +85,9 @@
   	-fx-border-color: dimgrey;
   	-fx-padding: 0.0;
 
+}
+/* RulesGridPane */
+#rules{
+	
 }
 
