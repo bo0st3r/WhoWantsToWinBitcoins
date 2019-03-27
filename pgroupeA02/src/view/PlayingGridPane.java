@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -65,6 +66,9 @@ public class PlayingGridPane extends GridPane {
 	private Paint rgbGreen = Color.rgb(100, 255, 100);
 	private Paint rgbActualStepColor = Color.rgb(255, 255, 100);
 	private int pyramidActualStep;
+	
+	//Validation
+	private ValidationGridPane validationGridPane;
 
 	// Timer
 	private TimerFlowPane timerFlowPane;
@@ -123,12 +127,13 @@ public class PlayingGridPane extends GridPane {
 		this.add(getBtnJokerPublic(), 0, 1);
 
 		// Timer
-		this.add(getTimerFlowPane(), 4, 5);
-
+		this.add(getTimerFlowPane(), 4, 5, 2, 1);
+		getTimerFlowPane().setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+		getTimerFlowPane().setAlignment(Pos.CENTER);
 		
-		
-		// Pyramid
-		this.add(getPyramidVbox(), 9, 1, 2, 9);
+		//Validation
+		this.add(getValidationGridPane(), 3, 1, 4, 4);
+		getValidationGridPane().setVisible(false);
 	}
 
 	public void runNewParty(String dest) throws QuestionsListIsEmptyException, DeckUnderFilledException,
@@ -239,39 +244,17 @@ public class PlayingGridPane extends GridPane {
 		if (btnAnswer[index] == null) {
 			btnAnswer[index] = new Button("");
 			
-				Scene secondScene = new Scene(new ValidationGridPane(), 450, 180);
+				
 			btnAnswer[index].setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent arg0) {
 					
 					btnAnswer[index].setId("answerValue");
-					answerIndex = index;
-						secondScene.getStylesheets().addAll(getScene().getStylesheets());
-						Stage secondStage = new Stage();
-						secondStage.setTitle("Validation");
-						secondStage.setScene(secondScene);
-						// Set the main Stage as it's owner
-						secondStage.initOwner(getScene().getWindow());
-						// Disable from acting on the owner stage while this window's open
-						secondStage.initModality(Modality.WINDOW_MODAL);
-						// Removes basic Windows style
-						secondStage.initStyle(StageStyle.UNDECORATED);
-						secondStage.show();
-//					Alert alert = new Alert(AlertType.NONE, "Are you sure?", ButtonType.YES, ButtonType.NO);
-//					alert.initModality(Modality.WINDOW_MODAL);
-//					alert.initStyle(StageStyle.UNDECORATED);
-//					alert.showAndWait();
-//					btnAnswer[index].setId("answers");
-//					
-
-//					if (alert.getResult() == ButtonType.YES)
-//						try {
-//							verifyAnswer();
-//						} catch (ExceedMaxStepsException e) {
-//							e.printStackTrace();
-//						}
+					answerIndex = index;					
+					getValidationGridPane().setVisible(true);
 
 				}
+				
 			});
 						
 		}
@@ -306,6 +289,7 @@ public class PlayingGridPane extends GridPane {
 	public PyramidVBox getPyramidVbox() {
 		if (pyramidVbox == null) {
 			pyramidVbox = new PyramidVBox();
+			this.add(getPyramidVbox(), 9, 1, 2, 9);
 			
 		}
 
@@ -323,6 +307,7 @@ public class PlayingGridPane extends GridPane {
 	public TimerFlowPane getTimerFlowPane() {
 		if (timerFlowPane == null) {
 			timerFlowPane = new TimerFlowPane();
+			
 		}
 		return timerFlowPane;
 	}
@@ -338,5 +323,16 @@ public class PlayingGridPane extends GridPane {
 		}
 		return alert;
 	}
+	public ValidationGridPane getValidationGridPane() {
+		if (validationGridPane==null) {
+			validationGridPane = new ValidationGridPane();
+		}
+		return validationGridPane;
+	}
 
+	public int getAnswerIndex() {
+		return answerIndex;
+	}
+
+	
 }

@@ -179,9 +179,6 @@ public class MainGame extends Application {
 //			primaryStage.setTitle("Who want to win Bitcoins");
 //			primaryStage.setMaximized(true);
 //TEST STACKPANE
-
-			
-//
 			// test Home
 //			HomeGridPane home = new HomeGridPane();
 //			home.setId("homePane");

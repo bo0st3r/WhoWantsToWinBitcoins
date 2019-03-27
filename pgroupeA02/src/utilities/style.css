@@ -46,15 +46,15 @@
 	-fx-alignment: center-left;
 	-fx-background-color: white;
 }
-#answerValue{
+#answerValue{ /*when select */
 	-fx-alignment: center-left;
 	-fx-background-color: #ABE5F0;
 }
-#answerOk{
+#answerOk{ /*when answer true */
 	-fx-alignment: center-left;
 	-fx-background-color: #ABF0BB;
 }
-#answerNotOk{
+#answerNotOk{ /*when answer false */
 	-fx-alignment: center-left;
 	-fx-background-color: #F6497D;
 	
@@ -67,6 +67,9 @@
 } 
 #btnValidation{
 	-fx-font-size: 30.0px;	
+}
+#validationPane{
+	-fx-background-color: white;
 }
 
 /* AddQuestionGridPane */

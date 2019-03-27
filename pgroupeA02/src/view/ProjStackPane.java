@@ -11,6 +11,7 @@ public class ProjStackPane extends BorderPane {
 	private PlayingGridPane playingGridPane;
 	private AboutGridPane aboutGridPane;
 	private RulesGridPane rulesGridPane;
+	
 
 	/*
 	 * ProjStackPane constructor, set homeGridPane visible at first.
@@ -87,6 +88,6 @@ public class ProjStackPane extends BorderPane {
 			rulesGridPane = new RulesGridPane();
 		}
 		return rulesGridPane;
-	}
+	}	
 	
 }
