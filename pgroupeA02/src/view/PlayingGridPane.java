@@ -50,7 +50,7 @@ public class PlayingGridPane extends GridPane {
 
 	private Button btnAnswer[];
 	private Button btnPrevious;
-	private Button btnExit;
+	private Button btnExitWithActualEarning;
 
 	private int answerIndex;
 	private String rightAnswer;
@@ -134,6 +134,10 @@ public class PlayingGridPane extends GridPane {
 		//Validation
 		this.add(getValidationGridPane(), 3, 1, 4, 4);
 		getValidationGridPane().setVisible(false);
+		
+		//Exit button 
+		this.add(getBtnExitWithActualEarning(), 7, 0, 2, 1);
+		
 	}
 
 	public void runNewParty(String dest) throws QuestionsListIsEmptyException, DeckUnderFilledException,
@@ -183,8 +187,8 @@ public class PlayingGridPane extends GridPane {
 			
 			//alert with message
 			alertPop("Sorry, you're a looser\n"
-					+ "the right answer was\n\n "+rightAnswer);
-			
+					+ "the right answer was\n\n "+rightAnswer
+					+"\n\n you win : "+EarningWhenLost()+" Bitcoins");
 		}
 	}
 
@@ -278,14 +282,6 @@ public class PlayingGridPane extends GridPane {
 		return btnPrevious;
 	}
 
-	public Button getBtnExit() {
-		if (btnExit == null) {
-			btnExit = new Button("Exit");
-
-		}
-		return btnExit;
-	}
-
 	public PyramidVBox getPyramidVbox() {
 		if (pyramidVbox == null) {
 			pyramidVbox = new PyramidVBox();
@@ -312,6 +308,10 @@ public class PlayingGridPane extends GridPane {
 		return timerFlowPane;
 	}
 	
+	/**
+	 * @param s is the text in the alert
+	 * @return Alert 
+	 */
 	public Alert alertPop(String s) {
 		
 		Alert alert = new Alert(AlertType.NONE, s , ButtonType.OK);
@@ -329,10 +329,53 @@ public class PlayingGridPane extends GridPane {
 		}
 		return validationGridPane;
 	}
-
+	//for the color in ValidationGridPane
 	public int getAnswerIndex() {
 		return answerIndex;
 	}
-
 	
+	//get earning of the round 
+	public double EarningWhenLost() {
+
+		double earn = 0;
+		if (pyramidActualStep > 9) {
+			earn = 0;
+		} else if (pyramidActualStep >= 5) {
+			earn = PlayingGridPane.getEarning().getAmount(4);
+		} else if (pyramidActualStep > 0) {
+			earn = PlayingGridPane.getEarning().getAmount(9);
+		}
+		return earn;
+	}
+
+	//get earning with step
+	public double earningWhenLeave() {
+
+		double earn = 0;
+		for (int i = 13; i >= 0; i--) {
+
+			if (pyramidActualStep == i) {
+				earn = PlayingGridPane.getEarning().getAmount(13 - i);
+			}
+		}
+		return earn;
+	}
+
+	//exit button
+	public Button getBtnExitWithActualEarning() {
+		if (btnExitWithActualEarning == null) {
+			btnExitWithActualEarning = new Button("Exit with actual earn");
+			btnExitWithActualEarning.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+
+					alertPop("You win: " + earningWhenLeave() + " Bitcoins");
+
+				}
+			});
+		}
+		return btnExitWithActualEarning;
+	}
+
 }
