@@ -150,6 +150,7 @@ public class Party {
 		return actualStep;
 	}
 
+	@Override
 	public String toString() {
 		String tmp = "\tChoosen questions for party : \n";
 

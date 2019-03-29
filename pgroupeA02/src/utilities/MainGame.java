@@ -1,5 +1,7 @@
 package utilities;
 
+import java.io.File;
+
 import exceptions.AnswerAlreadyPresentException;
 import exceptions.NeedRightAnswerException;
 import exceptions.NotAllAnswersException;
@@ -180,7 +182,6 @@ public class MainGame extends Application {
 //			primaryStage.setMaximized(true);
 //TEST STACKPANE
 
-			
 //
 			// test Home
 //			HomeGridPane home = new HomeGridPane();
@@ -190,8 +191,7 @@ public class MainGame extends Application {
 //			primaryStage.setMaximized(true);
 //			primaryStage.setMinHeight(600);
 //			primaryStage.setMinWidth(1000);
-			
-			
+
 			ProjStackPane psp = new ProjStackPane();
 			psp.setId("projStackPane");
 			Scene scene = new Scene(psp);
@@ -199,10 +199,11 @@ public class MainGame extends Application {
 //			primaryStage.setMaximized(true);
 			primaryStage.setMinHeight(750);
 			primaryStage.setMinWidth(1350);
-			
-			
 
-			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+			// CSS
+			File f = new File("style/style.css");
+			scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {

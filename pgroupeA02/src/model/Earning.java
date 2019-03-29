@@ -38,7 +38,9 @@ public class Earning {
 
 	/*
 	 * Returns the earnings corresponding to an index.
-	 * @param actualStep Index of the step for which we want to get the corresponding earnings.
+	 * 
+	 * @param actualStep Index of the step for which we want to get the
+	 * corresponding earnings.
 	 */
 	public int getAmount(int actualStep) {
 		if (actualStep < 1 || actualStep > Party.NB_STEPS)
@@ -47,6 +49,7 @@ public class Earning {
 		return amounts.get(actualStep);
 	}
 
+	@Override
 	public String toString() {
 		String tmp = "";
 		for (Integer i : amounts) {

@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import model.Deck;
 
 public class Serialization {
+	public static String datas = "data/";
 
 	/*
 	 * Writes a deck into a JSON file in JSON format. The JSON file name's depends
@@ -24,7 +25,7 @@ public class Serialization {
 		// Gets the text in JSON format for the deck
 		String json = new Gson().toJson(deck);
 
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(dest + ".json"))) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(datas + dest + ".json"))) {
 			bw.write(json);
 			bw.close();
 		} catch (IOException e1) {
@@ -34,7 +35,7 @@ public class Serialization {
 
 	public static Deck jsonToDeck(String dest) {
 		Deck result = null;
-		try (BufferedReader br = new BufferedReader(new FileReader(dest + ".json"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(datas + dest + ".json"))) {
 			String fromFile = "";
 
 			String tmp = br.readLine();

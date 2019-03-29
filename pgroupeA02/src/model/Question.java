@@ -129,7 +129,7 @@ public class Question {
 			Set<Entry<String, Boolean>> entries = choices.entrySet();
 			for (Entry<String, Boolean> entry : entries) {
 				if (entry.getValue())
-					return (String) entry.getKey();
+					return entry.getKey();
 			}
 		}
 
@@ -140,6 +140,7 @@ public class Question {
 		choices.clear();
 	}
 
+	@Override
 	public Question clone() {
 		Question clone = null;
 		try {
@@ -158,6 +159,7 @@ public class Question {
 		return clone;
 	}
 
+	@Override
 	public String toString() {
 		String result = "Statement : " + statement + "\nRound : " + round.getRoundStatement() + "\nAnswers :\n";
 

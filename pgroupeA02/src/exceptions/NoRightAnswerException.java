@@ -9,6 +9,7 @@ public class NoRightAnswerException extends Exception {
 		this.statement = statement;
 	}
 
+	@Override
 	public String getMessage() {
 		return super.getMessage() + statement + "\" has no right answer.";
 	}

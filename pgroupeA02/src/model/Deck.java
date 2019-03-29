@@ -64,6 +64,7 @@ public class Deck {
 		return tmp;
 	}
 
+	@Override
 	public String toString() {
 		String result = "\tHere's the questions of this deck :\n";
 
