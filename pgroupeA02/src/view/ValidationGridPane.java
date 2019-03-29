@@ -18,6 +18,8 @@ public class ValidationGridPane extends GridPane {
 	private Button btnNo;
 
 	public ValidationGridPane() {
+		
+		this.setId("validationPane");
 		// Set columns
 		ColumnConstraints c1 = new ColumnConstraints();
 		c1.setPercentWidth(13);
@@ -73,13 +75,18 @@ public class ValidationGridPane extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					Stage stageValidation = (Stage) btnNo.getScene().getWindow();
+					
 					try {
-						((ProjStackPane) getParent().getParent()).getPlayingGridPane().verifyAnswer();
+						((PlayingGridPane) getParent()).verifyAnswer();
 					} catch (ExceedMaxStepsException e) {
 						e.printStackTrace();
 					}
-					stageValidation.close();
+					int answer = ((PlayingGridPane) getParent()).getAnswerIndex();
+					((PlayingGridPane) getParent()).getBtnAnswer(answer).setId("answers");
+
+					
+					setVisible(false);
+					
 				}
 			});
 		}
@@ -93,8 +100,11 @@ public class ValidationGridPane extends GridPane {
 
 				@Override
 				public void handle(ActionEvent arg0) {
-					Stage stageValidation = (Stage) btnNo.getScene().getWindow();
-					stageValidation.close();
+					setVisible(false);
+					
+					int answer = ((PlayingGridPane) getParent()).getAnswerIndex();
+					((PlayingGridPane) getParent()).getBtnAnswer(answer).setId("answers");
+					
 				}
 
 			});
