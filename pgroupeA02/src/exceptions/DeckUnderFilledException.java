@@ -9,7 +9,8 @@ public class DeckUnderFilledException extends Exception {
 		super("A DeckUnderFilledException has occured because the Deck used to instanciate a Party has " + deckSize);
 	}
 
+	@Override
 	public String getMessage() {
-		return super.getMessage()+" questions in it's list but it requires exactly " + Party.NB_STEPS + ".";
+		return super.getMessage() + " questions in it's list but it requires exactly " + Party.NB_STEPS + ".";
 	}
 }

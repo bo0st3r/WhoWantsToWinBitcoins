@@ -11,6 +11,7 @@ public class NeedRightAnswerException extends Exception {
 		this.answer = answer;
 	}
 
+	@Override
 	public String getMessage() {
 		return super.getMessage() + answer + "\") for the question : \"" + statement
 				+ "\" as false and the 3 others are false too.";

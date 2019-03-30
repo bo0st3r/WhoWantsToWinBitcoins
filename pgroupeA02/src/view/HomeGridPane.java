@@ -157,6 +157,16 @@ public class HomeGridPane extends GridPane {
 	public Button getBtnRules() {
 		if (btnRules == null)
 			btnRules = new Button("Read rules");
+		btnRules.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+				setVisible(false);
+				((ProjStackPane) getParent().getParent()).getRulesGridPane().setVisible(true);
+
+			}
+		});
 		return btnRules;
 	}
 

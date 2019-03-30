@@ -82,7 +82,7 @@ public class AddQuestionGridPane extends GridPane {
 	public static AddQuestionGridPane getSingleton() {
 		if (SINGLETON == null) {
 			SINGLETON = new AddQuestionGridPane();
-			//CSS Id
+			// CSS Id
 			SINGLETON.setId("addQuestionPane");
 		}
 		return SINGLETON;

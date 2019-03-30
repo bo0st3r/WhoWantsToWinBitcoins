@@ -6,5 +6,5 @@ public class QuestionsListIsEmptyException extends Exception {
 	public QuestionsListIsEmptyException() {
 		super("A QuestionsListIsEmptyException has occured because the questions list is empty.");
 	}
-	
+
 }
