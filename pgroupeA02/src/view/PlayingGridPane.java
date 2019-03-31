@@ -264,7 +264,7 @@ public class PlayingGridPane extends GridPane {
 			lblJokerResults[index].setPrefWidth(Integer.MAX_VALUE);
 			lblJokerResults[index].setId("jokerResults");
 			lblJokerResults[index].setVisible(false);
-			PlayingGridPane.setHalignment(lblJokerResults[index], HPos.CENTER);
+			GridPane.setHalignment(lblJokerResults[index], HPos.CENTER);
 		}
 		return lblJokerResults[index];
 	}
