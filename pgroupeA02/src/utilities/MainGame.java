@@ -29,8 +29,9 @@ public class MainGame extends Application {
 			// CSS
 			File f = new File("style/style.css");
 			scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
-
+//			scene.getStylesheets().add(getClass().getResource("/../style/style.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.centerOnScreen();
 			primaryStage.show();
 		} catch (Exception e) {
 

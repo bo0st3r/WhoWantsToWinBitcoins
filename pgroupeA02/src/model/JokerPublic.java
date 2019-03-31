@@ -38,7 +38,6 @@ public class JokerPublic implements JokerStrategy {
 			// Computes the ratio necessary for the sum of publicVotePercents to equals 100%
 			double ratio = tot / 100;
 
-			DecimalFormat df = new DecimalFormat("#0.00");
 			for (i = 0; i <= Question.NB_ANSWERS - 1; i++) {
 				// Normalize % using computed ratio
 				publicVotePercents.set(i, publicVotePercents.get(i) / ratio);
@@ -73,8 +72,9 @@ public class JokerPublic implements JokerStrategy {
 			}
 
 			// Displays votes %
+			DecimalFormat df = new DecimalFormat("#0.00");
 			for (i = 0; i <= Question.NB_ANSWERS - 1; i++) {
-				pgp.getLblJokerResults(i).setText(df.format(publicVotePercents.get(i)) + "%");
+				pgp.lblJokerResultsSetText(i, df.format(publicVotePercents.get(i)) + "%");
 			}
 		}
 	}

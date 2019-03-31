@@ -35,8 +35,6 @@ import model.Joker;
 import model.Joker5050;
 import model.JokerFriend;
 import model.JokerPublic;
-//import model.Joker;
-//import model.JokerPublic;
 import model.Party;
 import model.Question;
 import utilities.Serialization;
@@ -52,7 +50,6 @@ public class PlayingGridPane extends GridPane {
 	private String rightAnswer;
 	private int rightAnswerIndex;
 
-	private Button btnPrevious;
 	private Button btnExitWithActualEarning;
 
 	// Jokers
@@ -79,7 +76,7 @@ public class PlayingGridPane extends GridPane {
 		earning = new Earning();
 		joker = new Joker();
 		pyramidActualStep = Party.NB_STEPS - 1;
-		this.setGridLinesVisible(true);
+//		this.setGridLinesVisible(true);
 
 		// Set columns
 		ColumnConstraints c = new ColumnConstraints();
@@ -98,13 +95,10 @@ public class PlayingGridPane extends GridPane {
 		this.setHgap(5);
 		this.setVgap(5);
 
-		// Btn previous
-		this.add(getBtnPrevious(), 0, 10);
-
 		// Question statement label
 		this.add(getLblStatement(), 1, 6, 8, 2);
 		// Question statement ID
-		getLblStatement().setId("idQuestion");
+		getLblStatement().setId("pgp_statement");
 		// Question statement sizes
 		getLblStatement().setPrefHeight(Integer.MAX_VALUE);
 		getLblStatement().setPrefWidth(Integer.MAX_VALUE);
@@ -114,15 +108,6 @@ public class PlayingGridPane extends GridPane {
 		this.add(getBtnAnswer(1), 1, 9, 4, 1);
 		this.add(getBtnAnswer(2), 5, 8, 4, 1);
 		this.add(getBtnAnswer(3), 5, 9, 4, 1);
-		// Answer buttons & public vote sizes
-		// Answer buttons ID
-		for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
-			getBtnAnswer(i).setId("answers");
-			getBtnAnswer(i).setPrefWidth(Integer.MAX_VALUE);
-			getBtnAnswer(i).setPrefHeight(Integer.MAX_VALUE);
-			getLblJokerResults(i).setPrefHeight(Integer.MAX_VALUE);
-			getLblJokerResults(i).setPrefWidth(Integer.MAX_VALUE);
-		}
 
 		// Timer
 		this.add(getTimerFlowPane(), 4, 5, 2, 1);
@@ -250,6 +235,7 @@ public class PlayingGridPane extends GridPane {
 	public Button getBtnJokerPublic() {
 		if (btnJokerPublic == null) {
 			btnJokerPublic = new Button("Ask the public");
+			btnJokerPublic.setId("jokers");
 
 			btnJokerPublic.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -271,6 +257,8 @@ public class PlayingGridPane extends GridPane {
 
 		if (lblJokerResults[index] == null) {
 			lblJokerResults[index] = new Label("" + index);
+			lblJokerResults[index].setPrefHeight(Integer.MAX_VALUE);
+			lblJokerResults[index].setPrefWidth(Integer.MAX_VALUE);
 			lblJokerResults[index].setId("jokerResults");
 			lblJokerResults[index].setVisible(false);
 			PlayingGridPane.setHalignment(lblJokerResults[index], HPos.CENTER);
@@ -278,10 +266,15 @@ public class PlayingGridPane extends GridPane {
 		return lblJokerResults[index];
 	}
 
+	public void lblJokerResultsSetText(int index, String text) {
+		getLblJokerResults(index).setText(text);
+	}
+
 	// Joker Friend
 	public Button getBtnJokerFriend() {
 		if (btnJokerFriend == null) {
 			btnJokerFriend = new Button("Call a friend");
+			btnJokerFriend.setId("jokers");
 
 			btnJokerFriend.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -300,6 +293,7 @@ public class PlayingGridPane extends GridPane {
 	public Button getBtnJoker5050() {
 		if (btnJoker5050 == null) {
 			btnJoker5050 = new Button("50/50");
+			btnJoker5050.setId("jokers");
 
 			btnJoker5050.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -324,21 +318,6 @@ public class PlayingGridPane extends GridPane {
 		lblJokerResults[index].setVisible(value);
 	}
 
-	public Button getBtnPrevious() {
-		if (btnPrevious == null) {
-			btnPrevious = new Button("Previous");
-			btnPrevious.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent event) {
-					setVisible(false);
-					((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
-				}
-			});
-		}
-		return btnPrevious;
-	}
-
 	// Question part
 	public Label getLblStatement() {
 		if (lblStatement == null) {
@@ -353,6 +332,9 @@ public class PlayingGridPane extends GridPane {
 
 		if (btnAnswer[index] == null) {
 			btnAnswer[index] = new Button("");
+			btnAnswer[index].setId("answers");
+			btnAnswer[index].setPrefWidth(Integer.MAX_VALUE);
+			btnAnswer[index].setPrefHeight(Integer.MAX_VALUE);
 
 			btnAnswer[index].setOnAction(new EventHandler<ActionEvent>() {
 				@Override

@@ -1,5 +1,26 @@
+/* Imports */
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100i,400,700');
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
+
+
+
+
+/* Classes */
+.button{
+	-fx-border-radius: 6.0;
+    -fx-background-radius: 6.0;
+    -fx-effect:dropshadow(one-pass-box,#2d2d2d,8,0.1,0,0);
+    
+    -fx-font-family:'Muli', sans-serif;
+    -fx-font-size:1.4em;
+}
+
+
+/* IDs */
 #projStackPane{
-	-fx-background-color:#7B8475 ;
+	/*-fx-background-color:#7B8475 ;*/
+	-fx-background-color:#E5903F;
 }
 
 /* Home */
@@ -11,16 +32,13 @@
 #playBtn{
 	-fx-background-color: #fef9e7;
 	-fx-border-color: #f9e79f;
-	-fx-border-width: 5.0px;
-	-fx-font-size: 40.0px;
-	-fx-border-width:0.0;	
+	-fx-font-size: 40.0px;	
 }
 
 #classicBtn, #about{
 	-fx-background-color: #fef9e7;
 	-fx-border-color: #f9e79f;
 	-fx-font-size: 20.0px;
-	
 }
 
 #profile{
@@ -36,14 +54,14 @@
 }
 
 /* PlayingGridPane */
-#idQuestion{
-	-fx-background-color: #f2c926;
+#pgp_statement{
+	-fx-background-color: #476B9E;
 	-fx-alignment: center;
 }
 
 #answers{
+	-fx-background-color: #FFFFFF;
 	-fx-alignment: center-left;
-	-fx-background-color: white;
 }
 
 #answerValue{
@@ -65,9 +83,14 @@
 	-fx-alignment: center-left;
 	-fx-background-color: #3f78d3;
 }
+
 #jokerResults{
 	-fx-alignment: center;
 	-fx-background-color:#F6497D;
+}
+
+#jokers{
+	-fx-background-color:E4D6A7;
 }
 
 
