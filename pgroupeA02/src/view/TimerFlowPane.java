@@ -10,7 +10,7 @@ import javafx.scene.layout.FlowPane;
 public class TimerFlowPane extends FlowPane {
 	private Label lblTimer;
 	// Time for timer
-	private int nbSeconds = 2;
+	private int nbSeconds =60;
 
 	public TimerFlowPane() {
 
@@ -42,20 +42,11 @@ public class TimerFlowPane extends FlowPane {
 							lblTimer.setText(nbSeconds + "s");
 							nbSeconds--;
 						} else {
-							if(nbSeconds == 0) {
+							if (nbSeconds == 0) {
 								lblTimer.setText(nbSeconds + "s");
 								nbSeconds = -1;
 								((PlayingGridPane) getParent()).alertPop("Time is over.");
-								
-								
-							}			
-
-//							lblTimer.setText("Lost");
-//							Alert alert = new Alert(AlertType.NONE, "PERDU");
-//							alert.initModality(Modality.WINDOW_MODAL);
-//							alert.initStyle(StageStyle.TRANSPARENT);
-//							alert.showAndWait();
-//							timer.cancel();
+							}
 						}
 					}
 				});

@@ -146,7 +146,7 @@ public class PlayingGridPane extends GridPane {
 
 	public void verifyAnswer() throws ExceedMaxStepsException {
 		// Still playing
-		if (answerIndex == rightAnswerIndex && party.getActualStep() <= Party.NB_STEPS) {
+		if (answerIndex == rightAnswerIndex && party.getActualStep() < Party.NB_STEPS) {
 			// green color when OK
 			getBtnAnswer(answerIndex).setId("answerOk");
 			// NEED PAUSE 1SEC BETWEEN 2 QUESTIONS
@@ -165,7 +165,7 @@ public class PlayingGridPane extends GridPane {
 			pyramidActualStep--;
 
 			// Party won
-		} else if (party.getActualStep() > Party.NB_STEPS) {
+		} else if (party.getActualStep() == Party.NB_STEPS) {
 			endParty();
 			alertPop("CONGRATS");
 

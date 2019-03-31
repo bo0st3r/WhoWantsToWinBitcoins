@@ -22,14 +22,13 @@ public class MainGame extends Application {
 			psp.setId("projStackPane");
 			Scene scene = new Scene(psp, 1350, 750);
 			primaryStage.setTitle("Jeu");
-//			primaryStage.setMaximized(true);
+			primaryStage.setMaximized(true);
 			primaryStage.setMinHeight(750);
 			primaryStage.setMinWidth(1350);
 
 			// CSS
 			File f = new File("style/style.css");
 			scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
-//			scene.getStylesheets().add(getClass().getResource("/../style/style.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.centerOnScreen();
 			primaryStage.show();
