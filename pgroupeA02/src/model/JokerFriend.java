@@ -23,13 +23,17 @@ public class JokerFriend implements JokerStrategy {
 			Random rand = new Random();
 			double accuracyTest = rand.nextDouble();
 
+			// Initially index value's the right answer index
 			int index = pgp.getRightAnswerIndex();
+			// If the accuracy test fails, a new index different from the previous will be
+			// generated
 			if (accuracyTest > accuracyRate) {
 				while (index == pgp.getRightAnswerIndex()) {
 					index = rand.nextInt(Question.NB_ANSWERS);
 				}
 			}
-			pgp.setVisibleLblJokerResults(true, index);
+
+			// Sets the button ID as "answerJokerFriend" in order to color it differently
 			pgp.getBtnAnswer(index).setId("answerJokerFriend");
 		}
 	}

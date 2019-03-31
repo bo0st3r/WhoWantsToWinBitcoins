@@ -156,7 +156,7 @@ public class PlayingGridPane extends GridPane {
 			resetTimer();
 			// Reset answers color
 			getBtnAnswer(answerIndex).setId("answers");
-
+			
 			// pyramid METHODE A PART !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			getPyramidVbox().getGain(pyramidActualStep)
 					.setBackground(new Background(new BackgroundFill(rgbGreen, null, null)));
@@ -210,6 +210,9 @@ public class PlayingGridPane extends GridPane {
 		if (cancelJokerResults) {
 			setVisibleLblJokerResults(false);
 			disableBtnAnswer(false);
+			for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
+				btnAnswer[i].setId("answers");
+			}
 			cancelJokerResults = false;
 		}
 
@@ -332,14 +335,13 @@ public class PlayingGridPane extends GridPane {
 
 		if (btnAnswer[index] == null) {
 			btnAnswer[index] = new Button("");
-			btnAnswer[index].setId("answers");
 			btnAnswer[index].setPrefWidth(Integer.MAX_VALUE);
 			btnAnswer[index].setPrefHeight(Integer.MAX_VALUE);
 
 			btnAnswer[index].setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					btnAnswer[index].setId("answerValue");
+
 					answerIndex = index;
 					getValidationGridPane().setVisible(true);
 				}
