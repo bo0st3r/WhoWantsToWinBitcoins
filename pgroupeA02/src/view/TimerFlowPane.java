@@ -47,6 +47,7 @@ public class TimerFlowPane extends FlowPane {
 								nbSeconds = -1;
 								((PlayingGridPane) getParent()).alertPop("Time is over.");
 								
+								
 							}			
 
 //							lblTimer.setText("Lost");
