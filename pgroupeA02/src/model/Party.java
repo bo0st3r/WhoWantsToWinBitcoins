@@ -13,10 +13,12 @@ import exceptions.QuestionsListIsEmptyException;
 import exceptions.TooMuchQuestionsException;
 
 public class Party {
-	private List<Question> choosenQuestions;
-	private int actualStep = 1;
 	public static final int NB_STEPS = 15;
 	public static final int NB_STEPS_BY_ROUND = 5;
+
+	private List<Question> choosenQuestions;
+	private Round actualRound;
+	private int actualStep;
 
 	/*
 	 * Constructor of Party class. The param "choosenQuestions" just gets
@@ -54,33 +56,37 @@ public class Party {
 			switch (q.getRound()) {
 
 			case FIRST_ROUND:
-				if (getNbQuestionsRound(Round.FIRST_ROUND) < 5 && !choosenQuestions.contains(q))
+				if (getNbQuestionsForRound(Round.FIRST_ROUND) < 5 && !choosenQuestions.contains(q))
 					choosenQuestions.add(q);
 				break;
 
 			case SECOND_ROUND:
-				if (getNbQuestionsRound(Round.SECOND_ROUND) < 5 && !choosenQuestions.contains(q))
+				if (getNbQuestionsForRound(Round.SECOND_ROUND) < 5 && !choosenQuestions.contains(q))
 					choosenQuestions.add(q);
 				break;
 
 			case LAST_ROUND:
-				if (getNbQuestionsRound(Round.LAST_ROUND) < 5 && !choosenQuestions.contains(q))
+				if (getNbQuestionsForRound(Round.LAST_ROUND) < 5 && !choosenQuestions.contains(q))
 					choosenQuestions.add(q);
 				break;
 			}
+
 		}
 
 		// Verify there's exactly 5 questions for each Round
 		for (Round r : Round.values()) {
-			if (getNbQuestionsRound(r) < 5) {
-				throw new NotEnoughQuestionsException(r, getNbQuestionsRound(r));
-			} else if (getNbQuestionsRound(r) > 5) {
-				throw new TooMuchQuestionsException(r, getNbQuestionsRound(r));
+			if (getNbQuestionsForRound(r) < 5) {
+				throw new NotEnoughQuestionsException(r, getNbQuestionsForRound(r));
+			} else if (getNbQuestionsForRound(r) > 5) {
+				throw new TooMuchQuestionsException(r, getNbQuestionsForRound(r));
 			}
 		}
 
 		// Sort by rounds order
 		sortQuestionsByRounds();
+
+		actualStep = 0;
+		actualRound = Round.FIRST_ROUND;
 	}
 
 	/*
@@ -89,7 +95,7 @@ public class Party {
 	 * 
 	 * @param round The Round that will be used.
 	 */
-	public int getNbQuestionsRound(Round round) {
+	public int getNbQuestionsForRound(Round round) {
 		int nb = 0;
 		if (choosenQuestions != null) {
 			for (Question q : choosenQuestions) {
@@ -135,12 +141,37 @@ public class Party {
 	 * Party.NB_STEPS
 	 */
 	public Question getQuestionNextStep() throws ExceedMaxStepsException {
-		if (actualStep > NB_STEPS) {
+		if (!hasNextStep())
 			throw new ExceedMaxStepsException(actualStep);
-		}
 
 		actualStep++;
-		return (choosenQuestions.get(actualStep - 2));
+		if (needNextRound())
+			getNextRound();
+		return (choosenQuestions.get(actualStep - 1));
+	}
+
+	/*
+	 * Returns the next Round
+	 */
+	public void getNextRound() {
+		Round[] rounds = Round.values();
+		for (int i = 0; i < rounds.length - 1; i++) {
+			if (actualRound == rounds[i]) {
+				actualRound = rounds[i + 1];
+				break;
+			}
+		}
+	}
+
+	public Round getActualRound() {
+		return actualRound;
+	}
+
+	/*
+	 * Return if the party need to move to the next step.
+	 */
+	public boolean needNextRound() {
+		return ((actualStep % Party.NB_STEPS_BY_ROUND) - 1 == 0 && actualStep > 1);
 	}
 
 	/*

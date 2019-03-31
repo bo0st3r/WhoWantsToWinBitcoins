@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.stage.Stage;
 
 public class ValidationGridPane extends GridPane {
 
@@ -75,7 +74,6 @@ public class ValidationGridPane extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					
 					try {
 						((PlayingGridPane) getParent()).verifyAnswer();
 					} catch (ExceedMaxStepsException e) {
@@ -83,10 +81,8 @@ public class ValidationGridPane extends GridPane {
 					}
 					int answer = ((PlayingGridPane) getParent()).getAnswerIndex();
 					((PlayingGridPane) getParent()).getBtnAnswer(answer).setId("answers");
-
 					
 					setVisible(false);
-					
 				}
 			});
 		}
@@ -99,14 +95,11 @@ public class ValidationGridPane extends GridPane {
 			btnNo.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
-				public void handle(ActionEvent arg0) {
+				public void handle(ActionEvent event) {
 					setVisible(false);
-					
 					int answer = ((PlayingGridPane) getParent()).getAnswerIndex();
 					((PlayingGridPane) getParent()).getBtnAnswer(answer).setId("answers");
-					
 				}
-
 			});
 		}
 		return btnNo;

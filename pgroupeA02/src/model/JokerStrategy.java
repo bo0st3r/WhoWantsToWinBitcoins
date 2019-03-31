@@ -1,5 +1,7 @@
 package model;
 
+import view.PlayingGridPane;
+
 public interface JokerStrategy {
-	void execute();
+	void execute(PlayingGridPane pgp);
 }
