@@ -39,7 +39,7 @@ public class EndPartyGridPane  extends GridPane{
 
 	public ImageView getImgEndParty() {
 		if(imgEndParty == null) {
-			imgEndParty = new ImageView("..\\victory.png");
+			imgEndParty = new ImageView("victory.png");
 		}
 		return imgEndParty;
 	}

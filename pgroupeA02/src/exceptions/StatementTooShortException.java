@@ -9,6 +9,7 @@ public class StatementTooShortException extends Exception {
 		this.statement = statement;
 	}
 
+	@Override
 	public String getMessage() {
 		return super.getMessage() + statement + "\" is too short.";
 	}

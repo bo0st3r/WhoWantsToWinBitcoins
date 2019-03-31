@@ -1,7 +1,7 @@
 {
 	"questions":
 	[
-		{"author":"Elsa","statement":"which of these active principles is used to control hypertension?","round":"LAST_ROUND","choices":{"Cetirizine":false,"Alprazolam":false,"Hydrocortisone":false,"Bisoprolol":true}},
+		{"author":"Elsa","statement":"Which of these active principles is used to control hypertension?","round":"LAST_ROUND","choices":{"Cetirizine":false,"Alprazolam":false,"Hydrocortisone":false,"Bisoprolol":true}},
 		{"author":"Elsa","statement":"When did the Berlin wall came down?","round":"SECOND_ROUND","choices":{"1987":false,"1988":false,"1989":true,"1990":false}},
 		{"author":"Elsa","statement":"In Belgium, which season starts in June?","round":"FIRST_ROUND","choices":{"Spring":false,"Autumn":false,"Summer":true,"Winter":false}},
 		{"author":"Paul","statement":"TEST2 TEST2 TEST2 TEST2 TEST2 TEST2 TEST2 ","round":"SECOND_ROUND","choices":{"A":false,"B":false,"right":true,"D":false}},

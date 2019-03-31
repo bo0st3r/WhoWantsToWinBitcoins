@@ -47,7 +47,8 @@ public class ProjStackPane extends BorderPane {
 	public StackPane getStackPane() {
 		if (stackPane == null) {
 			stackPane = new StackPane();
-			stackPane.getChildren().addAll(getHomeGridPane(), getPlayingGridPane(), getAboutGridPane(), getRulesGridPane());
+			stackPane.getChildren().addAll(getHomeGridPane(), getPlayingGridPane(), getAboutGridPane(),
+					getRulesGridPane());
 		}
 		return stackPane;
 	}
@@ -83,10 +84,10 @@ public class ProjStackPane extends BorderPane {
 	}
 
 	public RulesGridPane getRulesGridPane() {
-		if (rulesGridPane==null) {
+		if (rulesGridPane == null) {
 			rulesGridPane = new RulesGridPane();
 		}
 		return rulesGridPane;
 	}
-	
+
 }

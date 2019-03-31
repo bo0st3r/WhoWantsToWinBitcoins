@@ -15,12 +15,13 @@ import exceptions.StatementTooShortException;
 import exceptions.TooMuchAnswersException;
 
 public class Question {
+	public static final int NB_ANSWERS = 4;
+	
+	private Map<String, Boolean> choices;
+	private Round round;
 	private String author;
 	private String statement;
-	private Round round;
-	private Map<String, Boolean> choices;
 
-	public static final int NB_ANSWERS = 4;
 
 	/*
 	 * Constructor of Question class. The param "choices" just gets instantiated as
@@ -129,7 +130,7 @@ public class Question {
 			Set<Entry<String, Boolean>> entries = choices.entrySet();
 			for (Entry<String, Boolean> entry : entries) {
 				if (entry.getValue())
-					return (String) entry.getKey();
+					return entry.getKey();
 			}
 		}
 
@@ -140,6 +141,7 @@ public class Question {
 		choices.clear();
 	}
 
+	@Override
 	public Question clone() {
 		Question clone = null;
 		try {
@@ -158,6 +160,7 @@ public class Question {
 		return clone;
 	}
 
+	@Override
 	public String toString() {
 		String result = "Statement : " + statement + "\nRound : " + round.getRoundStatement() + "\nAnswers :\n";
 

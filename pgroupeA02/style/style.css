@@ -2,10 +2,9 @@
 	-fx-background-color:#7B8475 ;
 }
 
-/* HOME */
+/* Home */
 #homePane{
 	-fx-font-family : 'Georgia';
-	/*-fx-font-size: 20px ;*/
 	-fx-background-repeat: round;
 }
 
@@ -46,25 +45,38 @@
 	-fx-alignment: center-left;
 	-fx-background-color: white;
 }
+
 #answerValue{
 	-fx-alignment: center-left;
 	-fx-background-color: #ABE5F0;
 }
+
 #answerOk{
 	-fx-alignment: center-left;
 	-fx-background-color: #ABF0BB;
 }
+
 #answerNotOk{
 	-fx-alignment: center-left;
 	-fx-background-color: #F6497D;
-	
 }
+
+#answerJokerFriend{
+	-fx-alignment: center-left;
+	-fx-background-color: #3f78d3;
+}
+#jokerResults{
+	-fx-alignment: center;
+	-fx-background-color:#F6497D;
+}
+
 
 /* Validation */
 #validationText{
 	-fx-font-size: 50.0px;	
 	-fx-alignment: center;
 } 
+
 #btnValidation{
 	-fx-font-size: 30.0px;	
 }

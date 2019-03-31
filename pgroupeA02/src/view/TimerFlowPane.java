@@ -32,7 +32,7 @@ public class TimerFlowPane extends FlowPane {
 
 			@Override
 			public void run() {
-				
+
 				Platform.runLater(new Runnable() {
 
 					@Override
@@ -48,13 +48,20 @@ public class TimerFlowPane extends FlowPane {
 								((PlayingGridPane) getParent()).alertPop("Time is over.");
 								
 							}			
+
+//							lblTimer.setText("Lost");
+//							Alert alert = new Alert(AlertType.NONE, "PERDU");
+//							alert.initModality(Modality.WINDOW_MODAL);
+//							alert.initStyle(StageStyle.TRANSPARENT);
+//							alert.showAndWait();
+//							timer.cancel();
 						}
 					}
 				});
 
 			}
 		};
-		
+
 		timer.scheduleAtFixedRate(timerTask, 0, 1000);
 	}
 
