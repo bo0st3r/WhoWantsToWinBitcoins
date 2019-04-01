@@ -50,7 +50,7 @@ public class PlayingGridPane extends GridPane {
 	private String rightAnswer;
 	private int rightAnswerIndex;
 
-	private Button btnExitWithActualEarning;
+	private Button btnCashIn;
 
 	// Jokers
 	private Joker joker;
@@ -119,7 +119,7 @@ public class PlayingGridPane extends GridPane {
 		getValidationGridPane().setVisible(false);
 
 		// Exit button
-		this.add(getBtnExitWithActualEarning(), 7, 0, 2, 1);
+		this.add(getBtnCashIn(), 7, 0, 2, 1);
 
 		// Joker Public
 		this.add(getBtnJokerPublic(), 0, 1);
@@ -156,7 +156,7 @@ public class PlayingGridPane extends GridPane {
 			resetTimer();
 			// Reset answers color
 			getBtnAnswer(answerIndex).setId("answers");
-			
+
 			// pyramid METHODE A PART !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			getPyramidVbox().getGain(pyramidActualStep)
 					.setBackground(new Background(new BackgroundFill(rgbGreen, null, null)));
@@ -174,7 +174,7 @@ public class PlayingGridPane extends GridPane {
 			endParty();
 			// button turn red if false
 			getBtnAnswer(answerIndex).setId("answerNotOk");
-			/* Mettre en vert la bonne réponse */
+			/* Mettre en vert la bonne rï¿½ponse */
 
 			// alert with message
 			alertPop("Sorry, you're a looser\n" + "the right answer was\n\n " + rightAnswer + "\n\n you win : "
@@ -224,6 +224,7 @@ public class PlayingGridPane extends GridPane {
 
 	public void endParty() {
 		party = null;
+		getTimerFlowPane().stopTimer();
 	}
 
 	public Party getParty() {
@@ -238,7 +239,6 @@ public class PlayingGridPane extends GridPane {
 	public Button getBtnJokerPublic() {
 		if (btnJokerPublic == null) {
 			btnJokerPublic = new Button("Ask the public");
-			btnJokerPublic.setId("jokers");
 
 			btnJokerPublic.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -277,7 +277,6 @@ public class PlayingGridPane extends GridPane {
 	public Button getBtnJokerFriend() {
 		if (btnJokerFriend == null) {
 			btnJokerFriend = new Button("Call a friend");
-			btnJokerFriend.setId("jokers");
 
 			btnJokerFriend.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -296,7 +295,6 @@ public class PlayingGridPane extends GridPane {
 	public Button getBtnJoker5050() {
 		if (btnJoker5050 == null) {
 			btnJoker5050 = new Button("50/50");
-			btnJoker5050.setId("jokers");
 
 			btnJoker5050.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -404,18 +402,19 @@ public class PlayingGridPane extends GridPane {
 	}
 
 	// Exit button
-	public Button getBtnExitWithActualEarning() {
-		if (btnExitWithActualEarning == null) {
-			btnExitWithActualEarning = new Button("Cash-in");
-			btnExitWithActualEarning.setOnAction(new EventHandler<ActionEvent>() {
+	public Button getBtnCashIn() {
+		if (btnCashIn == null) {
+			btnCashIn = new Button("Cash-in");
+			btnCashIn.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent event) {
 					alertPop("You won: " + getEarningsWhenLeaving() + " Bitcoins");
+					endParty();
 				}
 			});
 		}
-		return btnExitWithActualEarning;
+		return btnCashIn;
 	}
 
 	/*
@@ -450,6 +449,7 @@ public class PlayingGridPane extends GridPane {
 	public PyramidVBox getPyramidVbox() {
 		if (pyramidVbox == null) {
 			pyramidVbox = new PyramidVBox();
+			pyramidVbox.getStyleClass().add("pane");
 			this.add(getPyramidVbox(), 9, 1, 2, 9);
 		}
 		return pyramidVbox;

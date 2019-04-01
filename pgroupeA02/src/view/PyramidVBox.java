@@ -6,10 +6,7 @@ import java.util.List;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
@@ -35,7 +32,7 @@ public class PyramidVBox extends GridPane {
 		r.setPercentHeight(10);
 		this.getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r, r, r, r, r, r);
 
-		this.setGridLinesVisible(true);
+//		this.setGridLinesVisible(true);
 
 		for (int i = Party.NB_STEPS - 1; i >= 0; i--) {
 			this.add(getGain(i), 0, i);
@@ -45,8 +42,6 @@ public class PyramidVBox extends GridPane {
 		}
 
 		// layout
-		this.setPrefWidth(Integer.MAX_VALUE);
-		this.setBackground(new Background(new BackgroundFill(blanc, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.getGain(5).setTextFill(rouge);
 		this.getGain(10).setTextFill(rouge);
 		this.getGain(5).setStyle("-fx-font-weight: bold;");

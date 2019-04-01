@@ -8,13 +8,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 
 public class TimerFlowPane extends FlowPane {
+	private static final int INITIAL_NB_SECONDS = 60;
 	private Label lblTimer;
 	// Time for timer
-	private int nbSeconds =60;
+	private int nbSeconds;
 
 	public TimerFlowPane() {
-
 		this.getChildren().add(getLblTimer());
+		nbSeconds = INITIAL_NB_SECONDS;
 	}
 
 	public Label getLblTimer() {
@@ -45,6 +46,7 @@ public class TimerFlowPane extends FlowPane {
 							if (nbSeconds == 0) {
 								lblTimer.setText(nbSeconds + "s");
 								nbSeconds = -1;
+//								timer.cancel();
 								((PlayingGridPane) getParent()).alertPop("Time is over.");
 							}
 						}
@@ -58,7 +60,11 @@ public class TimerFlowPane extends FlowPane {
 	}
 
 	public void resetNbSecond() {
-		nbSeconds = 60;
+		nbSeconds = INITIAL_NB_SECONDS;
+	}
+
+	public void stopTimer() {
+		nbSeconds = -1;
 	}
 
 }
