@@ -377,6 +377,10 @@ public class PlayingGridPane extends GridPane {
 	public void resetTimer() {
 		getTimerFlowPane().resetNbSecond();
 	}
+	
+	public void stopTimer() {
+		getTimerFlowPane().stopTimer();
+	}
 
 	// Answer validation
 	/**
@@ -410,6 +414,7 @@ public class PlayingGridPane extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					alertPop("You won: " + getEarningsWhenLeaving() + " Bitcoins");
+					stopTimer();
 					endParty();
 				}
 			});

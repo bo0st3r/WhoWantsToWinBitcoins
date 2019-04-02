@@ -18,15 +18,6 @@ public class TimerFlowPane extends FlowPane {
 		nbSeconds = INITIAL_NB_SECONDS;
 	}
 
-	public Label getLblTimer() {
-		if (lblTimer == null) {
-			lblTimer = new Label();
-			lblTimer.setId("timer");
-		}
-
-		return lblTimer;
-	}
-
 	public void runChrono() {
 		Timer timer = new Timer(true);
 		TimerTask timerTask = new TimerTask() {
@@ -42,13 +33,12 @@ public class TimerFlowPane extends FlowPane {
 						if (nbSeconds > 0) {
 							lblTimer.setText(nbSeconds + "s");
 							nbSeconds--;
+						} else if (nbSeconds == 0) {
+							stopTimer();
+							setVisible(false);
+							((PlayingGridPane) getParent()).alertPop("Time is over.");
 						} else {
-							if (nbSeconds == 0) {
-								lblTimer.setText(nbSeconds + "s");
-								nbSeconds = -1;
-//								timer.cancel();
-								((PlayingGridPane) getParent()).alertPop("Time is over.");
-							}
+							timer.cancel();
 						}
 					}
 				});
@@ -65,6 +55,15 @@ public class TimerFlowPane extends FlowPane {
 
 	public void stopTimer() {
 		nbSeconds = -1;
+	}
+
+	public Label getLblTimer() {
+		if (lblTimer == null) {
+			lblTimer = new Label();
+			lblTimer.setId("timer");
+		}
+
+		return lblTimer;
 	}
 
 }
