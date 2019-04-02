@@ -47,12 +47,13 @@ public class Party {
 		if (deck.getQuestions().size() < 15)
 			throw new DeckUnderFilledException(deck.getQuestions().size());
 
+		List<Question> questionsList = deck.getQuestions();
 		choosenQuestions = new ArrayList<Question>();
 		// Shuffle the list of questions to randomize the 15 questions set.
-		Collections.shuffle(deck.getQuestions());
+		Collections.shuffle(questionsList);
 
 		// Adding questions to choosenQuestions
-		for (Question q : deck.getQuestions()) {
+		for (Question q : questionsList) {
 			switch (q.getRound()) {
 
 			case FIRST_ROUND:

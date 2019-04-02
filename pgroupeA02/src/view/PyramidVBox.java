@@ -18,53 +18,41 @@ import model.Party;
 
 public class PyramidVBox extends GridPane {
 	private List<Label> lblGain;
-	private Paint blanc = Color.rgb(255, 255, 255);
 	private Paint rouge = Color.rgb(255, 0, 0);
 
 	public PyramidVBox() {
-
+//		setGridLinesVisible(true);
 		// add columns
 		ColumnConstraints c = new ColumnConstraints();
 		c.setPercentWidth(100);
 		this.getColumnConstraints().addAll(c);
-		this.setPadding(new Insets(10));
 
 		// add rows
 		RowConstraints r = new RowConstraints();
 		r.setPercentHeight(10);
 		this.getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r, r, r, r, r, r);
 
-//		this.setGridLinesVisible(true);
-
 		for (int i = Party.NB_STEPS - 1; i >= 0; i--) {
 			this.add(getLblGain(i), 0, i);
 			this.getLblGain(i).setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
 			this.getLblGain(i).setAlignment(Pos.CENTER);
-
 		}
 
-		// layout
+		// Layout
 		this.setPrefWidth(Integer.MAX_VALUE);
-		this.setBackground(new Background(new BackgroundFill(blanc, CornerRadii.EMPTY, Insets.EMPTY)));
-		this.getLblGain(5).setTextFill(rouge);
-		this.getLblGain(10).setTextFill(rouge);
-		this.getLblGain(5).setStyle("-fx-font-weight: bold;");
-		this.getLblGain(10).setStyle("-fx-font-weight: bold;");
+		this.getLblGain(5).setId("pyramidTextRound");
+		this.getLblGain(10).setId("pyramidTextRound");
 	}
 
 	public Label getLblGain(int index) {
 		if (lblGain == null) {
-
 			lblGain = new ArrayList<>();
 
 			for (int i = Party.NB_STEPS - 1; i >= 0; i--) {
-				lblGain.add(new Label((i + 1) + "        " + PlayingGridPane.getEarning().getAmount(i)));
-
+				lblGain.add(new Label((i + 1) + "\t\t" + PlayingGridPane.getEarning().getAmount(i)));
 			}
-
 		}
 		return lblGain.get(index);
-
 	}
 
 }
