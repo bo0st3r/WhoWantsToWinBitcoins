@@ -15,13 +15,15 @@ public class JokerPublic implements JokerStrategy {
 	private static final double SECOND_ROUND_RATE = 0.4;
 	private static final double LAST_ROUND_RATE = 0.3;
 	private List<Double> publicVotePercents;
-	private double tot = 0;
-	private double accuracyRate = 0;
+	private double tot;
+	private double accuracyRate;
 
 	/*
 	 * JokerPublic constructor. Initialize publicVotePercents as an empty ArrayList.
 	 */
 	public JokerPublic() {
+		tot = 0;
+		accuracyRate = 0;
 		publicVotePercents = new ArrayList<>();
 	}
 
@@ -79,6 +81,10 @@ public class JokerPublic implements JokerStrategy {
 		}
 	}
 
+	/*
+	 * Generates as much random numbers as Question.NB_ANSWERS value. Adds it to
+	 * publicVotePercent and add it's value to tot.
+	 */
 	public void getRandomNumbers() {
 		Random rand = new Random();
 		for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
@@ -88,6 +94,9 @@ public class JokerPublic implements JokerStrategy {
 		}
 	}
 
+	/*
+	 * Determines the accuracyRate for the Round ongoing.
+	 */
 	public void getAccuracyRate(PlayingGridPane pgp) {
 		switch (pgp.getParty().getActualRound()) {
 		case FIRST_ROUND:

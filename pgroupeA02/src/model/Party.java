@@ -145,7 +145,7 @@ public class Party {
 			throw new ExceedMaxStepsException(actualStep);
 
 		actualStep++;
-		if (needNextRound())
+		if (isNeedingNextRound())
 			getNextRound();
 		return (choosenQuestions.get(actualStep - 1));
 	}
@@ -170,7 +170,7 @@ public class Party {
 	/*
 	 * Return if the party need to move to the next step.
 	 */
-	public boolean needNextRound() {
+	public boolean isNeedingNextRound() {
 		return ((actualStep % Party.NB_STEPS_BY_ROUND) - 1 == 0 && actualStep > 1);
 	}
 

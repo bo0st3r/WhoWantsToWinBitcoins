@@ -11,7 +11,7 @@ import javafx.scene.layout.RowConstraints;
 public class AboutGridPane extends GridPane {
 
 	private Button btnPrevious;
-	private Label lblname;
+	private Label lblName;
 
 	public AboutGridPane() {
 		this.setGridLinesVisible(true);
@@ -52,10 +52,10 @@ public class AboutGridPane extends GridPane {
 	}
 
 	public Label getLblname() {
-		if (lblname == null) {
-			lblname = new Label("----De Bels Lieven , Decorte Bastien, Draux Elsa");
+		if (lblName == null) {
+			lblName = new Label("----De Bels Lieven , Decorte Bastien, Draux Elsa");
 		}
-		return lblname;
+		return lblName;
 	}
 
 }

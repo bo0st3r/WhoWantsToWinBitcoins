@@ -140,7 +140,7 @@ public class PlayingGridPane extends GridPane {
 
 		pyramidActualStep = Party.NB_STEPS - 1;
 		pyramidVbox = null;
-		getPyramidVbox().getGain(Party.NB_STEPS - 1)
+		getPyramidVbox().getLblGain(Party.NB_STEPS - 1)
 				.setBackground(new Background(new BackgroundFill(rgbActualStepColor, null, null)));
 	}
 
@@ -158,9 +158,9 @@ public class PlayingGridPane extends GridPane {
 			getBtnAnswer(answerIndex).setId("answers");
 
 			// pyramid METHODE A PART !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			getPyramidVbox().getGain(pyramidActualStep)
+			getPyramidVbox().getLblGain(pyramidActualStep)
 					.setBackground(new Background(new BackgroundFill(rgbGreen, null, null)));
-			getPyramidVbox().getGain(pyramidActualStep - 1)
+			getPyramidVbox().getLblGain(pyramidActualStep - 1)
 					.setBackground(new Background(new BackgroundFill(rgbActualStepColor, null, null)));
 			pyramidActualStep--;
 
