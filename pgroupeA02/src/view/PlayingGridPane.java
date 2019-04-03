@@ -76,7 +76,7 @@ public class PlayingGridPane extends GridPane {
 		earning = new Earning();
 		joker = new Joker();
 		pyramidActualStep = Party.NB_STEPS - 1;
-//		this.setGridLinesVisible(true);
+		this.setGridLinesVisible(true);
 
 		// Set columns
 		ColumnConstraints c = new ColumnConstraints();
