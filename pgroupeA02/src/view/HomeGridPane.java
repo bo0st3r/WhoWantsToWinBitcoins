@@ -174,7 +174,7 @@ public class HomeGridPane extends GridPane {
 		if (btnAddQuestion == null) {
 			btnAddQuestion = new Button("Add a question");
 
-			Scene secondScene = new Scene(AddQuestionGridPane.getSingleton(), 570, 305);
+			Scene secondScene = new Scene(new AddQuestionGridPane(), 570, 305);
 			btnAddQuestion.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override

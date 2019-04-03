@@ -18,15 +18,13 @@ public class MainGame extends Application {
 		try {
 			ProjStackPane psp = new ProjStackPane();
 			psp.setId("projStackPane");
-			Scene scene = new Scene(psp, 1350, 750);
-			primaryStage.setTitle("Jeu");
+			Scene scene = new Scene(psp);
+			primaryStage.setTitle("Qui veut gagner des Bitcoins");
 			primaryStage.setMaximized(true);
 			primaryStage.setMinHeight(750);
 			primaryStage.setMinWidth(1350);
 
 			// CSS
-//			File f = new File("style/style.css");
-//			scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 			scene.getStylesheets().add(getClass().getResource("/style/style.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.centerOnScreen();

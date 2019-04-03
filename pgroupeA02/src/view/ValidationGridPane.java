@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Modality;
 
 public class ValidationGridPane extends GridPane {
 
@@ -17,7 +18,6 @@ public class ValidationGridPane extends GridPane {
 	private Button btnNo;
 
 	public ValidationGridPane() {
-		
 		this.setId("validationPane");
 		// Set columns
 		ColumnConstraints c1 = new ColumnConstraints();
@@ -40,7 +40,7 @@ public class ValidationGridPane extends GridPane {
 		// this.setGridLinesVisible(true);
 
 		// IDs
-		getLblValidation().setId("validationText");
+		getLblValidation().setId("btnValidationText");
 		getBtnYes().setId("btnValidation");
 		getBtnNo().setId("btnValidation");
 
@@ -81,7 +81,7 @@ public class ValidationGridPane extends GridPane {
 					}
 					int answer = ((PlayingGridPane) getParent()).getAnswerIndex();
 					((PlayingGridPane) getParent()).getBtnAnswer(answer).setId("answers");
-					
+
 					setVisible(false);
 				}
 			});

@@ -10,8 +10,12 @@ public class JokerFriend implements JokerStrategy {
 	private static final double FIRST_ROUND_RATE = 0.7;
 	private static final double SECOND_ROUND_RATE = 0.50;
 	private static final double LAST_ROUND_RATE = 0.35;
-	private double accuracyRate = 0;
+	private double accuracyRate;
 
+	public JokerFriend() {
+		accuracyRate = 0;
+	}
+	
 	@Override
 	public void execute(PlayingGridPane pgp) {
 		if (!pgp.getBtnJokerFriend().isDisabled()) {

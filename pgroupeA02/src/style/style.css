@@ -5,13 +5,14 @@
 /* Classes */
 .pane{
 	-fx-background-color:#E5903F;
-  	-fx-effect: dropshadow(one-pass-box, black, 2.0, 0.1, 0.0, 0.0); 
-  	-fx-background-insets: 3.0;
+  	-fx-effect: dropshadow(one-pass-box, #2d2d2d, 2.0, 0.1, 0.0, 0.0); 
 }
 
 .button{
+	-fx-background-radius: 9.0;
+    -fx-background-color: #FFF8F1;
 	-fx-border-radius: 6.0;
-    -fx-background-radius: 6.0;
+   
     -fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
     
     -fx-font-family:'IBM Plex Sans', sans-serif;
@@ -24,23 +25,20 @@
 	-fx-background-color:#E5903F;
 }
 
-
 /* Home */
 #homePane{
 	-fx-background-repeat: round;
 }
 
 #playBtn{
-	-fx-background-color: #fef9e7;
-	-fx-border-color: #f9e79f;
 	-fx-font-size: 40.0px;	
 }
 
-#classicBtn, #about{
+/*#classicBtn, #about{
 	-fx-background-color: #fef9e7;
 	-fx-border-color: #f9e79f;
 	-fx-font-size: 20.0px;
-}
+}*/
 
 #profile{
 	-fx-background-color: null;
@@ -50,13 +48,22 @@
 
 #titleHome{
 	-fx-text-fill: #fef9e7;
-	-fx-font-size: 50.0px;
+	-fx-font-size: 5.0em;
 }
 
 /* PlayingGridPane */
-#pgp_statement{
-	-fx-background-color: #476B9E;
+#questionStatement{
+	/* ICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII */
+	-fx-background-color: #4B557A;
+	-fx-background-radius: 15.0;
+    -fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
+    
 	-fx-alignment: center;
+	
+	-fx-text-fill: #FFF8F1;
+    -fx-font-family:'IBM Plex Sans', sans-serif;
+    -fx-font-size:2.5em;
+    -fx-font-weight:bold;
 }
 
 #answerValue{
@@ -64,12 +71,12 @@
 	-fx-background-color: #ABE5F0;
 }
 
-#answerOk{
+#answerBtnOk{
 	-fx-alignment: center-left;
 	-fx-background-color: #ABF0BB;
 }
 
-#answerNotOk{
+#answerBtnNotOk{
 	-fx-alignment: center-left;
 	-fx-background-color: #F6497D;
 }
@@ -79,12 +86,47 @@
 }
 
 #jokerResults{
-	-fx-alignment: center-left;
-	-fx-background-color:#F6497D;
+	-fx-alignment: top-center;
+	-fx-font-size: 1.3em;
+	-fx-font-weight: bold;
+	-fx-padding: 10px;
+	/*-fx-background-color:#F6497D;*/
+}
+
+.btnJoker{
+	-fx-font-family:'IBM Plex Sans', sans-serif;
+    -fx-font-size:1.4em;
+}
+
+/* Pyramid */
+#earningsPyramid{
+	/* ICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII */
+	-fx-background-color: #4B557A;
+	-fx-background-radius: 15.0;
+	-fx-text-fill:#262626;
+	-fx-effect: dropshadow(one-pass-box, black, 2.0, 0.1, 0.0, 0.0);
+    
+	-fx-alignment: center; 
+ 	
+	-fx-font-family:'IBM Plex Sans', sans-serif;
+    -fx-font-size:1.6em;
+    -fx-font-weight:bold;
+}
+
+#pyramidOldStep{
+	-fx-background-color:#1FBB73;
+}
+
+#pyramidActualStep{
+	-fx-background-color:#FFF8F1;
+}
+
+#pyramidTextRound{
+	-fx-text-fill:#e04733;
 }
 
 /* Validation */
-#validationText{
+#btnValidationText{
 	-fx-font-size: 50.0px;	
 	-fx-alignment: center;
 } 
@@ -115,7 +157,4 @@
 	
 }
 
-.vbox{
-	-fx-background-color:#E5903F;
-}
 

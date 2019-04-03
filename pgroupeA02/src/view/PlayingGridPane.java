@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.HiddenAction;
+
 import exceptions.DeckUnderFilledException;
 import exceptions.ExceedMaxStepsException;
 import exceptions.NotEnoughQuestionsException;
@@ -62,8 +64,6 @@ public class PlayingGridPane extends GridPane {
 
 	// Earnings pyramid
 	private PyramidVBox pyramidVbox;
-	private Paint rgbGreen = Color.rgb(100, 255, 100);
-	private Paint rgbActualStepColor = Color.rgb(255, 255, 100);
 	private int pyramidActualStep;
 
 	// Validation
@@ -97,8 +97,6 @@ public class PlayingGridPane extends GridPane {
 
 		// Question statement label
 		this.add(getLblStatement(), 1, 6, 8, 2);
-		// Question statement ID
-		getLblStatement().setId("pgp_statement");
 		// Question statement sizes
 		getLblStatement().setPrefHeight(Integer.MAX_VALUE);
 		getLblStatement().setPrefWidth(Integer.MAX_VALUE);
@@ -110,7 +108,7 @@ public class PlayingGridPane extends GridPane {
 		this.add(getBtnAnswer(3), 5, 9, 4, 1);
 
 		// Timer
-		this.add(getTimerFlowPane(), 4, 5, 2, 1);
+		this.add(getTimerFlowPane(), 4, 3, 2, 2);
 		getTimerFlowPane().setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
 		getTimerFlowPane().setAlignment(Pos.CENTER);
 
@@ -140,44 +138,56 @@ public class PlayingGridPane extends GridPane {
 
 		pyramidActualStep = Party.NB_STEPS - 1;
 		pyramidVbox = null;
-		getPyramidVbox().getGain(Party.NB_STEPS - 1)
-				.setBackground(new Background(new BackgroundFill(rgbActualStepColor, null, null)));
+		getPyramidVbox().getLblGain(Party.NB_STEPS - 1).setId("pyramidActualStep");
 	}
 
 	public void verifyAnswer() throws ExceedMaxStepsException {
 		// Still playing
 		if (answerIndex == rightAnswerIndex && party.getActualStep() < Party.NB_STEPS) {
 			// green color when OK
-			getBtnAnswer(answerIndex).setId("answerOk");
+			getBtnAnswer(answerIndex).setId("answerBtnOk");
 			// NEED PAUSE 1SEC BETWEEN 2 QUESTIONS
 
 			getNextQuestion();
 			// Reset the timer
 			resetTimer();
+
 			// Reset answers color
-			getBtnAnswer(answerIndex).setId("answers");
+			getBtnAnswer(answerIndex).setId("");
 
 			// pyramid METHODE A PART !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			getPyramidVbox().getGain(pyramidActualStep)
-					.setBackground(new Background(new BackgroundFill(rgbGreen, null, null)));
-			getPyramidVbox().getGain(pyramidActualStep - 1)
-					.setBackground(new Background(new BackgroundFill(rgbActualStepColor, null, null)));
+			// Old earnings
+			getPyramidVbox().getLblGain(pyramidActualStep).setId("pyramidOldStep");
+//					.setBackground(new Background(new BackgroundFill(rgbGreen, null, null)));
+			// Actual earnings
+			getPyramidVbox().getLblGain(pyramidActualStep - 1).setId("pyramidActualStep");
+//					.setBackground(new Background(new BackgroundFill(rgbActualStepColor, null, null)));
 			pyramidActualStep--;
 
 			// Party won
 		} else if (party.getActualStep() == Party.NB_STEPS) {
-			endParty();
-			alertPop("CONGRATS");
-
+			alertPop("Congrats, you won !");
+			stopTimer();
 			// Party lost
 		} else {
-			endParty();
-			// button turn red if false
-			getBtnAnswer(answerIndex).setId("answerNotOk");
-			/* Mettre en vert la bonne r�ponse */
+			// Disable buttons except right answer button and button clicked by the user
+			for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
+				if (i != rightAnswerIndex && i != answerIndex)
+					disableBtnAnswer(false, i);
+			}
 
-			// alert with message
-			alertPop("Sorry, you're a looser\n" + "the right answer was\n\n " + rightAnswer + "\n\n you win : "
+			// Hide and stop the timer
+			stopTimer();
+			setVisibileTimerFlowPane(false);
+
+			// Hide validation pane
+			setVisibleValidationGridPane(false);
+
+			// Button turn red if false
+			getBtnAnswer(answerIndex).setId("answerBtnNotOk");
+
+			// Loosing alert
+			alertPop("Sorry, you're a looser !\n" + "The right answer was\n\n \"" + rightAnswer + "\"\n\n You won : "
 					+ getEarningsWhenLost() + " Bitcoins");
 		}
 	}
@@ -211,7 +221,7 @@ public class PlayingGridPane extends GridPane {
 			setVisibleLblJokerResults(false);
 			disableBtnAnswer(false);
 			for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
-				btnAnswer[i].setId("answers");
+				btnAnswer[i].setId("");
 			}
 			cancelJokerResults = false;
 		}
@@ -220,11 +230,6 @@ public class PlayingGridPane extends GridPane {
 
 	public int getRightAnswerIndex() {
 		return rightAnswerIndex;
-	}
-
-	public void endParty() {
-		party = null;
-		getTimerFlowPane().stopTimer();
 	}
 
 	public Party getParty() {
@@ -239,6 +244,7 @@ public class PlayingGridPane extends GridPane {
 	public Button getBtnJokerPublic() {
 		if (btnJokerPublic == null) {
 			btnJokerPublic = new Button("Ask the public");
+			btnJokerPublic.getStyleClass().add("btnJoker");
 
 			btnJokerPublic.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -264,7 +270,7 @@ public class PlayingGridPane extends GridPane {
 			lblJokerResults[index].setPrefWidth(Integer.MAX_VALUE);
 			lblJokerResults[index].setId("jokerResults");
 			lblJokerResults[index].setVisible(false);
-			PlayingGridPane.setHalignment(lblJokerResults[index], HPos.CENTER);
+			GridPane.setHalignment(lblJokerResults[index], HPos.CENTER);
 		}
 		return lblJokerResults[index];
 	}
@@ -277,6 +283,7 @@ public class PlayingGridPane extends GridPane {
 	public Button getBtnJokerFriend() {
 		if (btnJokerFriend == null) {
 			btnJokerFriend = new Button("Call a friend");
+			btnJokerPublic.getStyleClass().add("btnJoker");
 
 			btnJokerFriend.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -295,6 +302,7 @@ public class PlayingGridPane extends GridPane {
 	public Button getBtnJoker5050() {
 		if (btnJoker5050 == null) {
 			btnJoker5050 = new Button("50/50");
+			btnJokerPublic.getStyleClass().add("btnJoker");
 
 			btnJoker5050.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -323,6 +331,7 @@ public class PlayingGridPane extends GridPane {
 	public Label getLblStatement() {
 		if (lblStatement == null) {
 			lblStatement = new Label("");
+			lblStatement.setId("questionStatement");
 		}
 		return lblStatement;
 	}
@@ -335,6 +344,7 @@ public class PlayingGridPane extends GridPane {
 			btnAnswer[index] = new Button("");
 			btnAnswer[index].setPrefWidth(Integer.MAX_VALUE);
 			btnAnswer[index].setPrefHeight(Integer.MAX_VALUE);
+			btnAnswer[index].setId("");
 
 			btnAnswer[index].setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -377,9 +387,13 @@ public class PlayingGridPane extends GridPane {
 	public void resetTimer() {
 		getTimerFlowPane().resetNbSecond();
 	}
-	
+
 	public void stopTimer() {
 		getTimerFlowPane().stopTimer();
+	}
+
+	public void setVisibileTimerFlowPane(boolean value) {
+		getTimerFlowPane().setVisible(value);
 	}
 
 	// Answer validation
@@ -405,6 +419,10 @@ public class PlayingGridPane extends GridPane {
 		return validationGridPane;
 	}
 
+	public void setVisibleValidationGridPane(boolean value) {
+		getValidationGridPane().setVisible(value);
+	}
+
 	// Exit button
 	public Button getBtnCashIn() {
 		if (btnCashIn == null) {
@@ -415,7 +433,6 @@ public class PlayingGridPane extends GridPane {
 				public void handle(ActionEvent event) {
 					alertPop("You won: " + getEarningsWhenLeaving() + " Bitcoins");
 					stopTimer();
-					endParty();
 				}
 			});
 		}
@@ -454,6 +471,7 @@ public class PlayingGridPane extends GridPane {
 	public PyramidVBox getPyramidVbox() {
 		if (pyramidVbox == null) {
 			pyramidVbox = new PyramidVBox();
+			pyramidVbox.setId("earningsPyramid");
 			pyramidVbox.getStyleClass().add("pane");
 			this.add(getPyramidVbox(), 9, 1, 2, 9);
 		}

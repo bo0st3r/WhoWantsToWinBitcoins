@@ -15,9 +15,6 @@ import javafx.scene.layout.GridPane;
 import model.Question;
 
 public class AddQuestionGridPane extends GridPane {
-	// No need to initialize the singleton at program's start because it's a rarely
-	// used pane
-	private static AddQuestionGridPane SINGLETON = null;
 
 	private TextField txtAuthor;
 	private TextField txtStatement;
@@ -36,7 +33,7 @@ public class AddQuestionGridPane extends GridPane {
 
 	private ToggleGroup tglTrue;
 
-	private AddQuestionGridPane() {
+	public AddQuestionGridPane() {
 		this.setAlignment(Pos.BASELINE_CENTER);
 		this.setPadding(new Insets(10));
 		this.setHgap(5);
@@ -77,15 +74,6 @@ public class AddQuestionGridPane extends GridPane {
 		this.add(getBtnOk(), 2, 12, 2, 1);
 		GridPane.setHalignment(getBtnOk(), HPos.CENTER);
 		getBtnOk().setPrefWidth(Integer.MAX_VALUE);
-	}
-
-	public static AddQuestionGridPane getSingleton() {
-		if (SINGLETON == null) {
-			SINGLETON = new AddQuestionGridPane();
-			// CSS Id
-			SINGLETON.setId("addQuestionPane");
-		}
-		return SINGLETON;
 	}
 
 	public ComboBox<String> getCboBoxRound() {

@@ -6,12 +6,12 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public class EndPartyGridPane  extends GridPane{
+public class EndedPartyGridPane  extends GridPane{
 	
 	private Label lblGain;
 	private ImageView imgEndParty;
 	
-	public EndPartyGridPane() {
+	public EndedPartyGridPane() {
 		// Set columns
 		ColumnConstraints c = new ColumnConstraints();
 		c.setPercentWidth(20);

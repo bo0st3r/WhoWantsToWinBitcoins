@@ -9,9 +9,8 @@ import javafx.scene.layout.FlowPane;
 
 public class TimerFlowPane extends FlowPane {
 	private static final int INITIAL_NB_SECONDS = 60;
-	private Label lblTimer;
-	// Time for timer
 	private int nbSeconds;
+	private Label lblTimer;
 
 	public TimerFlowPane() {
 		this.getChildren().add(getLblTimer());
