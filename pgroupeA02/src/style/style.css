@@ -4,7 +4,8 @@
 
 /* Classes */
 .pane{
-	-fx-background-color:#E5903F;
+	
+	/*-fx-background-color:#E5903F;*/
   	-fx-effect: dropshadow(one-pass-box, #2d2d2d, 2.0, 0.1, 0.0, 0.0); 
 }
 
@@ -22,14 +23,13 @@
 
 /* IDs */
 #projStackPane{
-	-fx-background-color:#E5903F;
+	/*-fx-background-color:#E5903F;*/
+	-fx-background-image:url("/style/images/backgrounds/main_background.jpg");
+	-fx-background-repeat:stretch;
+	-fx-background-size: cover;
 }
 
 /* Home */
-#homePane{
-	-fx-background-repeat: round;
-}
-
 #playBtn{
 	-fx-font-size: 40.0px;	
 }
@@ -119,6 +119,8 @@
 
 #pyramidActualStep{
 	-fx-background-color:#FFF8F1;
+	-fx-background-image:url("/style/images/backgrounds/horizontal_rocket_tiny.png");
+	-fx-background-repeat:no-repeat; 
 }
 
 #pyramidTextRound{
