@@ -63,7 +63,7 @@ public class PlayingGridPane extends GridPane {
 	private boolean cancelJokerResults;
 
 	// Earnings pyramid
-	private PyramidVBox pyramidVbox;
+	private PyramidGridPane pyramidGridPane;
 	private int pyramidActualStep;
 
 	// Validation
@@ -79,56 +79,63 @@ public class PlayingGridPane extends GridPane {
 		this.setGridLinesVisible(true);
 
 		// Set columns
-		ColumnConstraints c = new ColumnConstraints();
-		c.setPercentWidth(10);
-		c.setHalignment(HPos.CENTER);
-		this.getColumnConstraints().addAll(c, c, c, c, c, c, c, c, c, c, c);
+		double[] sizesCol = { 3, 9, 22.5, 5, 1.5, 14.5, 17, 5, 3.5, 20, 3 };
+		for (int i = 0; i <= sizesCol.length - 1; i++) {
+			ColumnConstraints col = new ColumnConstraints();
+			col.setHalignment(HPos.CENTER);
+			col.setPercentWidth(sizesCol[i]);
+			this.getColumnConstraints().add(col);
+		}
 
 		// Set rows
-		RowConstraints r = new RowConstraints();
-		r.setPercentHeight(10);
-		r.setValignment(VPos.CENTER);
-		this.getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r, r);
+		double[] sizesRow = { 3, 3.5, 10, 10, 10, 14, 20, 1.5, 12, 1, 12, 3 };
+		for (int i = 0; i <= sizesRow.length - 1; i++) {
+			RowConstraints row = new RowConstraints();
+			row.setValignment(VPos.CENTER);
+			row.setPercentHeight(sizesRow[i]);
+			this.getRowConstraints().add(row);
+		}
 
 		// Spacings
 		this.setPadding(new Insets(10));
-		this.setHgap(5);
-		this.setVgap(5);
+//		this.setHgap(5);
+//		this.setVgap(5);
 
 		// Question statement label
-		this.add(getLblStatement(), 1, 6, 8, 2);
+		this.add(getLblStatement(), 1, 6, 7, 1);
 		// Question statement sizes
 		getLblStatement().setPrefHeight(Integer.MAX_VALUE);
 		getLblStatement().setPrefWidth(Integer.MAX_VALUE);
 
 		// Answer buttons
-		this.add(getBtnAnswer(0), 1, 8, 4, 1);
-		this.add(getBtnAnswer(1), 1, 9, 4, 1);
-		this.add(getBtnAnswer(2), 5, 8, 4, 1);
-		this.add(getBtnAnswer(3), 5, 9, 4, 1);
+		this.add(getBtnAnswer(0), 1, 8, 3, 1);
+		this.add(getBtnAnswer(1), 1, 10, 3, 1);
+		this.add(getBtnAnswer(2), 5, 8, 3, 1);
+		this.add(getBtnAnswer(3), 5, 10, 3, 1);
 
 		// Timer
-		this.add(getTimerFlowPane(), 4, 3, 2, 2);
-		getTimerFlowPane().setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+		this.add(getTimerFlowPane(), 5, 3, 2, 2);
+		getTimerFlowPane().setId("timer");
 		getTimerFlowPane().setAlignment(Pos.CENTER);
 
 		// Validation
-		this.add(getValidationGridPane(), 3, 1, 4, 4);
+		this.add(getValidationGridPane(), 1, 1, 5, 4);
 		getValidationGridPane().setVisible(false);
 
 		// Exit button
-		this.add(getBtnCashIn(), 7, 0, 2, 1);
+		this.add(getBtnCashIn(), 9, 0, 1, 2);
 
 		// Joker Public
-		this.add(getBtnJokerPublic(), 0, 1);
-		this.add(getLblJokerResults(0), 4, 8);
-		this.add(getLblJokerResults(1), 4, 9);
-		this.add(getLblJokerResults(2), 8, 8);
-		this.add(getLblJokerResults(3), 8, 9);
+		this.add(getBtnJokerPublic(), 0, 2, 2, 1);
 		// Joker Friend
-		this.add(getBtnJokerFriend(), 0, 2);
+		this.add(getBtnJokerFriend(), 0, 3, 2, 1);
 		// Joker 5050
-		this.add(getBtnJoker5050(), 0, 3);
+		this.add(getBtnJoker5050(), 0, 4, 2, 1);
+		// Jokers labels
+		this.add(getLblJokerResults(0), 3, 8);
+		this.add(getLblJokerResults(1), 3, 10);
+		this.add(getLblJokerResults(2), 7, 8);
+		this.add(getLblJokerResults(3), 7, 10);
 	}
 
 	public void runNewParty(String dest) throws QuestionsListIsEmptyException, DeckUnderFilledException,
@@ -137,8 +144,8 @@ public class PlayingGridPane extends GridPane {
 		getNextQuestion();
 
 		pyramidActualStep = Party.NB_STEPS - 1;
-		pyramidVbox = null;
-		getPyramidVbox().getLblGain(Party.NB_STEPS - 1).setId("pyramidActualStep");
+		pyramidGridPane = null;
+		getPyramidGridPane().getLblGain(Party.NB_STEPS - 1).setId("pyramidActualStep");
 	}
 
 	public void verifyAnswer() throws ExceedMaxStepsException {
@@ -155,13 +162,10 @@ public class PlayingGridPane extends GridPane {
 			// Reset answers color
 			getBtnAnswer(answerIndex).setId("");
 
-			// pyramid METHODE A PART !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			// Old earnings
-			getPyramidVbox().getLblGain(pyramidActualStep).setId("pyramidOldStep");
-//					.setBackground(new Background(new BackgroundFill(rgbGreen, null, null)));
+			getPyramidGridPane().getLblGain(pyramidActualStep).setId("textEarningsPyramid");
 			// Actual earnings
-			getPyramidVbox().getLblGain(pyramidActualStep - 1).setId("pyramidActualStep");
-//					.setBackground(new Background(new BackgroundFill(rgbActualStepColor, null, null)));
+			getPyramidGridPane().getLblGain(pyramidActualStep - 1).setId("pyramidActualStep");
 			pyramidActualStep--;
 
 			// Party won
@@ -468,14 +472,14 @@ public class PlayingGridPane extends GridPane {
 	}
 
 	// Pyramid
-	public PyramidVBox getPyramidVbox() {
-		if (pyramidVbox == null) {
-			pyramidVbox = new PyramidVBox();
-			pyramidVbox.setId("earningsPyramid");
-			pyramidVbox.getStyleClass().add("pane");
-			this.add(getPyramidVbox(), 9, 1, 2, 9);
+	public PyramidGridPane getPyramidGridPane() {
+		if (pyramidGridPane == null) {
+			pyramidGridPane = new PyramidGridPane();
+			pyramidGridPane.setId("earningsPyramid");
+			pyramidGridPane.getStyleClass().add("pane");
+			this.add(getPyramidGridPane(), 9, 2, 1, 9);
 		}
-		return pyramidVbox;
+		return pyramidGridPane;
 	}
 
 }

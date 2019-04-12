@@ -16,12 +16,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import model.Party;
 
-public class PyramidVBox extends GridPane {
+public class PyramidGridPane extends GridPane {
 	private List<Label> lblGain;
-	private Paint rouge = Color.rgb(255, 0, 0);
 
-	public PyramidVBox() {
-//		setGridLinesVisible(true);
+	public PyramidGridPane() {
+		// setGridLinesVisible(true);
+
 		// add columns
 		ColumnConstraints c = new ColumnConstraints();
 		c.setPercentWidth(100);
@@ -29,8 +29,10 @@ public class PyramidVBox extends GridPane {
 
 		// add rows
 		RowConstraints r = new RowConstraints();
-		r.setPercentHeight(10);
-		this.getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r, r, r, r, r, r);
+		r.setPercentHeight(6.66);
+		for (int i = Party.NB_STEPS - 1; i >= 0; i--) {
+			this.getRowConstraints().add(r);
+		}
 
 		for (int i = Party.NB_STEPS - 1; i >= 0; i--) {
 			this.add(getLblGain(i), 0, i);
@@ -40,8 +42,12 @@ public class PyramidVBox extends GridPane {
 
 		// Layout
 		this.setPrefWidth(Integer.MAX_VALUE);
-		this.getLblGain(5).setId("pyramidTextRound");
-		this.getLblGain(10).setId("pyramidTextRound");
+		this.getLblGain(10).getStyleClass().add("pyramidTextRound");
+		this.getLblGain(10).setId("");
+		this.getLblGain(5).getStyleClass().add("pyramidTextRound");
+		this.getLblGain(5).setId("");
+		this.getLblGain(0).getStyleClass().add("pyramidTextRound");
+		this.getLblGain(0).setId("");
 	}
 
 	public Label getLblGain(int index) {
@@ -49,7 +55,8 @@ public class PyramidVBox extends GridPane {
 			lblGain = new ArrayList<>();
 
 			for (int i = Party.NB_STEPS - 1; i >= 0; i--) {
-				lblGain.add(new Label((i + 1) + "\t\t" + PlayingGridPane.getEarning().getAmount(i)));
+				lblGain.add(new Label((i + 1) + "\t" + PlayingGridPane.getEarning().getAmount(i)));
+				lblGain.get(Party.NB_STEPS - 1 - i).setId("textEarningsPyramid");
 			}
 		}
 		return lblGain.get(index);

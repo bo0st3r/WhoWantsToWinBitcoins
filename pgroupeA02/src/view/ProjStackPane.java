@@ -69,6 +69,7 @@ public class ProjStackPane extends BorderPane {
 	public PlayingGridPane getPlayingGridPane() {
 		if (playingGridPane == null) {
 			playingGridPane = new PlayingGridPane();
+			playingGridPane.setId("playingGridPane");
 		}
 		return playingGridPane;
 	}

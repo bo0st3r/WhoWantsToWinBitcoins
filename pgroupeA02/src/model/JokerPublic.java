@@ -74,7 +74,7 @@ public class JokerPublic implements JokerStrategy {
 			}
 
 			// Displays votes %
-			DecimalFormat df = new DecimalFormat("#0.00");
+			DecimalFormat df = new DecimalFormat("#0.0");
 			for (i = 0; i <= Question.NB_ANSWERS - 1; i++) {
 				pgp.lblJokerResultsSetText(i, df.format(publicVotePercents.get(i)) + "%");
 			}

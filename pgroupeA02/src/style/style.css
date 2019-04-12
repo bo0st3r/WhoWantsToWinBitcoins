@@ -3,18 +3,11 @@
 @import url('https://fonts.googleapis.com/css?family=Muli');
 
 /* Classes */
-.pane{
-	
-	/*-fx-background-color:#E5903F;*/
-  	-fx-effect: dropshadow(one-pass-box, #2d2d2d, 2.0, 0.1, 0.0, 0.0); 
-}
-
 .button{
 	-fx-background-radius: 9.0;
-    -fx-background-color: #FFF8F1;
-	-fx-border-radius: 6.0;
-   
+    -fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
     -fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
+    -fx-background-insets: 0.0,0.0,0.0;
     
     -fx-font-family:'IBM Plex Sans', sans-serif;
     -fx-font-size:1.4em;
@@ -34,12 +27,6 @@
 	-fx-font-size: 40.0px;	
 }
 
-/*#classicBtn, #about{
-	-fx-background-color: #fef9e7;
-	-fx-border-color: #f9e79f;
-	-fx-font-size: 20.0px;
-}*/
-
 #profile{
 	-fx-background-color: null;
 	-fx-text-fill: #fdfefe;
@@ -51,46 +38,49 @@
 	-fx-font-size: 5.0em;
 }
 
+
 /* PlayingGridPane */
+#playingGridPane{
+	/*-fx-background-color:#E5903F;*/
+	-fx-background-image:url("/style/images/backgrounds/playing_background.jpg");
+	-fx-background-repeat:stretch;
+	-fx-background-size: cover;
+}
+
 #questionStatement{
-	/* ICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII */
-	-fx-background-color: #4B557A;
+	-fx-background-image:url("/style/images/backgrounds/statement_background.jpg");
 	-fx-background-radius: 15.0;
     -fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
     
 	-fx-alignment: center;
 	
-	-fx-text-fill: #FFF8F1;
+	-fx-text-fill: #fef9e7;
     -fx-font-family:'IBM Plex Sans', sans-serif;
-    -fx-font-size:2.5em;
+    -fx-font-size:2.2em;
     -fx-font-weight:bold;
 }
 
 #answerValue{
-	-fx-alignment: center-left;
 	-fx-background-color: #ABE5F0;
 }
 
 #answerBtnOk{
-	-fx-alignment: center-left;
-	-fx-background-color: #ABF0BB;
+	-fx-background-image:url("/style/images/backgrounds/btn_background_right.jpg");
 }
 
 #answerBtnNotOk{
-	-fx-alignment: center-left;
-	-fx-background-color: #F6497D;
+	-fx-background-image:url("/style/images/backgrounds/btn_background_wrong.jpg");
 }
 
 #answerJokerFriend{
-	-fx-background-color: #3f78d3;
+	-fx-background-image:url("/style/images/backgrounds/friend_joker_btn_background.jpg");
 }
 
 #jokerResults{
-	-fx-alignment: top-center;
-	-fx-font-size: 1.3em;
+	-fx-alignment: top-right;
+	-fx-font-size: 1.4em;
 	-fx-font-weight: bold;
-	-fx-padding: 10px;
-	/*-fx-background-color:#F6497D;*/
+	-fx-padding: 7.0px;
 }
 
 .btnJoker{
@@ -100,31 +90,47 @@
 
 /* Pyramid */
 #earningsPyramid{
-	/* ICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII */
-	-fx-background-color: #4B557A;
+	-fx-background-color: #222222;
+	-fx-background-image:url("/style/images/backgrounds/dark_background.jpg");
+	-fx-background-size: stretch;
 	-fx-background-radius: 15.0;
-	-fx-text-fill:#262626;
 	-fx-effect: dropshadow(one-pass-box, black, 2.0, 0.1, 0.0, 0.0);
-    
-	-fx-alignment: center; 
- 	
-	-fx-font-family:'IBM Plex Sans', sans-serif;
-    -fx-font-size:1.6em;
-    -fx-font-weight:bold;
 }
 
-#pyramidOldStep{
-	-fx-background-color:#1FBB73;
+#textEarningsPyramid{
+	-fx-font-family:'IBM Plex Sans', sans-serif;
+	-fx-alignment: center;
+	-fx-text-fill: #fef9e7;
+    -fx-font-size: 1.6em;
+    -fx-font-weight: bold;
 }
 
 #pyramidActualStep{
-	-fx-background-color:#FFF8F1;
-	-fx-background-image:url("/style/images/backgrounds/horizontal_rocket_tiny.png");
+	-fx-background-image:url("/style/images/backgrounds/pyramid_actual_step_background.jpg"),
+		url("/style/images/horizontal_rocket_tiny_right.png"),
+		url("/style/images/horizontal_rocket_tiny_left.png");
+	-fx-background-size:cover, auto;
 	-fx-background-repeat:no-repeat; 
+	-fx-background-position:center, left center, right center;
+	-fx-background-color:#fefffe;
+	
+	-fx-font-family:'IBM Plex Sans', sans-serif;
+	-fx-alignment: center;
+	-fx-text-fill:#e04733;
+    -fx-font-size: 1.8em;
+    -fx-font-weight: bold;
 }
 
-#pyramidTextRound{
+.pyramidTextRound{
+	-fx-background-image:url("/style/images/bitcoin_fun_tiny.png"),url("/style/images/bitcoin_fun_tiny.png");
+	-fx-background-position:left center,right center;
+	-fx-background-repeat: no-repeat ;
+	
+	-fx-font-family:'IBM Plex Sans', sans-serif;
+	-fx-alignment: center;
 	-fx-text-fill:#e04733;
+    -fx-font-size: 1.8em;
+    -fx-font-weight: bold;
 }
 
 /* Validation */
@@ -144,16 +150,16 @@
 
 /*Timer */
 #timer{
-	-fx-font-size: 40.0px;
-	-fx-background-color: white, white;
-  	-fx-background-radius: 16.4, 15.0;
-  	-fx-background-insets: -1.4, 0.0;
-  	-fx-border-radius: 15.0;
-  	-fx-border-width: 2.0;
-  	-fx-border-color: dimgrey;
-  	-fx-padding: 0.0;
-
+	-fx-background-image:url("/style/images/backgrounds/timer_background.jpg");
+	-fx-background-position:center;
+	-fx-background-repeat: no-repeat;
+	
+	-fx-font-size: 70.0px;
+	-fx-font-weight:bold;
+	-fx-alignment: center;
+	-fx-text-fill: #fef9e7;
 }
+
 /* RulesGridPane */
 #rules{
 	

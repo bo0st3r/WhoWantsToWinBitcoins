@@ -30,7 +30,7 @@ public class TimerFlowPane extends FlowPane {
 					public void run() {
 
 						if (nbSeconds > 0) {
-							lblTimer.setText(nbSeconds + "s");
+							lblTimer.setText(Integer.toString(nbSeconds));
 							nbSeconds--;
 						} else if (nbSeconds == 0) {
 							stopTimer();
@@ -59,7 +59,7 @@ public class TimerFlowPane extends FlowPane {
 	public Label getLblTimer() {
 		if (lblTimer == null) {
 			lblTimer = new Label();
-			lblTimer.setId("timer");
+			
 		}
 
 		return lblTimer;
