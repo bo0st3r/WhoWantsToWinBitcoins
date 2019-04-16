@@ -15,35 +15,33 @@ public class JokerFriend implements JokerStrategy {
 	public JokerFriend() {
 		accuracyRate = 0;
 	}
-	
+
 	@Override
-	public void execute(PlayingGridPane pgp) {
-		if (!pgp.getBtnJokerFriend().isDisabled()) {
-			// Get the joker's accuracy rate for the ongoing round
-			getAccuracyRate(pgp);
+	public void execute(Party party) {
+		// Get the joker's accuracy rate for the ongoing round
+		getAccuracyRate(party);
 
-			// Random test that will determine if the highest public vote will be assigned
-			// to the right answer or no
-			Random rand = new Random();
-			double accuracyTest = rand.nextDouble();
+		// Random test that will determine if the highest public vote will be assigned
+		// to the right answer or no
+		Random rand = new Random();
+		double accuracyTest = rand.nextDouble();
 
-			// Initially index value's the right answer index
-			int index = pgp.getRightAnswerIndex();
-			// If the accuracy test fails, a new index different from the previous will be
-			// generated
-			if (accuracyTest > accuracyRate) {
-				while (index == pgp.getRightAnswerIndex()) {
-					index = rand.nextInt(Question.NB_ANSWERS);
-				}
+		// Initially index value's the right answer index
+		int index = party.getRightAnswerIndex();
+		// If the accuracy test fails, a new index different from the previous will be
+		// generated
+		if (accuracyTest > accuracyRate) {
+			while (index == party.getRightAnswerIndex()) {
+				index = rand.nextInt(Question.NB_ANSWERS);
 			}
-
-			// Sets the button ID as "answerJokerFriend" in order to color it differently
-			pgp.getBtnAnswer(index).setId("answerJokerFriend");
 		}
+
+		// Assign the friend's answer index to the party JokerFriendIndex
+		party.setJokerFriendIndex(index);
 	}
 
-	public void getAccuracyRate(PlayingGridPane pgp) {
-		switch (pgp.getParty().getActualRound()) {
+	public void getAccuracyRate(Party party) {
+		switch (party.getActualRound()) {
 		case FIRST_ROUND:
 			accuracyRate = FIRST_ROUND_RATE;
 			break;

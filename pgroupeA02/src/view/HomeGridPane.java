@@ -123,7 +123,7 @@ public class HomeGridPane extends GridPane {
 				public void handle(ActionEvent event) {
 					((ProjStackPane) getParent().getParent()).resetPlayingGridPane();
 					try {
-						((ProjStackPane) getParent().getParent()).getPlayingGridPane().getTimerFlowPane().runChrono();
+						((ProjStackPane) getParent().getParent()).getPlayingGridPane().getTimerFP().runChrono();
 						((ProjStackPane) getParent().getParent()).getPlayingGridPane().runNewParty("main_deck");
 					} catch (QuestionsListIsEmptyException | DeckUnderFilledException | NotEnoughQuestionsException
 							| TooMuchQuestionsException | ExceedMaxStepsException e) {

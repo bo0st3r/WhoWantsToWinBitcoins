@@ -4,7 +4,6 @@
 
 /* Classes */
 .button{
-	-fx-background-radius: 9.0;
     -fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
     -fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
     -fx-background-insets: 0.0,0.0,0.0;
@@ -61,26 +60,32 @@
 }
 
 #answerValue{
-	-fx-background-color: #ABE5F0;
+	-fx-background-color: /* #ABE5F0*/#222222;
 }
 
 #answerBtnOk{
 	-fx-background-image:url("/style/images/backgrounds/btn_background_right.jpg");
+	-fx-background-repeat:stretch;
+	-fx-background-size: cover;
 }
 
 #answerBtnNotOk{
 	-fx-background-image:url("/style/images/backgrounds/btn_background_wrong.jpg");
+	-fx-background-repeat:stretch;
+	-fx-background-size: cover;
 }
 
 #answerJokerFriend{
 	-fx-background-image:url("/style/images/backgrounds/friend_joker_btn_background.jpg");
+	-fx-background-repeat:stretch;
+	-fx-background-size: cover;
 }
 
 #jokerResults{
-	-fx-alignment: top-right;
+	-fx-alignment: center;
 	-fx-font-size: 1.4em;
 	-fx-font-weight: bold;
-	-fx-padding: 7.0px;
+	-fx-padding: 4.0px;
 }
 
 .btnJoker{
@@ -90,10 +95,8 @@
 
 /* Pyramid */
 #earningsPyramid{
-	-fx-background-color: #222222;
 	-fx-background-image:url("/style/images/backgrounds/dark_background.jpg");
 	-fx-background-size: stretch;
-	-fx-background-radius: 15.0;
 	-fx-effect: dropshadow(one-pass-box, black, 2.0, 0.1, 0.0, 0.0);
 }
 
@@ -109,7 +112,7 @@
 	-fx-background-image:url("/style/images/backgrounds/pyramid_actual_step_background.jpg"),
 		url("/style/images/horizontal_rocket_tiny_right.png"),
 		url("/style/images/horizontal_rocket_tiny_left.png");
-	-fx-background-size:cover, auto;
+	-fx-background-size:cover, auto, auto;
 	-fx-background-repeat:no-repeat; 
 	-fx-background-position:center, left center, right center;
 	-fx-background-color:#fefffe;
@@ -125,6 +128,7 @@
 	-fx-background-image:url("/style/images/bitcoin_fun_tiny.png"),url("/style/images/bitcoin_fun_tiny.png");
 	-fx-background-position:left center,right center;
 	-fx-background-repeat: no-repeat ;
+	
 	
 	-fx-font-family:'IBM Plex Sans', sans-serif;
 	-fx-alignment: center;

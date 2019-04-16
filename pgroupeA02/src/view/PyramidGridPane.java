@@ -3,41 +3,33 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import model.Party;
 
 public class PyramidGridPane extends GridPane {
 	private List<Label> lblGain;
 
 	public PyramidGridPane() {
-		// setGridLinesVisible(true);
+//		setGridLinesVisible(true);
 
-		// add columns
-		ColumnConstraints c = new ColumnConstraints();
-		c.setPercentWidth(100);
-		this.getColumnConstraints().addAll(c);
+		// Add col
+		ColumnConstraints col = new ColumnConstraints();
+		col.setPercentWidth(100);
+		this.getColumnConstraints().add(col);
 
-		// add rows
-		RowConstraints r = new RowConstraints();
-		r.setPercentHeight(6.66);
+		// Add rows
+		RowConstraints row = new RowConstraints();
+		row.setPercentHeight((double) 100 / (double) Party.NB_STEPS);
 		for (int i = Party.NB_STEPS - 1; i >= 0; i--) {
-			this.getRowConstraints().add(r);
+			this.getRowConstraints().add(row);
 		}
 
+		// Adding steps
 		for (int i = Party.NB_STEPS - 1; i >= 0; i--) {
 			this.add(getLblGain(i), 0, i);
-			this.getLblGain(i).setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-			this.getLblGain(i).setAlignment(Pos.CENTER);
 		}
 
 		// Layout
@@ -57,6 +49,7 @@ public class PyramidGridPane extends GridPane {
 			for (int i = Party.NB_STEPS - 1; i >= 0; i--) {
 				lblGain.add(new Label((i + 1) + "\t" + PlayingGridPane.getEarning().getAmount(i)));
 				lblGain.get(Party.NB_STEPS - 1 - i).setId("textEarningsPyramid");
+				lblGain.get(Party.NB_STEPS - 1 - i).setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
 			}
 		}
 		return lblGain.get(index);

@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.HiddenAction;
-
 import exceptions.DeckUnderFilledException;
 import exceptions.ExceedMaxStepsException;
 import exceptions.NotEnoughQuestionsException;
@@ -24,19 +22,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import model.Earning;
-import model.Joker;
-import model.Joker5050;
-import model.JokerFriend;
-import model.JokerPublic;
 import model.Party;
 import model.Question;
 import utilities.Serialization;
@@ -45,97 +35,73 @@ public class PlayingGridPane extends GridPane {
 	private static Earning earning;
 	private Party party;
 
-	private Label lblStatement;
+	// Question
+	private QuestionGridPane questionGP;
 
-	private Button btnAnswer[];
-	private int answerIndex;
-	private String rightAnswer;
-	private int rightAnswerIndex;
-
+	// Cash in
 	private Button btnCashIn;
 
 	// Jokers
-	private Joker joker;
-	private Button btnJokerPublic;
+	private JokerVBox jokerVB;
 	private Label[] lblJokerResults;
-	private Button btnJokerFriend;
-	private Button btnJoker5050;
-	private boolean cancelJokerResults;
 
 	// Earnings pyramid
-	private PyramidGridPane pyramidGridPane;
+	private PyramidGridPane pyramidGP;
 	private int pyramidActualStep;
 
 	// Validation
-	private ValidationGridPane validationGridPane;
+	private ValidationGridPane validationGP;
 
 	// Timer
-	private TimerFlowPane timerFlowPane;
+	private TimerFlowPane timerFP;
 
 	public PlayingGridPane() {
 		earning = new Earning();
-		joker = new Joker();
 		pyramidActualStep = Party.NB_STEPS - 1;
-		this.setGridLinesVisible(true);
+//		setGridLinesVisible(true);
 
 		// Set columns
-		double[] sizesCol = { 3, 9, 22.5, 5, 1.5, 14.5, 17, 5, 3.5, 20, 3 };
+		double[] sizesCol = { 3, 9.5, 21.5, 5, 1.5, 15.5, 15.5, 5, 3.5, 20, 3 };
 		for (int i = 0; i <= sizesCol.length - 1; i++) {
 			ColumnConstraints col = new ColumnConstraints();
 			col.setHalignment(HPos.CENTER);
 			col.setPercentWidth(sizesCol[i]);
-			this.getColumnConstraints().add(col);
+			getColumnConstraints().add(col);
 		}
 
 		// Set rows
-		double[] sizesRow = { 3, 3.5, 10, 10, 10, 14, 20, 1.5, 12, 1, 12, 3 };
+		double[] sizesRow = { 3, 5.5, 10, 10, 10, 12, 21, 1.5, 12, 1, 12, 3 };
 		for (int i = 0; i <= sizesRow.length - 1; i++) {
 			RowConstraints row = new RowConstraints();
 			row.setValignment(VPos.CENTER);
 			row.setPercentHeight(sizesRow[i]);
-			this.getRowConstraints().add(row);
+			getRowConstraints().add(row);
 		}
 
 		// Spacings
-		this.setPadding(new Insets(10));
-//		this.setHgap(5);
-//		this.setVgap(5);
+		setPadding(new Insets(10));
 
-		// Question statement label
-		this.add(getLblStatement(), 1, 6, 7, 1);
-		// Question statement sizes
-		getLblStatement().setPrefHeight(Integer.MAX_VALUE);
-		getLblStatement().setPrefWidth(Integer.MAX_VALUE);
-
-		// Answer buttons
-		this.add(getBtnAnswer(0), 1, 8, 3, 1);
-		this.add(getBtnAnswer(1), 1, 10, 3, 1);
-		this.add(getBtnAnswer(2), 5, 8, 3, 1);
-		this.add(getBtnAnswer(3), 5, 10, 3, 1);
+		// Question
+		add(getQuestionGP(), 1, 6, 7, 5);
 
 		// Timer
-		this.add(getTimerFlowPane(), 5, 3, 2, 2);
-		getTimerFlowPane().setId("timer");
-		getTimerFlowPane().setAlignment(Pos.CENTER);
+		add(getTimerFP(), 5, 3, 2, 2);
 
 		// Validation
-		this.add(getValidationGridPane(), 1, 1, 5, 4);
-		getValidationGridPane().setVisible(false);
+		add(getValidationGP(), 3, 1, 5, 4);
 
 		// Exit button
-		this.add(getBtnCashIn(), 9, 0, 1, 2);
+		add(getBtnCashIn(), 9, 1);
 
-		// Joker Public
-		this.add(getBtnJokerPublic(), 0, 2, 2, 1);
-		// Joker Friend
-		this.add(getBtnJokerFriend(), 0, 3, 2, 1);
-		// Joker 5050
-		this.add(getBtnJoker5050(), 0, 4, 2, 1);
+		// Joker Pane
+		add(getJokerVB(), 0, 2, 2, 3);
+
 		// Jokers labels
-		this.add(getLblJokerResults(0), 3, 8);
-		this.add(getLblJokerResults(1), 3, 10);
-		this.add(getLblJokerResults(2), 7, 8);
-		this.add(getLblJokerResults(3), 7, 10);
+		add(getLblJokerResults(0), 3, 8);
+		add(getLblJokerResults(1), 3, 10);
+		add(getLblJokerResults(2), 7, 8);
+		add(getLblJokerResults(3), 7, 10);
+
 	}
 
 	public void runNewParty(String dest) throws QuestionsListIsEmptyException, DeckUnderFilledException,
@@ -144,15 +110,15 @@ public class PlayingGridPane extends GridPane {
 		getNextQuestion();
 
 		pyramidActualStep = Party.NB_STEPS - 1;
-		pyramidGridPane = null;
+		pyramidGP = null;
 		getPyramidGridPane().getLblGain(Party.NB_STEPS - 1).setId("pyramidActualStep");
 	}
 
 	public void verifyAnswer() throws ExceedMaxStepsException {
 		// Still playing
-		if (answerIndex == rightAnswerIndex && party.getActualStep() < Party.NB_STEPS) {
+		if (questionGP.getAnswerIndex() == party.getRightAnswerIndex() && party.getActualStep() < Party.NB_STEPS) {
 			// green color when OK
-			getBtnAnswer(answerIndex).setId("answerBtnOk");
+			questionGP.getBtnAnswer(questionGP.getAnswerIndex()).setId("answerBtnOk");
 			// NEED PAUSE 1SEC BETWEEN 2 QUESTIONS
 
 			getNextQuestion();
@@ -160,7 +126,7 @@ public class PlayingGridPane extends GridPane {
 			resetTimer();
 
 			// Reset answers color
-			getBtnAnswer(answerIndex).setId("");
+			questionGP.getBtnAnswer(questionGP.getAnswerIndex()).setId("");
 
 			// Old earnings
 			getPyramidGridPane().getLblGain(pyramidActualStep).setId("textEarningsPyramid");
@@ -176,8 +142,8 @@ public class PlayingGridPane extends GridPane {
 		} else {
 			// Disable buttons except right answer button and button clicked by the user
 			for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
-				if (i != rightAnswerIndex && i != answerIndex)
-					disableBtnAnswer(false, i);
+				if (i != party.getRightAnswerIndex() && i != questionGP.getAnswerIndex())
+					questionGP.setDisableBtnAnswer(false, i);
 			}
 
 			// Hide and stop the timer
@@ -185,14 +151,14 @@ public class PlayingGridPane extends GridPane {
 			setVisibileTimerFlowPane(false);
 
 			// Hide validation pane
-			setVisibleValidationGridPane(false);
+			setVisibleValidationGP(false);
 
 			// Button turn red if false
-			getBtnAnswer(answerIndex).setId("answerBtnNotOk");
+			questionGP.getBtnAnswer(questionGP.getAnswerIndex()).setId("answerBtnNotOk");
 
 			// Loosing alert
-			alertPop("Sorry, you're a looser !\n" + "The right answer was\n\n \"" + rightAnswer + "\"\n\n You won : "
-					+ getEarningsWhenLost() + " Bitcoins");
+			alertPop("Sorry, you're a looser !\n" + "The right answer was\n\n \"" + party.getRightAnswer()
+					+ "\"\n\n You won : " + getEarningsWhenLost() + " Bitcoins");
 		}
 	}
 
@@ -201,7 +167,7 @@ public class PlayingGridPane extends GridPane {
 		Question actualQuestion = party.getQuestionNextStep();
 
 		// Sets the new statement
-		getLblStatement().setText(actualQuestion.getStatement());
+		questionGP.getLblStatement().setText(actualQuestion.getStatement());
 
 		// Sets new answers
 		List<Map.Entry<String, Boolean>> choices = new ArrayList<>(actualQuestion.getChoices().entrySet());
@@ -210,30 +176,26 @@ public class PlayingGridPane extends GridPane {
 		int index = 0;
 		for (Entry<String, Boolean> choice : choices) {
 			String answer = choice.getKey();
-			getBtnAnswer(index).setText(answer);
+			questionGP.getBtnAnswer(index).setText(answer);
 
 			if (choice.getValue()) {
-				rightAnswer = answer;
-				rightAnswerIndex = index;
+				party.setRightAnswer(answer);
+				party.setRightAnswerIndex(index);
 			}
 
 			index++;
 		}
 
 		// Hide joker effects
-		if (cancelJokerResults) {
+		if (jokerVB.isCancelJokerResults()) {
 			setVisibleLblJokerResults(false);
-			disableBtnAnswer(false);
+			questionGP.setDisableBtnAnswer(false);
 			for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
-				btnAnswer[i].setId("");
+				questionGP.getBtnAnswer(i).setId("");
 			}
-			cancelJokerResults = false;
+			jokerVB.setCancelJokerResults(false);
 		}
 
-	}
-
-	public int getRightAnswerIndex() {
-		return rightAnswerIndex;
 	}
 
 	public Party getParty() {
@@ -244,24 +206,18 @@ public class PlayingGridPane extends GridPane {
 		return earning;
 	}
 
-	// Joker Public
-	public Button getBtnJokerPublic() {
-		if (btnJokerPublic == null) {
-			btnJokerPublic = new Button("Ask the public");
-			btnJokerPublic.getStyleClass().add("btnJoker");
+	public JokerVBox getJokerVB() {
+		if (jokerVB == null)
+			jokerVB = new JokerVBox(this);
 
-			btnJokerPublic.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent arg0) {
-					cancelJokerResults = true;
-					joker.setStrategy(new JokerPublic());
-					joker.useJoker(((ProjStackPane) getParent().getParent()).getPlayingGridPane());
-					setVisibleLblJokerResults(true);
-					btnJokerPublic.setDisable(true);
-				}
-			});
-		}
-		return btnJokerPublic;
+		return jokerVB;
+	}
+
+	public QuestionGridPane getQuestionGP() {
+		if (questionGP == null)
+			questionGP = new QuestionGridPane();
+
+		return questionGP;
 	}
 
 	public Label getLblJokerResults(int index) {
@@ -270,55 +226,15 @@ public class PlayingGridPane extends GridPane {
 
 		if (lblJokerResults[index] == null) {
 			lblJokerResults[index] = new Label("" + index);
-			lblJokerResults[index].setPrefHeight(Integer.MAX_VALUE);
-			lblJokerResults[index].setPrefWidth(Integer.MAX_VALUE);
 			lblJokerResults[index].setId("jokerResults");
 			lblJokerResults[index].setVisible(false);
-			GridPane.setHalignment(lblJokerResults[index], HPos.CENTER);
+			GridPane.setValignment(lblJokerResults[index], VPos.TOP);
 		}
 		return lblJokerResults[index];
 	}
 
 	public void lblJokerResultsSetText(int index, String text) {
 		getLblJokerResults(index).setText(text);
-	}
-
-	// Joker Friend
-	public Button getBtnJokerFriend() {
-		if (btnJokerFriend == null) {
-			btnJokerFriend = new Button("Call a friend");
-			btnJokerPublic.getStyleClass().add("btnJoker");
-
-			btnJokerFriend.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent arg0) {
-					cancelJokerResults = true;
-					joker.setStrategy(new JokerFriend());
-					joker.useJoker(((ProjStackPane) getParent().getParent()).getPlayingGridPane());
-					btnJokerFriend.setDisable(true);
-				}
-			});
-		}
-		return btnJokerFriend;
-	}
-
-	// Joker 5050
-	public Button getBtnJoker5050() {
-		if (btnJoker5050 == null) {
-			btnJoker5050 = new Button("50/50");
-			btnJokerPublic.getStyleClass().add("btnJoker");
-
-			btnJoker5050.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent arg0) {
-					cancelJokerResults = true;
-					joker.setStrategy(new Joker5050());
-					joker.useJoker(((ProjStackPane) getParent().getParent()).getPlayingGridPane());
-					btnJoker5050.setDisable(true);
-				}
-			});
-		}
-		return btnJoker5050;
 	}
 
 	public void setVisibleLblJokerResults(boolean value) {
@@ -331,73 +247,26 @@ public class PlayingGridPane extends GridPane {
 		lblJokerResults[index].setVisible(value);
 	}
 
-	// Question part
-	public Label getLblStatement() {
-		if (lblStatement == null) {
-			lblStatement = new Label("");
-			lblStatement.setId("questionStatement");
-		}
-		return lblStatement;
-	}
-
-	public Button getBtnAnswer(int index) {
-		if (btnAnswer == null)
-			btnAnswer = new Button[Question.NB_ANSWERS];
-
-		if (btnAnswer[index] == null) {
-			btnAnswer[index] = new Button("");
-			btnAnswer[index].setPrefWidth(Integer.MAX_VALUE);
-			btnAnswer[index].setPrefHeight(Integer.MAX_VALUE);
-			btnAnswer[index].setId("");
-
-			btnAnswer[index].setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-
-					answerIndex = index;
-					getValidationGridPane().setVisible(true);
-				}
-			});
-		}
-		return btnAnswer[index];
-	}
-
-	public void disableBtnAnswer(boolean value, int index) {
-		btnAnswer[index].setDisable(value);
-	}
-
-	public void disableBtnAnswer(boolean value) {
-		for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
-			btnAnswer[i].setDisable(value);
-		}
-	}
-
-	/*
-	 * Return the actual answer's index.
-	 */
-	public int getAnswerIndex() {
-		return answerIndex;
-	}
-
 	// Timer
-	public TimerFlowPane getTimerFlowPane() {
-		if (timerFlowPane == null) {
-			timerFlowPane = new TimerFlowPane();
-
+	public TimerFlowPane getTimerFP() {
+		if (timerFP == null) {
+			timerFP = new TimerFlowPane();
+			timerFP.setId("timer");
+			timerFP.setAlignment(Pos.CENTER);
 		}
-		return timerFlowPane;
+		return timerFP;
 	}
 
 	public void resetTimer() {
-		getTimerFlowPane().resetNbSecond();
+		getTimerFP().resetNbSecond();
 	}
 
 	public void stopTimer() {
-		getTimerFlowPane().stopTimer();
+		getTimerFP().stopTimer();
 	}
 
 	public void setVisibileTimerFlowPane(boolean value) {
-		getTimerFlowPane().setVisible(value);
+		getTimerFP().setVisible(value);
 	}
 
 	// Answer validation
@@ -416,21 +285,27 @@ public class PlayingGridPane extends GridPane {
 		return alert;
 	}
 
-	public ValidationGridPane getValidationGridPane() {
-		if (validationGridPane == null) {
-			validationGridPane = new ValidationGridPane();
+	public ValidationGridPane getValidationGP() {
+		if (validationGP == null) {
+			validationGP = new ValidationGridPane();
+			validationGP.setVisible(false);
 		}
-		return validationGridPane;
+		return validationGP;
 	}
 
-	public void setVisibleValidationGridPane(boolean value) {
-		getValidationGridPane().setVisible(value);
+	public void setVisibleValidationGP(boolean value) {
+		getBtnCashIn().setDisable(value);
+		questionGP.setDisableBtnAnswer(value);
+
+		getValidationGP().setVisible(value);
 	}
 
 	// Exit button
 	public Button getBtnCashIn() {
 		if (btnCashIn == null) {
 			btnCashIn = new Button("Cash-in");
+			btnCashIn.setMinSize(0, 0);
+			btnCashIn.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
 			btnCashIn.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -473,13 +348,13 @@ public class PlayingGridPane extends GridPane {
 
 	// Pyramid
 	public PyramidGridPane getPyramidGridPane() {
-		if (pyramidGridPane == null) {
-			pyramidGridPane = new PyramidGridPane();
-			pyramidGridPane.setId("earningsPyramid");
-			pyramidGridPane.getStyleClass().add("pane");
+		if (pyramidGP == null) {
+			pyramidGP = new PyramidGridPane();
+			pyramidGP.setMinHeight(0);
+			pyramidGP.setId("earningsPyramid");
 			this.add(getPyramidGridPane(), 9, 2, 1, 9);
 		}
-		return pyramidGridPane;
+		return pyramidGP;
 	}
 
 }

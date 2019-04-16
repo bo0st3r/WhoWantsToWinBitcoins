@@ -20,10 +20,17 @@ public class Party {
 	private Round actualRound;
 	private int actualStep;
 
+	private int rightAnswerIndex;
+	private String rightAnswer;
+
+	private int jokerFriendIndex;
+	private List<Double> jokerPublicPercents;
+	private List<Integer> joker5050Indexes;
+
 	/*
-	 * Constructor of Party class. The param "choosenQuestions" just gets
-	 * instantiated as an empty ArrayList<Question>. Gets Party.NB_STEPS_BY_ROUND
-	 * questions for each Round and then sort is by Round order.
+	 * Constructor of Party class. The param "choosenQuestions" gets instantiated as
+	 * an empty ArrayList<Question>. Gets Party.NB_STEPS_BY_ROUND questions for each
+	 * Round and then sort is by Round order.
 	 * 
 	 * @param deck A Deck that contains at least 15 questions, including 5 for each
 	 * Round parameter.
@@ -86,8 +93,15 @@ public class Party {
 		// Sort by rounds order
 		sortQuestionsByRounds();
 
+		rightAnswerIndex = -1;
+		rightAnswer = null;
+
 		actualStep = 0;
 		actualRound = Round.FIRST_ROUND;
+
+		jokerFriendIndex = -1;
+		jokerPublicPercents = new ArrayList<>();
+		joker5050Indexes = new ArrayList<>();
 	}
 
 	/*
@@ -193,5 +207,74 @@ public class Party {
 		}
 
 		return tmp;
+	}
+
+	public int getRightAnswerIndex() {
+		return rightAnswerIndex;
+	}
+
+	public void setRightAnswerIndex(int rightAnswerIndex) {
+		if (rightAnswerIndex >= 0 && rightAnswerIndex < Question.NB_ANSWERS)
+			this.rightAnswerIndex = rightAnswerIndex;
+		else
+			;
+		// EXCEPTION
+	}
+
+	public String getRightAnswer() {
+		return rightAnswer;
+	}
+
+	public void setRightAnswer(String rightAnswer) {
+		if (rightAnswer != null && !rightAnswer.isEmpty())
+			this.rightAnswer = rightAnswer;
+		else
+			;
+		// EXCEPTION
+	}
+
+	public int getJokerFriendIndex() {
+		return jokerFriendIndex;
+	}
+
+	public void setJokerFriendIndex(int jokerFriendIndex) {
+		if (jokerFriendIndex >= 0 && jokerFriendIndex < Question.NB_ANSWERS)
+			this.jokerFriendIndex = jokerFriendIndex;
+		else
+			;
+		// EXCEPTION
+	}
+
+	public List<Double> getJokerPublicPercents() {
+		return jokerPublicPercents;
+	}
+
+	public void setJokerPublicPercents(List<Double> jokerPublicPercents) {
+		if (jokerPublicPercents.size() == Question.NB_ANSWERS) {
+			for (Double percents : jokerPublicPercents) {
+				if (percents < 0 || percents > 100)
+					// EXCEPTION
+					return;
+			}
+		} else {
+			System.out.println(jokerPublicPercents.size());
+			// EXCEPTION
+		}
+		this.jokerPublicPercents = jokerPublicPercents;
+	}
+
+	public List<Integer> getJoker5050Indexes() {
+		return joker5050Indexes;
+	}
+
+	public void setJoker5050Indexes(List<Integer> joker5050Indexes) {
+		if (joker5050Indexes != null) {
+			for (Integer index : joker5050Indexes) {
+				if (index < 0 || index > Question.NB_ANSWERS - 1)
+					// EXCEPTION
+					return;
+			}
+		}
+		this.joker5050Indexes = joker5050Indexes;
 	}
 }

@@ -1,7 +1,5 @@
 package model;
 
-import view.PlayingGridPane;
-
 public class Joker {
 	private JokerStrategy jokerStrategy;
 
@@ -10,7 +8,7 @@ public class Joker {
 
 	}
 
-	public void useJoker(PlayingGridPane pgp) {
-		jokerStrategy.execute(pgp);
+	public void useJoker(Party party) {
+		jokerStrategy.execute(party);
 	}
 }

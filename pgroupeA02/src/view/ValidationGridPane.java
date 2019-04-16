@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.stage.Modality;
 
 public class ValidationGridPane extends GridPane {
 
@@ -79,10 +78,10 @@ public class ValidationGridPane extends GridPane {
 					} catch (ExceedMaxStepsException e) {
 						e.printStackTrace();
 					}
-					int answer = ((PlayingGridPane) getParent()).getAnswerIndex();
-					((PlayingGridPane) getParent()).getBtnAnswer(answer).setId("answers");
+					int answer = ((PlayingGridPane) getParent()).getQuestionGP().getAnswerIndex();
+					((PlayingGridPane) getParent()).getQuestionGP().getBtnAnswer(answer).setId("answers");
 
-					setVisible(false);
+					((PlayingGridPane) getParent()).setVisibleValidationGP(false);
 				}
 			});
 		}
@@ -96,9 +95,9 @@ public class ValidationGridPane extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					setVisible(false);
-					int answer = ((PlayingGridPane) getParent()).getAnswerIndex();
-					((PlayingGridPane) getParent()).getBtnAnswer(answer).setId("answers");
+					((PlayingGridPane) getParent()).setVisibleValidationGP(false);
+					int answer = ((PlayingGridPane) getParent()).getQuestionGP().getAnswerIndex();
+					((PlayingGridPane) getParent()).getQuestionGP().getBtnAnswer(answer).setId("answers");
 				}
 			});
 		}

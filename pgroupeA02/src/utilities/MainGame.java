@@ -1,11 +1,7 @@
 package utilities;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import view.ProjStackPane;
 
@@ -36,7 +32,7 @@ public class MainGame extends Application {
 			scene.getStylesheets().add(getClass().getResource("/style/style.css").toExternalForm());
 			
 			primaryStage.setTitle("Qui veut gagner des Bitcoins");
-			primaryStage.setMaximized(true);
+//			primaryStage.setMaximized(true);
 			primaryStage.setMinHeight(750);
 			primaryStage.setMinWidth(1350);
 			primaryStage.setScene(scene);

@@ -28,57 +28,52 @@ public class JokerPublic implements JokerStrategy {
 	}
 
 	@Override
-	public void execute(PlayingGridPane pgp) {
-		if (!pgp.getBtnJokerPublic().isDisabled()) {
-			int i;
+	public void execute(Party party) {
+		int i;
+		// Randomize the 4 results
+		getRandomNumbers();
+		// Get the joker's accuracy rate for the ongoing round
+		getAccuracyRate(party);
 
-			// Randomize the 4 results
-			getRandomNumbers();
-			// Get the joker's accuracy rate for the ongoing round
-			getAccuracyRate(pgp);
+		// Computes the ratio necessary for the sum of publicVotePercents to equals 100%
+		double ratio = tot / 100;
 
-			// Computes the ratio necessary for the sum of publicVotePercents to equals 100%
-			double ratio = tot / 100;
+		for (i = 0; i <= Question.NB_ANSWERS - 1; i++) {
+			// Normalize % using computed ratio
+			publicVotePercents.set(i, publicVotePercents.get(i) / ratio);
+		}
+
+		// Random test that will determine if the highest public vote will be assigned
+		// to the right answer or no
+		Random rand = new Random();
+		double accuracyTest = rand.nextDouble();
+
+		if (accuracyTest < accuracyRate) {
+			double max = 0;
+			int maxIndex = 0;
+			double valueRightAnswer = 0;
+			int rightAnswerIndex = party.getRightAnswerIndex();
 
 			for (i = 0; i <= Question.NB_ANSWERS - 1; i++) {
-				// Normalize % using computed ratio
-				publicVotePercents.set(i, publicVotePercents.get(i) / ratio);
-			}
-
-			// Random test that will determine if the highest public vote will be assigned
-			// to the right answer or no
-			Random rand = new Random();
-			double accuracyTest = rand.nextDouble();
-
-			if (accuracyTest < accuracyRate) {
-				double max = 0;
-				int maxIndex = 0;
-				double valueRightAnswer = 0;
-				int rightAnswerIndex = pgp.getRightAnswerIndex();
-
-				for (i = 0; i <= Question.NB_ANSWERS - 1; i++) {
-					// Gets the max % of vote & it's index for wrong answers
-					if (publicVotePercents.get(i) > max && i != rightAnswerIndex) {
-						max = publicVotePercents.get(i);
-						maxIndex = i;
-					}
-				}
-				// Gets the % vote for the right answer
-				valueRightAnswer = publicVotePercents.get(rightAnswerIndex);
-
-				// If the votes % for the right answer is less than the max vote % then swap
-				// their values
-				if (max > valueRightAnswer) {
-					Collections.swap(publicVotePercents, maxIndex, rightAnswerIndex);
+				// Gets the max % of vote & it's index for wrong answers
+				if (publicVotePercents.get(i) > max && i != rightAnswerIndex) {
+					max = publicVotePercents.get(i);
+					maxIndex = i;
 				}
 			}
+			// Gets the % vote for the right answer
+			valueRightAnswer = publicVotePercents.get(rightAnswerIndex);
 
-			// Displays votes %
-			DecimalFormat df = new DecimalFormat("#0.0");
-			for (i = 0; i <= Question.NB_ANSWERS - 1; i++) {
-				pgp.lblJokerResultsSetText(i, df.format(publicVotePercents.get(i)) + "%");
+			// If the votes % for the right answer is less than the max vote % then swap
+			// their values
+			if (max > valueRightAnswer) {
+				Collections.swap(publicVotePercents, maxIndex, rightAnswerIndex);
 			}
 		}
+
+		// Assign the percents of vote given by the public to the party
+		// JokerPublicPercents
+		party.setJokerPublicPercents(publicVotePercents);
 	}
 
 	/*
@@ -97,8 +92,8 @@ public class JokerPublic implements JokerStrategy {
 	/*
 	 * Determines the accuracyRate for the Round ongoing.
 	 */
-	public void getAccuracyRate(PlayingGridPane pgp) {
-		switch (pgp.getParty().getActualRound()) {
+	public void getAccuracyRate(Party party) {
+		switch (party.getActualRound()) {
 		case FIRST_ROUND:
 			accuracyRate = FIRST_ROUND_RATE;
 			break;
