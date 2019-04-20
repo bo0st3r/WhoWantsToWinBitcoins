@@ -1,10 +1,5 @@
 package view;
 
-import exceptions.DeckUnderFilledException;
-import exceptions.ExceedMaxStepsException;
-import exceptions.NotEnoughQuestionsException;
-import exceptions.QuestionsListIsEmptyException;
-import exceptions.TooMuchQuestionsException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -37,99 +32,80 @@ public class HomeGridPane extends GridPane {
 	private Button btnProfile;
 	private Button btnDisconnect;
 
-//	private About about;
-
+	/*
+	 * Constructor, sets spacings, rows and cols constraints and adds it's content.
+	 */
 	public HomeGridPane() {
 //		this.setGridLinesVisible(true);
 
-		this.setPadding(new Insets(10));
-		this.setHgap(8);
-		this.setVgap(8);
+		// Spacings
+		setPadding(new Insets(10));
+		setHgap(8);
+		setVgap(8);
 
-		// add columns
+		// Set columns constraints
 		ColumnConstraints c = new ColumnConstraints();
 		c.setPercentWidth(10);
-		this.getColumnConstraints().addAll(c, c, c, c, c, c, c, c, c, c);
+		getColumnConstraints().addAll(c, c, c, c, c, c, c, c, c, c);
 
-		// add rows
+		// Set rows constraints
 		RowConstraints r = new RowConstraints();
 		r.setPercentHeight(10);
-		this.getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r);
+		getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r);
 
-		// title
-		this.add(getLblTitle(), 2, 1, 6, 2);
-		GridPane.setHalignment(getLblTitle(), HPos.CENTER);
-		getLblTitle().setId("titleHome");
+		// Title
+		add(getLblTitle(), 2, 1, 6, 2);
 
 		// Play button
-		getBtnPlay().setPrefWidth(Integer.MAX_VALUE);
-		getBtnPlay().setPrefHeight(Integer.MAX_VALUE);
-		this.add(getBtnPlay(), 3, 4, 4, 2);
-		GridPane.setHalignment(getBtnPlay(), HPos.CENTER);
-		getBtnPlay().setId("playBtn");
+		add(getBtnPlay(), 3, 4, 4, 2);
 
 		// Score button
-		getBtnScoreBoard().setPrefHeight(Integer.MAX_VALUE);
-		getBtnScoreBoard().setPrefWidth(Integer.MAX_VALUE);
-		this.add(getBtnScoreBoard(), 4, 6, 2, 1);
-		getBtnScoreBoard().setId("classicBtn");
+		add(getBtnScoreBoard(), 4, 6, 2, 1);
 
 		// Rule button
-		getBtnRules().setPrefHeight(Integer.MAX_VALUE);
-		getBtnRules().setPrefWidth(Integer.MAX_VALUE);
-		this.add(getBtnRules(), 4, 7, 2, 1);
-		getBtnRules().setId("classicBtn");
+		add(getBtnRules(), 4, 7, 2, 1);
 
 		// AddQuestion button
-		getBtnAddQuestion().setPrefHeight(Integer.MAX_VALUE);
-		getBtnAddQuestion().setPrefWidth(Integer.MAX_VALUE);
-		this.add(getBtnAddQuestion(), 4, 8, 2, 1);
-		getBtnAddQuestion().setId("classicBtn");
-		// hidden if not admin
-		getBtnAddQuestion().setVisible(false);
+		add(getBtnAddQuestion(), 4, 8, 2, 1);
 
 		// Connection button
-		this.add(getBtnConnect(), 9, 0, 2, 1);
-		GridPane.setHalignment(getBtnConnect(), HPos.RIGHT);
-		getBtnConnect().setId("profile");
+		add(getBtnConnect(), 9, 0, 2, 1);
 
 		// Profile button
-		this.add(getBtnProfile(), 8, 0, 2, 1);
-		GridPane.setHalignment(getBtnProfile(), HPos.RIGHT);
-		getBtnProfile().setId("profile");
-		// hidden if not connected
-		getBtnProfile().setVisible(false);
+		add(getBtnProfile(), 8, 0, 2, 1);
 
 		// Disconnection button
-		this.add(getBtnDisconnect(), 8, 1, 2, 1);
-		GridPane.setHalignment(getBtnDisconnect(), HPos.RIGHT);
-		GridPane.setValignment(getBtnDisconnect(), VPos.TOP);
-		getBtnDisconnect().setId("profile");
-		// hidden if not connected
-		getBtnDisconnect().setVisible(false);
+		add(getBtnDisconnect(), 8, 1, 2, 1);
 
 		// About button
-		this.add(getBtnAbout(), 0, 9);
-		getBtnAbout().setId("about");
+		add(getBtnAbout(), 0, 9);
 	}
 
 	// Getters
+	/*
+	 * Returns btnPlay, if null instantiates it, sets it's sizes, alignment, ID and
+	 * action when clicking on it.
+	 * 
+	 * @return btnPlay, a Button object.
+	 */
 	public Button getBtnPlay() {
 		if (btnPlay == null) {
 			btnPlay = new Button("Let's play");
+			btnPlay.setPrefWidth(Integer.MAX_VALUE);
+			btnPlay.setPrefHeight(Integer.MAX_VALUE);
+			GridPane.setHalignment(btnPlay, HPos.CENTER);
+			btnPlay.setId("playBtn");
 
 			btnPlay.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
+					//
 					((ProjStackPane) getParent().getParent()).resetPlayingGridPane();
-					try {
-						((ProjStackPane) getParent().getParent()).getPlayingGridPane().getTimerFP().runChrono();
-						((ProjStackPane) getParent().getParent()).getPlayingGridPane().runNewParty("main_deck");
-					} catch (QuestionsListIsEmptyException | DeckUnderFilledException | NotEnoughQuestionsException
-							| TooMuchQuestionsException | ExceedMaxStepsException e) {
-						e.printStackTrace();
-					}
+
+					// Hide the Home Pane
 					setVisible(false);
+
+					// Show the PlayingGridPane
 					((ProjStackPane) getParent().getParent()).getPlayingGridPane().setVisible(true);
 				}
 			});
@@ -138,9 +114,18 @@ public class HomeGridPane extends GridPane {
 		return btnPlay;
 	}
 
+	/*
+	 * Returns btnScoreBoard, if null instantiates it, sets it's sizes and action
+	 * when clicking on it.
+	 * 
+	 * @return btnScoreBoard, a Button object.
+	 */
 	public Button getBtnScoreBoard() {
 		if (btnScoreBoard == null) {
 			btnScoreBoard = new Button("Scores board");
+			btnScoreBoard.setPrefHeight(Integer.MAX_VALUE);
+			btnScoreBoard.setPrefWidth(Integer.MAX_VALUE);
+
 			btnScoreBoard.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -154,25 +139,45 @@ public class HomeGridPane extends GridPane {
 		return btnScoreBoard;
 	}
 
+	/*
+	 * Returns btnRules, if null instantiates it, sets it's sizes and action when
+	 * clicking on it.
+	 * 
+	 * @return btnRules, a Button object.
+	 */
 	public Button getBtnRules() {
-		if (btnRules == null)
+		if (btnRules == null) {
 			btnRules = new Button("Read rules");
-		btnRules.setOnAction(new EventHandler<ActionEvent>() {
+			btnRules.setPrefHeight(Integer.MAX_VALUE);
+			btnRules.setPrefWidth(Integer.MAX_VALUE);
 
-			@Override
-			public void handle(ActionEvent event) {
+			btnRules.setOnAction(new EventHandler<ActionEvent>() {
 
-				setVisible(false);
-				((ProjStackPane) getParent().getParent()).getRulesGridPane().setVisible(true);
+				@Override
+				public void handle(ActionEvent event) {
 
-			}
-		});
+					setVisible(false);
+					((ProjStackPane) getParent().getParent()).getRulesGridPane().setVisible(true);
+
+				}
+			});
+		}
 		return btnRules;
 	}
 
+	/*
+	 * Returns btnAddQuestion, if null instantiates it, sets it's sizes, action when
+	 * clicking on it and invisible at first.
+	 * 
+	 * @return btnAddQuestion, a Button object.
+	 */
 	public Button getBtnAddQuestion() {
 		if (btnAddQuestion == null) {
 			btnAddQuestion = new Button("Add a question");
+			btnAddQuestion.setPrefHeight(Integer.MAX_VALUE);
+			btnAddQuestion.setPrefWidth(Integer.MAX_VALUE);
+			// Hidden if the user is not an admin
+			btnAddQuestion.setVisible(false);
 
 			Scene secondScene = new Scene(new AddQuestionGridPane(), 570, 305);
 			btnAddQuestion.setOnAction(new EventHandler<ActionEvent>() {
@@ -195,9 +200,17 @@ public class HomeGridPane extends GridPane {
 		return btnAddQuestion;
 	}
 
+	/*
+	 * Returns btnAbout, if null instantiates it, sets it's ID and action when
+	 * clicking on it.
+	 * 
+	 * @return btnAbout, a Button object.
+	 */
 	public Button getBtnAbout() {
 		if (btnAbout == null) {
 			btnAbout = new Button("About...");
+			btnAbout.setId("about");
+
 			btnAbout.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -213,9 +226,18 @@ public class HomeGridPane extends GridPane {
 		return btnAbout;
 	}
 
+	/*
+	 * Returns btnConnect, if null instantiates it, sets it's ID, alignment and
+	 * action when clicking on it.
+	 * 
+	 * @return btnConnect, a Button object.
+	 */
 	public Button getBtnConnect() {
 		if (btnConnect == null) {
 			btnConnect = new Button("Connection");
+			GridPane.setHalignment(btnConnect, HPos.RIGHT);
+			btnConnect.setId("profile");
+
 			btnConnect.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -232,15 +254,41 @@ public class HomeGridPane extends GridPane {
 		return btnConnect;
 	}
 
+	/*
+	 * Returns btnProfile, if null instantiates it, sets it's ID, alignment,
+	 * invisible at first and action when clicking on it.
+	 * 
+	 * @return btnProfile, a Button object.
+	 */
 	public Button getBtnProfile() {
-		if (btnProfile == null)
+		if (btnProfile == null) {
 			btnProfile = new Button("Profile");
+			GridPane.setHalignment(btnProfile, HPos.RIGHT);
+			btnProfile.setId("profile");
+
+			// Hidden if not connected
+			btnProfile.setVisible(false);
+		}
+
 		return btnProfile;
 	}
 
+	/*
+	 * Returns btnDisconnect, if null instantiates it, sets it's ID, alignment,
+	 * invisible at first and action when clicking on it.
+	 * 
+	 * @return btnDisconnect, a Button object.
+	 */
 	public Button getBtnDisconnect() {
 		if (btnDisconnect == null) {
 			btnDisconnect = new Button("Disconnection");
+			GridPane.setHalignment(btnDisconnect, HPos.RIGHT);
+			GridPane.setValignment(btnDisconnect, VPos.TOP);
+			btnDisconnect.setId("profile");
+
+			// Hidden if not connected
+			btnDisconnect.setVisible(false);
+
 			btnDisconnect.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -256,9 +304,18 @@ public class HomeGridPane extends GridPane {
 		return btnDisconnect;
 	}
 
+	/*
+	 * Returns lblTitle, if null instantiates it, sets it's ID and alignment.
+	 * 
+	 * @return lblTitle, a Label object.
+	 */
 	public Label getLblTitle() {
-		if (lblTitle == null)
+		if (lblTitle == null) {
 			lblTitle = new Label("Who wants to win Bitcoins?");
+			GridPane.setHalignment(lblTitle, HPos.CENTER);
+			lblTitle.setId("titleHome");
+		}
+
 		return lblTitle;
 	}
 

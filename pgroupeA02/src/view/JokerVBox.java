@@ -23,20 +23,35 @@ public class JokerVBox extends VBox {
 	private Button btnJokerFriend;
 	private Button btnJoker5050;
 
+	/*
+	 * Constructor, set spacings, alignment, instance variables and add the pane
+	 * content.
+	 */
 	public JokerVBox(PlayingGridPane pgp) {
-		this.setPadding(new Insets(10));
-		this.setSpacing(45);
+		// Spacings
+		setPadding(new Insets(10));
+		setSpacing(45);
 
+		// Alignment
+		setAlignment(Pos.CENTER);
+
+		// Setting instance variables
 		this.pgp = pgp;
 		joker = new Joker();
-
 		cancelJokerResults = false;
 
-		this.setAlignment(Pos.CENTER);
-		this.getChildren().addAll(getBtnJoker5050(), getBtnJokerFriend(), getBtnJokerPublic());
+		// Add the content
+		getChildren().addAll(getBtnJoker5050(), getBtnJokerFriend(), getBtnJokerPublic());
 	}
 
 	// Joker Public
+	/*
+	 * Return btnJokerPublic, if null instantiates it, adds CSS class "btnJoker" and
+	 * set it's action when clicking on it. Action : shows 4 (almost) randoms % of
+	 * public vote for each answer button.
+	 * 
+	 * @return btnJokerPublic, the Button object used for the public joker.
+	 */
 	public Button getBtnJokerPublic() {
 		if (btnJokerPublic == null) {
 			btnJokerPublic = new Button("Ask the public");
@@ -65,6 +80,13 @@ public class JokerVBox extends VBox {
 	}
 
 	// Joker Friend
+	/*
+	 * Return btnJokerFriend, if null instantiates it, adds CSS class "btnJoker" and
+	 * set it's action when clicking on it. Action : for 1 answer button, changes
+	 * it's style in order to designate the answer that the player's friend gave.
+	 * 
+	 * @return btnJokerFriend, the Button object used for the friend joker.
+	 */
 	public Button getBtnJokerFriend() {
 		if (btnJokerFriend == null) {
 			btnJokerFriend = new Button("Call a friend");
@@ -87,6 +109,13 @@ public class JokerVBox extends VBox {
 	}
 
 	// Joker 5050
+	/*
+	 * Return btnJoker5050, if null instantiates it, adds CSS class "btnJoker" and
+	 * set it's action when clicking on it. Action : disable half of the answer
+	 * buttons, the right answer button can't be disabled.
+	 * 
+	 * @return btnJoker5050, the Button object used for the 50/50 joker.
+	 */
 	public Button getBtnJoker5050() {
 		if (btnJoker5050 == null) {
 			btnJoker5050 = new Button("50/50");
@@ -113,10 +142,21 @@ public class JokerVBox extends VBox {
 		return btnJoker5050;
 	}
 
+	/*
+	 * Return if there's the need of canceling the jokers results.
+	 * 
+	 * @return cancelJokerResults, the boolean value.
+	 */
 	public boolean isCancelJokerResults() {
 		return cancelJokerResults;
 	}
 
+	/*
+	 * Change cancelJokerResults value, which determine if there's the need of
+	 * canceling the jokers results.
+	 * 
+	 * @param cancelJokerResults, the new boolean value.
+	 */
 	public void setCancelJokerResults(boolean cancelJokerResults) {
 		this.cancelJokerResults = cancelJokerResults;
 	}

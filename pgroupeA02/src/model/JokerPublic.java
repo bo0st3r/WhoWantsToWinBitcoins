@@ -1,12 +1,9 @@
 package model;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import view.PlayingGridPane;
 
 public class JokerPublic implements JokerStrategy {
 	// Rates are used to determine if the highest % of vote will be assigned to the
@@ -20,6 +17,7 @@ public class JokerPublic implements JokerStrategy {
 
 	/*
 	 * JokerPublic constructor. Initialize publicVotePercents as an empty ArrayList.
+	 * Set tot and accuracyRate values to 0.
 	 */
 	public JokerPublic() {
 		tot = 0;
@@ -27,6 +25,16 @@ public class JokerPublic implements JokerStrategy {
 		publicVotePercents = new ArrayList<>();
 	}
 
+	/*
+	 * JokerStrategy pattern method, generates 4 random numbers whose sum is 100 and
+	 * who will be used to display the JokerPublic result. A rate will be picked
+	 * depending on the actual round. The higher the round is, the lower the rate
+	 * will be. Then generates a random number between 0 and 1, if this number is
+	 * lower than the picked round then the biggest number will be allowed to the
+	 * right answer.
+	 * 
+	 * @see model.JokerStrategy#execute(model.Party)
+	 */
 	@Override
 	public void execute(Party party) {
 		int i;

@@ -13,18 +13,21 @@ public class ProjStackPane extends BorderPane {
 	private RulesGridPane rulesGridPane;
 
 	/*
-	 * ProjStackPane constructor, set homeGridPane visible at first.
+	 * Constructor, set homeGridPane visible at first, hide the others panes and set
+	 * stackPane as the center.
 	 */
 	public ProjStackPane() {
-		this.setCenter(getStackPane());
-		hideAllComponentsInStackPane();
-		// Set home visible first
-		this.getHomeGridPane().setVisible(true);
+		// Center the pane
+		setCenter(getStackPane());
 
+		hideAllComponentsInStackPane();
+
+		// Set home visible first
+		getHomeGridPane().setVisible(true);
 	}
 
 	/*
-	 * Hide all components in stackPane.
+	 * Hides each component in stackPane.
 	 */
 	public void hideAllComponentsInStackPane() {
 		for (Node node : getStackPane().getChildren()) {
@@ -36,25 +39,35 @@ public class ProjStackPane extends BorderPane {
 	 * Reset the playingGridPane in order to run a new party.
 	 */
 	public void resetPlayingGridPane() {
+		// Removes the playingGridPane from stackPane
+		stackPane.getChildren().remove(playingGridPane);
+
+		// Sets playingGridPane as null so getPlayingGridPane() instantiate a new one.
 		playingGridPane = null;
 		stackPane.getChildren().add(getPlayingGridPane());
+
+		System.out.println(stackPane.getChildren().size());
 	}
 
 	// Getters
 	/*
-	 * If null, instantiate stackPane and add panes Home, Playing and About to it.
+	 * If null, instantiates stackPane and adds panes Home, About and Rules to it's
+	 * childrens and then returns it.
+	 * 
+	 * @return stackPane, a StackPane object which contains the others main panes.
 	 */
 	public StackPane getStackPane() {
 		if (stackPane == null) {
 			stackPane = new StackPane();
-			stackPane.getChildren().addAll(getHomeGridPane(), getPlayingGridPane(), getAboutGridPane(),
-					getRulesGridPane());
+			stackPane.getChildren().addAll(getHomeGridPane(), getAboutGridPane(), getRulesGridPane());
 		}
 		return stackPane;
 	}
 
 	/*
-	 * If null, instantiate homeGridPane.
+	 * If null, instantiate homeGridPane and then returns it.
+	 * 
+	 * @return homeGridPane, a HomeGridPane object which is the home page.
 	 */
 	public HomeGridPane getHomeGridPane() {
 		if (homeGridPane == null) {
@@ -64,7 +77,9 @@ public class ProjStackPane extends BorderPane {
 	}
 
 	/*
-	 * If null, instantiate playingGridPane.
+	 * If null, instantiates playingGridPane, set it's CSS ID and then returns it.
+	 * 
+	 * @return playingGridPane, a PlayingGridPane object which is the playing page.
 	 */
 	public PlayingGridPane getPlayingGridPane() {
 		if (playingGridPane == null) {
@@ -75,7 +90,9 @@ public class ProjStackPane extends BorderPane {
 	}
 
 	/*
-	 * If null, instantiate aboutGridPane;
+	 * If null, instantiate aboutGridPane and then returns it.
+	 * 
+	 * @return aboutGridPane, an AboutGridPane object which is the "about" page.
 	 */
 	public AboutGridPane getAboutGridPane() {
 		if (aboutGridPane == null) {
@@ -84,6 +101,11 @@ public class ProjStackPane extends BorderPane {
 		return aboutGridPane;
 	}
 
+	/*
+	 * If null, instantiate rulesGridPane and then returns it.
+	 * 
+	 * @return rulesGridPane, an RulesGridPane object which is the rules page.
+	 */
 	public RulesGridPane getRulesGridPane() {
 		if (rulesGridPane == null) {
 			rulesGridPane = new RulesGridPane();

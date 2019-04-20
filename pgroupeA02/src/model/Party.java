@@ -7,16 +7,16 @@ import java.util.List;
 
 import enumerations.Round;
 import exceptions.DeckUnderFilledException;
+import exceptions.EmptyQuestionsListException;
 import exceptions.ExceedMaxStepsException;
 import exceptions.NotEnoughQuestionsException;
-import exceptions.QuestionsListIsEmptyException;
 import exceptions.TooMuchQuestionsException;
 
 public class Party {
 	public static final int NB_STEPS = 15;
 	public static final int NB_STEPS_BY_ROUND = 5;
 
-	private List<Question> choosenQuestions;
+	private List<Question> chosenQuestions;
 	private Round actualRound;
 	private int actualStep;
 
@@ -28,7 +28,7 @@ public class Party {
 	private List<Integer> joker5050Indexes;
 
 	/*
-	 * Constructor of Party class. The param "choosenQuestions" gets instantiated as
+	 * Constructor of Party class. The param "chosenQuestions" gets instantiated as
 	 * an empty ArrayList<Question>. Gets Party.NB_STEPS_BY_ROUND questions for each
 	 * Round and then sort is by Round order.
 	 * 
@@ -47,35 +47,35 @@ public class Party {
 	 * @throws NotEnoughQuestionsException occurs when a Round has more questions
 	 * than Party.NB_STEPS_BY_ROUND asks it to have.
 	 */
-	public Party(Deck deck) throws QuestionsListIsEmptyException, DeckUnderFilledException, NotEnoughQuestionsException,
+	public Party(Deck deck) throws EmptyQuestionsListException, DeckUnderFilledException, NotEnoughQuestionsException,
 			TooMuchQuestionsException {
 		if (deck.getQuestions() == null)
-			throw new QuestionsListIsEmptyException();
+			throw new EmptyQuestionsListException();
 		if (deck.getQuestions().size() < 15)
 			throw new DeckUnderFilledException(deck.getQuestions().size());
 
 		List<Question> questionsList = deck.getQuestions();
-		choosenQuestions = new ArrayList<Question>();
+		chosenQuestions = new ArrayList<Question>();
 		// Shuffle the list of questions to randomize the 15 questions set.
 		Collections.shuffle(questionsList);
 
-		// Adding questions to choosenQuestions
+		// Adding questions to chosenQuestions
 		for (Question q : questionsList) {
 			switch (q.getRound()) {
 
 			case FIRST_ROUND:
-				if (getNbQuestionsForRound(Round.FIRST_ROUND) < 5 && !choosenQuestions.contains(q))
-					choosenQuestions.add(q);
+				if (getNbQuestionsForRound(Round.FIRST_ROUND) < 5 && !chosenQuestions.contains(q))
+					chosenQuestions.add(q);
 				break;
 
 			case SECOND_ROUND:
-				if (getNbQuestionsForRound(Round.SECOND_ROUND) < 5 && !choosenQuestions.contains(q))
-					choosenQuestions.add(q);
+				if (getNbQuestionsForRound(Round.SECOND_ROUND) < 5 && !chosenQuestions.contains(q))
+					chosenQuestions.add(q);
 				break;
 
 			case LAST_ROUND:
-				if (getNbQuestionsForRound(Round.LAST_ROUND) < 5 && !choosenQuestions.contains(q))
-					choosenQuestions.add(q);
+				if (getNbQuestionsForRound(Round.LAST_ROUND) < 5 && !chosenQuestions.contains(q))
+					chosenQuestions.add(q);
 				break;
 			}
 
@@ -105,15 +105,17 @@ public class Party {
 	}
 
 	/*
-	 * Returns the nb of questions in choosenQuestions for the Round passed as an
+	 * Returns the nb of questions in chosenQuestions for the Round passed as an
 	 * argument.
 	 * 
 	 * @param round The Round that will be used.
+	 * 
+	 * @return the number of questions the the round.
 	 */
 	public int getNbQuestionsForRound(Round round) {
 		int nb = 0;
-		if (choosenQuestions != null) {
-			for (Question q : choosenQuestions) {
+		if (chosenQuestions != null) {
+			for (Question q : chosenQuestions) {
 				if (q.getRound() == round)
 					nb++;
 			}
@@ -125,8 +127,8 @@ public class Party {
 	 * Sorts the questions by Round enumeration declaration order.
 	 */
 	public void sortQuestionsByRounds() {
-		if (choosenQuestions != null) {
-			Collections.sort(choosenQuestions, new Comparator<Object>() {
+		if (chosenQuestions != null) {
+			Collections.sort(chosenQuestions, new Comparator<Object>() {
 
 				@Override
 				public int compare(Object o1, Object o2) {
@@ -144,16 +146,20 @@ public class Party {
 
 	/*
 	 * Returns if the Party has a next step of is ended.
+	 * 
+	 * @return if actualStep is lower than NB_STEPS.
 	 */
 	public boolean hasNextStep() {
 		return actualStep < NB_STEPS;
 	}
 
 	/*
-	 * Returns the Question for the next step and incremets actualStep by 1.
+	 * Returns the Question for the next step and increments actualStep by 1.
 	 * 
 	 * @throws ExceedMaxStepsException occurs if the actual step is higher than the
 	 * Party.NB_STEPS
+	 * 
+	 * @return the Question for the next step.
 	 */
 	public Question getQuestionNextStep() throws ExceedMaxStepsException {
 		if (!hasNextStep())
@@ -161,14 +167,15 @@ public class Party {
 
 		actualStep++;
 		if (isNeedingNextRound())
-			getNextRound();
-		return (choosenQuestions.get(actualStep - 1));
+			goToNextRound();
+
+		return (chosenQuestions.get(actualStep - 1));
 	}
 
 	/*
-	 * Returns the next Round
+	 * Step-up the party Round.
 	 */
-	public void getNextRound() {
+	public void goToNextRound() {
 		Round[] rounds = Round.values();
 		for (int i = 0; i < rounds.length - 1; i++) {
 			if (actualRound == rounds[i]) {
@@ -178,12 +185,19 @@ public class Party {
 		}
 	}
 
+	/*
+	 * Return the actual Round.
+	 * 
+	 * @return Actual Round.
+	 */
 	public Round getActualRound() {
 		return actualRound;
 	}
 
 	/*
-	 * Return if the party need to move to the next step.
+	 * Return if the current round is over.
+	 * 
+	 * @return if the round is over.
 	 */
 	public boolean isNeedingNextRound() {
 		return ((actualStep % Party.NB_STEPS_BY_ROUND) - 1 == 0 && actualStep > 1);
@@ -191,17 +205,24 @@ public class Party {
 
 	/*
 	 * Returns the actual step.
+	 * 
+	 * @return actual step.
 	 */
 	public int getActualStep() {
 		return actualStep;
 	}
 
+	/*
+	 * Return a description of the chosen questions.
+	 * 
+	 * @return the description.
+	 */
 	@Override
 	public String toString() {
-		String tmp = "\tChoosen questions for party : \n";
+		String tmp = "\tchosen questions for party : \n";
 
-		if (choosenQuestions != null) {
-			for (Question q : choosenQuestions) {
+		if (chosenQuestions != null) {
+			for (Question q : chosenQuestions) {
 				tmp += q.toString() + "\n";
 			}
 		}
@@ -209,71 +230,161 @@ public class Party {
 		return tmp;
 	}
 
+	/*
+	 * Return the right answer index.
+	 * 
+	 * @return The int that represents the right answer index.
+	 */
 	public int getRightAnswerIndex() {
 		return rightAnswerIndex;
 	}
 
+	/*
+	 * Set a new value for rightAnswerIndex. The new value must be higher or equals
+	 * to 0 and lower than Question.NB_ANSWERS.
+	 * 
+	 * @param rightAnswerIndex, the new right answer index.
+	 * 
+	 * @throws IndexOutOfBoundsException if the index is out of bounds. Describe the
+	 * bounds with a message.
+	 */
 	public void setRightAnswerIndex(int rightAnswerIndex) {
 		if (rightAnswerIndex >= 0 && rightAnswerIndex < Question.NB_ANSWERS)
 			this.rightAnswerIndex = rightAnswerIndex;
 		else
-			;
-		// EXCEPTION
+			throw new IndexOutOfBoundsException("Index should be equals or superior to 0 and lower than "
+					+ Question.NB_ANSWERS + ". However, it's value is : " + rightAnswerIndex);
 	}
 
+	/*
+	 * Return the right answer statement.
+	 * 
+	 * @param The String object that represents the right answer statement.
+	 */
 	public String getRightAnswer() {
 		return rightAnswer;
 	}
 
+	/*
+	 * Set a new value for rightAnswer, the value must no be empty.
+	 * 
+	 * @param rightAnswer the new value for rightAnswer.
+	 * 
+	 * @throws IllegalArgumentException if the answer is null or empty. Describe the
+	 * problem that occured.
+	 */
 	public void setRightAnswer(String rightAnswer) {
 		if (rightAnswer != null && !rightAnswer.isEmpty())
 			this.rightAnswer = rightAnswer;
-		else
-			;
-		// EXCEPTION
+		else if (rightAnswer == null)
+			throw new IllegalArgumentException("The param rightAnswer is null.");
+		else if (rightAnswer.isEmpty())
+			throw new IllegalArgumentException("The param rightAnswer is empty.");
 	}
 
+	/*
+	 * Return the index for the friend joker.
+	 * 
+	 * @return An int with the value of the joker friend index.
+	 */
 	public int getJokerFriendIndex() {
 		return jokerFriendIndex;
 	}
 
-	public void setJokerFriendIndex(int jokerFriendIndex) {
+	/*
+	 * Set a new value for jokerFriendIndex. The new value must be higher or equals
+	 * to 0 and lower than Question.NB_ANSWERS.
+	 * 
+	 * @param jokerFriendIndex, the new joker friend index.
+	 * 
+	 * @throws IndexOutOfBoundsException if the index is out of bounds. Describe the
+	 * bounds with a message.
+	 */
+	public void setJokerFriendIndex(int jokerFriendIndex) throws IndexOutOfBoundsException {
 		if (jokerFriendIndex >= 0 && jokerFriendIndex < Question.NB_ANSWERS)
 			this.jokerFriendIndex = jokerFriendIndex;
 		else
-			;
-		// EXCEPTION
+			throw new IndexOutOfBoundsException("Index should be equals or superior to 0 and lower than "
+					+ Question.NB_ANSWERS + ". However, it's value is : " + jokerFriendIndex);
 	}
 
+	/*
+	 * Return the list of percents allowed by the public for the public joker.
+	 * 
+	 * @return A List of double var that represents the percents of votes allowed by
+	 * the public.
+	 */
 	public List<Double> getJokerPublicPercents() {
 		return jokerPublicPercents;
 	}
 
-	public void setJokerPublicPercents(List<Double> jokerPublicPercents) {
-		if (jokerPublicPercents.size() == Question.NB_ANSWERS) {
+	/*
+	 * Replace the values of the jokerPublicPercents List.
+	 * 
+	 * @param jokerPublicPercents, the new List of doubles.
+	 * 
+	 * @throws IndexOutOfBoundsException if a percents value isn't between 0 and 100
+	 * included.
+	 * 
+	 * @throws IllegalArgumentException if the size of the param isn't equals to
+	 * Question.NB_ANSWERS or if the param is null.
+	 */
+	public void setJokerPublicPercents(List<Double> jokerPublicPercents)
+			throws IndexOutOfBoundsException, IllegalArgumentException {
+		if (jokerPublicPercents.size() == Question.NB_ANSWERS && jokerPublicPercents != null) {
+			// Right size
 			for (Double percents : jokerPublicPercents) {
 				if (percents < 0 || percents > 100)
-					// EXCEPTION
-					return;
+					throw new IndexOutOfBoundsException(
+							"Percents should be between 0% and 100%. However, it's value is : " + percents);
 			}
+		} else if (jokerPublicPercents == null) {
+			// Null parameter
+			throw new IllegalArgumentException("The param jokerPublicPercents is null.");
 		} else {
-			System.out.println(jokerPublicPercents.size());
-			// EXCEPTION
+			// Size not right
+			throw new IllegalArgumentException("The size of the jokerPublicPercents List should be equals to "
+					+ Question.NB_ANSWERS + ", however it's " + jokerPublicPercents.size());
 		}
+
 		this.jokerPublicPercents = jokerPublicPercents;
 	}
 
+	/*
+	 * Return the List of indexes for the 5050 joker.
+	 * 
+	 * @return the List of indexes.
+	 */
 	public List<Integer> getJoker5050Indexes() {
 		return joker5050Indexes;
 	}
 
-	public void setJoker5050Indexes(List<Integer> joker5050Indexes) {
-		if (joker5050Indexes != null) {
+	/*
+	 * Replace the values of the joker5050Indexes List.
+	 * 
+	 * @param joker5050Indexes, the new List of ints.
+	 * 
+	 * @throws IndexOutOfBoundsException if an index isn't between 0 and
+	 * Question.NB_ANSWERS -1
+	 * 
+	 * @throws IllegalArgumentException if the size of the param isn't equals to
+	 * Question.NB_ANSWERS/2 or if the param is null.
+	 */
+	public void setJoker5050Indexes(List<Integer> joker5050Indexes)
+			throws IndexOutOfBoundsException, IllegalArgumentException {
+		if (joker5050Indexes != null && joker5050Indexes.size() == Question.NB_ANSWERS / 2) {
 			for (Integer index : joker5050Indexes) {
 				if (index < 0 || index > Question.NB_ANSWERS - 1)
-					// EXCEPTION
-					return;
+					throw new IndexOutOfBoundsException("Joker5050 index should be between 0 and "
+							+ (Question.NB_ANSWERS - 1) + " included. However, it's value is : " + index);
 			}
+		} else if (joker5050Indexes == null) {
+			// Null parameter
+			throw new IllegalArgumentException("The param joker5050Indexes is null.");
+		} else {
+			// Size not right
+			throw new IllegalArgumentException("The size of the joker5050Indexes List should be equals to "
+					+ Question.NB_ANSWERS / 2 + ", however it's " + joker5050Indexes.size());
 		}
 		this.joker5050Indexes = joker5050Indexes;
 	}

@@ -13,8 +13,11 @@ public class AboutGridPane extends GridPane {
 	private Button btnPrevious;
 	private Label lblName;
 
+	/*
+	 * Constructor. Add rows and cols constraints plus the pane content.
+	 */
 	public AboutGridPane() {
-		this.setGridLinesVisible(true);
+//		this.setGridLinesVisible(true);
 
 		// Set columns
 		ColumnConstraints c = new ColumnConstraints();
@@ -34,6 +37,12 @@ public class AboutGridPane extends GridPane {
 
 	}
 
+	/*
+	 * If null instantiate btnPrevious, then return it. Define it's action when
+	 * using it.
+	 * 
+	 * @return The previous Button
+	 */
 	public Button getBtnPrevious() {
 		if (btnPrevious == null) {
 			btnPrevious = new Button("Previous");
@@ -51,6 +60,12 @@ public class AboutGridPane extends GridPane {
 		return btnPrevious;
 	}
 
+	/*
+	 * If null instantiate lblName, then return it. Define it's action when using
+	 * it.
+	 * 
+	 * @return The name Label
+	 */
 	public Label getLblname() {
 		if (lblName == null) {
 			lblName = new Label("----De Bels Lieven , Decorte Bastien, Draux Elsa");

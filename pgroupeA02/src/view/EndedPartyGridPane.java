@@ -6,39 +6,44 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public class EndedPartyGridPane  extends GridPane{
-	
+public class EndedPartyGridPane extends GridPane {
+
 	private Label lblGain;
 	private ImageView imgEndParty;
-	
+
+	/*
+	 * Constructor, set cols and rows constraints plus add the pane contents.
+	 */
 	public EndedPartyGridPane() {
 		// Set columns
 		ColumnConstraints c = new ColumnConstraints();
 		c.setPercentWidth(20);
-		this.getColumnConstraints().addAll(c, c, c, c, c, c);
+		getColumnConstraints().addAll(c, c, c, c, c, c);
 
 		// Set rows
 		RowConstraints r = new RowConstraints();
 		r.setPercentHeight(20);
-		this.getRowConstraints().addAll(r, r, r, r, r, r);
-		
-		//ID
-		getLblGain().setId("lblGain");
-		
-		this.add(getImgEndParty(),0,0);
-		
-		
+		getRowConstraints().addAll(r, r, r, r, r, r);
+
+		add(getImgEndParty(), 0, 0);
 	}
 
-	public Label getLblGain() {
-		if(lblGain == null) {
+	/*
+	 * Returns lblGain and if null instantiates it plus defines it's ID.
+	 */
+	public Label lblGain() {
+		if (lblGain == null) {
 			lblGain = new Label("Votre gain est de : ");
+			lblGain.setId("lblGain");
 		}
 		return lblGain;
 	}
 
+	/*
+	 * Returns imgEndParty and if null instantiates it.
+	 */
 	public ImageView getImgEndParty() {
-		if(imgEndParty == null) {
+		if (imgEndParty == null) {
 			imgEndParty = new ImageView("victory.png");
 		}
 		return imgEndParty;

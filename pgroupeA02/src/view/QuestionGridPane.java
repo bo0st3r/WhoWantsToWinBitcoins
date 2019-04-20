@@ -14,9 +14,12 @@ public class QuestionGridPane extends GridPane {
 	private Button btnAnswer[];
 	private int answerIndex;
 
+	/*
+	 * Constructor. Sets rows and cols constraints and define the pane contents.
+	 */
 	public QuestionGridPane() {
 //		setGridLinesVisible(true);
-		
+
 		// Row constraints
 		double[] sizesRow = { 44.1, 3.2, 25.3, 2.1, 25.3 };
 		for (int i = 0; i <= sizesRow.length - 1; i++) {
@@ -43,6 +46,13 @@ public class QuestionGridPane extends GridPane {
 		add(getBtnAnswer(3), 2, 4);
 	}
 
+	/*
+	 * If null, instantiates lblStatement, sets it's prefered size and CSS ID, then
+	 * returns it.
+	 * 
+	 * @return lblStatement, a Label object which contains the actual question
+	 * statement.
+	 */
 	public Label getLblStatement() {
 		if (lblStatement == null) {
 			lblStatement = new Label("");
@@ -53,6 +63,17 @@ public class QuestionGridPane extends GridPane {
 		return lblStatement;
 	}
 
+	/*
+	 * If null instantiates btnAnswer list, for the specified index sets it's
+	 * prefered size, CSS ID and action when clicking on it and then returns it.
+	 * Clicking on the button will set it's index as the new value of answerIndex,
+	 * show the ValidationGridPane and disable cash in + every answers buttons.
+	 * 
+	 * @param index, the list index of the selected button answer button.
+	 * 
+	 * @return btnAnswer, a Button object which contains the answer for the
+	 * specified index.
+	 */
 	public Button getBtnAnswer(int index) {
 		if (btnAnswer == null)
 			btnAnswer = new Button[Question.NB_ANSWERS];
@@ -61,24 +82,47 @@ public class QuestionGridPane extends GridPane {
 			btnAnswer[index] = new Button("");
 			btnAnswer[index].setPrefWidth(Integer.MAX_VALUE);
 			btnAnswer[index].setPrefHeight(Integer.MAX_VALUE);
-			btnAnswer[index].setId("");
+			btnAnswer[index].setId("answerBtn");
 
 			btnAnswer[index].setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-
+					// Set the answer index
 					answerIndex = index;
-					((ProjStackPane) getParent().getParent().getParent()).getPlayingGridPane().setVisibleValidationGP(true);
+
+					PlayingGridPane pgp = ((ProjStackPane) getParent().getParent().getParent()).getPlayingGridPane();
+
+					// Remove Button class from the btn
+					pgp.getQuestionGP().getBtnAnswer(answerIndex).getStyleClass().remove("button");
+					// Set validation grid pane visible
+					pgp.setVisibleValidationGP(true);
+					// Disable btn "Cash in"
+					pgp.getBtnCashIn().setDisable(true);
+					// Disable answers buttons
+					pgp.setDisableBtnAnswer(true);
 				}
 			});
 		}
 		return btnAnswer[index];
 	}
 
+	/*
+	 * Set disabled or not the answer btn specified by the index using the boolean
+	 * value.
+	 * 
+	 * @param value, the new boolean value (true for disabled, false for enabled).
+	 * 
+	 * @param index, the index of the specified answer button.
+	 */
 	public void setDisableBtnAnswer(boolean value, int index) {
 		btnAnswer[index].setDisable(value);
 	}
 
+	/*
+	 * Set disabled or not every answer button using the boolean value.
+	 * 
+	 * @param value, the new boolean value (true for disabled, false for enabled).
+	 */
 	public void setDisableBtnAnswer(boolean value) {
 		for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
 			btnAnswer[i].setDisable(value);
@@ -87,6 +131,8 @@ public class QuestionGridPane extends GridPane {
 
 	/*
 	 * Return the actual answer's index.
+	 * 
+	 * @return answerIndex, the index of the last answer button clicked by the user.
 	 */
 	public int getAnswerIndex() {
 		return answerIndex;

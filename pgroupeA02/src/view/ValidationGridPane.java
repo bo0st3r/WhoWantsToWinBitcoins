@@ -11,11 +11,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public class ValidationGridPane extends GridPane {
-
 	private Label lblValidation;
 	private Button btnYes;
 	private Button btnNo;
 
+	/*
+	 * Constructor. Sets rows and cols constraints, spacings and the pane content.
+	 */
 	public ValidationGridPane() {
 		this.setId("validationPane");
 		// Set columns
@@ -23,84 +25,117 @@ public class ValidationGridPane extends GridPane {
 		c1.setPercentWidth(13);
 		ColumnConstraints c2 = new ColumnConstraints();
 		c2.setPercentWidth(30);
-		this.getColumnConstraints().addAll(c1, c2, c1, c2, c1);
+		getColumnConstraints().addAll(c1, c2, c1, c2, c1);
 
 		// Set rows
 		RowConstraints r = new RowConstraints();
 		r.setPercentHeight(50);
-		this.getRowConstraints().addAll(r, r);
+		getRowConstraints().addAll(r, r);
 
 		// Spacings
-		this.setPadding(new Insets(10));
-		this.setHgap(5);
-		this.setVgap(5);
+		setPadding(new Insets(10));
+		setHgap(5);
+		setVgap(5);
 
-		// this.setAlignment(Pos.BASELINE_CENTER);
-		// this.setGridLinesVisible(true);
-
-		// IDs
-		getLblValidation().setId("btnValidationText");
-		getBtnYes().setId("btnValidation");
-		getBtnNo().setId("btnValidation");
-
-		// Additions
-		this.add(getLblValidation(), 0, 0, 5, 1);
-		this.add(getBtnYes(), 1, 1, 1, 1);
-		this.add(getBtnNo(), 3, 1, 1, 1);
-
-		// Sizes
-		getLblValidation().setPrefHeight(Integer.MAX_VALUE);
-		getLblValidation().setPrefWidth(Integer.MAX_VALUE);
-
-		getBtnYes().setPrefHeight(Integer.MAX_VALUE);
-		getBtnYes().setPrefWidth(Integer.MAX_VALUE);
-
-		getBtnNo().setPrefHeight(Integer.MAX_VALUE);
-		getBtnNo().setPrefWidth(Integer.MAX_VALUE);
+		// Content
+		add(getLblValidation(), 0, 0, 5, 1);
+		add(getBtnYes(), 1, 1, 1, 1);
+		add(getBtnNo(), 3, 1, 1, 1);
 	}
 
+	/*
+	 * If null instantiates lblValidation, sets it's ID and size, then returns it.
+	 * 
+	 * @return lblValidation, a Label object containing the validation question.
+	 */
 	public Label getLblValidation() {
 		if (lblValidation == null) {
 			lblValidation = new Label("No doubt?");
+			lblValidation.setId("btnValidationText");
+			lblValidation.setPrefHeight(Integer.MAX_VALUE);
+			lblValidation.setPrefWidth(Integer.MAX_VALUE);
 		}
+
 		return lblValidation;
 	}
 
+	/*
+	 * If null instantiates btnYes, sets it's ID, size and action when clicking on
+	 * it, then returns it. It's action is to ask the PlayingGridPane to verify the
+	 * answer picked by the user, to set invisible the validationGP, to enable the
+	 * Cash-In button and the answers buttons.
+	 * 
+	 * @return btnYes, a Button object for the "Yes" choice.
+	 */
 	public Button getBtnYes() {
 		if (btnYes == null) {
 			btnYes = new Button("Sure");
+			btnYes.setPrefHeight(Integer.MAX_VALUE);
+			btnYes.setPrefWidth(Integer.MAX_VALUE);
+			btnYes.setId("btnValidation");
+
 			btnYes.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent event) {
+					PlayingGridPane pgp = (PlayingGridPane) getParent();
+
+					// Verify the answer
 					try {
-						((PlayingGridPane) getParent()).verifyAnswer();
+						pgp.verifyAnswer();
 					} catch (ExceedMaxStepsException e) {
 						e.printStackTrace();
 					}
-					int answer = ((PlayingGridPane) getParent()).getQuestionGP().getAnswerIndex();
-					((PlayingGridPane) getParent()).getQuestionGP().getBtnAnswer(answer).setId("answers");
 
-					((PlayingGridPane) getParent()).setVisibleValidationGP(false);
+					int answerIndex = pgp.getQuestionGP().getAnswerIndex();
+					// Re-add the "button" class to the button
+					pgp.getQuestionGP().getBtnAnswer(answerIndex).getStyleClass().add("button");
+					// Set invisible the validation pane
+					pgp.setVisibleValidationGP(false);
+					// Enable btn "Cash in"
+					pgp.getBtnCashIn().setDisable(false);
+					// Enable answers buttons
+					pgp.setDisableBtnAnswer(false);
 				}
 			});
 		}
+
 		return btnYes;
 	}
 
+	/*
+	 * If null instantiates btnNo, sets it's ID, size and action when clicking on
+	 * it, then returns it. It's action is to to set invisible the validationGP, to
+	 * enable the Cash-In button and the answers buttons.
+	 * 
+	 * @return btnNo, a Button object for the "No" choice.
+	 */
 	public Button getBtnNo() {
 		if (btnNo == null) {
 			btnNo = new Button("Nope");
-			btnNo.setOnAction(new EventHandler<ActionEvent>() {
+			btnNo.setPrefHeight(Integer.MAX_VALUE);
+			btnNo.setPrefWidth(Integer.MAX_VALUE);
+			btnNo.setId("btnValidation");
 
+			btnNo.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					((PlayingGridPane) getParent()).setVisibleValidationGP(false);
-					int answer = ((PlayingGridPane) getParent()).getQuestionGP().getAnswerIndex();
-					((PlayingGridPane) getParent()).getQuestionGP().getBtnAnswer(answer).setId("answers");
+					PlayingGridPane pgp = (PlayingGridPane) getParent();
+
+					int answerIndex = pgp.getQuestionGP().getAnswerIndex();
+					pgp.getQuestionGP().getBtnAnswer(answerIndex).setId("answerBtn");
+					pgp.getQuestionGP().getBtnAnswer(answerIndex).getStyleClass().add("button");
+
+					// Set validation grid pane invisible
+					pgp.setVisibleValidationGP(false);
+					// Enable btn "Cash in"
+					pgp.getBtnCashIn().setDisable(false);
+					// Enable answers buttons
+					pgp.setDisableBtnAnswer(false);
 				}
 			});
 		}
+
 		return btnNo;
 	}
 }

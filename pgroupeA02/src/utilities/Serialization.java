@@ -14,8 +14,8 @@ public class Serialization {
 	public static String datas = "data/";
 
 	/*
-	 * Writes a deck into a JSON file in JSON format. The JSON file name's depends
-	 * of the "dest" param passed while calling the method.
+	 * Writes a deck into a JSON file using JSON format. The JSON file name's
+	 * depends of the "dest" param passed while calling the method.
 	 * 
 	 * @param Deck deck It's a set of questions
 	 * 
@@ -33,6 +33,14 @@ public class Serialization {
 		}
 	}
 
+	/*
+	 * Reads a deck from a JSON file using JSON format. The JSON file name's depends
+	 * of the "dest" param passed while calling the method.
+	 * 
+	 * @param String dest It's the name of the JSON file.
+	 * 
+	 * @return The Deck that was recovered from the JSON file.
+	 */
 	public static Deck jsonToDeck(String dest) {
 		Deck result = null;
 		try (BufferedReader br = new BufferedReader(new FileReader(datas + dest + ".json"))) {

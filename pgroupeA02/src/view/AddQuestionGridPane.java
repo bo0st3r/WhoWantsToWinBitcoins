@@ -33,12 +33,20 @@ public class AddQuestionGridPane extends GridPane {
 
 	private ToggleGroup tglTrue;
 
+	/*
+	 * Constructor. Set rows and cols constraints, alignment, spacings and the pane
+	 * contents.
+	 */
 	public AddQuestionGridPane() {
+//		this.setGridLinesVisible(true);
+
+		// Alignment
 		this.setAlignment(Pos.BASELINE_CENTER);
+
+		// Spacings
 		this.setPadding(new Insets(10));
 		this.setHgap(5);
 		this.setVgap(5);
-//		this.setGridLinesVisible(true);
 
 		// Defines 6 columns of 17% for the grid
 		ColumnConstraints col = new ColumnConstraints();
@@ -51,7 +59,6 @@ public class AddQuestionGridPane extends GridPane {
 
 		// Round
 		this.add(getCboBoxRound(), 4, 1, 2, 1);
-		GridPane.setHalignment(getCboBoxRound(), HPos.RIGHT);
 
 		// Statement
 		this.add(getLblStatement(), 0, 2);
@@ -59,38 +66,45 @@ public class AddQuestionGridPane extends GridPane {
 
 		// Choices
 		this.add(getLblChoices(), 1, 5, 4, 1);
-		GridPane.setHalignment(getLblChoices(), HPos.CENTER);
 		this.add(getLblRight(), 5, 5);
-		GridPane.setHalignment(getLblRight(), HPos.CENTER);
 
 		// Adding the TextFields for answers and the RadioButtons to select the right
 		// answer
 		for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
 			this.add(getTxtAnswer(i), 1, i + 6, 4, 1);
 			this.add(getRdoAnswer(i), 5, i + 6);
-			GridPane.setHalignment(getRdoAnswer(i), HPos.CENTER);
 		}
 
 		this.add(getBtnOk(), 2, 12, 2, 1);
-		GridPane.setHalignment(getBtnOk(), HPos.CENTER);
-		getBtnOk().setPrefWidth(Integer.MAX_VALUE);
 	}
 
+	/*
+	 * If null, instantiates cboBoxRound and returns it. Set it's alignment, add
+	 * it's items and set the first item as selected.
+	 * 
+	 * @return the cboBoxRound object.
+	 */
 	public ComboBox<String> getCboBoxRound() {
 		if (cboBoxRound == null) {
 			cboBoxRound = new ComboBox<String>();
+			GridPane.setHalignment(cboBoxRound, HPos.RIGHT);
 
 			for (Round r : Round.values()) {
 				cboBoxRound.getItems().add(r.getRoundStatement());
 			}
 
-//			cboBoxRound.getItems().setAll(Round.values());
 			cboBoxRound.setValue(Round.values()[0].getRoundStatement());
 		}
 
 		return cboBoxRound;
 	}
 
+	/*
+	 * If null, instantiates txtAnswer for the index passed as an param and returns
+	 * it.
+	 * 
+	 * @return the txtAnswer object.
+	 */
 	public TextField getTxtAnswer(int index) {
 		if (txtAnswer == null)
 			txtAnswer = new TextField[Question.NB_ANSWERS];
@@ -103,6 +117,11 @@ public class AddQuestionGridPane extends GridPane {
 		return txtAnswer[index];
 	}
 
+	/*
+	 * If null, instantiates txtAuthor and returns it.
+	 * 
+	 * @return the txtAuthor object.
+	 */
 	public TextField getTxtAuthor() {
 		if (txtAuthor == null) {
 			txtAuthor = new TextField();
@@ -112,6 +131,11 @@ public class AddQuestionGridPane extends GridPane {
 		return txtAuthor;
 	}
 
+	/*
+	 * If null, instantiates txtStatement and returns it.
+	 * 
+	 * @return the txtStatement object.
+	 */
 	public TextField getTxtStatement() {
 		if (txtStatement == null) {
 			txtStatement = new TextField();
@@ -121,6 +145,11 @@ public class AddQuestionGridPane extends GridPane {
 		return txtStatement;
 	}
 
+	/*
+	 * If null, instantiates lblStatement and returns it.
+	 * 
+	 * @return the lblStatement object.
+	 */
 	public Label getLblStatement() {
 		if (lblStatement == null) {
 			lblStatement = new Label("Statement :");
@@ -129,6 +158,11 @@ public class AddQuestionGridPane extends GridPane {
 		return lblStatement;
 	}
 
+	/*
+	 * If null, instantiates lblAuthor and returns it.
+	 * 
+	 * @return the lblAuthor object.
+	 */
 	public Label getLblAuthor() {
 		if (lblAuthor == null) {
 			lblAuthor = new Label("Author :");
@@ -137,22 +171,39 @@ public class AddQuestionGridPane extends GridPane {
 		return lblAuthor;
 	}
 
+	/*
+	 * If null, instantiates lblChoices and returns it.
+	 * 
+	 * @return the lblChoices object.
+	 */
 	public Label getLblChoices() {
 		if (lblChoices == null) {
 			lblChoices = new Label("Choices :");
+			GridPane.setHalignment(lblChoices, HPos.CENTER);
 		}
 
 		return lblChoices;
 	}
 
+	/*
+	 * If null, instantiates lblRight and returns it.
+	 * 
+	 * @return the lblRight object.
+	 */
 	public Label getLblRight() {
 		if (lblRight == null) {
 			lblRight = new Label("Right one");
+			GridPane.setHalignment(lblRight, HPos.CENTER);
 		}
 
 		return lblRight;
 	}
 
+	/*
+	 * If null, instantiates tglTrue and returns it.
+	 * 
+	 * @return the tglTrue object.
+	 */
 	public ToggleGroup getTglTrue() {
 		if (tglTrue == null) {
 			tglTrue = new ToggleGroup();
@@ -161,12 +212,23 @@ public class AddQuestionGridPane extends GridPane {
 		return tglTrue;
 	}
 
+	/*
+	 * If null, instantiates rdoAnswer with Question.NB_ANSWERS for it's size and
+	 * returns the rdoAnswer corresponding to the index passed as a param. Set the
+	 * first RadioButton as selected.
+	 * 
+	 * @param int, the index used to select the RadioButton in the array.
+	 * 
+	 * @return the rdoAnswer object ccorresponding to the index passed as a param.
+	 */
 	public RadioButton getRdoAnswer(int index) {
 		if (rdoAnswer == null)
 			rdoAnswer = new RadioButton[Question.NB_ANSWERS];
 
 		if (rdoAnswer[index] == null) {
 			rdoAnswer[index] = new RadioButton();
+			GridPane.setHalignment(rdoAnswer[index], HPos.CENTER);
+
 			// Groups the 4 radio buttons that states which answer is right together
 			rdoAnswer[index].setToggleGroup(getTglTrue());
 
@@ -180,9 +242,17 @@ public class AddQuestionGridPane extends GridPane {
 		return rdoAnswer[index];
 	}
 
+	/*
+	 * If null, instantiates btnOk and returns it.
+	 * 
+	 * @return the btnOk object.
+	 */
 	public Button getBtnOk() {
-		if (btnOk == null)
+		if (btnOk == null) {
 			btnOk = new Button("Add");
+			GridPane.setHalignment(btnOk, HPos.CENTER);
+			btnOk.setPrefWidth(Integer.MAX_VALUE);
+		}
 
 		return btnOk;
 	}

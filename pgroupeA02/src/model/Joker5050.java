@@ -6,6 +6,16 @@ import java.util.Random;
 
 public class Joker5050 implements JokerStrategy {
 
+	/*
+	 * JokerStrategy pattern method, generates 2 random indexes which are not the right answer index and set the
+	 * joker5050Indexes var with them.
+	 * 
+	 * (non-Javadoc)
+	 * 
+	 * @see model.JokerStrategy#execute(model.Party)
+	 * 
+	 * @param party, the ongoing Party.
+	 */
 	@Override
 	public void execute(Party party) {
 		Random rand = new Random();

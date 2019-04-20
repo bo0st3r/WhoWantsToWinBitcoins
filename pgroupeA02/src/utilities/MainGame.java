@@ -30,7 +30,6 @@ public class MainGame extends Application {
 
 			// CSS
 			scene.getStylesheets().add(getClass().getResource("/style/style.css").toExternalForm());
-			
 			primaryStage.setTitle("Qui veut gagner des Bitcoins");
 //			primaryStage.setMaximized(true);
 			primaryStage.setMinHeight(750);

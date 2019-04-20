@@ -15,7 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import enumerations.Round;
-import exceptions.NotAllAnswersException;
+import exceptions.NotEnoughAnswersException;
 import exceptions.QuestionAlreadyPresentException;
 import model.Deck;
 import model.Question;
@@ -67,7 +67,7 @@ public class TestDeck {
 	}
 
 	@Test
-	public void testAddQuestion() throws QuestionAlreadyPresentException, NotAllAnswersException {
+	public void testAddQuestion() throws QuestionAlreadyPresentException, NotEnoughAnswersException {
 		deck.addQuestion(q1);
 		assertTrue("Question has not been added", questions.size() == 1);
 		assertNotNull("Question has not been added", questions.get(0));
@@ -79,13 +79,13 @@ public class TestDeck {
 
 	@Test(expected = QuestionAlreadyPresentException.class)
 	public void testAddQuestionQuestionAlreadyPresentException()
-			throws QuestionAlreadyPresentException, NotAllAnswersException {
+			throws QuestionAlreadyPresentException, NotEnoughAnswersException {
 		deck.addQuestion(q1);
 		deck.addQuestion(q1);
 	}
 
-	@Test(expected = NotAllAnswersException.class)
-	public void testAddQuestionNotAllAnswersException() throws QuestionAlreadyPresentException, NotAllAnswersException {
+	@Test(expected = NotEnoughAnswersException.class)
+	public void testAddQuestionNotAllAnswersException() throws QuestionAlreadyPresentException, NotEnoughAnswersException {
 		deck.addQuestion(q3);
 	}
 
@@ -106,7 +106,7 @@ public class TestDeck {
 	}
 
 	@Test
-	public void testEqualsObject() throws QuestionAlreadyPresentException, NotAllAnswersException {
+	public void testEqualsObject() throws QuestionAlreadyPresentException, NotEnoughAnswersException {
 		Deck deck2 = new Deck();
 		questions.add(q1);
 		deck2.addQuestion(q1);

@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import exceptions.NotAllAnswersException;
+import exceptions.NotEnoughAnswersException;
 import exceptions.QuestionAlreadyPresentException;
 
 public class Deck {
@@ -24,12 +24,12 @@ public class Deck {
 	 * @throws NotAllAnswersException Occurs if the question has less than 4
 	 * possible answers.
 	 */
-	public boolean addQuestion(Question question) throws QuestionAlreadyPresentException, NotAllAnswersException {
+	public boolean addQuestion(Question question) throws QuestionAlreadyPresentException, NotEnoughAnswersException {
 		if (questions.contains(question))
 			throw new QuestionAlreadyPresentException(question.getStatement());
 
 		if (question.getNbAnswers() < 4)
-			throw new NotAllAnswersException(question.getStatement());
+			throw new NotEnoughAnswersException(question.getStatement());
 
 		return questions.add(question.clone());
 	}

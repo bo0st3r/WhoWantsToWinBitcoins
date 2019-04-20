@@ -14,74 +14,91 @@ public class RulesGridPane extends GridPane {
 
 	private Label lblTitle;
 	private Label lblText;
-	private Button btnPrevious;
+	private Button btnHome;
 
+	/*
+	 * Constructor. Set the spacings, cols and rows constraints and define the pane
+	 * content.
+	 */
 	public RulesGridPane() {
 		// this.setGridLinesVisible(true);
 
-		this.setPadding(new Insets(10));
-		this.setHgap(8);
-		this.setVgap(8);
+		// Spacings
+		setPadding(new Insets(10));
+		setHgap(8);
+		setVgap(8);
 
-		// add columns
+		// Columns constraints
 		ColumnConstraints c = new ColumnConstraints();
 		c.setPercentWidth(10);
-		this.getColumnConstraints().addAll(c, c, c, c, c, c, c, c, c, c);
+		getColumnConstraints().addAll(c, c, c, c, c, c, c, c, c, c);
 
-		// add rows
+		// Rows constraints
 		RowConstraints r = new RowConstraints();
 		r.setPercentHeight(10);
-		this.getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r);
+		getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r);
 
-		this.setPadding(new Insets(10));
-		this.setHgap(8);
-		this.setVgap(8);
+		// Title
+		add(getLblTitle(), 2, 1, 6, 2);
 
-		// title
-		this.add(getLblTitle(), 2, 1, 6, 2);
-		GridPane.setHalignment(getLblTitle(), HPos.CENTER);
-		getLblTitle().setId("titleHome");
-
-		// text
-		this.add(getLblText(), 2, 2, 6, 6);
+		// Text
+		add(getLblText(), 2, 2, 6, 6);
 
 		// Previous button
-		this.add(getBtnPrevious(), 4, 8, 2, 2);
+		add(getBtnHome(), 4, 8, 2, 2);
 	}
 
+	/*
+	 * If null instantiates lblTitle, sets it's horizontal alignment and ID, then
+	 * returns it.
+	 * 
+	 * @return lblTitle, a Label object which contains the the title of the pane.
+	 */
 	public Label getLblTitle() {
 		if (lblTitle == null) {
 			lblTitle = new Label("Game rules");
+			GridPane.setHalignment(lblTitle, HPos.CENTER);
+			lblTitle.setId("titleHome");
 		}
 		return lblTitle;
 	}
 
+	/*
+	 * If null instantiates lblTitle, sets it's ID and then returns it.
+	 * 
+	 * @return lblTitle, a Label object which contains the the rules.
+	 */
 	public Label getLblText() {
 		if (lblText == null) {
-
 			lblText = new Label("Test rules " + "\n\nMore rules" + "\n\nMore more rules" + "\n\nMore rules"
 					+ "\n\nMore more rules" + "\n\nMore rules");
+			lblText.setId("rules");
 		}
-		this.setId("rules");
 
 		return lblText;
 	}
 
-	public Button getBtnPrevious() {
-		if (btnPrevious == null) {
-			btnPrevious = new Button("Previous");
-			btnPrevious.setOnAction(new EventHandler<ActionEvent>() {
+	/*
+	 * If null instantiates btnPrevious, sets it's action when clicking on it and
+	 * then returns it.
+	 * 
+	 * @return btnHome, a Button object which is the button that bring the user back
+	 * to the home pane.
+	 */
+	public Button getBtnHome() {
+		if (btnHome == null) {
+			btnHome = new Button("Previous");
+			btnHome.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent event) {
-
 					setVisible(false);
 					((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
 
 				}
 			});
 		}
-		return btnPrevious;
+		return btnHome;
 	}
 
 }
