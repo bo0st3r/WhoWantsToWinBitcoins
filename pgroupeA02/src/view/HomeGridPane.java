@@ -247,6 +247,10 @@ public class HomeGridPane extends GridPane {
 					getBtnProfile().setVisible(true);
 					if (admin == 1)
 						getBtnAddQuestion().setVisible(true);
+					setVisible(false);
+					((ProjStackPane) getParent().getParent()).getRegistrationConnectionGridPane().setVisible(true);
+					((ProjStackPane) getParent().getParent()).getRegistrationConnectionGridPane().getTxtEmail().clear();
+					
 
 				}
 			});

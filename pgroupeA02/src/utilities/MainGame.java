@@ -3,11 +3,14 @@ package utilities;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.UserManagement;
 import view.ProjStackPane;
+import view.RegistrationConnectionGridPane;
 
 public class MainGame extends Application {
 
 	public static void main(String[] args) {
+
 		// Run GUI
 		launch(args);
 	}

@@ -11,6 +11,7 @@ public class ProjStackPane extends BorderPane {
 	private PlayingGridPane playingGridPane;
 	private AboutGridPane aboutGridPane;
 	private RulesGridPane rulesGridPane;
+	private RegistrationConnectionGridPane registrationConnectionGridPane;
 
 	/*
 	 * Constructor, set homeGridPane visible at first, hide the others panes and set
@@ -59,7 +60,7 @@ public class ProjStackPane extends BorderPane {
 	public StackPane getStackPane() {
 		if (stackPane == null) {
 			stackPane = new StackPane();
-			stackPane.getChildren().addAll(getHomeGridPane(), getAboutGridPane(), getRulesGridPane());
+			stackPane.getChildren().addAll(getHomeGridPane(), getAboutGridPane(), getRulesGridPane(), getRegistrationConnectionGridPane());
 		}
 		return stackPane;
 	}
@@ -112,5 +113,13 @@ public class ProjStackPane extends BorderPane {
 		}
 		return rulesGridPane;
 	}
+
+	public RegistrationConnectionGridPane getRegistrationConnectionGridPane() {
+		if (registrationConnectionGridPane==null) {
+			registrationConnectionGridPane = new RegistrationConnectionGridPane();
+		}
+		return registrationConnectionGridPane;
+	}
+	
 
 }
