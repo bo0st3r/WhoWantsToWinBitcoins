@@ -40,7 +40,7 @@ public class Serialization {
 		}
 	}
 
-	/*
+	/**
 	 * Reads a deck from a JSON file using JSON format. The JSON file name's depends
 	 * of the "dest" param passed while calling the method.
 	 * 
@@ -66,14 +66,12 @@ public class Serialization {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Writes a user into a JSON file using JSON format. The JSON file name's
 	 * depends of the "dest" param passed while calling the method.
-	 * @param string 
-	 * @param users 
-	 * @param user it's a user created by {@link RegistrationConnectionGridPane}
-	 * @param dest  It's the name of the .json file
+	 * @param users   it's a user created by {@link RegistrationConnectionGridPane}
+	 * @param dest   It's the name of the .json file
 	 */
 	public static void UserToJson(List<User> users, String dest) {
 		// Gets the text in JSON format for the deck
@@ -86,6 +84,7 @@ public class Serialization {
 			e1.printStackTrace();
 		}
 	}
+
 	public static User jsonToUser(String dest) {
 		User result = null;
 		try (BufferedReader br = new BufferedReader(new FileReader(datas + dest + ".json"))) {

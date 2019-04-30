@@ -37,7 +37,7 @@ public class AboutGridPane extends GridPane {
 
 	}
 
-	/*
+	/**
 	 * If null instantiate btnPrevious, then return it. Define it's action when
 	 * using it.
 	 * 
@@ -60,7 +60,7 @@ public class AboutGridPane extends GridPane {
 		return btnPrevious;
 	}
 
-	/*
+	/**
 	 * If null instantiate lblName, then return it. Define it's action when using
 	 * it.
 	 * 

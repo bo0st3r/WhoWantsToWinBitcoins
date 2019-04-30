@@ -6,22 +6,27 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class RulesGridPane extends GridPane {
 
 	private Label lblTitle;
 	private Label lblText;
 	private Button btnHome;
+	private ScrollPane scpRule;
 
 	/*
 	 * Constructor. Set the spacings, cols and rows constraints and define the pane
 	 * content.
 	 */
 	public RulesGridPane() {
-		// this.setGridLinesVisible(true);
+		//this.setGridLinesVisible(true);
+		setId("rules");
 
 		// Spacings
 		setPadding(new Insets(10));
@@ -36,16 +41,16 @@ public class RulesGridPane extends GridPane {
 		// Rows constraints
 		RowConstraints r = new RowConstraints();
 		r.setPercentHeight(10);
-		getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r);
+		getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r, r, r, r, r);
 
 		// Title
 		add(getLblTitle(), 2, 1, 6, 2);
 
 		// Text
-		add(getLblText(), 2, 2, 6, 6);
+		add(getScpRule(), 1, 3, 8, 9);
 
 		// Previous button
-		add(getBtnHome(), 4, 8, 2, 2);
+		add(getBtnHome(), 4, 12, 2, 2);
 	}
 
 	/*
@@ -70,9 +75,30 @@ public class RulesGridPane extends GridPane {
 	 */
 	public Label getLblText() {
 		if (lblText == null) {
-			lblText = new Label("Test rules " + "\n\nMore rules" + "\n\nMore more rules" + "\n\nMore rules"
-					+ "\n\nMore more rules" + "\n\nMore rules");
-			lblText.setId("rules");
+			lblText = new Label("The \"Who Wants to win Bitcoins\" questions are structured according to five differents Levels with each level increasing in difficulty. Each level contains five questions.\r\n" + 
+					"\r\n" + 
+					"Questions that are grouped into the same level will all be of similar difficulty. For example: Questions 1-5 make up the first Level and will contain the easiest questions. The second Level (Questions 6 – 10) will be compose by middle difficult questions. The thirtLevel (Questions 11-15) will consist of really difficult questions.\r\n" + 
+					"\r\n" + 
+					"It’s important to remember that the questions which make up each level will not necessarily relate to the same or even similar topics, but their overall level of difficulty will be the same. \r\n" + 
+					"\r\n" + 
+					"There are three ‘step’ in the question structure (Questions five, ten and fifteen). Gamers accumulate money with each correct answer, but should the they answer incorrectly before reaching a step, they stand to lose a large amount of winnings. \r\n" + 
+					"\r\n" + 
+					"If gamers get a question wrong before the first step, they leave with nothing. If this question is answered correctly, gamers are guaranteed the of the fifth question amount\r\n" + 
+					"\r\n" + 
+					"If gamers get this question wrong before the second step, they leave with the of the fifth question amount. If this question is answered correctly, gamers are guaranteed the of the 10th question amount.\r\n"+
+					"\nJOKERS:"
+					+ "\nGamers are allowed three Jokers that they can use at any point during the game. Each Joker can only be used once.\r\n" + 
+					"\r\n" + 
+					"50/50 – eliminates two incorrect answers from the multiple-choice selection, leaving the gamers with only one correct and one incorrect option. This means they have a 50/50 chance.\r\n" + 
+					"\r\n" + 
+					"Ask the Public – the public is asked the same question as the gamer and a quick poll is done to show the answers. If the chart shows a clear majority for a specific answer, this joker can be extremely helpful, but it’s still up to the contestant whether or not to go with the results obtained from the public.\r\n" + 
+					"\r\n" + 
+					"Phone a Friend – gamers are allowed to make a call to a friend . Here the friend will give everytime an answer, good or false.\n");
+			
+			
+			lblText.setId("rulesText");
+			
+			
 		}
 
 		return lblText;
@@ -100,5 +126,19 @@ public class RulesGridPane extends GridPane {
 		}
 		return btnHome;
 	}
+
+	public ScrollPane getScpRule() {
+		if (scpRule==null) {
+			scpRule = new ScrollPane();
+			scpRule.setPadding(new Insets(5));
+			scpRule.setFitToWidth(true);
+			scpRule.setContent(getLblText());
+			
+
+			scpRule.setId("rulesPane");
+		}
+		return scpRule;
+	}
+	
 
 }

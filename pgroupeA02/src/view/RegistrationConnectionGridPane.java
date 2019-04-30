@@ -51,7 +51,7 @@ public class RegistrationConnectionGridPane extends GridPane{
 	private TextField txtEmail;
 	private Button btnValidate;
 	private Button btnPrevious;
-	private Button btnPrevious2;
+
 	
 	
 	
@@ -79,56 +79,43 @@ public class RegistrationConnectionGridPane extends GridPane{
 		
 		//////////////////Part connection
 		this.add(getLblTitleConnection(), 3, 1, 2, 1);
-		GridPane.setValignment(getLblTitleConnection(), VPos.BOTTOM);
+
 		//pseudo
 		this.add(getLblPseudoConnection(), 2, 2);
 		this.add(getTxtPseudoConnection(), 3, 2, 4, 1);
-		GridPane.setHalignment(getLblPseudoConnection(), HPos.RIGHT);
-		GridPane.setValignment(getLblPseudoConnection(), VPos.BOTTOM);
-		GridPane.setValignment(getTxtPseudoConnection(), VPos.BOTTOM);
-		getTxtPseudoConnection().setPromptText("Enter your pseudo");
+
+
 		//password
 		this.add(getLblPasswordConnection(), 2, 3);
 		this.add(getPwdPasswordConnection(), 3, 3, 4, 1);
-		GridPane.setHalignment(getLblPasswordConnection(), HPos.RIGHT);
-		GridPane.setValignment(getLblPasswordConnection(), VPos.TOP);
-		GridPane.setValignment(getPwdPasswordConnection(), VPos.TOP);
-		getPwdPasswordConnection().setPromptText("Enter your password");
+
+
 		//button
 		this.add(getBtnConnection(), 5, 4, 2, 1);
-		this.add(getBtnPrevious(), 4, 4);
-		GridPane.setHalignment(getBtnConnection(), HPos.RIGHT);
-		GridPane.setValignment(getBtnConnection(), VPos.TOP);
-		GridPane.setHalignment(getBtnPrevious(), HPos.RIGHT);
-		GridPane.setValignment(getBtnPrevious(), VPos.TOP);
+
 		
 		
 		////////////////part registration
 		this.add(getLblTitleRegistration(), 3, 5, 2, 1);
-		GridPane.setValignment(getLblTitleRegistration(), VPos.BOTTOM);
+
 		//pseudo
 		this.add(getLblPseudoRegistration(), 2, 6);
 		this.add(getTxtPseudoRegistration(), 3, 6, 4, 1);
-		getTxtPseudoRegistration().setPromptText("Choose pseudo");
-		GridPane.setHalignment(getLblPseudoRegistration(), HPos.RIGHT);
+
+
 
 		//password
 		this.add(getLblPasswordRegistration(), 2, 7);
 		this.add(getPwdPasswordRegistration(), 3, 7, 4, 1);
-		getPwdPasswordRegistration().setPromptText("Choose password");
-		GridPane.setHalignment(getLblPasswordRegistration(), HPos.RIGHT);
+
+
 		this.add(getLblEmail(), 2, 8);
 		this.add(getTxtEmail(), 3, 8, 4, 1);
-		GridPane.setHalignment(getLblEmail(), HPos.RIGHT);
-		getTxtEmail().setPromptText("Enter your Email");
+
 		//button
 		this.add(getBtnValidate(), 5, 9, 2, 1);
-		this.add(getBtnPrevious2(), 4, 9);
-		GridPane.setHalignment(getBtnValidate(), HPos.RIGHT);
-		GridPane.setValignment(getBtnValidate(), VPos.TOP);
-		GridPane.setHalignment(getBtnPrevious2(), HPos.RIGHT);
-		GridPane.setValignment(getBtnPrevious2(), VPos.TOP);
 		
+		this.add(getBtnPrevious(), 8, 4, 2, 2);
 		
 		
 	}
@@ -148,6 +135,7 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public Label getLblTitleConnection() {
 		if (lblTitleConnection == null) {
 			lblTitleConnection = new Label("Already registered?");
+			GridPane.setValignment(getLblTitleConnection(), VPos.BOTTOM);
 			lblTitleConnection.setId("titleForRegistration");
 		}
 		return lblTitleConnection;
@@ -158,6 +146,8 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public Label getLblPseudoConnection() {
 		if (lblPseudoConnection == null) {
 			lblPseudoConnection = new Label("Pseudo");
+			GridPane.setHalignment(getLblPseudoConnection(), HPos.RIGHT);
+			GridPane.setValignment(getLblPseudoConnection(), VPos.BOTTOM);
 			
 		}
 		return lblPseudoConnection;
@@ -168,6 +158,8 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public TextField getTxtPseudoConnection() {
 		if (txtPseudoConnection==null) {
 			txtPseudoConnection = new TextField();
+			GridPane.setValignment(getTxtPseudoConnection(), VPos.BOTTOM);
+			getTxtPseudoConnection().setPromptText("Enter your pseudo");
 		}
 		return txtPseudoConnection;
 	}
@@ -177,6 +169,8 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public Label getLblPasswordConnection() {
 		if (lblPasswordConnection == null) {
 			lblPasswordConnection = new Label("Password");
+			GridPane.setHalignment(getLblPasswordConnection(), HPos.RIGHT);
+			GridPane.setValignment(getLblPasswordConnection(), VPos.TOP);
 		}
 		return lblPasswordConnection;
 	}
@@ -186,6 +180,8 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public PasswordField getPwdPasswordConnection() {
 		if (pwdPasswordConnection == null) {
 			pwdPasswordConnection = new PasswordField();
+			GridPane.setValignment(getPwdPasswordConnection(), VPos.TOP);
+			getPwdPasswordConnection().setPromptText("Enter your password");
 		}
 		return pwdPasswordConnection;
 	}
@@ -194,6 +190,8 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public Button getBtnConnection() {
 		if (btnConnection==null) {
 			btnConnection = new Button("Connection");
+			GridPane.setHalignment(getBtnConnection(), HPos.RIGHT);
+			GridPane.setValignment(getBtnConnection(), VPos.TOP);
 		}
 		return btnConnection;
 	}
@@ -204,6 +202,7 @@ public class RegistrationConnectionGridPane extends GridPane{
 		if (lblTitleRegistration == null) {
 			lblTitleRegistration = new Label("Not yet registered? create an account");
 			lblTitleRegistration.setId("titleForRegistration");
+			GridPane.setValignment(getLblTitleRegistration(), VPos.BOTTOM);
 		}
 		return lblTitleRegistration;
 	}
@@ -213,6 +212,7 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public Label getLblPseudoRegistration() {
 		if (lblPseudoRegistration == null) {
 			lblPseudoRegistration = new Label("Pseudo");
+			GridPane.setHalignment(getLblPseudoRegistration(), HPos.RIGHT);
 		}
 		return lblPseudoRegistration;
 	}
@@ -222,6 +222,7 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public TextField getTxtPseudoRegistration() {
 		if (txtPseudoRegistration==null) {
 			txtPseudoRegistration = new TextField();
+			getTxtPseudoRegistration().setPromptText("Choose pseudo");
 		}
 		return txtPseudoRegistration;
 	}
@@ -231,6 +232,7 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public Label getLblPasswordRegistration() {
 		if (lblPasswordRegistration == null) {
 			lblPasswordRegistration = new Label("Password");
+			GridPane.setHalignment(getLblPasswordRegistration(), HPos.RIGHT);
 		}
 		return lblPasswordRegistration;
 	}
@@ -240,6 +242,7 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public PasswordField getPwdPasswordRegistration() {
 		if (pwdPasswordRegistration==null) {
 			pwdPasswordRegistration = new PasswordField();
+			getPwdPasswordRegistration().setPromptText("Choose password");
 		}
 		return pwdPasswordRegistration;
 	}
@@ -249,6 +252,8 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public Label getLblEmail() {
 		if (lblEmail==null) {
 			lblEmail = new Label("E-Mail");
+			GridPane.setHalignment(getLblEmail(), HPos.RIGHT);
+
 		}
 		return lblEmail;
 	}
@@ -258,6 +263,7 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public TextField getTxtEmail() {
 		if (txtEmail == null) {
 			txtEmail = new TextField();
+			getTxtEmail().setPromptText("Enter your Email");
 		}
 		return txtEmail;
 	}
@@ -267,7 +273,10 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public Button getBtnValidate() {
 		if (btnValidate==null) {
 			btnValidate = new Button("Validate");
+			GridPane.setHalignment(getBtnValidate(), HPos.RIGHT);
+			GridPane.setValignment(getBtnValidate(), VPos.TOP);
 			btnValidate.setOnAction(new EventHandler<ActionEvent>() {
+
 				
 
 				@Override
@@ -293,6 +302,9 @@ public class RegistrationConnectionGridPane extends GridPane{
 	public Button getBtnPrevious() {
 		if (btnPrevious==null) {
 			btnPrevious = new Button("Previous");
+			GridPane.setHalignment(getBtnPrevious(), HPos.CENTER);
+			GridPane.setValignment(getBtnPrevious(), VPos.CENTER);
+			
 			btnPrevious.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
@@ -306,23 +318,7 @@ public class RegistrationConnectionGridPane extends GridPane{
 		return btnPrevious;
 	}
 	
-	public Button getBtnPrevious2() {
-		if (btnPrevious2==null) {
-			btnPrevious2 = new Button("Previous");
-			
-			btnPrevious2.setOnAction(new EventHandler<ActionEvent>() {
-				
-				@Override
-				public void handle(ActionEvent event) {
-					setVisible(false);
-					((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
-					
-					
-				}
-			});
-		}
-		return btnPrevious2;
-	}
+	
 	/**
 	 * gets the pseudo, password and email address of a created user
 	 * @return return a new user, to add it to the json file

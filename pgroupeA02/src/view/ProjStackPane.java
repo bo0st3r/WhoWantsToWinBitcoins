@@ -8,10 +8,11 @@ public class ProjStackPane extends BorderPane {
 
 	private StackPane stackPane;
 	private HomeGridPane homeGridPane;
-	private PlayingGridPane playingGridPane;
+	//private PlayingGridPane playingGridPane;
 	private AboutGridPane aboutGridPane;
 	private RulesGridPane rulesGridPane;
 	private RegistrationConnectionGridPane registrationConnectionGridPane;
+	private PartyStackPane partyStackPane;
 
 	/*
 	 * Constructor, set homeGridPane visible at first, hide the others panes and set
@@ -39,16 +40,16 @@ public class ProjStackPane extends BorderPane {
 	/*
 	 * Reset the playingGridPane in order to run a new party.
 	 */
-	public void resetPlayingGridPane() {
-		// Removes the playingGridPane from stackPane
-		stackPane.getChildren().remove(playingGridPane);
-
-		// Sets playingGridPane as null so getPlayingGridPane() instantiate a new one.
-		playingGridPane = null;
-		stackPane.getChildren().add(getPlayingGridPane());
-
-		System.out.println(stackPane.getChildren().size());
-	}
+//	public void resetPlayingGridPane() {
+//		// Removes the playingGridPane from stackPane
+//		stackPane.getChildren().remove(playingGridPane);
+//
+//		// Sets playingGridPane as null so getPlayingGridPane() instantiate a new one.
+//		playingGridPane = null;
+//		stackPane.getChildren().add(getPlayingGridPane());
+//
+//		System.out.println(stackPane.getChildren().size());
+//	}
 
 	// Getters
 	/*
@@ -60,7 +61,7 @@ public class ProjStackPane extends BorderPane {
 	public StackPane getStackPane() {
 		if (stackPane == null) {
 			stackPane = new StackPane();
-			stackPane.getChildren().addAll(getHomeGridPane(), getAboutGridPane(), getRulesGridPane(), getRegistrationConnectionGridPane());
+			stackPane.getChildren().addAll(getHomeGridPane(), getAboutGridPane(), getRulesGridPane(), getRegistrationConnectionGridPane(), getPartyStackPane());
 		}
 		return stackPane;
 	}
@@ -82,13 +83,13 @@ public class ProjStackPane extends BorderPane {
 	 * 
 	 * @return playingGridPane, a PlayingGridPane object which is the playing page.
 	 */
-	public PlayingGridPane getPlayingGridPane() {
-		if (playingGridPane == null) {
-			playingGridPane = new PlayingGridPane();
-			playingGridPane.setId("playingGridPane");
-		}
-		return playingGridPane;
-	}
+//	public PlayingGridPane getPlayingGridPane() {
+//		if (playingGridPane == null) {
+//			playingGridPane = new PlayingGridPane();
+//			playingGridPane.setId("playingGridPane");
+//		}
+//		return playingGridPane;
+//	}
 
 	/*
 	 * If null, instantiate aboutGridPane and then returns it.
@@ -110,6 +111,7 @@ public class ProjStackPane extends BorderPane {
 	public RulesGridPane getRulesGridPane() {
 		if (rulesGridPane == null) {
 			rulesGridPane = new RulesGridPane();
+			rulesGridPane.setId("rulesPane");
 		}
 		return rulesGridPane;
 	}
@@ -120,6 +122,28 @@ public class ProjStackPane extends BorderPane {
 		}
 		return registrationConnectionGridPane;
 	}
+
+	public PartyStackPane getPartyStackPane() {
+		if (partyStackPane==null) {
+			partyStackPane = new PartyStackPane();
+		}
+		return partyStackPane;
+	}
+	public void resetPane() {
+		// Removes the components from stackPane
+		stackPane.getChildren().removeAll(homeGridPane, aboutGridPane, registrationConnectionGridPane, rulesGridPane );
+
+		// Sets playingGridPane as null so getPlayingGridPane() instantiate a new one.
+		homeGridPane = null; 
+		aboutGridPane= null;
+		registrationConnectionGridPane=null ;
+		rulesGridPane = null;
+		stackPane.getChildren().addAll(getHomeGridPane(), getAboutGridPane(), getRegistrationConnectionGridPane(), getRulesGridPane());
+		hideAllComponentsInStackPane();
+		
+
+	}
+	
 	
 
 }

@@ -82,7 +82,7 @@ public class HomeGridPane extends GridPane {
 	}
 
 	// Getters
-	/*
+	/**
 	 * Returns btnPlay, if null instantiates it, sets it's sizes, alignment, ID and
 	 * action when clicking on it.
 	 * 
@@ -99,14 +99,14 @@ public class HomeGridPane extends GridPane {
 			btnPlay.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					//
-					((ProjStackPane) getParent().getParent()).resetPlayingGridPane();
+					((ProjStackPane) getParent().getParent()).getPartyStackPane().resetPlayingGridPane();
 
 					// Hide the Home Pane
 					setVisible(false);
 
-					// Show the PlayingGridPane
-					((ProjStackPane) getParent().getParent()).getPlayingGridPane().setVisible(true);
+					// Show the PartyStackPane
+					((ProjStackPane) getParent().getParent()).getPartyStackPane().setVisible(true);
+					
 				}
 			});
 		}
@@ -114,7 +114,7 @@ public class HomeGridPane extends GridPane {
 		return btnPlay;
 	}
 
-	/*
+	/**
 	 * Returns btnScoreBoard, if null instantiates it, sets it's sizes and action
 	 * when clicking on it.
 	 * 
@@ -139,7 +139,7 @@ public class HomeGridPane extends GridPane {
 		return btnScoreBoard;
 	}
 
-	/*
+	/**
 	 * Returns btnRules, if null instantiates it, sets it's sizes and action when
 	 * clicking on it.
 	 * 
@@ -165,7 +165,7 @@ public class HomeGridPane extends GridPane {
 		return btnRules;
 	}
 
-	/*
+	/**
 	 * Returns btnAddQuestion, if null instantiates it, sets it's sizes, action when
 	 * clicking on it and invisible at first.
 	 * 
@@ -200,7 +200,7 @@ public class HomeGridPane extends GridPane {
 		return btnAddQuestion;
 	}
 
-	/*
+	/**
 	 * Returns btnAbout, if null instantiates it, sets it's ID and action when
 	 * clicking on it.
 	 * 
@@ -226,7 +226,7 @@ public class HomeGridPane extends GridPane {
 		return btnAbout;
 	}
 
-	/*
+	/**
 	 * Returns btnConnect, if null instantiates it, sets it's ID, alignment and
 	 * action when clicking on it.
 	 * 
@@ -250,7 +250,6 @@ public class HomeGridPane extends GridPane {
 					setVisible(false);
 					((ProjStackPane) getParent().getParent()).getRegistrationConnectionGridPane().setVisible(true);
 					((ProjStackPane) getParent().getParent()).getRegistrationConnectionGridPane().getTxtEmail().clear();
-					
 
 				}
 			});
@@ -258,7 +257,7 @@ public class HomeGridPane extends GridPane {
 		return btnConnect;
 	}
 
-	/*
+	/**
 	 * Returns btnProfile, if null instantiates it, sets it's ID, alignment,
 	 * invisible at first and action when clicking on it.
 	 * 
@@ -277,7 +276,7 @@ public class HomeGridPane extends GridPane {
 		return btnProfile;
 	}
 
-	/*
+	/**
 	 * Returns btnDisconnect, if null instantiates it, sets it's ID, alignment,
 	 * invisible at first and action when clicking on it.
 	 * 
@@ -308,7 +307,7 @@ public class HomeGridPane extends GridPane {
 		return btnDisconnect;
 	}
 
-	/*
+	/**
 	 * Returns lblTitle, if null instantiates it, sets it's ID and alignment.
 	 * 
 	 * @return lblTitle, a Label object.

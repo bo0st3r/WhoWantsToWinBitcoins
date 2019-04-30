@@ -90,7 +90,7 @@ public class QuestionGridPane extends GridPane {
 					// Set the answer index
 					answerIndex = index;
 
-					PlayingGridPane pgp = ((ProjStackPane) getParent().getParent().getParent()).getPlayingGridPane();
+					PlayingGridPane pgp = ((PartyStackPane) getParent().getParent().getParent()).getPlayingGridPane();
 
 					// Remove Button class from the btn
 					pgp.getQuestionGP().getBtnAnswer(answerIndex).getStyleClass().remove("button");

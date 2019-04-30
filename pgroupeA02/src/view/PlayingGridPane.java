@@ -65,7 +65,7 @@ public class PlayingGridPane extends GridPane {
 	 */
 	public PlayingGridPane() {
 		earning = new Earning();
-//		setGridLinesVisible(true);
+		//setGridLinesVisible(true);
 
 		// Set columns
 		double[] sizesCol = { 3, 9.5, 21.5, 5, 1.5, 15.5, 15.5, 5, 3.5, 20, 3 };
@@ -95,7 +95,7 @@ public class PlayingGridPane extends GridPane {
 		add(getTimerFP(), 5, 3, 2, 2);
 
 		// Validation
-		add(getValidationGP(), 3, 1, 5, 4);
+		add(getValidationGP(), 3, 2, 5, 4);
 
 		// Exit button
 		add(getBtnCashIn(), 9, 1);
@@ -294,7 +294,9 @@ public class PlayingGridPane extends GridPane {
 
 		// Won
 		if (value) {
-			alertPop("Congrats, you won !");
+			//alertPop("Congrats, you won !");
+			setVisible(false);
+			((PartyStackPane) getParent().getParent()).getPartyWonGridPane().setVisible(true);
 
 		}
 
@@ -312,8 +314,11 @@ public class PlayingGridPane extends GridPane {
 			getBtnCashIn().setDisable(true);
 
 			// Loosing alert
-			alertPop("Sorry, you're a looser !\n" + "The right answer was\n\n \"" + party.getRightAnswer()
-					+ "\"\n\n You won : " + getEarningsWhenLost() + " Bitcoins");
+//			alertPop("Sorry, you're a looser !\n" + "The right answer was\n\n \"" + party.getRightAnswer()
+//					+ "\"\n\n You won : " + getEarningsWhenLost() + " Bitcoins");
+			setVisible(false);
+			
+			((PartyStackPane) getParent().getParent()).getPartyLostGridPane().setVisible(true);
 		}
 
 	}
@@ -420,6 +425,7 @@ public class PlayingGridPane extends GridPane {
 			timerFP = new TimerFlowPane();
 			timerFP.setId("timer");
 			timerFP.setAlignment(Pos.CENTER);
+			
 		}
 		return timerFP;
 	}
@@ -449,6 +455,7 @@ public class PlayingGridPane extends GridPane {
 		if (validationGP == null) {
 			validationGP = new ValidationGridPane();
 			validationGP.setVisible(false);
+			GridPane.setValignment(getValidationGP(), VPos.CENTER);
 		}
 		return validationGP;
 	}
@@ -477,7 +484,9 @@ public class PlayingGridPane extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					alertPop("You won: " + getEarningsWhenLeaving() + " Bitcoins");
+					//alertPop("You won: " + getEarningsWhenLeaving() + " Bitcoins");
+					setVisible(false);
+					((PartyStackPane) getParent().getParent()).getLeavePartyGridPane().setVisible(true);
 					getTimerFP().stopTimer();
 				}
 			});

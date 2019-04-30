@@ -3,7 +3,10 @@ package view;
 import exceptions.ExceedMaxStepsException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
@@ -19,17 +22,16 @@ public class ValidationGridPane extends GridPane {
 	 * Constructor. Sets rows and cols constraints, spacings and the pane content.
 	 */
 	public ValidationGridPane() {
+		//setGridLinesVisible(true);
 		this.setId("validationPane");
 		// Set columns
-		ColumnConstraints c1 = new ColumnConstraints();
-		c1.setPercentWidth(13);
-		ColumnConstraints c2 = new ColumnConstraints();
-		c2.setPercentWidth(30);
-		getColumnConstraints().addAll(c1, c2, c1, c2, c1);
+		ColumnConstraints c = new ColumnConstraints();
+		c.setPercentWidth(20);
+		getColumnConstraints().addAll(c, c, c, c, c);
 
 		// Set rows
 		RowConstraints r = new RowConstraints();
-		r.setPercentHeight(50);
+		r.setPercentHeight(30);
 		getRowConstraints().addAll(r, r);
 
 		// Spacings
@@ -38,9 +40,9 @@ public class ValidationGridPane extends GridPane {
 		setVgap(5);
 
 		// Content
-		add(getLblValidation(), 0, 0, 5, 1);
-		add(getBtnYes(), 1, 1, 1, 1);
-		add(getBtnNo(), 3, 1, 1, 1);
+		add(getLblValidation(), 2, 0, 5, 1);
+		add(getBtnYes(), 0, 1, 2, 1);
+		add(getBtnNo(), 3, 1, 2, 1);
 	}
 
 	/*
@@ -54,6 +56,7 @@ public class ValidationGridPane extends GridPane {
 			lblValidation.setId("btnValidationText");
 			lblValidation.setPrefHeight(Integer.MAX_VALUE);
 			lblValidation.setPrefWidth(Integer.MAX_VALUE);
+			GridPane.setHalignment(getLblValidation(), HPos.CENTER);
 		}
 
 		return lblValidation;

@@ -168,8 +168,51 @@
 }
 
 /* RulesGridPane */
-#rules{
-	
+#rulesText{
+	-fx-font-family:'IBM Plex Sans', sans-serif;
+	-fx-alignment: center;
+	-fx-text-fill: #fef9e7;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+    -fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
+    -fx-background-size: stretch;
+    -fx-wrap-text: true ;	
+    
 }
+#rulesPane{
+	-fx-background-image:url("/style/images/backgrounds/basic_background.jpg");
+}
+
+#validationPane{
+	  -fx-font-size: 1.5em;
+}
+
+/*PartyLostGridPane */
+
+#lostGridPane{ 
+    -fx-font-size: 3em;
+    -fx-font-weight: bold;
+    -fx-background-image:url("/style/images/backgrounds/lost_background.jpg");
+ }
+ #leaveGridPane{
+ 	-fx-font-size: 3em;
+    -fx-font-weight: bold;
+    -fx-background-image:url("/style/images/backgrounds/basic_background.jpg");
+    -fx-wrap-text: true ;	
+ 	
+ }
+ #wonGridPane{
+ 	-fx-font-size: 3em;
+    -fx-font-weight: bold;
+    -fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
+ }
+
+#okButton{
+	-fx-font-family:'IBM Plex Sans', sans-serif;
+    -fx-font-size:1em;
+    -fx-alignment:center;
+}
+
+
 
 
