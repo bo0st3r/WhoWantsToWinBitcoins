@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Joker5050 implements JokerStrategy {
 
-	/**
+	/*
 	 * JokerStrategy pattern method, generates 2 random indexes which are not the right answer index and set the
 	 * joker5050Indexes var with them.
 	 * 

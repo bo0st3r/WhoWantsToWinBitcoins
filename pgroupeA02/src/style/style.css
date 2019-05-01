@@ -4,12 +4,12 @@
 
 /* Classes */
 .button{
-	-fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
-	-fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
-	-fx-background-insets: 0.0,0.0,0.0;
-	
-	-fx-font-family:'IBM Plex Sans', sans-serif;
-	-fx-font-size:1.4em;
+    -fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
+    -fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
+    -fx-background-insets: 0.0,0.0,0.0;
+    
+    -fx-font-family:'IBM Plex Sans', sans-serif;
+    -fx-font-size:1.4em;
 }
 
 
@@ -49,30 +49,46 @@
 #questionStatement{
 	-fx-background-image:url("/style/images/backgrounds/statement_background.jpg");
 	-fx-background-radius: 15.0;
-	-fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
-	
+    -fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
+    
 	-fx-alignment: center;
 	
 	-fx-text-fill: #fef9e7;
-	-fx-font-family:'IBM Plex Sans', sans-serif;
-	-fx-font-size:2.2em;
-	-fx-font-weight:bold;
+    -fx-font-family:'IBM Plex Sans', sans-serif;
+    -fx-font-size:2.2em;
+    -fx-font-weight:bold;
 }
 
-#answerValue{
-	-fx-background-color: /* #ABE5F0*/#222222;
+#answerBtn{
+	-fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
+    -fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
+    -fx-background-insets: 0.0,0.0,0.0;
+    
+    -fx-font-family:'IBM Plex Sans', sans-serif;
+    -fx-font-size:1.4em;
+    -fx-alignment:center;
 }
 
 #answerBtnOk{
 	-fx-background-image:url("/style/images/backgrounds/btn_background_right.jpg");
+	-fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
 	-fx-background-repeat:stretch;
 	-fx-background-size:cover;
+	
+	-fx-font-family:'IBM Plex Sans', sans-serif;
+    -fx-font-size:1.4em;
+    -fx-alignment:center;
 }
 
 #answerBtnNotOk{
 	-fx-background-image:url("/style/images/backgrounds/btn_background_wrong.jpg");
+	-fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
 	-fx-background-repeat:stretch;
-	-fx-background-size: cover;
+	-fx-background-size:cover;
+	
+	-fx-font-family:'IBM Plex Sans', sans-serif;
+    -fx-font-size:1.4em;
+    -fx-alignment:center;
 }
 
 #answerJokerFriend{
@@ -81,16 +97,13 @@
 	-fx-background-size: cover;
 }
 
+
+
 #jokerResults{
 	-fx-alignment: center;
 	-fx-font-size: 1.4em;
 	-fx-font-weight: bold;
 	-fx-padding: 4.0px;
-}
-
-.btnJoker{
-	-fx-font-family:'IBM Plex Sans', sans-serif;
-	-fx-font-size:1.4em;
 }
 
 /* Pyramid */
@@ -104,15 +117,15 @@
 	-fx-font-family:'IBM Plex Sans', sans-serif;
 	-fx-alignment: center;
 	-fx-text-fill: #fef9e7;
-	-fx-font-size: 1.6em;
-	-fx-font-weight: bold;
+    -fx-font-size: 1.6em;
+    -fx-font-weight: bold;
 }
 
 #pyramidActualStep{
 	-fx-background-image:url("/style/images/backgrounds/pyramid_actual_step_background.jpg"),
-		url("/style/images/horizontal_rocket_tiny_right.png"),
-		url("/style/images/horizontal_rocket_tiny_left.png");
-	-fx-background-size:cover, auto, auto;
+		url("/style/images/facing_right_rocket_tiny.png"),
+		url("/style/images/facing_left_rocket_tiny.png");
+	-fx-background-size:cover, contain, contain;
 	-fx-background-repeat:no-repeat; 
 	-fx-background-position:center, left center, right center;
 	-fx-background-color:#fefffe;
@@ -120,8 +133,8 @@
 	-fx-font-family:'IBM Plex Sans', sans-serif;
 	-fx-alignment: center;
 	-fx-text-fill:#e04733;
-	-fx-font-size: 1.8em;
-	-fx-font-weight: bold;
+    -fx-font-size: 1.8em;
+    -fx-font-weight: bold;
 }
 
 .pyramidTextRound{
@@ -133,18 +146,8 @@
 	-fx-font-family:'IBM Plex Sans', sans-serif;
 	-fx-alignment: center;
 	-fx-text-fill:#e04733;
-	-fx-font-size: 1.8em;
-	-fx-font-weight: bold;
-}
-
-/* Validation */
-#btnValidationText{
-	-fx-font-size: 50.0px;	
-	-fx-alignment: center;
-} 
-
-#btnValidation{
-	-fx-font-size: 30.0px;	
+    -fx-font-size: 1.8em;
+    -fx-font-weight: bold;
 }
 
 /* AddQuestionGridPane */
@@ -169,44 +172,47 @@
 	-fx-font-family:'IBM Plex Sans', sans-serif;
 	-fx-alignment: center;
 	-fx-text-fill: #fef9e7;
-	-fx-font-size: 1.2em;
-	-fx-font-weight: bold;
-	-fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
-	-fx-background-size: stretch;
-	-fx-wrap-text: true ;	
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+    -fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
+    -fx-background-size: stretch;
+    -fx-wrap-text: true ;	
+    
 }
-
 #rulesPane{
 	-fx-background-image:url("/style/images/backgrounds/basic_background.jpg");
 }
 
 #validationPane{
-	-fx-font-size: 1.5em;
+	  -fx-font-size: 1.5em;
 }
 
 /*PartyLostGridPane */
-#partyLostGridPane{ 
-	-fx-font-size: 3.0em;
-	-fx-font-weight: bold;
-	-fx-background-image:url("/style/images/backgrounds/lost_background.jpg");
-}
- 
-#partyLeftGridPane{
-	-fx-font-size: 3.0em;
-	-fx-font-weight: bold;
-	-fx-background-image:url("/style/images/backgrounds/basic_background.jpg");
-	-fx-wrap-text: true ;	
-}
- 
-#partyWonGridPane{
-	-fx-font-size: 3.0em;
-	-fx-font-weight: bold;
-	-fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
-}
+
+#lostGridPane{ 
+    -fx-font-size: 3em;
+    -fx-font-weight: bold;
+    -fx-background-image:url("/style/images/backgrounds/lost_background.jpg");
+ }
+ #leaveGridPane{
+ 	-fx-font-size: 3em;
+    -fx-font-weight: bold;
+    -fx-background-image:url("/style/images/backgrounds/basic_background.jpg");
+    -fx-wrap-text: true ;	
+ 	
+ }
+ #wonGridPane{
+ 	-fx-font-size: 3em;
+    -fx-font-weight: bold;
+    -fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
+ }
 
 #okButton{
 	-fx-font-family:'IBM Plex Sans', sans-serif;
-	-fx-font-size:1.0em;
-	-fx-alignment:center;
+    -fx-font-size:1em;
+    -fx-alignment:center;
 }
+
+
+
 

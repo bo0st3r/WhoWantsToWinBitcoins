@@ -1,6 +1,6 @@
 package exceptions;
 
-public class EmptyQuestionsListException extends RuntimeException {
+public class EmptyQuestionsListException extends Exception {
 	private static final long serialVersionUID = -792196609150547277L;
 
 	public EmptyQuestionsListException() {

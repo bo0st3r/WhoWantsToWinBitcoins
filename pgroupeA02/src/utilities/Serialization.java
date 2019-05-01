@@ -3,30 +3,28 @@ package utilities;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.util.List;
+import java.util.Scanner;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 
 import model.Deck;
-import model.Earning;
-import model.UserManagerSingleton;
+import model.User;
+import model.UserManagement;
 import view.RegistrationConnectionGridPane;
 
 public class Serialization {
-	public static final String DATA_DIRECTORY = "data/";
+	public static String datas = "data/";
 
-	// Deck
-	/**
-	 * Writes a Deck object into a JSON file using JSON format. The JSON file name's
+	/*
+	 * Writes a deck into a JSON file using JSON format. The JSON file name's
 	 * depends of the "dest" param passed while calling the method.
 	 * 
-	 * @param Deck   deck It's a set of questions
+	 * @param Deck deck It's a set of questions
 	 * 
 	 * @param String dest It's the name of the .json file
 	 */
@@ -34,8 +32,7 @@ public class Serialization {
 		// Gets the text in JSON format for the deck
 		String json = new Gson().toJson(deck);
 
-		try (BufferedWriter bw = new BufferedWriter(
-				new FileWriter(DATA_DIRECTORY + removeJSONExtension(dest) + ".json"))) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(datas + dest + ".json"))) {
 			bw.write(json);
 			bw.close();
 		} catch (IOException e1) {
@@ -44,17 +41,16 @@ public class Serialization {
 	}
 
 	/**
-	 * Recovers a Deck object from a JSON file using JSON format. The JSON file
-	 * name's depends on the "source" param passed while calling the method.
+	 * Reads a deck from a JSON file using JSON format. The JSON file name's depends
+	 * of the "dest" param passed while calling the method.
 	 * 
-	 * @param String source It's the name of the JSON file.
+	 * @param String dest It's the name of the JSON file.
 	 * 
 	 * @return The Deck that was recovered from the JSON file.
 	 */
-	public static Deck jsonToDeck(String source) {
-		Deck deck = null;
-		try (BufferedReader br = new BufferedReader(
-				new FileReader(DATA_DIRECTORY + removeJSONExtension(source) + ".json"))) {
+	public static Deck jsonToDeck(String dest) {
+		Deck result = null;
+		try (BufferedReader br = new BufferedReader(new FileReader(datas + dest + ".json"))) {
 			String fromFile = "";
 
 			String tmp = br.readLine();
@@ -64,83 +60,24 @@ public class Serialization {
 			}
 
 			br.close();
-			deck = new Gson().fromJson(fromFile, Deck.class);
+			result = new Gson().fromJson(fromFile, Deck.class);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		return deck;
-	}
-
-	// UserManager
-	/**
-	 * Writes an UserManager object into a JSON file using JSON format. The JSON
-	 * file name's depends of the "dest" param passed while calling the method.
-	 * 
-	 * @param dest     the name of the .json file.
-	 * @param instance the list of users created by
-	 *                 {@link RegistrationConnectionGridPane}.
-	 */
-	public static void userManagerSingletonToJson(UserManagerSingleton instance, String dest) {
-		try (ObjectOutputStream oos = new ObjectOutputStream(
-				new FileOutputStream(DATA_DIRECTORY + removeJSONExtension(dest) + ".json"))) {
-
-			oos.writeObject(instance);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		return result;
 	}
 
 	/**
-	 * Recovers an UserManagerSingleton object from a JSON file using JSON format.
-	 * The JSON file name's depends on the "source" param passed while calling the
-	 * method.
-	 * 
-	 * @param String source It's the name of the JSON file.
-	 * 
-	 * @return The UserManagerSingleton object that was recovered from the JSON
-	 *         file.
+	 * Writes a user into a JSON file using JSON format. The JSON file name's
+	 * depends of the "dest" param passed while calling the method.
+	 * @param users   it's a user created by {@link RegistrationConnectionGridPane}
+	 * @param dest   It's the name of the .json file
 	 */
-	public static UserManagerSingleton jsonToUserManagerSingleton(String source) {
-		UserManagerSingleton userManagerSingleton = null;
-
-		try (ObjectInputStream ois = new ObjectInputStream(
-				new FileInputStream(DATA_DIRECTORY + removeJSONExtension(source) + ".json"))) {
-
-			if (UserManagerSingleton.isNullInstance()) {
-				try {
-					userManagerSingleton = (UserManagerSingleton) ois.readObject();
-				} catch (ClassNotFoundException | IOException e) {
-					e.printStackTrace();
-				}
-			} else {
-				userManagerSingleton = UserManagerSingleton.getInstance();
-			}
-
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-
-		return userManagerSingleton;
-	}
-
-	// Earnings
-	/**
-	 * Writes an Earnings object into a JSON file using JSON format. The JSON file
-	 * name's depends of the "dest" param passed while calling the method.
-	 * 
-	 * @param dest    the name of the .json file.
-	 * @param earning the Earning object {@link RegistrationConnectionGridPane}.
-	 */
-	public static void earningToJson(Earning earning, String dest) {
+	public static void UserToJson(List<User> users, String dest) {
 		// Gets the text in JSON format for the deck
-		String json = new Gson().toJson(earning);
+		String json = new Gson().toJson(users);
 
-		try (BufferedWriter bw = new BufferedWriter(
-				new FileWriter(DATA_DIRECTORY + removeJSONExtension(dest) + ".json"))) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(datas + dest + ".json", true))) {
 			bw.write(json);
 			bw.close();
 		} catch (IOException e1) {
@@ -148,20 +85,9 @@ public class Serialization {
 		}
 	}
 
-	/**
-	 * Recovers an UserManager from a JSON file using JSON format. The JSON file
-	 * name's depends on the "source" param passed while calling the method.
-	 * 
-	 * @param String source It's the name of the JSON file.
-	 * 
-	 * @return The Deck that was recovered from the JSON file.
-	 */
-	public static Earning jsonToEarning(String source) {
-		Earning earning = null;
-
-		try (BufferedReader br = new BufferedReader(
-				new FileReader(DATA_DIRECTORY + removeJSONExtension(source) + ".json"))) {
-
+	public static User jsonToUser(String dest) {
+		User result = null;
+		try (BufferedReader br = new BufferedReader(new FileReader(datas + dest + ".json"))) {
 			String fromFile = "";
 
 			String tmp = br.readLine();
@@ -171,23 +97,11 @@ public class Serialization {
 			}
 
 			br.close();
-			earning = new Gson().fromJson(fromFile, Earning.class);
+			result = new Gson().fromJson(fromFile, User.class);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-
-		return earning;
+		return result;
 	}
 
-	/**
-	 * If the given param contains ".json" (case insensitive), returns the param
-	 * without it.
-	 * 
-	 * @param str String, param to verify.
-	 * @return String The verified param.
-	 */
-	public static String removeJSONExtension(String str) {
-		String lowered = str.toLowerCase();
-		return lowered.replaceAll(".json", "");
-	}
 }

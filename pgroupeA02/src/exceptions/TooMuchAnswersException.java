@@ -1,6 +1,6 @@
 package exceptions;
 
-public class TooMuchAnswersException extends RuntimeException {
+public class TooMuchAnswersException extends Exception {
 	private static final long serialVersionUID = 4823146638067044493L;
 	private String statement;
 

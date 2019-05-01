@@ -3,7 +3,10 @@ package view;
 import exceptions.ExceedMaxStepsException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
@@ -15,22 +18,20 @@ public class ValidationGridPane extends GridPane {
 	private Button btnYes;
 	private Button btnNo;
 
-	/**
+	/*
 	 * Constructor. Sets rows and cols constraints, spacings and the pane content.
 	 */
 	public ValidationGridPane() {
-//		setGridLinesVisible(true);
-		
+		//setGridLinesVisible(true);
+		this.setId("validationPane");
 		// Set columns
-		ColumnConstraints c1 = new ColumnConstraints();
-		c1.setPercentWidth(13);
-		ColumnConstraints c2 = new ColumnConstraints();
-		c2.setPercentWidth(30);
-		getColumnConstraints().addAll(c1, c2, c1, c2, c1);
+		ColumnConstraints c = new ColumnConstraints();
+		c.setPercentWidth(20);
+		getColumnConstraints().addAll(c, c, c, c, c);
 
 		// Set rows
 		RowConstraints r = new RowConstraints();
-		r.setPercentHeight(50);
+		r.setPercentHeight(30);
 		getRowConstraints().addAll(r, r);
 
 		// Spacings
@@ -39,12 +40,12 @@ public class ValidationGridPane extends GridPane {
 		setVgap(5);
 
 		// Content
-		add(getLblValidation(), 0, 0, 5, 1);
-		add(getBtnYes(), 1, 1, 1, 1);
-		add(getBtnNo(), 3, 1, 1, 1);
+		add(getLblValidation(), 2, 0, 5, 1);
+		add(getBtnYes(), 0, 1, 2, 1);
+		add(getBtnNo(), 3, 1, 2, 1);
 	}
 
-	/**
+	/*
 	 * If null instantiates lblValidation, sets it's ID and size, then returns it.
 	 * 
 	 * @return lblValidation, a Label object containing the validation question.
@@ -55,12 +56,13 @@ public class ValidationGridPane extends GridPane {
 			lblValidation.setId("btnValidationText");
 			lblValidation.setPrefHeight(Integer.MAX_VALUE);
 			lblValidation.setPrefWidth(Integer.MAX_VALUE);
+			GridPane.setHalignment(getLblValidation(), HPos.CENTER);
 		}
 
 		return lblValidation;
 	}
 
-	/**
+	/*
 	 * If null instantiates btnYes, sets it's ID, size and action when clicking on
 	 * it, then returns it. It's action is to ask the PlayingGridPane to verify the
 	 * answer picked by the user, to set invisible the validationGP, to enable the
@@ -90,7 +92,7 @@ public class ValidationGridPane extends GridPane {
 
 					int answerIndex = pgp.getQuestionGP().getAnswerIndex();
 					// Re-add the "button" class to the button
-					pgp.getQuestionGP().getBtnAnswer(answerIndex).setStyle("");
+					pgp.getQuestionGP().getBtnAnswer(answerIndex).getStyleClass().add("button");
 					// Set invisible the validation pane
 					pgp.setVisibleValidationGP(false);
 					// Enable btn "Cash in"
@@ -104,7 +106,7 @@ public class ValidationGridPane extends GridPane {
 		return btnYes;
 	}
 
-	/**
+	/*
 	 * If null instantiates btnNo, sets it's ID, size and action when clicking on
 	 * it, then returns it. It's action is to to set invisible the validationGP, to
 	 * enable the Cash-In button and the answers buttons.
@@ -125,7 +127,7 @@ public class ValidationGridPane extends GridPane {
 
 					int answerIndex = pgp.getQuestionGP().getAnswerIndex();
 					pgp.getQuestionGP().getBtnAnswer(answerIndex).setId("answerBtn");
-					pgp.getQuestionGP().getBtnAnswer(answerIndex).setStyle("");
+					pgp.getQuestionGP().getBtnAnswer(answerIndex).getStyleClass().add("button");
 
 					// Set validation grid pane invisible
 					pgp.setVisibleValidationGP(false);

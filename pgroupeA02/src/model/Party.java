@@ -27,30 +27,28 @@ public class Party {
 	private List<Double> jokerPublicPercents;
 	private List<Integer> joker5050Indexes;
 
-	/**
+	/*
 	 * Constructor of Party class. The param "chosenQuestions" gets instantiated as
 	 * an empty ArrayList<Question>. Gets Party.NB_STEPS_BY_ROUND questions for each
 	 * Round and then sort is by Round order.
 	 * 
 	 * @param deck A Deck that contains at least 15 questions, including 5 for each
-	 *             Round parameter.
+	 * Round parameter.
 	 * 
 	 * @throws QuestionsListIsEmptyException occurs when the list of questions from
-	 *                                       Deck is empty.
+	 * Deck is empty.
 	 * 
-	 * @throws DeckUnderFilledException      occurs when there's not enough
-	 *                                       questions to fit the requirement of
-	 *                                       Party.NB_STEPS for the Party.
+	 * @throws DeckUnderFilledException occurs when there's not enough questions to
+	 * fit the requirement of Party.NB_STEPS for the Party.
 	 * 
-	 * @throws NotEnoughQuestionsException   occurs when a Round has less questions
-	 *                                       than Party.NB_STEPS_BY_ROUND asks it to
-	 *                                       have.
+	 * @throws NotEnoughQuestionsException occurs when a Round has less questions
+	 * than Party.NB_STEPS_BY_ROUND asks it to have.
 	 * 
-	 * @throws NotEnoughQuestionsException   occurs when a Round has more questions
-	 *                                       than Party.NB_STEPS_BY_ROUND asks it to
-	 *                                       have.
+	 * @throws NotEnoughQuestionsException occurs when a Round has more questions
+	 * than Party.NB_STEPS_BY_ROUND asks it to have.
 	 */
-	public Party(Deck deck) throws EmptyQuestionsListException, DeckUnderFilledException, NotEnoughQuestionsException {
+	public Party(Deck deck) throws EmptyQuestionsListException, DeckUnderFilledException, NotEnoughQuestionsException,
+			TooMuchQuestionsException {
 		if (deck.getQuestions() == null)
 			throw new EmptyQuestionsListException();
 		if (deck.getQuestions().size() < 15)
@@ -106,7 +104,7 @@ public class Party {
 		joker5050Indexes = new ArrayList<>();
 	}
 
-	/**
+	/*
 	 * Returns the nb of questions in chosenQuestions for the Round passed as an
 	 * argument.
 	 * 
@@ -125,26 +123,28 @@ public class Party {
 		return nb;
 	}
 
-	/**
+	/*
 	 * Sorts the questions by Round enumeration declaration order.
 	 */
 	public void sortQuestionsByRounds() {
 		if (chosenQuestions != null) {
-			Collections.sort(chosenQuestions, new Comparator<Question>() {
+			Collections.sort(chosenQuestions, new Comparator<Object>() {
 
 				@Override
-				public int compare(Question q1, Question q2) {
-					int ordinalQ1 = q1.getRound().ordinal();
-					int ordinalQ2 = q2.getRound().ordinal();
+				public int compare(Object o1, Object o2) {
+					Question q1 = (Question) o1;
+					Round r1 = q1.getRound();
 
-					return Integer.compare(ordinalQ1, ordinalQ2);
+					Question q2 = (Question) o2;
+					Round r2 = q2.getRound();
+					return Integer.compare(r1.ordinal(), r2.ordinal());
 				}
 
 			});
 		}
 	}
 
-	/**
+	/*
 	 * Returns if the Party has a next step of is ended.
 	 * 
 	 * @return if actualStep is lower than NB_STEPS.
@@ -153,11 +153,11 @@ public class Party {
 		return actualStep < NB_STEPS;
 	}
 
-	/**
+	/*
 	 * Returns the Question for the next step and increments actualStep by 1.
 	 * 
 	 * @throws ExceedMaxStepsException occurs if the actual step is higher than the
-	 *                                 Party.NB_STEPS
+	 * Party.NB_STEPS
 	 * 
 	 * @return the Question for the next step.
 	 */
@@ -172,7 +172,7 @@ public class Party {
 		return (chosenQuestions.get(actualStep - 1));
 	}
 
-	/**
+	/*
 	 * Step-up the party Round.
 	 */
 	public void goToNextRound() {
@@ -185,7 +185,7 @@ public class Party {
 		}
 	}
 
-	/**
+	/*
 	 * Return the actual Round.
 	 * 
 	 * @return Actual Round.
@@ -194,7 +194,7 @@ public class Party {
 		return actualRound;
 	}
 
-	/**
+	/*
 	 * Return if the current round is over.
 	 * 
 	 * @return if the round is over.
@@ -203,7 +203,7 @@ public class Party {
 		return ((actualStep % Party.NB_STEPS_BY_ROUND) - 1 == 0 && actualStep > 1);
 	}
 
-	/**
+	/*
 	 * Returns the actual step.
 	 * 
 	 * @return actual step.
@@ -212,7 +212,7 @@ public class Party {
 		return actualStep;
 	}
 
-	/**
+	/*
 	 * Return a description of the chosen questions.
 	 * 
 	 * @return the description.
@@ -230,7 +230,7 @@ public class Party {
 		return tmp;
 	}
 
-	/**
+	/*
 	 * Return the right answer index.
 	 * 
 	 * @return The int that represents the right answer index.
@@ -239,14 +239,14 @@ public class Party {
 		return rightAnswerIndex;
 	}
 
-	/**
+	/*
 	 * Set a new value for rightAnswerIndex. The new value must be higher or equals
 	 * to 0 and lower than Question.NB_ANSWERS.
 	 * 
 	 * @param rightAnswerIndex, the new right answer index.
 	 * 
 	 * @throws IndexOutOfBoundsException if the index is out of bounds. Describe the
-	 *                                   bounds with a message.
+	 * bounds with a message.
 	 */
 	public void setRightAnswerIndex(int rightAnswerIndex) {
 		if (rightAnswerIndex >= 0 && rightAnswerIndex < Question.NB_ANSWERS)
@@ -256,7 +256,7 @@ public class Party {
 					+ Question.NB_ANSWERS + ". However, it's value is : " + rightAnswerIndex);
 	}
 
-	/**
+	/*
 	 * Return the right answer statement.
 	 * 
 	 * @param The String object that represents the right answer statement.
@@ -265,13 +265,13 @@ public class Party {
 		return rightAnswer;
 	}
 
-	/**
+	/*
 	 * Set a new value for rightAnswer, the value must no be empty.
 	 * 
 	 * @param rightAnswer the new value for rightAnswer.
 	 * 
 	 * @throws IllegalArgumentException if the answer is null or empty. Describe the
-	 *                                  problem that occured.
+	 * problem that occured.
 	 */
 	public void setRightAnswer(String rightAnswer) {
 		if (rightAnswer != null && !rightAnswer.isEmpty())
@@ -282,7 +282,7 @@ public class Party {
 			throw new IllegalArgumentException("The param rightAnswer is empty.");
 	}
 
-	/**
+	/*
 	 * Return the index for the friend joker.
 	 * 
 	 * @return An int with the value of the joker friend index.
@@ -291,14 +291,14 @@ public class Party {
 		return jokerFriendIndex;
 	}
 
-	/**
+	/*
 	 * Set a new value for jokerFriendIndex. The new value must be higher or equals
 	 * to 0 and lower than Question.NB_ANSWERS.
 	 * 
 	 * @param jokerFriendIndex, the new joker friend index.
 	 * 
 	 * @throws IndexOutOfBoundsException if the index is out of bounds. Describe the
-	 *                                   bounds with a message.
+	 * bounds with a message.
 	 */
 	public void setJokerFriendIndex(int jokerFriendIndex) throws IndexOutOfBoundsException {
 		if (jokerFriendIndex >= 0 && jokerFriendIndex < Question.NB_ANSWERS)
@@ -308,27 +308,26 @@ public class Party {
 					+ Question.NB_ANSWERS + ". However, it's value is : " + jokerFriendIndex);
 	}
 
-	/**
+	/*
 	 * Return the list of percents allowed by the public for the public joker.
 	 * 
 	 * @return A List of double var that represents the percents of votes allowed by
-	 *         the public.
+	 * the public.
 	 */
 	public List<Double> getJokerPublicPercents() {
 		return jokerPublicPercents;
 	}
 
-	/**
+	/*
 	 * Replace the values of the jokerPublicPercents List.
 	 * 
 	 * @param jokerPublicPercents, the new List of doubles.
 	 * 
 	 * @throws IndexOutOfBoundsException if a percents value isn't between 0 and 100
-	 *                                   included.
+	 * included.
 	 * 
-	 * @throws IllegalArgumentException  if the size of the param isn't equals to
-	 *                                   Question.NB_ANSWERS or if the param is
-	 *                                   null.
+	 * @throws IllegalArgumentException if the size of the param isn't equals to
+	 * Question.NB_ANSWERS or if the param is null.
 	 */
 	public void setJokerPublicPercents(List<Double> jokerPublicPercents)
 			throws IndexOutOfBoundsException, IllegalArgumentException {
@@ -351,7 +350,7 @@ public class Party {
 		this.jokerPublicPercents = jokerPublicPercents;
 	}
 
-	/**
+	/*
 	 * Return the List of indexes for the 5050 joker.
 	 * 
 	 * @return the List of indexes.
@@ -360,17 +359,16 @@ public class Party {
 		return joker5050Indexes;
 	}
 
-	/**
+	/*
 	 * Replace the values of the joker5050Indexes List.
 	 * 
 	 * @param joker5050Indexes, the new List of ints.
 	 * 
 	 * @throws IndexOutOfBoundsException if an index isn't between 0 and
-	 *                                   Question.NB_ANSWERS -1
+	 * Question.NB_ANSWERS -1
 	 * 
-	 * @throws IllegalArgumentException  if the size of the param isn't equals to
-	 *                                   Question.NB_ANSWERS/2 or if the param is
-	 *                                   null.
+	 * @throws IllegalArgumentException if the size of the param isn't equals to
+	 * Question.NB_ANSWERS/2 or if the param is null.
 	 */
 	public void setJoker5050Indexes(List<Integer> joker5050Indexes)
 			throws IndexOutOfBoundsException, IllegalArgumentException {

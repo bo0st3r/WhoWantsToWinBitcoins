@@ -15,7 +15,7 @@ public class JokerPublic implements JokerStrategy {
 	private double tot;
 	private double accuracyRate;
 
-	/**
+	/*
 	 * JokerPublic constructor. Initialize publicVotePercents as an empty ArrayList.
 	 * Set tot and accuracyRate values to 0.
 	 */
@@ -25,7 +25,7 @@ public class JokerPublic implements JokerStrategy {
 		publicVotePercents = new ArrayList<>();
 	}
 
-	/**
+	/*
 	 * JokerStrategy pattern method, generates 4 random numbers whose sum is 100 and
 	 * who will be used to display the JokerPublic result. A rate will be picked
 	 * depending on the actual round. The higher the round is, the lower the rate
@@ -84,7 +84,7 @@ public class JokerPublic implements JokerStrategy {
 		party.setJokerPublicPercents(publicVotePercents);
 	}
 
-	/**
+	/*
 	 * Generates as much random numbers as Question.NB_ANSWERS value. Adds it to
 	 * publicVotePercent and add it's value to tot.
 	 */
@@ -97,7 +97,7 @@ public class JokerPublic implements JokerStrategy {
 		}
 	}
 
-	/**
+	/*
 	 * Determines the accuracyRate for the Round ongoing.
 	 */
 	public void getAccuracyRate(Party party) {

@@ -16,27 +16,27 @@ import exceptions.TooMuchAnswersException;
 
 public class Question {
 	public static final int NB_ANSWERS = 4;
-
+	
 	private Map<String, Boolean> choices;
 	private Round round;
 	private String author;
 	private String statement;
 
-	/**
+
+	/*
 	 * Constructor of Question class. The param "choices" just gets instantiated as
 	 * an empty HashMap<String,Boolean>.
 	 * 
-	 * @param author    The name of the question's author, as a String.
+	 * @param author The name of the question's author, as a String.
 	 * 
 	 * @param statement The statement of the question, as a String.
 	 * 
-	 * @param round     The game round of the question.
+	 * @param round The game round of the question.
 	 * 
 	 * @throws StatementTooShortException If the statement is less than 15
-	 *                                    characters long.
+	 * characters long.
 	 * 
-	 * @throws NotARoundException         If the round param passed is not from
-	 *                                    Round enum.
+	 * @throws NotARoundException If the round param passed is not from Round enum.
 	 */
 	public Question(String author, String statement, Round round)
 			throws StatementTooShortException, NotARoundException {
@@ -58,27 +58,24 @@ public class Question {
 		choices = new HashMap<String, Boolean>();
 	}
 
-	/**
+	/*
 	 * This method adds a choice to the question, it also indicates if it's the
 	 * right answer or no.
 	 * 
 	 * @param answer A string that is the answer which will be added to the question
 	 * 
-	 * @param value  A boolean that states if it is or not the right answer
+	 * @param value A boolean that states if it is or not the right answer
 	 * 
-	 * @throws TooMuchAnswersException            If there's already 4 answers
-	 *                                            present.
+	 * @throws TooMuchAnswersException If there's already 4 answers present.
 	 * 
-	 * @throws AnswerAlreadyPresentException      If this answer's already present.
+	 * @throws AnswerAlreadyPresentException If this answer's already present.
 	 * 
 	 * @throws RightAnswerAlreadyPresentException If we passed "value" param as true
-	 *                                            and the right answer is already
-	 *                                            present.
+	 * and the right answer is already present.
 	 * 
-	 * @throws NeedRightAnswerException           If we passed the fourth choice
-	 *                                            with "value" as false and there's
-	 *                                            already 3 false answers. (Cause we
-	 *                                            need the right answer)
+	 * @throws NeedRightAnswerException If we passed the fourth choice with "value"
+	 * as false and there's already 3 false answers. (Cause we need the right
+	 * answer)
 	 */
 	public void addChoice(String answer, boolean value) throws TooMuchAnswersException, AnswerAlreadyPresentException,
 			RightAnswerAlreadyPresentException, NeedRightAnswerException {
@@ -101,7 +98,7 @@ public class Question {
 		choices.put(answer, value);
 	}
 
-	/**
+	/*
 	 * Remove the answer related to the statement.
 	 * 
 	 * @param statement The statement of the answer to remove.
@@ -110,7 +107,7 @@ public class Question {
 		return choices.remove(statement);
 	}
 
-	/**
+	/*
 	 * If the question already has it's right answer, removes it from the choices.
 	 */
 	public void removeRightAnswer() {
@@ -123,7 +120,7 @@ public class Question {
 		}
 	}
 
-	/**
+	/*
 	 * If the question already has it's right answer, returns it.
 	 * 
 	 * @throws NoRightAnswerException If there is no right answer yet.
@@ -140,9 +137,6 @@ public class Question {
 		throw new NoRightAnswerException(statement);
 	}
 
-	/**
-	 * Clear the list of answer choices.
-	 */
 	public void clearChoices() {
 		choices.clear();
 	}

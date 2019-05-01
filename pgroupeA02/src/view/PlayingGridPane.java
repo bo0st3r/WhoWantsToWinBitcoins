@@ -55,7 +55,7 @@ public class PlayingGridPane extends GridPane {
 	// Timer
 	private TimerFlowPane timerFP;
 
-	/**
+	/*
 	 * PlayingGridPane constructor
 	 * 
 	 * Instantiate earning, set defaut value for pyramidActualStep, cols and rows
@@ -64,8 +64,8 @@ public class PlayingGridPane extends GridPane {
 	 * user know that there has been a problem with the deck.
 	 */
 	public PlayingGridPane() {
-		earning = new Earning(Earning.FILE_NAME);
-//		setGridLinesVisible(true);
+		earning = new Earning();
+		//setGridLinesVisible(true);
 
 		// Set columns
 		double[] sizesCol = { 3, 9.5, 21.5, 5, 1.5, 15.5, 15.5, 5, 3.5, 20, 3 };
@@ -95,7 +95,7 @@ public class PlayingGridPane extends GridPane {
 		add(getTimerFP(), 5, 3, 2, 2);
 
 		// Validation
-		add(getValidationGP(), 3, 1, 5, 4);
+		add(getValidationGP(), 3, 2, 5, 4);
 
 		// Exit button
 		add(getBtnCashIn(), 9, 1);
@@ -118,29 +118,29 @@ public class PlayingGridPane extends GridPane {
 			e.printStackTrace();
 		} catch (ExceedMaxStepsException e1) {
 			// Make the user win the party
-			alertPop("A problem occured with the party.");
+			alertPop("A problem occured with party.");
 			e1.printStackTrace();
 		}
 	}
 
-	/**
+	/*
 	 * Run a new party using a questions deck.
 	 * 
 	 * @param dest The name of the JSON file used to get the questions deck.
 	 * 
 	 * @throws QuestionsListIsEmptyException When the questions deck is empty.
 	 * 
-	 * @throws DeckUnderFilledException      When the deck size is lower than the
-	 *                                       number of steps.
+	 * @throws DeckUnderFilledException When the deck size is lower than the number
+	 * of steps.
 	 * 
-	 * @throws NotEnoughQuestionsException   When the deck has not enough questions
-	 *                                       for each round.
+	 * @throws NotEnoughQuestionsException When the deck has not enough questions
+	 * for each round.
 	 * 
-	 * @throws TooMuchQuestionsException     When the deck has too much questions
-	 *                                       for a round.
+	 * @throws TooMuchQuestionsException When the deck has too much questions for a
+	 * round.
 	 * 
-	 * @throws ExceedMaxStepsException       When the actual step is higher than the
-	 *                                       max steps.
+	 * @throws ExceedMaxStepsException When the actual step is higher than the max
+	 * steps.
 	 */
 	public void runNewParty(String dest) throws EmptyQuestionsListException, DeckUnderFilledException,
 			NotEnoughQuestionsException, TooMuchQuestionsException, ExceedMaxStepsException {
@@ -155,7 +155,7 @@ public class PlayingGridPane extends GridPane {
 		getTimerFP().runTimer();
 	}
 
-	/**
+	/*
 	 * Verify if the user has either won the party or lost or answered correctly.
 	 * 
 	 * If the answer is right and the actual step is less than the max step, then it
@@ -168,7 +168,7 @@ public class PlayingGridPane extends GridPane {
 	 * of money he won. Then gets the GUI back to the home pane.
 	 * 
 	 * @throws ExceedMaxStepsException When the actual step is higher than the max
-	 *                                 steps.
+	 * steps.
 	 */
 	public void verifyAnswer() throws ExceedMaxStepsException {
 		int answerIndex = questionGP.getAnswerIndex();
@@ -233,15 +233,16 @@ public class PlayingGridPane extends GridPane {
 		}
 	}
 
-	/**
+	/*
 	 * Shows the next question on the GUI and hide previous jokers effects if used.
 	 * 
 	 * @throws ExceedMaxStepsException When the actual step is higher than the max
-	 *                                 steps.
+	 * steps.
 	 */
 	public void getNextQuestion() throws ExceedMaxStepsException {
 		// Gets the next question
 		Question actualQuestion = party.getQuestionNextStep();
+
 		// Sets the new statement
 		questionGP.getLblStatement().setText(actualQuestion.getStatement());
 
@@ -273,7 +274,7 @@ public class PlayingGridPane extends GridPane {
 		}
 	}
 
-	/**
+	/*
 	 * Return the Party instance.
 	 * 
 	 * @return earning instance of party.
@@ -282,7 +283,7 @@ public class PlayingGridPane extends GridPane {
 		return party;
 	}
 
-	/**
+	/*
 	 * Stops the timer, then if "value" is true hide this pane and shows the winning
 	 * pane, else it shows the loosing pane.
 	 * 
@@ -293,8 +294,10 @@ public class PlayingGridPane extends GridPane {
 
 		// Won
 		if (value) {
-			// Show the party won pane
-			((PartyStackPane) getParent().getParent()).partyWon();
+			//alertPop("Congrats, you won !");
+			setVisible(false);
+			((PartyStackPane) getParent().getParent()).getPartyWonGridPane().setVisible(true);
+
 		}
 
 		// Lost
@@ -313,14 +316,14 @@ public class PlayingGridPane extends GridPane {
 			// Loosing alert
 //			alertPop("Sorry, you're a looser !\n" + "The right answer was\n\n \"" + party.getRightAnswer()
 //					+ "\"\n\n You won : " + getEarningsWhenLost() + " Bitcoins");
-
-			// Show the party lost pane
-			((PartyStackPane) getParent().getParent()).partyLost();
+			setVisible(false);
+			
+			((PartyStackPane) getParent().getParent()).getPartyLostGridPane().setVisible(true);
 		}
 
 	}
 
-	/**
+	/*
 	 * Return the Earning instance.
 	 * 
 	 * @return the instance of Earning.
@@ -329,7 +332,7 @@ public class PlayingGridPane extends GridPane {
 		return earning;
 	}
 
-	/**
+	/*
 	 * If jokerVB is null, instantiate a JokerVBox.
 	 * 
 	 * @return the instance of JokerVBox.
@@ -341,7 +344,7 @@ public class PlayingGridPane extends GridPane {
 		return jokerVB;
 	}
 
-	/**
+	/*
 	 * If questionGP is null, instantiate a QuestionGridPane.
 	 * 
 	 * @return the instance of QuestionGridPane.
@@ -357,7 +360,7 @@ public class PlayingGridPane extends GridPane {
 		questionGP.setDisableBtnAnswer(value);
 	}
 
-	/**
+	/*
 	 * If lblJokerResults is null then instantiate it with Question.NB_ANSWERS as
 	 * size. For each Label in the array, set the ID as "jokerResults", set it
 	 * invisible and center it vertically in the pane.
@@ -379,18 +382,18 @@ public class PlayingGridPane extends GridPane {
 		return lblJokerResults[index];
 	}
 
-	/**
+	/*
 	 * Replace the specified Label text.
 	 * 
 	 * @param index used to specify which Label is requested.
 	 * 
-	 * @param text  used to replace the Label text.
+	 * @param text used to replace the Label text.
 	 */
 	public void lblJokerResultsSetText(int index, String text) {
 		getLblJokerResults(index).setText(text);
 	}
 
-	/**
+	/*
 	 * Set visible or not every joker results.
 	 * 
 	 * @param value boolean used set visible or not.
@@ -401,7 +404,7 @@ public class PlayingGridPane extends GridPane {
 		}
 	}
 
-	/**
+	/*
 	 * Set visible or not all the joker results.
 	 * 
 	 * @param value boolean used set visible or not.
@@ -412,7 +415,7 @@ public class PlayingGridPane extends GridPane {
 		lblJokerResults[index].setVisible(value);
 	}
 
-	/**
+	/*
 	 * If timerFP is null, instantiate it and set his ID and alignment.
 	 * 
 	 * @return The FimerFlowPane instance.
@@ -422,12 +425,13 @@ public class PlayingGridPane extends GridPane {
 			timerFP = new TimerFlowPane();
 			timerFP.setId("timer");
 			timerFP.setAlignment(Pos.CENTER);
+			
 		}
 		return timerFP;
 	}
 
 	// Answer validation
-	/***
+	/**
 	 * @param s is the text in the alert
 	 * @return Alert
 	 */
@@ -436,13 +440,13 @@ public class PlayingGridPane extends GridPane {
 		alert.initModality(Modality.WINDOW_MODAL);
 		alert.showAndWait();
 
-		((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
 		setVisible(false);
+		((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
 
 		return alert;
 	}
 
-	/**
+	/*
 	 * If validationGP is null, instantiate it and set it invisible.
 	 * 
 	 * @return The ValidationGridPane instance.
@@ -450,14 +454,13 @@ public class PlayingGridPane extends GridPane {
 	public ValidationGridPane getValidationGP() {
 		if (validationGP == null) {
 			validationGP = new ValidationGridPane();
-			validationGP.setId("validationPane");
 			validationGP.setVisible(false);
-			GridPane.setValignment(validationGP, VPos.CENTER);
+			GridPane.setValignment(getValidationGP(), VPos.CENTER);
 		}
 		return validationGP;
 	}
 
-	/**
+	/*
 	 * Set the ValidationGridPane as visible or not.
 	 * 
 	 * @param value boolean value used to set visible or not.
@@ -466,7 +469,7 @@ public class PlayingGridPane extends GridPane {
 		getValidationGP().setVisible(value);
 	}
 
-	/**
+	/*
 	 * If btnCashIn is null, instantiate it, set it's min size to 0x0 and it's
 	 * prefSize to max.
 	 * 
@@ -481,9 +484,9 @@ public class PlayingGridPane extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					// Show the party left pane
-					((PartyStackPane) getParent().getParent()).partyLeft();
-
+					//alertPop("You won: " + getEarningsWhenLeaving() + " Bitcoins");
+					setVisible(false);
+					((PartyStackPane) getParent().getParent()).getLeavePartyGridPane().setVisible(true);
 					getTimerFP().stopTimer();
 				}
 			});
@@ -491,7 +494,7 @@ public class PlayingGridPane extends GridPane {
 		return btnCashIn;
 	}
 
-	/**
+	/*
 	 * Get the earnings when the player loses.
 	 *
 	 * @return double, the amount won.
@@ -509,7 +512,7 @@ public class PlayingGridPane extends GridPane {
 		return earn;
 	}
 
-	/**
+	/*
 	 * Get the earnings when the player leaves.
 	 * 
 	 * @return double, the amount won.
@@ -524,7 +527,7 @@ public class PlayingGridPane extends GridPane {
 		return earn;
 	}
 
-	/**
+	/*
 	 * If the pyramidGP is null, instantiate it, set it's min height to 0 and it's
 	 * ID to "earningsPyramid". Then shows it in the pane.
 	 */

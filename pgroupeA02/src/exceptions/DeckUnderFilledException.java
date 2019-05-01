@@ -2,7 +2,7 @@ package exceptions;
 
 import model.Party;
 
-public class DeckUnderFilledException extends RuntimeException {
+public class DeckUnderFilledException extends Exception {
 	private static final long serialVersionUID = -4465061752767277294L;
 
 	public DeckUnderFilledException(int deckSize) {
