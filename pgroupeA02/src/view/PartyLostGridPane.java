@@ -10,12 +10,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public class PartyLostGridPane extends GridPane {
-	
+
 	private Label lblTitle;
 	private Label lblEarning;
 	private ImageView imgLostParty;
 	private Button btnOk;
-
 
 	/**
 	 * Constructor, set cols and rows constraints plus add the pane contents.
@@ -32,9 +31,9 @@ public class PartyLostGridPane extends GridPane {
 		getRowConstraints().addAll(r, r, r, r, r, r);
 
 		add(getLblEarning(), 2, 4, 3, 1);
-		add(getBtnOk(),2, 5, 2, 1);
+		add(getBtnOk(), 2, 5, 2, 1);
 		add(getLblTitle(), 4, 1, 2, 1);
-		
+
 	}
 
 	/**
@@ -53,43 +52,43 @@ public class PartyLostGridPane extends GridPane {
 	 */
 	public ImageView getImgLostParty() {
 		if (imgLostParty == null) {
-			imgLostParty = new ImageView("victory.png"); //A CHANGER
+			imgLostParty = new ImageView("victory.png"); // A CHANGER
 		}
 		return imgLostParty;
 	}
 
 	/**
-	 * If null instantiate btnOk, then return it. Define it's action when
-	 * using it.
+	 * If null instantiate btnOk, then return it. Define it's action when using it.
 	 * 
 	 * @return The Ok Button
 	 */
 	public Button getBtnOk() {
-		if (btnOk==null) {
+		if (btnOk == null) {
 			btnOk = new Button("Ok");
 			btnOk.setId("okButton");
 			btnOk.setPrefWidth(Integer.MAX_VALUE);
 			btnOk.setOnAction(new EventHandler<ActionEvent>() {
-				
+
 				@Override
 				public void handle(ActionEvent event) {
 					setVisible(false);
 					((ProjStackPane) getParent().getParent().getParent().getParent()).resetPane();
-					((ProjStackPane) getParent().getParent().getParent().getParent()).getHomeGridPane().setVisible(true);
-					//((ProjStackPane) getParent().getParent().getParent().getParent()).resetGame();
-					
+					((ProjStackPane) getParent().getParent().getParent().getParent()).getHomeGridPane()
+							.setVisible(true);
+					// ((ProjStackPane)
+					// getParent().getParent().getParent().getParent()).resetGame();
+
 				}
 			});
 		}
 		return btnOk;
 	}
+
 	public Label getLblTitle() {
-		if(lblTitle==null) {
+		if (lblTitle == null) {
 			lblTitle = new Label("You loose :(");
 		}
 		return lblTitle;
 	}
-	
-	
 
 }
