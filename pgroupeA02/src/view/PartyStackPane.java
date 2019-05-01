@@ -10,16 +10,13 @@ public class PartyStackPane extends BorderPane {
 	private PlayingGridPane playingGridPane;
 	private PartyWonGridPane partyWonGridPane;
 	private PartyLostGridPane partyLostGridPane;
-	private LeavePartyGridPane leavePartyGridPane;
-	
-
+	private PartyLeftGridPane partyLeftGridPane;
 
 	/**
-	 * Constructor, set PlayingGridPane visible at first, hide the others panes and set
-	 * stackPane as the center.
+	 * Constructor, set PlayingGridPane visible at first, hide the others panes and
+	 * set stackPane as the center.
 	 */
 	public PartyStackPane() {
-		
 		setId("partyStackPane");
 		// Center the pane
 		setCenter(getStackPane());
@@ -50,10 +47,34 @@ public class PartyStackPane extends BorderPane {
 
 	}
 
+	/**
+	 * Hide all the panes and then displays the PartyLeftGridPane.
+	 */
+	public void partyLeft() {
+		hideAllComponentsInStackPane();
+		getPartyLeftGridPane().setVisible(true);
+	}
+
+	/**
+	 * Hide all the panes and then displays the PartyWonGridPane.
+	 */
+	public void partyWon() {
+		hideAllComponentsInStackPane();
+		getPartyWonGridPane().setVisible(true);
+	}
+
+	/**
+	 * Hide all the panes and then displays the PartyLostGridPane.
+	 */
+	public void partyLost() {
+		hideAllComponentsInStackPane();
+		getPartyLostGridPane().setVisible(true);
+	}
+
 	// Getters
 	/**
-	 * If null, instantiates stackPane and adds panes Playing, PartyLost, PartyWon and LeaveParty to it's
-	 * childrens and then returns it.
+	 * If null, instantiates stackPane and adds panes Playing, PartyLost, PartyWon
+	 * and LeaveParty to it's childrens and then returns it.
 	 * 
 	 * @return stackPane, a StackPane object which contains the others main panes.
 	 */
@@ -61,11 +82,8 @@ public class PartyStackPane extends BorderPane {
 		if (stackPane == null) {
 			stackPane = new StackPane();
 			stackPane.getChildren().addAll(
-					
-					getPartyLostGridPane()
-					,getPartyWonGridPane()
-					,getLeavePartyGridPane()
-					);
+
+					getPartyLostGridPane(), getPartyWonGridPane(), getPartyLeftGridPane());
 		}
 		return stackPane;
 	}
@@ -82,34 +100,34 @@ public class PartyStackPane extends BorderPane {
 		}
 		return playingGridPane;
 	}
+
 	/**
-	 * If null, instantiates partyWonGridPane and  returns it.
+	 * If null, instantiates partyWonGridPane and returns it.
 	 * 
 	 * @return partyWonGridPane, a PartyWonGridPane object which is the win page.
 	 */
 	public PartyWonGridPane getPartyWonGridPane() {
-		if (partyWonGridPane==null) {
+		if (partyWonGridPane == null) {
 			partyWonGridPane = new PartyWonGridPane();
-			partyWonGridPane.setId("wonGridPane");
+			partyWonGridPane.setId("partyWonGridPane");
 		}
 		return partyWonGridPane;
 	}
 
 	public PartyLostGridPane getPartyLostGridPane() {
-		if (partyLostGridPane==null) {
+		if (partyLostGridPane == null) {
 			partyLostGridPane = new PartyLostGridPane();
-			partyLostGridPane.setId("lostGridPane");
+			partyLostGridPane.setId("partyLostGridPane");
 		}
 		return partyLostGridPane;
 	}
 
-	public LeavePartyGridPane getLeavePartyGridPane() {
-		if (leavePartyGridPane==null) {
-			leavePartyGridPane = new LeavePartyGridPane();
-			leavePartyGridPane.setId("leaveGridPane");
+	public PartyLeftGridPane getPartyLeftGridPane() {
+		if (partyLeftGridPane == null) {
+			partyLeftGridPane = new PartyLeftGridPane();
+			partyLeftGridPane.setId("partyLeftGridPane");
 		}
-		return leavePartyGridPane;
+		return partyLeftGridPane;
 	}
-	
 
 }

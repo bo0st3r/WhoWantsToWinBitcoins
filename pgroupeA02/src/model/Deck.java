@@ -13,7 +13,7 @@ public class Deck {
 		questions = new ArrayList<>();
 	}
 
-	/*
+	/**
 	 * This method adds a question to the deck if it's not yet in.
 	 * 
 	 * @param question A Question object
@@ -34,7 +34,7 @@ public class Deck {
 		return questions.add(question.clone());
 	}
 
-	/*
+	/**
 	 * If "questions" collection contains the Question passed as argument, removes
 	 * it from "questions".
 	 * 
@@ -44,14 +44,14 @@ public class Deck {
 		return questions.remove(question);
 	}
 
-	/*
+	/**
 	 * Returns the size of the deck.
 	 */
-	public int getDeckSize() {
+	public int questionsSize() {
 		return questions.size();
 	}
 
-	/*
+	/**
 	 * Returns a clone of the questions List.
 	 */
 	public List<Question> getQuestions() {

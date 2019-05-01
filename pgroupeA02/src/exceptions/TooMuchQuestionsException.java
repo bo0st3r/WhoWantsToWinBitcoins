@@ -3,7 +3,7 @@ package exceptions;
 import enumerations.Round;
 import model.Party;
 
-public class TooMuchQuestionsException extends Exception {
+public class TooMuchQuestionsException extends RuntimeException{
 	private static final long serialVersionUID = -328395467319113763L;
 
 	public TooMuchQuestionsException(Round round, int nbQuestions) {

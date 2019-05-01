@@ -10,14 +10,14 @@ public class JokerFriend implements JokerStrategy {
 	private static final double LAST_ROUND_RATE = 0.35;
 	private double accuracyRate;
 
-	/*
+	/**
 	 * JokerFriend constructor. Set accuracyRate to 0.
 	 */
 	public JokerFriend() {
 		accuracyRate = 0;
 	}
 
-	/*
+	/**
 	 * JokerStrategy pattern method, generate an index who will be used to display the JokerFriend result. A rate
 	 * will be picked depending on the actual round. The higher the round is, the
 	 * lower the rate will be. Then generates a random number between 0 and 1, if
@@ -54,7 +54,7 @@ public class JokerFriend implements JokerStrategy {
 		party.setJokerFriendIndex(index);
 	}
 
-	/*
+	/**
 	 * Determines the rate for the actual round.
 	 * 
 	 * @param party, the ongoing Party.

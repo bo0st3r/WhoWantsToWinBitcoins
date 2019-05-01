@@ -14,7 +14,7 @@ public class QuestionGridPane extends GridPane {
 	private Button btnAnswer[];
 	private int answerIndex;
 
-	/*
+	/**
 	 * Constructor. Sets rows and cols constraints and define the pane contents.
 	 */
 	public QuestionGridPane() {
@@ -46,12 +46,12 @@ public class QuestionGridPane extends GridPane {
 		add(getBtnAnswer(3), 2, 4);
 	}
 
-	/*
+	/**
 	 * If null, instantiates lblStatement, sets it's prefered size and CSS ID, then
 	 * returns it.
 	 * 
 	 * @return lblStatement, a Label object which contains the actual question
-	 * statement.
+	 *         statement.
 	 */
 	public Label getLblStatement() {
 		if (lblStatement == null) {
@@ -63,7 +63,7 @@ public class QuestionGridPane extends GridPane {
 		return lblStatement;
 	}
 
-	/*
+	/**
 	 * If null instantiates btnAnswer list, for the specified index sets it's
 	 * prefered size, CSS ID and action when clicking on it and then returns it.
 	 * Clicking on the button will set it's index as the new value of answerIndex,
@@ -72,7 +72,7 @@ public class QuestionGridPane extends GridPane {
 	 * @param index, the list index of the selected button answer button.
 	 * 
 	 * @return btnAnswer, a Button object which contains the answer for the
-	 * specified index.
+	 *         specified index.
 	 */
 	public Button getBtnAnswer(int index) {
 		if (btnAnswer == null)
@@ -92,8 +92,8 @@ public class QuestionGridPane extends GridPane {
 
 					PlayingGridPane pgp = ((PartyStackPane) getParent().getParent().getParent()).getPlayingGridPane();
 
-					// Remove Button class from the btn
-					pgp.getQuestionGP().getBtnAnswer(answerIndex).getStyleClass().remove("button");
+					btnAnswer[index].setStyle("-fx-opacity:1.0;");
+
 					// Set validation grid pane visible
 					pgp.setVisibleValidationGP(true);
 					// Disable btn "Cash in"
@@ -106,7 +106,7 @@ public class QuestionGridPane extends GridPane {
 		return btnAnswer[index];
 	}
 
-	/*
+	/**
 	 * Set disabled or not the answer btn specified by the index using the boolean
 	 * value.
 	 * 
@@ -118,7 +118,7 @@ public class QuestionGridPane extends GridPane {
 		btnAnswer[index].setDisable(value);
 	}
 
-	/*
+	/**
 	 * Set disabled or not every answer button using the boolean value.
 	 * 
 	 * @param value, the new boolean value (true for disabled, false for enabled).
@@ -129,7 +129,7 @@ public class QuestionGridPane extends GridPane {
 		}
 	}
 
-	/*
+	/**
 	 * Return the actual answer's index.
 	 * 
 	 * @return answerIndex, the index of the last answer button clicked by the user.

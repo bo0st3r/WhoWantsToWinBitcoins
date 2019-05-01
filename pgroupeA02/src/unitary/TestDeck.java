@@ -67,6 +67,11 @@ public class TestDeck {
 	}
 
 	@Test
+	public void testDeck() {
+		assertNotNull("Constructor returns null", questions);
+	}
+	
+	@Test
 	public void testAddQuestion() throws QuestionAlreadyPresentException, NotEnoughAnswersException {
 		deck.addQuestion(q1);
 		assertTrue("Question has not been added", questions.size() == 1);
@@ -85,7 +90,8 @@ public class TestDeck {
 	}
 
 	@Test(expected = NotEnoughAnswersException.class)
-	public void testAddQuestionNotAllAnswersException() throws QuestionAlreadyPresentException, NotEnoughAnswersException {
+	public void testAddQuestionNotAllAnswersException()
+			throws QuestionAlreadyPresentException, NotEnoughAnswersException {
 		deck.addQuestion(q3);
 	}
 
@@ -102,7 +108,7 @@ public class TestDeck {
 	public void testGetDeckSize() {
 		questions.add(q1);
 		questions.add(q2);
-		assertEquals("Returned deck size is not right", deck.getDeckSize(), 2);
+		assertEquals("Returned deck size is not right", deck.questionsSize(), 2);
 	}
 
 	@Test
