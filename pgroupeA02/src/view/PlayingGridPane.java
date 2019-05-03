@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import exceptions.DeckUnderFilledException;
+import exceptions.EmptyQuestionsListException;
 import exceptions.ExceedMaxStepsException;
 import exceptions.NotEnoughQuestionsException;
-import exceptions.EmptyQuestionsListException;
 import exceptions.TooMuchQuestionsException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -156,16 +156,8 @@ public class PlayingGridPane extends GridPane {
 	}
 
 	/**
-	 * Verify if the user has either won the party or lost or answered correctly.
-	 * 
-	 * If the answer is right and the actual step is less than the max step, then it
-	 * shows to the user that he answered correctly and pause the party for 1.5
-	 * seconds. Then go to the next question.
-	 * 
-	 * If the user has won, it indicates this to him and then stop the timer.
-	 * 
-	 * Finally, if the user has lost it indicates to him that he lost and the amount
-	 * of money he won. Then gets the GUI back to the home pane.
+	 * Verify if the user has either won the party or lost or answered correctly and
+	 * reacts accordingly.
 	 * 
 	 * @throws ExceedMaxStepsException When the actual step is higher than the max
 	 *                                 steps.
@@ -175,8 +167,32 @@ public class PlayingGridPane extends GridPane {
 		int rightAnswerIndex = party.getRightAnswerIndex();
 		int actualStep = party.getActualStep();
 
-		// Still playing
-		if (answerIndex == rightAnswerIndex && actualStep < Party.NB_STEPS) {
+		// Actual step too high
+		if (actualStep > Party.NB_STEPS) {
+			throw new ExceedMaxStepsException(actualStep);
+			// Still playing
+		} else if (answerIndex == rightAnswerIndex) {
+			onRightAnswer();
+			// Lost
+		} else {
+			onLost();
+		}
+	}
+
+	/**
+	 * If the answer is right and the actual step is less than the max step, then it
+	 * shows to the user that he answered correctly and pause the party for 1.5
+	 * seconds. Then go to the next question.
+	 * 
+	 * If the user has won, it indicates this to him and then stop the timer.
+	 */
+	public void onRightAnswer() {
+		int answerIndex = questionGP.getAnswerIndex();
+		int rightAnswerIndex = party.getRightAnswerIndex();
+		int actualStep = party.getActualStep();
+
+		// When the player's still playing
+		if (actualStep < Party.NB_STEPS) {
 			// Sets the button showing as right
 			questionGP.getBtnAnswer(answerIndex).setId("answerBtnOk");
 
@@ -217,20 +233,27 @@ public class PlayingGridPane extends GridPane {
 				}
 			}).start();
 
-			// Party won
+			// When the player has won
 		} else if (actualStep == Party.NB_STEPS) {
 			endPartyWithResult(true);
-
-			// Party lost
-		} else {
-			// Disable buttons except right answer button and button clicked by the user
-			for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
-				if (i != rightAnswerIndex && i != answerIndex)
-					questionGP.setDisableBtnAnswer(true, i);
-			}
-
-			endPartyWithResult(false);
 		}
+	}
+
+	/**
+	 * If the user has lost it indicates to him that he lost and the amount of money
+	 * he won. Then gets the GUI back to the home pane.
+	 */
+	public void onLost() {
+		int answerIndex = questionGP.getAnswerIndex();
+		int rightAnswerIndex = party.getRightAnswerIndex();
+
+		// Disable buttons except right answer button and button clicked by the user
+		for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
+			if (i != rightAnswerIndex && i != answerIndex)
+				questionGP.setDisableBtnAnswer(true, i);
+		}
+
+		endPartyWithResult(false);
 	}
 
 	/**
@@ -262,14 +285,27 @@ public class PlayingGridPane extends GridPane {
 			index++;
 		}
 
-		// Hide joker effects
-		if (jokerVB.isCancelJokerResults()) {
+		// Hide every joker's effects
+		if (getJokerVB().isCancelJokerResults()) {
 			setVisibleLblJokerResults(false);
-			questionGP.setDisableBtnAnswer(false);
+
+			getQuestionGP().setDisableBtnAnswer(false);
 			for (int i = 0; i <= Question.NB_ANSWERS - 1; i++) {
-				questionGP.getBtnAnswer(i).setId("");
+				getQuestionGP().getBtnAnswer(i).setId("");
 			}
-			jokerVB.setCancelJokerResults(false);
+
+			// Set the cancelJoker5050 field to false
+			getJokerVB().setCancelJoker5050(false);
+
+		}
+
+		// Hide the 5050 joker results
+		if (getJokerVB().isCancelJoker5050()) {
+			// Set the cancelJoker5050 field to false
+			getJokerVB().setCancelJoker5050(false);
+
+			// Empty the joker5050Indexes field
+			getParty().clearJoker5050Indexes();
 		}
 	}
 
@@ -353,8 +389,23 @@ public class PlayingGridPane extends GridPane {
 		return questionGP;
 	}
 
+	/**
+	 * Set the if answer buttons are enabled or not.
+	 * 
+	 * @param value the value to set.
+	 */
 	public void setDisableBtnAnswer(boolean value) {
 		questionGP.setDisableBtnAnswer(value);
+	}
+
+	/**
+	 * Set the if the answer button is enabled or not for the specified index.
+	 * 
+	 * @param value the value to set.
+	 * @param index the button index.
+	 */
+	public void setDisableBtnAnswer(boolean value, int index) {
+		questionGP.setDisableBtnAnswer(value, index);
 	}
 
 	/**

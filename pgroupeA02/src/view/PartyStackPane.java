@@ -33,6 +33,15 @@ public class PartyStackPane extends BorderPane {
 		}
 	}
 
+	public void returnToHome() {
+		// Hides this pane
+		setVisible(false);
+		hideAllComponentsInStackPane();
+
+		// Sets the Home pane visible
+		((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+	}
+
 	/**
 	 * Reset the playingGridPane in order to run a new party.
 	 */
@@ -81,9 +90,7 @@ public class PartyStackPane extends BorderPane {
 	public StackPane getStackPane() {
 		if (stackPane == null) {
 			stackPane = new StackPane();
-			stackPane.getChildren().addAll(
-
-					getPartyLostGridPane(), getPartyWonGridPane(), getPartyLeftGridPane());
+			stackPane.getChildren().addAll(getPartyLostGridPane(), getPartyWonGridPane(), getPartyLeftGridPane());
 		}
 		return stackPane;
 	}

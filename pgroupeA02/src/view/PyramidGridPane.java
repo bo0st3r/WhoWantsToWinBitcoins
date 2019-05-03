@@ -67,7 +67,6 @@ public class PyramidGridPane extends GridPane {
 				lblGain.get(step).setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
 
 				if (step % 5 == 0 && step != Party.NB_STEPS) {
-					System.out.println(step);
 					lblGain.get(step).setId("");
 					lblGain.get(step).getStyleClass().add("pyramidTextRound");
 				}
@@ -82,9 +81,16 @@ public class PyramidGridPane extends GridPane {
 	public void goToNextStep() {
 		// Old earnings
 		getLblGain(pyramidActualStep).setId("textEarningsPyramid");
+
+		if (pyramidActualStep % 5 == 0 && pyramidActualStep != Party.NB_STEPS) {
+			lblGain.get(pyramidActualStep).setId("");
+			lblGain.get(pyramidActualStep).getStyleClass().add("pyramidTextRound");
+		}
+
 		// Actual earnings
 		getLblGain(pyramidActualStep - 1).setId("pyramidActualStep");
 		pyramidActualStep--;
+
 	}
 
 	/*

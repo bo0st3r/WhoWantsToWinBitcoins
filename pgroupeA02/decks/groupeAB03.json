@@ -1,0 +1,70 @@
+{
+	"questions": [
+		{
+			"author": "Pagnieau",
+			"round": "FIRST_ROUND",
+			"statement": "In the movie Lord of Ring what kind of race is Gimli",
+			"choices": {
+				"Dwarf": true,
+				"Hobbit": false,
+				"Wookiee": false,
+				"Elf": false
+			}
+		},
+		{
+			"author": "Pagnieau",
+			"round": "SECOND_ROUND",
+			"statement": "What does GPS stand for?",
+			"choices": {
+				"Global Positioning System": true,
+				"Geographical Precise System": false,
+				"General Positioning System": false,
+				"Geographical Positioning System": false
+			}
+		},
+		{
+			"author": "Pagnieau",
+			"round": "LAST_ROUND",
+			"statement": "In Harry Potter, which of these characters is nicknamed the Half-Blood Prince",
+			"choices": {
+				"Harry Potter": false,
+				"Albus Dumbledore": false,
+				"Severus Snape": true,
+				"Lord Voldemort": false
+			}
+		},
+		{
+			"author": "Fabio Gioé",
+			"round": "FIRST_ROUND",
+			"statement": "The city of Rio de Janeiro lies on which ocean ?",
+			"choices": {
+				"Indian": false,
+				"Arctic": false,
+				"Pacific": false,
+				"Atlantic": true
+			}
+		},
+		{
+			"author": "Fabio Gioé",
+			"round": "SECOND_ROUND",
+			"statement": "In which field is Roland Mouret a famous name?",
+			"choices": {
+				"Tennis": false,
+				"Fashion Design": true,
+				"Wether forecasting": false,
+				"Hair style": false
+			}
+		},
+		{
+			"author": "Fabio Gioé",
+			"round": "LAST_ROUND",
+			"statement": "What kind of musical work is Liberty Bell by John Philip Sousa",
+			"choices": {
+				"Polka": false,
+				"March": true,
+				"Nocturne ": false,
+				"Waltz": false
+			}
+		}
+	]
+}

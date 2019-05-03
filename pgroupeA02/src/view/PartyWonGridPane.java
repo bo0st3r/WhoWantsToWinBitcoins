@@ -15,7 +15,6 @@ public class PartyWonGridPane extends GridPane {
 	private Label lblEarning;
 	private ImageView imgWonParty;
 	private Button btnOk;
-	
 
 	/*
 	 * Constructor, set cols and rows constraints plus add the pane contents.
@@ -32,7 +31,7 @@ public class PartyWonGridPane extends GridPane {
 		getRowConstraints().addAll(r, r, r, r, r, r);
 
 		add(getLblEarning(), 2, 4, 3, 1);
-		add(getBtnOk(),2, 5, 2, 1);
+		add(getBtnOk(), 2, 5, 2, 1);
 		add(getLblTitle(), 4, 1, 2, 1);
 	}
 
@@ -53,23 +52,22 @@ public class PartyWonGridPane extends GridPane {
 	public ImageView getImgWonParty() {
 		if (imgWonParty == null) {
 			imgWonParty = new ImageView();
-			
+
 		}
 		return imgWonParty;
 	}
+
 	public Button getBtnOk() {
-		if (btnOk==null) {
+		if (btnOk == null) {
 			btnOk = new Button("Ok");
 			btnOk.setId("okButton");
 			btnOk.setPrefWidth(Integer.MAX_VALUE);
 			btnOk.setOnAction(new EventHandler<ActionEvent>() {
-				
+
 				@Override
 				public void handle(ActionEvent event) {
-					setVisible(false);
-					((ProjStackPane) getParent().getParent().getParent().getParent()).resetPane();
-					((ProjStackPane) getParent().getParent().getParent().getParent()).getHomeGridPane().setVisible(true);
-					
+					// Returns to the home pane
+					((PartyStackPane) getParent().getParent()).returnToHome();
 				}
 			});
 		}
@@ -77,10 +75,10 @@ public class PartyWonGridPane extends GridPane {
 	}
 
 	public Label getLblTitle() {
-		if(lblTitle==null) {
+		if (lblTitle == null) {
 			lblTitle = new Label("Congratulation!");
 		}
 		return lblTitle;
 	}
-	
+
 }

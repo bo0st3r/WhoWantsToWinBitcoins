@@ -15,7 +15,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class HomeGridPane extends GridPane {
-
 	// General
 	private Button btnPlay;
 	private Button btnScoreBoard;
@@ -39,9 +38,9 @@ public class HomeGridPane extends GridPane {
 //		this.setGridLinesVisible(true);
 
 		// Spacings
-		setPadding(new Insets(10));
-		setHgap(8);
-		setVgap(8);
+		setPadding(new Insets(8));
+		setHgap(6);
+		setVgap(6);
 
 		// Set columns constraints
 		ColumnConstraints c = new ColumnConstraints();
@@ -54,7 +53,7 @@ public class HomeGridPane extends GridPane {
 		getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r);
 
 		// Title
-		add(getLblTitle(), 2, 1, 6, 2);
+		add(getLblTitle(), 1, 1, 8, 2);
 
 		// Play button
 		add(getBtnPlay(), 3, 4, 4, 2);
@@ -91,22 +90,22 @@ public class HomeGridPane extends GridPane {
 	public Button getBtnPlay() {
 		if (btnPlay == null) {
 			btnPlay = new Button("Let's play");
+			btnPlay.setId("playBtn");
 			btnPlay.setPrefWidth(Integer.MAX_VALUE);
 			btnPlay.setPrefHeight(Integer.MAX_VALUE);
 			GridPane.setHalignment(btnPlay, HPos.CENTER);
-			btnPlay.setId("playBtn");
 
 			btnPlay.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
+					// Resets the playing pane
 					((ProjStackPane) getParent().getParent()).getPartyStackPane().resetPlayingGridPane();
 
-					// Hide the Home Pane
+					// Hides the Home Pane
 					setVisible(false);
 
-					// Show the PartyStackPane
+					// Shows the PartyStackPane
 					((ProjStackPane) getParent().getParent()).getPartyStackPane().setVisible(true);
-					
 				}
 			});
 		}
@@ -125,6 +124,7 @@ public class HomeGridPane extends GridPane {
 			btnScoreBoard = new Button("Scores board");
 			btnScoreBoard.setPrefHeight(Integer.MAX_VALUE);
 			btnScoreBoard.setPrefWidth(Integer.MAX_VALUE);
+			btnScoreBoard.getStyleClass().add("main-button-md");
 
 			btnScoreBoard.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -150,6 +150,7 @@ public class HomeGridPane extends GridPane {
 			btnRules = new Button("Read rules");
 			btnRules.setPrefHeight(Integer.MAX_VALUE);
 			btnRules.setPrefWidth(Integer.MAX_VALUE);
+			btnRules.getStyleClass().add("main-button-md");
 
 			btnRules.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -249,8 +250,6 @@ public class HomeGridPane extends GridPane {
 						getBtnAddQuestion().setVisible(true);
 					setVisible(false);
 					((ProjStackPane) getParent().getParent()).getRegistrationConnectionGridPane().setVisible(true);
-					((ProjStackPane) getParent().getParent()).getRegistrationConnectionGridPane().getTxtEmail().clear();
-
 				}
 			});
 		}
@@ -316,7 +315,7 @@ public class HomeGridPane extends GridPane {
 		if (lblTitle == null) {
 			lblTitle = new Label("Who wants to win Bitcoins?");
 			GridPane.setHalignment(lblTitle, HPos.CENTER);
-			lblTitle.setId("titleHome");
+			lblTitle.getStyleClass().add("title-xl");
 		}
 
 		return lblTitle;

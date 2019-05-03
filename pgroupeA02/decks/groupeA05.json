@@ -1,0 +1,159 @@
+{
+	"questions": [
+		{
+			"author": "Loïc Laruelle",
+			"statement": "Which animal, now extinct, lived in Mauritius Island?",
+			"round": "FIRST_ROUND",
+			"choices": {
+				"Dodo": true,
+				"Panda-ant": false,
+				"Lyrebird": false,
+				"Blobfish": false
+			}
+		},
+		{
+			"author": "Loïc Laruelle",
+			"statement": "The Deadly Hallow are...",
+			"round": "FIRST_ROUND",
+			"choices": {
+				"An eagle, a seal and a panda": false,
+				"A cloak, a stone and a wand": true,
+				"A shovel, a pickaxe and a torch": false,
+				"A gate, a grave and a burial": false
+			}
+		},
+		{
+			"author": "Loïc Laruelle",
+			"statement": "Who wrote Notre-Dame de Paris?",
+			"round": "FIRST_ROUND",
+			"choices": {
+				"Edgar Poe Allen": false,
+				"Bram Stoker": false,
+				"Mary Shelley": false,
+				"Victor Hugo": true
+			}
+		},
+		{
+			"author": "Loïc Laruelle",
+			"statement": "Loki has three children with the jöthunn Angrboba. Fenrir, Hel and...",
+			"round": "SECOND_ROUND",
+			"choices": {
+				"Thor": false,
+				"Laufey": false,
+				"Sleipnir": false,
+				"Jörmungand": true
+			}
+		},
+		{
+			"author": "Loïc Laruelle",
+			"statement": "Who is the longest real molecule name?",
+			"round": "SECOND_ROUND",
+			"choices": {
+				"Vitamin B1": false,
+				"Titin": true,
+				"DNA": false,
+				"Nitroglycerin": false
+			}
+		},
+		{
+			"author": "Loïc Laruelle",
+			"statement": "What\u0027s the current capital of Kazakhstan?",
+			"round": "SECOND_ROUND",
+			"choices": {
+				"Astana": false,
+				"Oural": false,
+				"Almaty": false,
+				"Noursoultan": true
+			}
+		},
+		{
+			"author": "Loïc Laruelle",
+			"statement": "What\u0027s called a resident of Jerusalem?",
+			"round": "LAST_ROUND",
+			"choices": {
+				"Jerusan": false,
+				"Jerusalemite": true,
+				"Jerusalemish": false,
+				"Hierosolytain": false
+			}
+		},
+		{
+			"author": "Loïc Laruelle",
+			"statement": "Candle is an old unit of measurement and was replaced by...",
+			"round": "LAST_ROUND",
+			"choices": {
+				"Farad": false,
+				"Candela": true,
+				"Katal": false,
+				"Henry": false
+			}
+		},
+		{
+			"author": "Robin Roekens",
+			"statement": "What\u0027s the name of the most famous hedgedog in videogame history?",
+			"round": "FIRST_ROUND",
+			"choices": {
+				"Pikachu": false,
+				"Sonic": true,
+				"Sora": false,
+				"Mario": false
+			}
+		},
+		{
+			"author": "Robin Roekens",
+			"statement": "What kind of chemical reaction occurs inside a Li-ion battery?",
+			"round": "SECOND_ROUND",
+			"choices": {
+				"combustion": false,
+				"subsitution": false,
+				"acid-base": false,
+				"redox": true
+			}
+		},
+		{
+			"author": "Robin Roekens",
+			"statement": "The molecule C8H10N4O2 is commonly known under which name?",
+			"round": "LAST_ROUND",
+			"choices": {
+				"caffeine": false,
+				"theine": false,
+				"caffeine or theine": true,
+				"water": false
+			}
+		},
+		{
+			"author": "Bryan Guesnerie",
+			"statement": "What's the Belgium most famous beer?",
+			"round": "FIRST_ROUND",
+			"choices": {
+				"Maes": false,
+				"Moinette": false,
+				"Jupiler": true,
+				"Sparkling Water": false
+			}
+		},
+		{
+			"author": "Bryan Guesnerie",
+			"statement": "Which actor plays Jack Sparrow in Pirates of the Caribbean?",
+			"round": "SECOND_ROUND",
+			"choices": {
+				"Le bron James": false,
+				"Eddy Mitchell": false,
+				"Mickael Jackson": false,
+				"Johnny Depp": true
+			}
+		},
+		{
+			"author": "Bryan Guesnerie",
+			"statement": "When was the last victory of Liverpool in Champion's League?",
+			"round": "LAST_ROUND",
+			"choices": {
+				"1997": false,
+				"1995": false,
+				"2009": false,
+				"2005": true
+			}
+		}
+	]
+}
+

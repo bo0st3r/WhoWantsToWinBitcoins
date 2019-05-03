@@ -1,0 +1,103 @@
+{
+	"questions": [
+        {
+            "author": "Mithirsan MATHYVARNAN", 
+            "round": "FIRST_ROUND", 
+            "statement": "On which building is Big Ben?", 
+            "choices": {
+                "Elizabeth tower": true, 
+                "Big Ben is also the building name": false, 
+                "Tower Clock": false, 
+                "Augustus Tower": false
+            }
+        },
+        {
+            "author": "Mithirsan MATHYVARNAN", 
+            "round": "SECOND_ROUND", 
+            "statement": "Who created Apple with Steve Jobs?", 
+            "choices": {
+                "Steve Wozniak": false, 
+                "Steve Wozniak & Ronald Wayne ": true, 
+                "Nobody": false, 
+                "Bill Gates ": false
+            }
+        },
+        {
+            "author": "Mithirsan MATHYVARNAN", 
+            "round": "LAST_ROUND", 
+            "statement": "How long is the revolution period of Mars?", 
+            "choices": {
+                "about 365 days and 6 hours ": false, 
+                "about 687 days and 23 hours": true, 
+                "about 876 days and 2 minutes": false, 
+                "1.65x earth's revolution period": false
+            }
+        },
+        {
+            "author": "Axel Lux", 
+            "round": "FIRST_ROUND", 
+            "statement": "What is the shape of the Earth?", 
+            "choices": { 
+                "Spherical": true, 
+                "Flat": false, 
+                "Rectangular": false, 
+                "Triangular": false
+            }
+        },
+        {
+            "author": "Axel Lux", 
+            "round": "SECOND_ROUND", 
+            "statement": "Which one is the fourth planets of the solar system?", 
+            "choices": {
+                "Earth": false, 
+                "Mars": true, 
+                "Saturn": false, 
+                "Jupiter": false
+            }
+        },
+        {
+            "author": "Axel Lux", 
+            "round": "LAST_ROUND", 
+            "statement": "What is the name of the biggest star?", 
+            "choices": {
+                "UY Scuti": true, 
+                "the Sun": false, 
+                "VY Canis Majoris": false, 
+                "VV Cephei A": false
+            }
+        },
+        { 
+            "author": "Duyck Nathanaël*", 
+            "round": "SECOND_ROUND", 
+            "statement": "What is Europe’s highest volcano?*", 
+            "choices": {
+                "Etna": true, 
+                "Vesuvius": false, 
+                "Helka": false, 
+                "Ararat": false
+            }
+        },
+        { 
+            "author": "Duyck Nathanaël*", 
+            "round": "FIRST_ROUND", 
+            "statement": "What planet shares its name with a cartoon dog?*", 
+            "choices": {
+                "Pluto": true, 
+                "Jupiter": false, 
+                "Mars": false, 
+                "Saturn": false
+            }
+        },
+        { 
+            "author": "Duyck Nathanaël*", 
+            "round": "LAST_ROUND", 
+            "statement": "The Cathode Ray Tube is used in what?*", 
+            "choices": {
+                "Light bulb": false, 
+                "Television": true, 
+                "Telephone": false, 
+                "CD Player": false
+            }
+        }
+        ]
+}

@@ -28,12 +28,18 @@ public class MainGame extends Application {
 			// CSS
 			scene.getStylesheets().add(getClass().getResource("/style/style.css").toExternalForm());
 			primaryStage.setTitle("Who wants to win Bitcoins?");
-			primaryStage.setMaximized(true);
-			primaryStage.setMinHeight(750);
-			primaryStage.setMinWidth(1350);
+			primaryStage.setMinWidth(1440);
+			primaryStage.setMinHeight(810);
+
+			// Allows the stage to always keep the 16/9 aspect ratio
+			primaryStage.minHeightProperty().bind(primaryStage.widthProperty().multiply(0.5625));
+			primaryStage.maxHeightProperty().bind(primaryStage.widthProperty().multiply(0.5625));
+
 			primaryStage.setScene(scene);
+
 			primaryStage.centerOnScreen();
 			primaryStage.show();
+
 		} catch (Exception e) {
 
 		}

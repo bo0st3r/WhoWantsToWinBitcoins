@@ -1,0 +1,103 @@
+{
+	"questions": [
+		{
+			"author": "Corentin",
+			"round": "FIRST_ROUND",
+			"statement": "What\u0027s the purpose of a cat\u0027s tail ?",
+			"choices": {
+				"To use it like a radar": false,
+				"To clean themselves": false,
+				"To keep their balance": true,
+				"To show you they’re happy": false
+			}
+		},
+		{
+			"author": "Corentin",
+			"round": "SECOND_ROUND",
+			"statement": "What’s the largest breed of cat ?",
+			"choices": {
+				"Savannah": false,
+				"Maine coon": true,
+				"British shorthair": false,
+				"Ragdoll": false
+			}
+		},
+		{
+			"author": "Corentin",
+			"round": "LAST_ROUND",
+			"statement": "Why do cats rub against you ?",
+			"choices": {
+				"All of these": true,
+				"To mark you with its scent": false,
+				"To show affection": false,
+				"To say hello": false
+			}
+		},
+		{
+			"author": "Alexandra",
+			"round": "FIRST_ROUND",
+			"statement": "For what is Ada Lovelace known ?",
+			"choices": {
+				"For her research in biology": false,
+				"Her beauty": false,
+				"For her research in computer sciences": true,
+				"For her research in Chemistryly": false
+			}
+		},
+		{
+			"author": "Alexandra",
+			"round": "SECOND_ROUND",
+			"statement": "What is the longest river of the world ?",
+			"choices": {
+				"Nil": true,
+				"Amazone": false,
+				"Yangzi Jiang": false,
+				"Mississippi ": false
+			}
+		},
+		{
+			"author": "Alexandra",
+			"round": "LAST_ROUND",
+			"statement": "What is the release date of the FAMICOM ?",
+			"choices": {
+				"1983 ": true,
+				"1995": false,
+				"1991": false,
+				"2000": false
+			}
+		},
+		{
+			"author": "Kevin",
+			"round": "FIRST_ROUND",
+			"statement": "Where’s Paris ?",
+			"choices": {
+				"In China": false,
+				"In France": true,
+				"In Japan": false,
+				"In America": false
+			}
+		},
+		{
+			"author": "Kevin",
+			"round": "SECOND_ROUND",
+			"statement": "Where was the 2002 world soccer cup held ?",
+			"choices": {
+				"In China": false,
+				"In Japan": false,
+				"In South Korea": false,
+				"In South Korea and Japan": true
+			}
+		},
+		{
+			"author": "Kevin",
+			"round": "LAST_ROUND",
+			"statement": "What country isn’t part of the European Union ?",
+			"choices": {
+				"Turkey": true,
+				"Belgium": false,
+				"Switzerland": false,
+				"Germany": false
+			}
+		}
+	]
+}

@@ -1,6 +1,5 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,8 +7,10 @@ import java.util.List;
 import utilities.IntegerComparator;
 import utilities.Serialization;
 
-public class Earning implements Serializable {
-	private static final long serialVersionUID = -7426233831685861896L;
+public class Earning 
+//implements Serializable 
+{
+//	private static final long serialVersionUID = -7426233831685861896L;
 
 	public static final String FILE_NAME = "earnings";
 

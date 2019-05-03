@@ -8,7 +8,7 @@ public class ProjStackPane extends BorderPane {
 
 	private StackPane stackPane;
 	private HomeGridPane homeGridPane;
-	//private PlayingGridPane playingGridPane;
+	// private PlayingGridPane playingGridPane;
 	private AboutGridPane aboutGridPane;
 	private RulesGridPane rulesGridPane;
 	private RegistrationConnectionGridPane registrationConnectionGridPane;
@@ -61,7 +61,8 @@ public class ProjStackPane extends BorderPane {
 	public StackPane getStackPane() {
 		if (stackPane == null) {
 			stackPane = new StackPane();
-			stackPane.getChildren().addAll(getHomeGridPane(), getAboutGridPane(), getRulesGridPane(), getRegistrationConnectionGridPane(), getPartyStackPane());
+			stackPane.getChildren().addAll(getHomeGridPane(), getAboutGridPane(), getRulesGridPane(),
+					getRegistrationConnectionGridPane(), getPartyStackPane());
 		}
 		return stackPane;
 	}
@@ -117,33 +118,16 @@ public class ProjStackPane extends BorderPane {
 	}
 
 	public RegistrationConnectionGridPane getRegistrationConnectionGridPane() {
-		if (registrationConnectionGridPane==null) {
+		if (registrationConnectionGridPane == null) {
 			registrationConnectionGridPane = new RegistrationConnectionGridPane();
 		}
 		return registrationConnectionGridPane;
 	}
 
 	public PartyStackPane getPartyStackPane() {
-		if (partyStackPane==null) {
+		if (partyStackPane == null) {
 			partyStackPane = new PartyStackPane();
 		}
 		return partyStackPane;
 	}
-	public void resetPane() {
-		// Removes the components from stackPane
-		stackPane.getChildren().removeAll(homeGridPane, aboutGridPane, registrationConnectionGridPane, rulesGridPane );
-
-		// Sets playingGridPane as null so getPlayingGridPane() instantiate a new one.
-		homeGridPane = null; 
-		aboutGridPane= null;
-		registrationConnectionGridPane=null ;
-		rulesGridPane = null;
-		stackPane.getChildren().addAll(getHomeGridPane(), getAboutGridPane(), getRegistrationConnectionGridPane(), getRulesGridPane());
-		hideAllComponentsInStackPane();
-		
-
-	}
-	
-	
-
 }

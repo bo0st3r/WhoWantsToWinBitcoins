@@ -41,10 +41,7 @@ public class TimerFlowPane extends FlowPane {
 							nbSeconds--;
 						} else if (nbSeconds == 0) {
 							stopTimer();
-							setVisible(false);
-							//((PlayingGridPane) getParent()).alertPop("Time is over.");
-							//***************A VERIFIER
-							((PartyStackPane) getParent().getParent()).getPartyLostGridPane().setVisible(true);
+							((PartyStackPane) getParent().getParent().getParent()).partyLost();
 						} else {
 							timer.cancel();
 						}

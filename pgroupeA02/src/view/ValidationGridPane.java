@@ -20,7 +20,7 @@ public class ValidationGridPane extends GridPane {
 	 */
 	public ValidationGridPane() {
 //		setGridLinesVisible(true);
-		
+
 		// Set columns
 		ColumnConstraints c1 = new ColumnConstraints();
 		c1.setPercentWidth(13);
@@ -124,15 +124,24 @@ public class ValidationGridPane extends GridPane {
 					PlayingGridPane pgp = (PlayingGridPane) getParent();
 
 					int answerIndex = pgp.getQuestionGP().getAnswerIndex();
-					pgp.getQuestionGP().getBtnAnswer(answerIndex).setId("answerBtn");
 					pgp.getQuestionGP().getBtnAnswer(answerIndex).setStyle("");
 
-					// Set validation grid pane invisible
+					// Re-set validation grid pane invisible
 					pgp.setVisibleValidationGP(false);
-					// Enable btn "Cash in"
+
+					// Re-enable btn "Cash in"
 					pgp.getBtnCashIn().setDisable(false);
-					// Enable answers buttons
-					pgp.setDisableBtnAnswer(false);
+
+					// Re-enable answers buttons
+					if (pgp.getJokerVB().isCancelJoker5050()) {
+						for (int index = 0; index <= 3; index++) {
+							if (!pgp.getParty().getJoker5050Indexes().contains(index))
+								pgp.setDisableBtnAnswer(false, index);
+						}
+
+					} else {
+						pgp.setDisableBtnAnswer(false);
+					}
 				}
 			});
 		}

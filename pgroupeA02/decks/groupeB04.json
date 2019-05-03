@@ -1,0 +1,103 @@
+{
+	"questions": [
+		{
+			"author": "David ORIENT",
+			"round": "FIRST_ROUND",
+			"statement": "What is the capital of Switzerland ?",
+			"choices": {
+				"Bern": true,
+				"Berlin": false,
+				"Geneva": false,
+				"Zurich": false
+			}
+		},
+		{
+			"author": "Vincent LEURART",
+			"round": "FIRST_ROUND",
+			"statement": "Which United States president was assassinated in Dallas in 1963 ?",
+			"choices": {
+				"John Fitzgerald Kennedy": true,
+				"Ronald Reagan": false,
+				"Richard Nixon": false,
+				"Lyndon B. Johnson": false
+			}
+		},
+		{
+			"author": "Maxime JANSSENS",
+			"round": "FIRST_ROUND",
+			"statement": "In the Mendeleev\u0027s table, which acronym stands for gold ?",
+			"choices": {
+				"Or": false,
+				"Au": true,
+				"Go": false,
+				"Gd": false
+			}
+		},
+		{
+			"author": "Vincent LEURART",
+			"round": "SECOND_ROUND",
+			"statement": "What was the immediate cause of the First World War ?",
+			"choices": {
+				"The increase of militarism": false,
+				"The assassination of Archduke Franz Ferdinand": true,
+				"Mutual Defense Alliances": false,
+				"Imperialism": false
+			}
+		},
+		{
+			"author": "Maxime JANSSENS",
+			"round": "SECOND_ROUND",
+			"statement": "Which beach name was a real name during the Normandy landing ?",
+			"choices": {
+				"Yumaha Beach": false,
+				"Gold Beach": true,
+				"Silver Beach": false,
+				"Iron Beach": false
+			}
+		},
+		{
+			"author": "David ORIENT",
+			"round": "SECOND_ROUND",
+			"statement": "Who discovered photon ?",
+			"choices": {
+				"Stephen Hawking": false,
+				"Isaac Newton": false,
+				"Nikola Tesla": false,
+				"Albert Einstein": true
+			}
+		},
+		{
+			"author": "Vincent LEURART",
+			"round": "LAST_ROUND",
+			"statement": "When was the Federal Bureau of Investigation created ?",
+			"choices": {
+				"18 septembre 1947": false,
+				"4 novembre 1952": false,
+				"21 july 1969": false,
+				"26 july 1908": true
+			}
+		},
+		{
+			"author": "Maxime JANSSENS",
+			"round": "LAST_ROUND",
+			"statement": "What\u0027s the old name of Taiwan ?",
+			"choices": {
+				"Aqcuera": false,
+				"Tortuga": false,
+				"Taïti": false,
+				"Formosa": true
+			}
+		},
+		{
+			"author": "David ORIENT",
+			"round": "LAST_ROUND",
+			"statement": "When did the construction of the Statue of Liberty start ?",
+			"choices": {
+				"1875": true,
+				"1893": false,
+				"1902": false,
+				"1825": false
+			}
+		}
+	]
+}

@@ -390,4 +390,11 @@ public class Party {
 		}
 		this.joker5050Indexes = joker5050Indexes;
 	}
+
+	/**
+	 * Clears the joker5050Indexes field.
+	 */
+	public void clearJoker5050Indexes() {
+		joker5050Indexes.clear();
+	}
 }

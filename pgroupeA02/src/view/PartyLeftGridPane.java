@@ -65,11 +65,8 @@ public class PartyLeftGridPane extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					setVisible(false);
-					((ProjStackPane) getParent().getParent().getParent().getParent()).resetPane();
-					((ProjStackPane) getParent().getParent().getParent().getParent()).getHomeGridPane()
-							.setVisible(true);
-
+					// Returns to the home pane
+					((PartyStackPane) getParent().getParent()).returnToHome();
 				}
 			});
 		}

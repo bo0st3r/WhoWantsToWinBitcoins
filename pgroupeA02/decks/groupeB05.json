@@ -1,0 +1,103 @@
+{
+	"questions": [
+		{
+			"author": "Wilson MAY",
+			"statement": "What is the real name of the greatest dark wizard in the Harry Potter universe of J.K. Rowling ?",
+			"round": "FIRST_ROUND",
+			"choices": {
+				"Tom Elvis Jedusor": true,
+				"Lord Voldemort": false,
+				"Gellert Grindelwarld": false,
+				"Lucius Malefoy": false
+			}
+		},
+		{
+			"author": "Wilson MAY",
+			"statement": "Who was the first pharaoh preceding the first Egyptian dynasty ?",
+			"round": "SECOND_ROUND",
+			"choices": {
+				"Ougaf": false,
+				"Scorpion 1er": true,
+				"Djéser": false,
+				"Khéops": false
+			}
+		},
+		{
+			"author": "Wilson MAY",
+			"statement": "How many protons and neutrons are there in the first isotope of the hydrogen atom ?",
+			"round": "LAST_ROUND",
+			"choices": {
+				"Zero proton, One neutron": false,
+				"Two proton, Zero neutron": false,
+				"One proton, Zero neutron": true,
+				"One proton, One neutron": false
+			}
+		},
+		{
+			"author": "Thomas DUJACQUIER",
+			"statement": "What did the crocodile swallow in Peter Pan ?",
+			"round": "FIRST_ROUND",
+			"choices": {
+				"An alarm clock": true,
+				"A hook": false,
+				"A shoe": false,
+				"Peter Pan": false
+			}
+		},
+		{
+			"author": "Thomas DUJACQUIER",
+			"statement": "What horoscope sign is a crab ?",
+			"round": "SECOND_ROUND",
+			"choices": {
+				"Cancer": true,
+				"Aries": false,
+				"Leo": false,
+				"Scorpion": false
+			}
+		},
+		{
+			"author": "Thomas DUJACQUIER",
+			"statement": "Where does the British Prime Minister live ?",
+			"round": "LAST_ROUND",
+			"choices": {
+				"10, Downing Street": true,
+				"221B, Baker Street": false,
+				"1600, Pennsylvania Avenue": false,
+				"55, Rue du Faubourg Saint-Honoré": false
+			}
+		},
+		{
+			"author": "Gilles HUBERT",
+			"statement": "Who painted the Mona Lisa ?",
+			"round": "FIRST_ROUND",
+			"choices": {
+				"Da Vinci": true,
+				"Van Gogh": false,
+				"Warhoi": false,
+				"Dali": false
+			}
+		},
+		{
+			"author": "Gilles HUBERT",
+			"statement": "How many lanes does an olympic swimming pool have ?",
+			"round": "SECOND_ROUND",
+			"choices": {
+				"5": false,
+				"6": false,
+				"7": false,
+				"8": true
+			}
+		},
+		{
+			"author": "Gilles HUBERT",
+			"statement": "How many children has Queen Elizabeth the Second got ?",
+			"round": "LAST_ROUND",
+			"choices": {
+				"2": false,
+				"3": false,
+				"4": true,
+				"5": false
+			}
+		}
+	]
+}

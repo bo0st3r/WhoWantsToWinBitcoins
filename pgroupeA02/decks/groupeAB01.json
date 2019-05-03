@@ -1,0 +1,103 @@
+{
+	"questions": [
+		{
+			"author": "Alberto Nasello",
+			"statement": "What is the biggest planet in our solar system ?",
+			"round": "FIRST_ROUND",
+			"choices": {
+				"Earth": false,
+				"Jupiter": true,
+				"Saturn": false,
+				"Venus": false
+			}
+		},
+		{
+			"author": "Alberto Nasello",
+			"statement": "Which of these creatures is not a mammal ?",
+			"round": "SECOND_ROUND",
+			"choices": {
+				"Dolphin": false,
+				"Bear": false,
+				"Bat": false,
+				"Snake": true
+			}
+		},
+		{
+			"author": "Alberto Nasello",
+			"statement": "What is the nationality of Gabriel García Márquez ?",
+			"round": "LAST_ROUND",
+			"choices": {
+				"Spanish": false,
+				"Italian": false,
+				"Mexican": false,
+				"Colombian": true
+			}
+		},
+		{
+			"author": "Nicolas Pescarzoli",
+			"statement": "What is Steve Jobs' middle name ?",
+			"round": "FIRST_ROUND",
+			"choices": {
+				"Paul": true,
+				"Ben": false,
+				"Harry": false,
+				"Nicolas": false
+			}
+		},
+		{
+			"author": "Nicolas Pescarzoli",
+			"statement": "Who wrote and sang the theme music for the James Bond film Skyfall ?",
+			"round": "SECOND_ROUND",
+			"choices": {
+				"Beyoncé": false,
+				"Adele": true,
+				"Alicia Keys": false,
+				"Daddy K": false
+			}
+		},
+		{
+			"author": "Nicolas Pescarzoli",
+			"statement": "How old was Nelson Mandela when he died ?",
+			"round": "LAST_ROUND",
+			"choices": {
+				"85": false,
+				"90": false,
+				"95": true,
+				"100": false
+			}
+		},
+		{
+			"author": "Alexis Van Driessche",
+			"statement": "What is the most popular cryptocurrency ?",
+			"round": "FIRST_ROUND",
+			"choices": {
+				"Ethereum": false,
+				"Bitcoin": true,
+				"Litecoin": false,
+				"Darkcoin": false
+			}
+		},
+		{
+			"author": "Alexis Van Driessche",
+			"statement": "Which of these actors has been nominated for the most oscars ?",
+			"round": "SECOND_ROUND",
+			"choices": {
+				"Meryl Streep": true,
+				"George Clooney": false,
+				"Brad Pitt": false,
+				"Johnnhy Depp": false
+			}
+		},
+		{
+			"author": "Alexis Van Driessche",
+			"statement": "What is the longest distance between any two points on land ?",
+			"round": "LAST_ROUND",
+			"choices": {
+				"8539.31 miles": false,
+				"24896.80 miles": false,
+				"17549.28 miles": false,
+				"12450.50 miles": true
+			}
+		}
+	]
+}

@@ -18,6 +18,7 @@ public class JokerVBox extends VBox {
 	private PlayingGridPane pgp;
 	private Joker joker;
 	private boolean cancelJokerResults;
+	private boolean cancelJoker5050;
 
 	private Button btnJokerPublic;
 	private Button btnJokerFriend;
@@ -39,6 +40,7 @@ public class JokerVBox extends VBox {
 		this.pgp = pgp;
 		joker = new Joker();
 		cancelJokerResults = false;
+		cancelJoker5050 = false;
 
 		// Add the content
 		getChildren().addAll(getBtnJoker5050(), getBtnJokerFriend(), getBtnJokerPublic());
@@ -125,7 +127,8 @@ public class JokerVBox extends VBox {
 
 				@Override
 				public void handle(ActionEvent arg0) {
-					setCancelJokerResults(true);
+					setCancelJoker5050(true);
+
 					joker.setStrategy(new Joker5050());
 					joker.useJoker(pgp.getParty());
 
@@ -159,5 +162,40 @@ public class JokerVBox extends VBox {
 	 */
 	public void setCancelJokerResults(boolean cancelJokerResults) {
 		this.cancelJokerResults = cancelJokerResults;
+	}
+
+	/*
+	 * Return if there's the need of canceling the joker 5050 results.
+	 * 
+	 * @return cancelJoker5050, the boolean value.
+	 */
+	public boolean isCancelJoker5050() {
+		return cancelJoker5050;
+	}
+
+	/*
+	 * Change cancelJoker5050 value, which determine if there's the need of
+	 * canceling the joker 5050 results.
+	 * 
+	 * @param cancelJoker5050, the new boolean value.
+	 */
+	public void setCancelJoker5050(boolean cancelJoker5050) {
+		this.cancelJoker5050 = cancelJoker5050;
+	}
+
+	/**
+	 * If the joker 5050 has been used, set cancelJoker5050 to false and then
+	 * returns if it has been done.
+	 * 
+	 * @return boolean the result.
+	 */
+	public boolean removeJoker5050() {
+		if (isCancelJoker5050()) {
+			// Set the cancelJoker5050 field to false
+			setCancelJoker5050(false);
+			return true;
+		}
+
+		return false;
 	}
 }

@@ -71,13 +71,8 @@ public class PartyLostGridPane extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					setVisible(false);
-					((ProjStackPane) getParent().getParent().getParent().getParent()).resetPane();
-					((ProjStackPane) getParent().getParent().getParent().getParent()).getHomeGridPane()
-							.setVisible(true);
-					// ((ProjStackPane)
-					// getParent().getParent().getParent().getParent()).resetGame();
-
+					// Returns to the home pane
+					((PartyStackPane) getParent().getParent()).returnToHome();
 				}
 			});
 		}
@@ -86,7 +81,7 @@ public class PartyLostGridPane extends GridPane {
 
 	public Label getLblTitle() {
 		if (lblTitle == null) {
-			lblTitle = new Label("You loose :(");
+			lblTitle = new Label("You lost... :(");
 		}
 		return lblTitle;
 	}
