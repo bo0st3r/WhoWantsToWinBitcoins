@@ -270,6 +270,16 @@ public class HomeGridPane extends GridPane {
 
 			// Hidden if not connected
 			btnProfile.setVisible(false);
+			btnProfile.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					setVisible(false);
+					((ProjStackPane) getParent().getParent()).getProfilGridPane().setVisible(true);
+					
+					
+				}
+			});
 		}
 
 		return btnProfile;
