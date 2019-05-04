@@ -14,7 +14,7 @@ public class UserManagerSingleton implements Serializable {
 	private static final long serialVersionUID = 2967689235642893360L;
 	public static final String FILE_NAME = "user_manager_singleton";
 
-	public static UserManagerSingleton INSTANCE = null;
+	private static UserManagerSingleton INSTANCE = null;
 	private Set<User> users;
 
 	/**

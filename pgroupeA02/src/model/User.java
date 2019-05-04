@@ -9,9 +9,9 @@ import utilities.SHA256Hasher;
 public class User implements Serializable {
 	private static final long serialVersionUID = 3778008834876366931L;
 
-	public static final Pattern PSEUDO_SYNTAX_REGEX = Pattern.compile("[a-zA-Z0-9]{" + 3 + "," + 25 + "}");
+	public static final Pattern PSEUDO_SYNTAX_REGEX = Pattern.compile("[a-zA-Z0-9]{" + 3 + "," + 40 + "}");
 	public static final Pattern PASSWORD_SYNTAX_REGEX = Pattern
-			.compile("[a-zA-Z0-9\\p{Punct}\\p{L}]{" + 4 + "," + 26 + "}");
+			.compile("[a-zA-Z0-9\\p{Punct}\\p{L}]{" + 4 + "," + 40 + "}");
 	public static final Pattern EMAIL_SYNTAX_REGEX = Pattern.compile(
 			"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d"
 					+ "-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"

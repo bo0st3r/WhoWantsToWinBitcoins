@@ -18,6 +18,7 @@ import enumerations.Round;
 import exceptions.NotEnoughAnswersException;
 import exceptions.QuestionAlreadyPresentException;
 import model.Deck;
+import model.Earning;
 import model.Question;
 import utilities.Explorer;
 
@@ -70,7 +71,7 @@ public class TestDeck {
 	public void testDeck() {
 		assertNotNull("Constructor returns null", questions);
 	}
-	
+
 	@Test
 	public void testAddQuestion() throws QuestionAlreadyPresentException, NotEnoughAnswersException {
 		deck.addQuestion(q1);
@@ -112,6 +113,39 @@ public class TestDeck {
 	}
 
 	@Test
+	public void testGetQuestions() {
+		questions.add(q1);
+		questions.add(q2);
+		questions.add(q3);
+		questions = (List<Question>) Explorer.getField(deck, "questions");
+
+		assertEquals("Should be equal cause of same questions", questions, deck.getQuestions());
+		assertFalse("Shouldn't have the same reference", q1 == deck.getQuestions().get(0));
+		assertEquals("Should be equal", q1, deck.getQuestions().get(0));
+	}
+
+	@Test
+	public void testToString() {
+		questions.add(q2);
+		deck.toString();
+	}
+
+	@Test
+	public void testHashCode() {
+		Deck deck2 = new Deck();
+		List<Question> questions2 = (List<Question>) Explorer.getField(deck2, "questions");
+		questions2.add(q1);
+		questions2.add(q2);
+
+		questions.add(q1);
+		questions.add(q2);
+
+		assertTrue("Should have the same hashcode", deck.hashCode() == deck2.hashCode());
+		questions.add(q3);
+		assertFalse("Shouldn't have the same hashcode", deck.hashCode() == deck2.hashCode());
+	}
+
+	@Test
 	public void testEqualsObject() throws QuestionAlreadyPresentException, NotEnoughAnswersException {
 		Deck deck2 = new Deck();
 		questions.add(q1);
@@ -120,6 +154,10 @@ public class TestDeck {
 
 		questions.add(q2);
 		assertNotEquals("Decks should not be equals", deck, deck2);
+
+		assertEquals("Should be equal cause of same reference", deck, deck);
+		assertNotEquals("Shouldn't be equal cause of null", deck, null);
+		assertNotEquals("Shouldn't be equal cause of noot same class", deck, new Object());
 	}
 
 }

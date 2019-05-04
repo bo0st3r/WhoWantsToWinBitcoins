@@ -92,7 +92,7 @@ public class QuestionGridPane extends GridPane {
 
 					PlayingGridPane pgp = ((PartyStackPane) getParent().getParent().getParent()).getPlayingGridPane();
 
-					btnAnswer[index].setStyle("-fx-opacity:1.0;");
+					btnAnswer[index].setStyle("-fx-opacity:1.0; -fx-font-family:'IBM Plex Sans SemiBold', sans-serif;");
 
 					// Set validation grid pane visible
 					pgp.setVisibleValidationGP(true);

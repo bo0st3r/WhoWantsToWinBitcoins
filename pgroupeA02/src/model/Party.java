@@ -15,6 +15,7 @@ import exceptions.TooMuchQuestionsException;
 public class Party {
 	public static final int NB_STEPS = 15;
 	public static final int NB_STEPS_BY_ROUND = 5;
+	public static final String FILE_NAME = "main_deck";
 
 	private List<Question> chosenQuestions;
 	private Round actualRound;
@@ -51,7 +52,7 @@ public class Party {
 	 *                                       have.
 	 */
 	public Party(Deck deck) throws EmptyQuestionsListException, DeckUnderFilledException, NotEnoughQuestionsException {
-		if (deck.getQuestions() == null)
+		if (deck.getQuestions().size() == 0)
 			throw new EmptyQuestionsListException();
 		if (deck.getQuestions().size() < 15)
 			throw new DeckUnderFilledException(deck.getQuestions().size());
@@ -154,6 +155,15 @@ public class Party {
 	}
 
 	/**
+	 * Returns the numbers of chosen questions.
+	 * 
+	 * @return the number of chosen question.
+	 */
+	public int nbChosenQuestion() {
+		return chosenQuestions.size();
+	}
+
+	/**
 	 * Returns the Question for the next step and increments actualStep by 1.
 	 * 
 	 * @throws ExceedMaxStepsException occurs if the actual step is higher than the
@@ -162,14 +172,19 @@ public class Party {
 	 * @return the Question for the next step.
 	 */
 	public Question getQuestionNextStep() throws ExceedMaxStepsException {
-		if (!hasNextStep())
-			throw new ExceedMaxStepsException(actualStep);
+		incrementActualStep();
 
-		actualStep++;
 		if (isNeedingNextRound())
 			goToNextRound();
 
 		return (chosenQuestions.get(actualStep - 1));
+	}
+
+	public void incrementActualStep() throws ExceedMaxStepsException {
+		if (!hasNextStep())
+			throw new ExceedMaxStepsException(actualStep);
+
+		actualStep++;
 	}
 
 	/**
@@ -274,12 +289,12 @@ public class Party {
 	 *                                  problem that occured.
 	 */
 	public void setRightAnswer(String rightAnswer) {
-		if (rightAnswer != null && !rightAnswer.isEmpty())
-			this.rightAnswer = rightAnswer;
-		else if (rightAnswer == null)
+		if (rightAnswer == null)
 			throw new IllegalArgumentException("The param rightAnswer is null.");
 		else if (rightAnswer.isEmpty())
 			throw new IllegalArgumentException("The param rightAnswer is empty.");
+
+		this.rightAnswer = rightAnswer;
 	}
 
 	/**
@@ -332,16 +347,13 @@ public class Party {
 	 */
 	public void setJokerPublicPercents(List<Double> jokerPublicPercents)
 			throws IndexOutOfBoundsException, IllegalArgumentException {
-		if (jokerPublicPercents.size() == Question.NB_ANSWERS && jokerPublicPercents != null) {
+		if (jokerPublicPercents.size() == Question.NB_ANSWERS) {
 			// Right size
 			for (Double percents : jokerPublicPercents) {
 				if (percents < 0 || percents > 100)
 					throw new IndexOutOfBoundsException(
 							"Percents should be between 0% and 100%. However, it's value is : " + percents);
 			}
-		} else if (jokerPublicPercents == null) {
-			// Null parameter
-			throw new IllegalArgumentException("The param jokerPublicPercents is null.");
 		} else {
 			// Size not right
 			throw new IllegalArgumentException("The size of the jokerPublicPercents List should be equals to "
@@ -374,20 +386,18 @@ public class Party {
 	 */
 	public void setJoker5050Indexes(List<Integer> joker5050Indexes)
 			throws IndexOutOfBoundsException, IllegalArgumentException {
-		if (joker5050Indexes != null && joker5050Indexes.size() == Question.NB_ANSWERS / 2) {
+		if (joker5050Indexes.size() == (Question.NB_ANSWERS / 2)) {
 			for (Integer index : joker5050Indexes) {
 				if (index < 0 || index > Question.NB_ANSWERS - 1)
 					throw new IndexOutOfBoundsException("Joker5050 index should be between 0 and "
 							+ (Question.NB_ANSWERS - 1) + " included. However, it's value is : " + index);
 			}
-		} else if (joker5050Indexes == null) {
-			// Null parameter
-			throw new IllegalArgumentException("The param joker5050Indexes is null.");
 		} else {
 			// Size not right
 			throw new IllegalArgumentException("The size of the joker5050Indexes List should be equals to "
 					+ Question.NB_ANSWERS / 2 + ", however it's " + joker5050Indexes.size());
 		}
+
 		this.joker5050Indexes = joker5050Indexes;
 	}
 

@@ -1,29 +1,32 @@
-/* Imports */
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,400,700');
-
 /* Classes */
+
+.root{
+    -fx-font-size: 12.0pt;
+	-fx-font-family:'IBM Plex Sans', sans-serif;
+}
 .button{
 	-fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
 	-fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
 	-fx-background-insets: 0.0,0.0,0.0;
 	
-	-fx-font-family:'IBM Plex Sans', sans-serif;
 	-fx-font-size:1.4em;
 	-fx-text-fill:#2d2d2d;	
 }
 
 .button-medium{
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 	-fx-min-height: 55.0px;
 	-fx-min-width: 193.5px;
 }
 
 .button-large{
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 	-fx-min-height: 77.0px;
 	-fx-min-width: 270.9px;
 }
 
 .main-button-md{
-	-fx-font-family:'IBM Plex Sans', sans-serif;
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 	-fx-font-size:2.0em;
 }
 
@@ -41,36 +44,32 @@
 	-fx-prompt-text-fill: #666666;
 	-fx-padding:5.0px;
 	
-	-fx-font-family:'IBM Plex Sans', sans-serif;
 	-fx-font-size:1.6em;
 }
 
 .title-xl{
-	-fx-font-family:'IBM Plex Sans', sans-serif;
 	-fx-font-size:4.7em;
 	-fx-font-weight:bold;
 	-fx-text-fill:#edbf0b;
 }
 
 .title-large{
-	-fx-font-family:'IBM Plex Sans', sans-serif;
-	-fx-font-size:3.2em;
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
+	-fx-font-size:3.8em;
 	-fx-font-weight:bold;
 	-fx-text-fill:#edbf0b;
 }
 
 .title-medium{
-	-fx-font-family:'IBM Plex Sans', sans-serif;
-	-fx-font-size:2.1em;
-	-fx-font-weight:bold;
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
+	-fx-font-size:2.5em;
 	-fx-text-fill:#2d2d2d;
 }
 
 .input-error{
-	-fx-font-family:'IBM Plex Sans', sans-serif;
-	-fx-font-size:1.2em;
+	-fx-font-size:1.3em;
 	-fx-font-weight:bold;
-	-fx-text-fill:#C13030;
+	-fx-text-fill:#d82811/*#e23822*/;
 }
 
 .basic-background{
@@ -84,7 +83,6 @@
 	-fx-background-radius: 5.0px;
 	-fx-padding:9.0px;
 	
-	-fx-font-family:'IBM Plex Sans', sans-serif;
     -fx-text-alignment:center;
 	-fx-font-size:1.2em;
 }
@@ -92,14 +90,17 @@
 
 /* IDs */
 #projStackPane{
-	/*-fx-background-color:#E5903F;*/
 	-fx-background-image:url("/style/images/backgrounds/main_background.jpg");
 	-fx-background-repeat:round;
 	-fx-background-size:contain;
 }
 
 /* Home */
+#home-title{
+}
+
 #playBtn{
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 	-fx-font-size:3.8em;
 }
 
@@ -111,7 +112,6 @@
 
 /* PlayingGridPane */
 #playingGridPane{
-	/*-fx-background-color:#E5903F;*/
 	-fx-background-image:url("/style/images/backgrounds/playing_background.jpg");
 	-fx-background-repeat:round;
 	-fx-background-size:contain;
@@ -125,43 +125,45 @@
 	-fx-alignment: center;
 	
 	-fx-text-fill: #fef9e7;
-	-fx-font-family:'IBM Plex Sans', sans-serif;
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 	-fx-font-size:2.2em;
 	-fx-font-weight:bold;
 }
 
 #answerValue{
 	-fx-background-color: /* #ABE5F0*/#222222;
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 }
 
 #answerBtnOk{
 	-fx-background-image:url("/style/images/backgrounds/btn_background_right.jpg");
 	-fx-background-repeat:stretch;
 	-fx-background-size:cover;
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 }
 
 #answerBtnNotOk{
 	-fx-background-image:url("/style/images/backgrounds/btn_background_wrong.jpg");
 	-fx-background-repeat:stretch;
 	-fx-background-size: cover;
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 }
 
 #answerJokerFriend{
 	-fx-background-image:url("/style/images/backgrounds/friend_joker_btn_background.jpg");
 	-fx-background-repeat:stretch;
 	-fx-background-size: cover;
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 }
 
 #jokerResults{
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 	-fx-alignment: center;
 	-fx-font-size: 1.4em;
-	-fx-font-weight: bold;
 	-fx-padding: 4.0px;
 }
 
 .btnJoker{
-	-fx-font-family:'IBM Plex Sans', sans-serif;
-	-fx-font-size:1.4em;
 }
 
 /* Pyramid */
@@ -172,7 +174,7 @@
 }
 
 #textEarningsPyramid{
-	-fx-font-family:'IBM Plex Sans', sans-serif;
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 	-fx-alignment: center;
 	-fx-text-fill: #fef9e7;
 	-fx-font-size: 1.6em;
@@ -188,9 +190,8 @@
 	-fx-background-position:center, left center, right center;
 	-fx-background-color:#fefffe;
 	
-	-fx-font-family:'IBM Plex Sans', sans-serif;
 	-fx-alignment: center;
-	-fx-text-fill:#e04733;
+	-fx-text-fill:#d82811;
 	-fx-font-size: 1.8em;
 	-fx-font-weight: bold;
 }
@@ -200,10 +201,8 @@
 	-fx-background-position:left center,right center;
 	-fx-background-repeat: no-repeat ;
 	
-	
-	-fx-font-family:'IBM Plex Sans', sans-serif;
 	-fx-alignment: center;
-	-fx-text-fill:#e04733;
+	-fx-text-fill:#d82811;
 	-fx-font-size: 1.8em;
 	-fx-font-weight: bold;
 }
@@ -237,7 +236,6 @@
 
 /* RulesGridPane */
 #rulesText{
-	-fx-font-family:'IBM Plex Sans', sans-serif;
 	-fx-alignment: center;
 	-fx-text-fill: #fef9e7;
 	-fx-font-size: 1.2em;
@@ -276,7 +274,6 @@
 }
 
 #okButton{
-	-fx-font-family:'IBM Plex Sans', sans-serif;
 	-fx-font-size:1.0em;
 	-fx-alignment:center;
 }

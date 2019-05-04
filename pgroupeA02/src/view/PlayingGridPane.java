@@ -111,7 +111,7 @@ public class PlayingGridPane extends GridPane {
 
 		// Starts the party
 		try {
-			runNewParty("main_deck");
+			runNewParty(Party.FILE_NAME);
 		} catch (EmptyQuestionsListException | DeckUnderFilledException | NotEnoughQuestionsException
 				| TooMuchQuestionsException e) {
 			alertPop("A problem occured with the deck : \"main_deck.json\".");

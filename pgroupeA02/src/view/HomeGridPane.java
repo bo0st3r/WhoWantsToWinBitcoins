@@ -82,6 +82,22 @@ public class HomeGridPane extends GridPane {
 
 	// Getters
 	/**
+	 * Returns lblTitle, if null instantiates it, sets it's ID and alignment.
+	 * 
+	 * @return lblTitle, a Label object.
+	 */
+	public Label getLblTitle() {
+		if (lblTitle == null) {
+			lblTitle = new Label("Who wants to win Bitcoins?");
+			GridPane.setHalignment(lblTitle, HPos.CENTER);
+			lblTitle.getStyleClass().add("title-xl");
+			lblTitle.setId("home-title");
+		}
+
+		return lblTitle;
+	}
+
+	/**
 	 * Returns btnPlay, if null instantiates it, sets it's sizes, alignment, ID and
 	 * action when clicking on it.
 	 * 
@@ -276,8 +292,7 @@ public class HomeGridPane extends GridPane {
 				public void handle(ActionEvent event) {
 					setVisible(false);
 					((ProjStackPane) getParent().getParent()).getProfilGridPane().setVisible(true);
-					
-					
+
 				}
 			});
 		}
@@ -314,21 +329,6 @@ public class HomeGridPane extends GridPane {
 		}
 
 		return btnDisconnect;
-	}
-
-	/**
-	 * Returns lblTitle, if null instantiates it, sets it's ID and alignment.
-	 * 
-	 * @return lblTitle, a Label object.
-	 */
-	public Label getLblTitle() {
-		if (lblTitle == null) {
-			lblTitle = new Label("Who wants to win Bitcoins?");
-			GridPane.setHalignment(lblTitle, HPos.CENTER);
-			lblTitle.getStyleClass().add("title-xl");
-		}
-
-		return lblTitle;
 	}
 
 }

@@ -39,7 +39,7 @@ public class RegistrationGridPane extends GridPane {
 	private Button btnRegister;
 
 	public RegistrationGridPane() {
-		this.setGridLinesVisible(true);
+//		this.setGridLinesVisible(true);
 
 		// Add columns
 		double[] sizesCol = { 3, 94, 3 };
@@ -84,18 +84,30 @@ public class RegistrationGridPane extends GridPane {
 		add(getBtnRegister(), 1, 11, 2, 1);
 	}
 
+	/**
+	 * Returns the register button, if null first instantiates it and sets it's
+	 * action and style.
+	 * 
+	 * @return the register Button object.
+	 */
 	public Button getBtnRegister() {
 		if (btnRegister == null) {
 			btnRegister = new Button("Register");
 			btnRegister.getStyleClass().add("button-medium");
 			GridPane.setHalignment(btnRegister, HPos.CENTER);
 			GridPane.setValignment(btnRegister, VPos.CENTER);
-			btnRegister.setOnAction(new EventHandler<ActionEvent>() {
 
+			btnRegister.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
+					// Hide all the error labels and tries to create the user
 					hideErrorLbls();
-					createUser();
+					// Creates the user
+					User user = createUser();
+					// If not null, tries to add it to the users database
+					if (user != null)
+						registerUser(user);
+					System.out.println(UserManagerSingleton.getInstance());
 				}
 			});
 			;
@@ -104,41 +116,41 @@ public class RegistrationGridPane extends GridPane {
 	}
 
 	/**
-	 * Creates and gets an new user using the pseudo, password and email address set
-	 * in the fields.
+	 * Creates and returns a new user using the pseudo, password and email address
+	 * set in the input fields.
 	 * 
 	 * @return the new User object.
 	 */
-	public void createUser() {
+	public User createUser() {
 		String pseudo = getTxtPseudo().getText();
 		String password = getPwdPassword().getText();
 		String email = getTxtEmail().getText();
 
 		try {
+			// Instantiates the user
 			User user = new User(pseudo, password, email);
-			registerUser(user);
+			return user;
 		} catch (InputSyntaxException e) {
 			// Show the pseudo syntax error
-			if (!User.validatePseudo(pseudo)) {
-				setLblText(getLblPseudoError(), "This pseudo does not fit the requirements.	");
-				getLblPseudoError().setVisible(true);
-			}
+			verifyPseudoSyntax(pseudo);
 
 			// Show the password syntax error
-			if (!User.validatePassword(password))
-				getLblPasswordSyntax().setVisible(true);
+			verifyPasswordSyntax(password);
 
 			// Show the email syntax error
-			if (!User.validateEmail(email)) {
-				setLblText(getLblEmailError(), "This email does not fit the requirements.");
-				getLblEmailError().setVisible(true);
-			}
+			verifyEmailSyntax(email);
 
 			e.printStackTrace();
-			return;
+			return null;
 		}
 	}
 
+	/**
+	 * Adds the user to the users database if he's not already in use, otherwise
+	 * displays a error message above the concerned field.
+	 * 
+	 * @param user the user to add.
+	 */
 	public void registerUser(User user) {
 		try {
 			UserManagerSingleton.getInstance().addUser(user);
@@ -162,6 +174,46 @@ public class RegistrationGridPane extends GridPane {
 			getLblEmailError().setVisible(true);
 
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Verifies the given pseudo syntax, if incorrect displays the email error.
+	 * 
+	 * @param pseudo the pseudo to verify.
+	 */
+	public void verifyPseudoSyntax(String pseudo) {
+		if (!User.validatePseudo(pseudo)) {
+			setLblText(getLblPseudoError(), "This pseudo does not fit it's requirements.	");
+			getLblPseudoError().setVisible(true);
+		} else {
+			getLblPseudoError().setVisible(false);
+		}
+	}
+
+	/**
+	 * Verifies the given password syntax, if incorrect displays the email error.
+	 * 
+	 * @param password the password to verify.
+	 */
+	private void verifyPasswordSyntax(String password) {
+		if (!User.validatePassword(password))
+			getLblPasswordSyntax().setVisible(true);
+		else
+			getLblPasswordSyntax().setVisible(false);
+	}
+
+	/**
+	 * Verifies the given email syntax, if incorrect displays the email error.
+	 * 
+	 * @param email the email to verify.
+	 */
+	private void verifyEmailSyntax(String email) {
+		if (!User.validateEmail(email)) {
+			setLblText(getLblEmailError(), "This email does not fit it's requirements.");
+			getLblEmailError().setVisible(true);
+		} else {
+			getLblEmailError().setVisible(false);
 		}
 	}
 
@@ -234,18 +286,10 @@ public class RegistrationGridPane extends GridPane {
 				@Override
 				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 					String pseudo = getTxtPseudo().getText();
-					if (pseudo.length() == 0)
-						return;
 
-					if (oldValue) {
-						if (!User.validatePseudo(pseudo)) {
-							setLblText(getLblPseudoError(), "This pseudo does not fit the requirements.	");
-							getLblPseudoError().setVisible(true);
-						} else {
-							getLblPseudoError().setVisible(false);
-						}
+					if (oldValue && pseudo.length() > 0) {
+						verifyPseudoSyntax(pseudo);
 					}
-					System.out.println("hey");
 				}
 			});
 
@@ -283,7 +327,7 @@ public class RegistrationGridPane extends GridPane {
 	 */
 	public Label getLblPasswordSyntax() {
 		if (lblPasswordSyntax == null) {
-			lblPasswordSyntax = new Label("This password does not fit the requirements.");
+			lblPasswordSyntax = new Label("This password does not fit it's requirements.");
 			lblPasswordSyntax.getStyleClass().add("input-error");
 			lblPasswordSyntax.setVisible(false);
 			GridPane.setHalignment(lblPasswordSyntax, HPos.RIGHT);
@@ -305,6 +349,18 @@ public class RegistrationGridPane extends GridPane {
 			getPwdPassword().setPromptText("Choose a password");
 			pwdPassword.getStyleClass().add("textfield-large");
 			GridPane.setValignment(pwdPassword, VPos.CENTER);
+
+			// Verify the input when leaving the field
+			pwdPassword.focusedProperty().addListener(new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					String password = getPwdPassword().getText();
+
+					if (oldValue && password.length() > 0) {
+						verifyPasswordSyntax(password);
+					}
+				}
+			});
 		}
 
 		return pwdPassword;
@@ -358,6 +414,18 @@ public class RegistrationGridPane extends GridPane {
 			getTxtEmail().setPromptText("Enter your email");
 			txtEmail.getStyleClass().add("textfield-large");
 			GridPane.setValignment(txtEmail, VPos.CENTER);
+
+			// Verify the input when leaving the field
+			txtEmail.focusedProperty().addListener(new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					String email = getTxtEmail().getText();
+
+					if (oldValue && email.length() > 0) {
+						verifyEmailSyntax(email);
+					}
+				}
+			});
 		}
 
 		return txtEmail;

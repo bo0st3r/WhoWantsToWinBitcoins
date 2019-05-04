@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.util.Map;
 
 import org.junit.After;
@@ -22,6 +23,7 @@ import exceptions.NotARoundException;
 import exceptions.RightAnswerAlreadyPresentException;
 import exceptions.StatementTooShortException;
 import exceptions.TooMuchAnswersException;
+import model.Earning;
 import model.Question;
 import utilities.Explorer;
 
@@ -192,13 +194,26 @@ public class TestQuestion {
 	@Test
 	public void testEqualsObject() throws StatementTooShortException, NotARoundException {
 		Question question2 = new Question(author, statement, round);
-		assertTrue("Question equals doesn't work", question.equals(question2));
+		assertEquals("Questions should be equals", question, question2);
+
+		question2 = new Question(author, statement + 'a', round);
+		assertNotEquals("Question shouldn't be equals", question.equals(question2));
+
+		assertEquals("Should be equal cause of same reference", question, question);
+		assertNotEquals("Shouldn't be equal cause of null", question, null);
+		assertNotEquals("Shouldn't be equal cause of noot same class", question, new Object());
 	}
 
 	@Test
 	public void testSetStatement() throws StatementTooShortException {
 		question.setStatement("Test Test Test Test Test Test");
 		assertNotEquals("Statement wasn't changed", question.getStatement(), statement);
+	}
+
+	@Test
+	public void testToString() {
+		choices.put("1", false);
+		question.toString();
 	}
 
 	@Test(expected = StatementTooShortException.class)
@@ -214,4 +229,31 @@ public class TestQuestion {
 		assertEquals("Didn't get the right number of choices", question.getNbAnswers(), 3);
 	}
 
+	@Test
+	public void testSetRound() {
+		question.setRound(Round.LAST_ROUND);
+		Round actualRound = (Round) Explorer.getField(question, "round");
+
+		assertEquals("Should have changed to LAST_ROUND", actualRound, Round.LAST_ROUND);
+
+		question.setRound(null);
+		assertEquals("Should still be set to LAST_ROUND", actualRound, Round.LAST_ROUND);
+	}
+
+	@Test
+	public void testHashCode() throws StatementTooShortException, NotARoundException {
+		Question question2 = new Question(author, statement, round);
+		Map<String, Boolean> choices2 = (Map<String, Boolean>) Explorer.getField(question2, "choices");
+		choices2.put("1", false);
+		choices2.put("2", false);
+		choices2.put("3", true);
+		choices2.put("4", false);
+
+		choices.put("1", false);
+		choices.put("2", false);
+		choices.put("3", true);
+		choices.put("4", false);
+
+		assertTrue("Should have the same hashcode", question.hashCode() == question2.hashCode());
+	}
 }

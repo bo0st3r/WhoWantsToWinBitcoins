@@ -184,6 +184,12 @@ public class TestEarning {
 	}
 
 	@Test
+	public void testToString() {
+		amounts.add(3);
+		earning.toString();
+	}
+
+	@Test
 	public void testEqualsObject() {
 		amounts.add(a1);
 		amounts.add(a2);

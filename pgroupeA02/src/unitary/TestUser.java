@@ -181,6 +181,11 @@ public class TestUser {
 	}
 
 	@Test
+	public void testToString() {
+		user.toString();
+	}
+
+	@Test
 	public void testGetPartiesPlayed() {
 		assertTrue("partiesPlayed should be set to 0", user.getPartiesPlayed() == 0);
 	}
@@ -255,7 +260,7 @@ public class TestUser {
 	@Test
 	public void testHashCode() throws InputSyntaxException {
 		User other = new User("testUser", "password", "test-user@testing.com");
-		assertTrue("Hashcode shoud be equal", user.hashCode() == (other.hashCode()));
+		assertTrue("Hashcode shoud be equal", user.hashCode() == other.hashCode());
 
 		other = new User("testUser", "newPassword", "test-user@testing.com");
 		assertFalse("Hashcode shoudn't be equal", user.hashCode() == (other.hashCode()));
