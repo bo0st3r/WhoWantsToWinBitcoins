@@ -71,6 +71,16 @@ public class Serialization {
 		return deck;
 	}
 
+	/**
+	 * Updates the deck file with the new deck.
+	 * 
+	 * @param deck the new Deck object.
+	 * @param dest the destination folder.
+	 */
+	public static void updateDeckFile(Deck deck, String dest) {
+		Serialization.deckToJson(deck, dest);
+	}
+
 	// UserManager
 	/**
 	 * Writes an UserManager object into a JSON file using JSON format. The JSON

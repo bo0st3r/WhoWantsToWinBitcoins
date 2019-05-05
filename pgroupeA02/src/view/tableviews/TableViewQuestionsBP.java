@@ -9,28 +9,28 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.GridPane;
 import model.Deck;
 import model.Party;
 import model.Question;
 import utilities.Serialization;
+import view.AddQuestionGP;
 import view.ProjSP;
+import view.AlertError;
 
 public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
+	private AddQuestionGP addQuestionGP;
 	private Deck deck;
 	private Button btnHome;
 	private Button btnDelete;
 	private Button btnAdd;
+	private Button btnTable;
 
 	public TableViewQuestionsBP(Deck deck) {
 		super(deck.getQuestions(), Question.class);
@@ -38,14 +38,15 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 
 		setLeft(getBtnDelete());
 
-		setBottom(getBtnHome());
+		// Adds the buttons to the HBox
+		getBottomHB().getChildren().addAll(getBtnHome(), getBtnDelete(), getBtnAdd());
+		setBottom(getBottomHB());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public TableView<Question> getTv() {
 		TableView<Question> tv = super.getTv();
-
 		tv.setEditable(true);
 
 		ObservableList<Question> data = FXCollections.observableList(getList());
@@ -101,12 +102,13 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 						@SuppressWarnings("unused")
 						Party deckTester = new Party(testDeck);
 
-						// Updates the deck file
-						deck.update(oldValue, newValue);
-						updateDeckFile();
-
 						// Updates the view
 						event.getRowValue().setRound(event.getNewValue());
+						getTv().sort();
+
+						// Updates the deck file
+						deck.update(oldValue, newValue);
+						Serialization.updateDeckFile(deck, Deck.FILE_NAME);
 					}
 
 				} catch (NotEnoughQuestionsException e) {
@@ -149,10 +151,13 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 
 					// Tries to update the deck
 					if (testDeck.update(oldValue, newValue)) {
+						// Updates the view
 						event.getRowValue().setStatement(event.getNewValue());
+						getTv().sort();
 
+						// Updates the model
 						deck.update(oldValue, newValue);
-						updateDeckFile();
+						Serialization.updateDeckFile(deck, Deck.FILE_NAME);
 					}
 					tv.refresh();
 
@@ -199,7 +204,7 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 						event.getRowValue().setAuthor(event.getNewValue());
 
 						deck.update(oldValue, newValue);
-						updateDeckFile();
+						Serialization.updateDeckFile(deck, Deck.FILE_NAME);
 					}
 					tv.refresh();
 
@@ -225,8 +230,6 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 		if (btnHome == null) {
 			btnHome = new Button("Home");
 			btnHome.getStyleClass().add("button-medium");
-			GridPane.setHalignment(getBtnHome(), HPos.CENTER);
-			GridPane.setValignment(getBtnHome(), VPos.CENTER);
 
 			btnHome.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -244,20 +247,17 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 	public Button getBtnDelete() {
 		if (btnDelete == null) {
 			btnDelete = new Button("Delete");
+			btnDelete.getStyleClass().add("button-medium");
+
 			btnDelete.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
 					// Removes from model
 					deck.removeAll(getTv().getSelectionModel().getSelectedItems());
-					System.out.println(deck.getQuestions());
-					updateDeckFile();
+					Serialization.updateDeckFile(deck, Deck.FILE_NAME);
 
-					Alert a = new Alert(AlertType.CONFIRMATION);
-					a.showAndWait();
-					
 					// Removes from view
 					getTv().getItems().removeAll(getTv().getSelectionModel().getSelectedItems());
-					System.out.println(getTv().getItems());
 					getTv().refresh();
 				}
 			});
@@ -268,19 +268,20 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 	public Button getBtnAdd() {
 		if (btnAdd == null) {
 			btnAdd = new Button("Add");
+			btnAdd.getStyleClass().add("button-medium");
+
+			addQuestionGP = new AddQuestionGP();
+			addQuestionGP.setId("addQuestionPane");
+			addQuestionGP.setMinSize(570, 305);
+
 			btnAdd.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent event) {
-//					PointColor randomPC = PointColor.getRandomPointColor();
-//					if (!getTv().getItems().contains(randomPC)) {
-					// Adds to model
-//						gestionPoints.add(randomPC);
-					// Adds to view
-//						getTv().getItems().add(randomPC);
-//					}
-//					System.out.println("modele : " + gestionPoints.getPoints());
-//					System.out.println("vue : " + tv.getItems());
+					// Ajout
+					setCenter(addQuestionGP);
+					getBottomHB().getChildren().removeAll(getBtnAdd(), getBtnDelete());
+					getBottomHB().getChildren().add(getBtnTable());
 				}
 			});
 		}
@@ -288,9 +289,36 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 	}
 
 	/**
-	 * Updates the deck file with the new deck.
+	 * If null instantiate btnTable, then returns it. Defines it's action when using
+	 * it.
+	 * 
+	 * @return The "table" Button object.
 	 */
-	public void updateDeckFile() {
-		Serialization.deckToJson(deck, Deck.FILE_NAME);
+	public Button getBtnTable() {
+		if (btnTable == null) {
+			btnTable = new Button("Table");
+			btnTable.getStyleClass().add("button-medium");
+
+			btnTable.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					getBottomHB().getChildren().addAll(getBtnDelete(), getBtnAdd());
+					getBottomHB().getChildren().remove(btnTable);
+					setCenter(getTv());
+				}
+			});
+		}
+
+		return btnTable;
+	}
+
+	/**
+	 * Returns the deck.
+	 * 
+	 * @return the Deck object.
+	 */
+	public Deck getDeck() {
+		return deck;
 	}
 }

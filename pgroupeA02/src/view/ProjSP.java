@@ -147,6 +147,7 @@ public class ProjSP extends BorderPane {
 	public TableViewQuestionsBP getTvQuestionBP() {
 		if (tvQuestionBP == null) {
 			tvQuestionBP = new TableViewQuestionsBP(Serialization.jsonToDeck(Deck.FILE_NAME));
+			tvQuestionBP.getStyleClass().add("basic-background");
 			stackPane.getChildren().add(tvQuestionBP);
 		}
 

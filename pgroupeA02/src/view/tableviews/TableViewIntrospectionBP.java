@@ -6,20 +6,18 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.SelectionMode;
+import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
-import javafx.stage.StageStyle;
+import javafx.scene.layout.HBox;
 
 public class TableViewIntrospectionBP<T> extends BorderPane {
 	private TableView<T> tv;
 	private List<T> list;
 	private Class<T> clType;
+	private HBox bottomHB;
 
 	public TableViewIntrospectionBP(List<T> list, Class<T> clType) {
 		if (list.size() > 0)
@@ -28,13 +26,12 @@ public class TableViewIntrospectionBP<T> extends BorderPane {
 		this.clType = clType;
 
 		setCenter(getTv());
+		setBottom(getBottomHB());
 	}
 
 	public TableView<T> getTv() {
 		if (tv == null) {
 			tv = new TableView<T>();
-			tv.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-			tv.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
 			// List
 			ObservableList<T> data = FXCollections.observableList(list);
@@ -57,30 +54,23 @@ public class TableViewIntrospectionBP<T> extends BorderPane {
 			}
 
 			// Auto resize the columns and disable the cols reordering
-//			tv.setColumnResizePolicy(new Callback<TableView.ResizeFeatures, Boolean>() {
-//				@Override
-//				public Boolean call(ResizeFeatures param) {
-//					return true;
-//				}
-//			});
-
-			// Auto resize the columns and disable the cols reordering
 			tv.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 		}
 
 		return tv;
 	}
 
+	public HBox getBottomHB() {
+		if (bottomHB == null) {
+			bottomHB = new HBox();
+			bottomHB.setSpacing(25);
+			bottomHB.setAlignment(Pos.CENTER);
+			bottomHB.setId("tableview-bottom-hb");
+		}
+		return bottomHB;
+	}
+
 	public List<T> getList() {
 		return list;
-	}
-}
-
-class AlertError extends Alert {
-	public AlertError(String string) {
-		super(AlertType.NONE, string, ButtonType.OK);
-		initModality(Modality.WINDOW_MODAL);
-		initStyle(StageStyle.UNIFIED);
-		setHeaderText(string);
 	}
 }

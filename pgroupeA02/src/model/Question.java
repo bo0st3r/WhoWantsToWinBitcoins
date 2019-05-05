@@ -168,11 +168,15 @@ public class Question {
 
 	@Override
 	public String toString() {
-		String result = "Statement : " + statement + "\nRound : " + round.getRoundStatement() + "\nAnswers :\n";
+		String result = "Author : " + author + "\nStatement : " + statement + "\nRound : " + round.getRoundStatement()
+				+ "\nAnswers :\n";
 
 		Set<Entry<String, Boolean>> entries = choices.entrySet();
 		for (Entry<String, Boolean> entry : entries) {
-			result += "- " + entry.getKey() + "\n";
+			result += "- " + entry.getKey();
+			if (entry.getValue())
+				result += " - right choice";
+			result += "\n";
 		}
 
 		return result;

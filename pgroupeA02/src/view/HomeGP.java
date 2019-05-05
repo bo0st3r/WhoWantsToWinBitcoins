@@ -8,15 +8,9 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import model.Deck;
-import utilities.Serialization;
-import view.tableviews.TableViewQuestionsBP;
 
 public class HomeGP extends GridPane {
 	// General
