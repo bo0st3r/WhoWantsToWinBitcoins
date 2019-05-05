@@ -2,22 +2,27 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public class AboutGP extends GridPane {
 
-	private Button btnPrevious;
-	private Label lblName;
+	private Label lblTitle;
+	private Label lblText;
+	private Button btnHome;
+//	private ScrollPane scpAbout;
 
 	/*
 	 * Constructor. Add rows and cols constraints plus the pane content.
 	 */
 	public AboutGP() {
-//		this.setGridLinesVisible(true);
+		this.setGridLinesVisible(true);
 
 		// Set columns
 		ColumnConstraints c = new ColumnConstraints();
@@ -29,24 +34,27 @@ public class AboutGP extends GridPane {
 		r.setPercentHeight(10);
 		this.getRowConstraints().addAll(r, r, r, r, r, r, r, r, r, r);
 
-		// Label
-		this.add(getLblname(), 3, 1, 3, 1);
+		// title
+		this.add(getLblTitle(), 4, 0, 2, 1);
 
 		// Previous button
-		this.add(getBtnPrevious(), 4, 8, 2, 2);
+		this.add(getBtnHome(), 4, 8, 2, 2);
+		
+		add(getLblText(), 1, 2, 8, 3);
 
 	}
 
 	/**
-	 * If null instantiate btnPrevious, then return it. Define it's action when
+	 * If null instantiate btnHome, then return it. Define it's action when
 	 * using it.
 	 * 
-	 * @return The previous Button
+	 * @return The Home Button
 	 */
-	public Button getBtnPrevious() {
-		if (btnPrevious == null) {
-			btnPrevious = new Button("Previous");
-			btnPrevious.setOnAction(new EventHandler<ActionEvent>() {
+	public Button getBtnHome() {
+		if (btnHome == null) {
+			btnHome = new Button("Previous");
+			GridPane.setHalignment(getBtnHome(), HPos.CENTER);
+			btnHome.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent event) {
@@ -57,20 +65,51 @@ public class AboutGP extends GridPane {
 				}
 			});
 		}
-		return btnPrevious;
+		return btnHome;
 	}
 
 	/**
-	 * If null instantiate lblName, then return it. Define it's action when using
+	 * If null instantiate lblTitke, then return it. Define it's action when using
 	 * it.
 	 * 
-	 * @return The name Label
+	 * @return The Title Label
 	 */
-	public Label getLblname() {
-		if (lblName == null) {
-			lblName = new Label("----De Bels Lieven , Decorte Bastien, Draux Elsa");
+	public Label getLblTitle() {
+		if (lblTitle == null) {
+			lblTitle = new Label("About");
+			lblTitle.getStyleClass().add("title-large");
+			GridPane.setHalignment(getLblTitle(), HPos.CENTER);
 		}
-		return lblName;
+		return lblTitle;
 	}
+	
+	public Label getLblText() {
+		if (lblText == null) {
+			lblText = new Label("This game was developed by Bastien Decorte, Elsa Draux and Lieven De Bels.\r\n\n" + 
+					"Software used: Photoshop, Gimp, Eclipse and Greenshot.\r\n" + 
+					"\r\n" + 
+					"Developed in Java (JavaFx, CSS)");
 
+			lblText.setId("AboutText");
+			GridPane.setHalignment(getLblText(), HPos.CENTER);
+
+		}
+
+		return lblText;
+	}
+	
+	
+//	public ScrollPane getScpAbout() {
+//		if (scpAbout == null) {
+//			scpAbout = new ScrollPane();
+//			scpAbout.setPadding(new Insets(5));
+//			scpAbout.setFitToWidth(true);
+//			scpAbout.setContent(getLblText());
+//
+//			scpAbout.setId("rulesPane");
+//		}
+//		return scpAbout;
+//	}
+
+	
 }

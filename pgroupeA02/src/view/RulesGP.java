@@ -23,7 +23,7 @@ public class RulesGP extends GridPane {
 	 * content.
 	 */
 	public RulesGP() {
-		// this.setGridLinesVisible(true);
+		 this.setGridLinesVisible(true);
 		setId("rules");
 
 		// Spacings
@@ -61,6 +61,7 @@ public class RulesGP extends GridPane {
 		if (lblTitle == null) {
 			lblTitle = new Label("Game rules");
 			GridPane.setHalignment(lblTitle, HPos.CENTER);
+			lblTitle.getStyleClass().add("title-large");
 			lblTitle.setId("titleHome");
 		}
 		return lblTitle;

@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import model.UserManagerSingleton;
 
 public class HomeGP extends GridPane {
 	// General
@@ -299,8 +300,16 @@ public class HomeGP extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
+
+					String pseudo = ProjSP.getUserSP().getPseudo();
+
+					((ProjSP) getParent().getParent()).getProfilGridPane()
+							.UserToProfilFields(UserManagerSingleton.getInstance().getUserByPseudo(pseudo));
+
 					setVisible(false);
 					((ProjSP) getParent().getParent()).getProfilGridPane().setVisible(true);
+					((ProjSP) getParent().getParent()).getProfilGridPane().getBtnPasswordChange().setDisable(false);
+					((ProjSP) getParent().getParent()).getProfilGridPane().getBtnEmailChange().setDisable(false);
 
 				}
 			});

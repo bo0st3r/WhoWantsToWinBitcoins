@@ -261,6 +261,16 @@
 #validationPane{
 	-fx-font-size: 1.5em;
 }
+#AboutText{
+	-fx-alignment: center;
+	-fx-text-fill: #fef9e7;
+	-fx-font-size: 1.8em;
+	-fx-font-weight: bold;
+	-fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
+	-fx-background-size: stretch;
+	-fx-wrap-text: true ;	
+}
+
 
 /*PartyLostGridPane */
 #partyLostGridPane{ 
@@ -284,6 +294,15 @@
 
 #okButton{
 	-fx-alignment:center;
+}
+
+/*ProfilGridPane */
+#profilPane{
+	-fx-background-image:url("/style/images/backgrounds/basic_background.jpg");
+}
+
+#lblResize{
+	-fx-wrap-text: true ;
 }
 
 /* TableViews */
@@ -616,3 +635,5 @@
 .scroll-bar:disabled {
     -fx-opacity: 0.4;
 }
+
+

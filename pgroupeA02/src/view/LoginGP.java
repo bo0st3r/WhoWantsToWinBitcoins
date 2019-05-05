@@ -124,6 +124,10 @@ public class LoginGP extends GridPane {
 				public void handle(ActionEvent event) {
 					setVisible(false);
 					((ProjSP) getParent().getParent()).getHomeGridPane().setVisible(true);
+					
+//					((ProjSP) getParent().getParent().getParent()).setUser(user);
+//					getBtnDisconnect().setVisible(true);
+//					getBtnProfile().setVisible(true);
 				}
 			});
 			;
