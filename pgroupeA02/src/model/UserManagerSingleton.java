@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import exceptions.DuplicateUserEmailException;
@@ -35,6 +37,14 @@ public class UserManagerSingleton implements Serializable {
 			INSTANCE = new UserManagerSingleton();
 		}
 		return INSTANCE;
+	}
+
+	public List<User> getUsersAsList() {
+		List<User> usersList = new ArrayList<>();
+		for (User u : users) {
+			usersList.add(u);
+		}
+		return usersList;
 	}
 
 	/**

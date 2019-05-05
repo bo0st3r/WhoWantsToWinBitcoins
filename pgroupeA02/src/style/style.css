@@ -1,5 +1,4 @@
 /* Classes */
-
 .root{
     -fx-font-size: 12.0pt;
 	-fx-font-family:'IBM Plex Sans', sans-serif;
@@ -289,14 +288,18 @@
 
 /* TableViews */
 #tableview-bottom-hb{
-	-fx-padding: 0.0 0.0 3.0em 0.0 ;	
+	-fx-padding: 1.5em 0.0 1.0em 0.0 ;	
 }
 
 .table-view{
 	-fx-background-color: transparent;
 	-fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
-	-fx-padding: 3.0em;
 }
+
+.table-resize{
+	-fx-padding: 3.0em 3.0em 1.5em 3.0em;
+}
+
 
 .table-view:focused{
     -fx-background-color: transparent;
@@ -311,7 +314,7 @@
 	-fx-background-color: #2d2d2d;
     -fx-text-fill: #f4f4f4;
     -fx-min-height:1.6em;
-    -fx-font-size:1.6em;
+    -fx-font-size:1.5em;
 }
 
 .table-view .column-header {
@@ -319,6 +322,7 @@
 	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
     -fx-min-height:2.0em;
 }
+
 
 .table-view .table-cell{
     -fx-text-fill: #f4f4f4;
@@ -359,6 +363,12 @@
 {
     -fx-opacity: 0.0;
 }
+
+#scores-table .table-column{
+	-fx-font-size: 1.3em;
+	-fx-alignment: center;
+}
+
 
 /* Radio buttons */
 .radio-button {

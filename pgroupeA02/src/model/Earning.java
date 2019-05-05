@@ -7,7 +7,7 @@ import java.util.List;
 import utilities.IntegerComparator;
 import utilities.Serialization;
 
-public class Earning 
+public class Earning
 //implements Serializable 
 {
 //	private static final long serialVersionUID = -7426233831685861896L;
@@ -133,6 +133,20 @@ public class Earning
 					+ ", however the given index is : " + index);
 
 		return amounts.get(index);
+	}
+
+	/**
+	 * Gets a copy of the amounts field.
+	 * 
+	 * @return List<Integer> a copy of the "amounts" field.
+	 */
+	public List<Integer> getAmounts() {
+		List<Integer> clone = new ArrayList<>();
+
+		for (int amount : amounts) {
+			clone.add(amount);
+		}
+		return clone;
 	}
 
 	@Override

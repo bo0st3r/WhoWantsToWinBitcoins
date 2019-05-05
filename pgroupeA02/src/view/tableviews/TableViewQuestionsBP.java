@@ -36,8 +36,6 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 		super(deck.getQuestions(), Question.class);
 		this.deck = deck;
 
-		setLeft(getBtnDelete());
-
 		// Adds the buttons to the HBox
 		getBottomHB().getChildren().addAll(getBtnHome(), getBtnDelete(), getBtnAdd());
 		setBottom(getBottomHB());

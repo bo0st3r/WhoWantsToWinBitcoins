@@ -24,6 +24,7 @@ public class TableViewIntrospectionBP<T> extends BorderPane {
 			this.list = list;
 
 		this.clType = clType;
+		getStyleClass().add("table-resize");
 
 		setCenter(getTv());
 		setBottom(getBottomHB());
@@ -42,6 +43,8 @@ public class TableViewIntrospectionBP<T> extends BorderPane {
 			for (Field f : fields) {
 				// Allows to remove static fields from the table
 				if (!Modifier.isStatic(f.getModifiers())) {
+					f.setAccessible(true);
+
 					String fieldName = f.getName();
 					fieldName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
 

@@ -17,9 +17,9 @@ import view.ProjSP;
 public class MainGame extends Application {
 	public static void main(String[] args) throws DuplicateUserPseudoException, DuplicateUserEmailException,
 			DuplicateUserException, InputSyntaxException {
-		UserManagerSingleton.getInstance().clearUsers();
-		UserManagerSingleton.getInstance().addUser(new User("admin", "helha", "admin@helha.be", true));
-		UserManagerSingleton.getInstance().addUser(new User("user", "helha", "user@helha.be"));
+//		UserManagerSingleton.getInstance().clearUsers();
+//		UserManagerSingleton.getInstance().addUser(new User("admin", "helha", "admin@helha.be", true));
+//		UserManagerSingleton.getInstance().addUser(new User("user", "helha", "user@helha.be"));
 		launch(args);
 	}
 

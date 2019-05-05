@@ -4,8 +4,11 @@ import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import model.Deck;
+import model.Earning;
 import utilities.Serialization;
+import view.tableviews.TableViewEarningsBP;
 import view.tableviews.TableViewQuestionsBP;
+import view.tableviews.TableViewScoresBP;
 
 public class ProjSP extends BorderPane {
 
@@ -17,6 +20,8 @@ public class ProjSP extends BorderPane {
 	private PartySP partyStackPane;
 	private ProfilGP profilGridPane;
 	private TableViewQuestionsBP tvQuestionBP;
+	private TableViewEarningsBP tvEarningsBP;
+	private TableViewScoresBP tvScoresBP;
 
 	/*
 	 * Constructor, set homeGridPane visible at first, hide the others panes and set
@@ -41,24 +46,10 @@ public class ProjSP extends BorderPane {
 		}
 	}
 
-	/*
-	 * Reset the playingGridPane in order to run a new party.
-	 */
-//	public void resetPlayingGridPane() {
-//		// Removes the playingGridPane from stackPane
-//		stackPane.getChildren().remove(playingGridPane);
-//
-//		// Sets playingGridPane as null so getPlayingGridPane() instantiate a new one.
-//		playingGridPane = null;
-//		stackPane.getChildren().add(getPlayingGridPane());
-//
-//		System.out.println(stackPane.getChildren().size());
-//	}
-
 	// Getters
 	/*
 	 * If null, instantiates stackPane and adds panes Home, About and Rules to it's
-	 * childrens and then returns it.
+	 * children and then returns it.
 	 * 
 	 * @return stackPane, a StackPane object which contains the others main panes.
 	 */
@@ -154,4 +145,23 @@ public class ProjSP extends BorderPane {
 		return tvQuestionBP;
 	}
 
+	public TableViewEarningsBP getTvEarningsBP() {
+		if (tvEarningsBP == null) {
+			tvEarningsBP = new TableViewEarningsBP(Serialization.jsonToEarning(Earning.FILE_NAME));
+			tvEarningsBP.getStyleClass().add("basic-background");
+			stackPane.getChildren().add(tvEarningsBP);
+		}
+
+		return tvEarningsBP;
+	}
+
+	public TableViewScoresBP getTvScoresBP() {
+		if (tvScoresBP == null) {
+			tvScoresBP = new TableViewScoresBP();
+			tvScoresBP.getStyleClass().add("basic-background");
+			stackPane.getChildren().add(tvScoresBP);
+		}
+
+		return tvScoresBP;
+	}
 }

@@ -9,18 +9,25 @@ import exceptions.QuestionAlreadyPresentException;
 import exceptions.RightAnswerAlreadyPresentException;
 import exceptions.StatementTooShortException;
 import exceptions.TooMuchAnswersException;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.StageStyle;
 import model.Deck;
 import model.Question;
 import utilities.Serialization;
@@ -325,6 +332,31 @@ public class AddQuestionGP extends GridPane {
 						Serialization.deckToJson(deck, Deck.FILE_NAME);
 						((TableViewQuestionsBP) getParent()).getTv().getItems().add(question);
 
+						Alert successAlert = new Alert(AlertType.NONE,
+								"The question \"" + question.getStatement() + "\" has been successfully added !",
+								ButtonType.OK);
+						successAlert.initModality(Modality.APPLICATION_MODAL);
+						successAlert.initStyle(StageStyle.UTILITY);
+
+						// Closes the alert 2 seconds after showing
+						successAlert.setOnShown(new EventHandler<DialogEvent>() {
+							@Override
+							public void handle(DialogEvent event) {
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {
+										try {
+											Thread.sleep(2000);
+											successAlert.close();
+										} catch (InterruptedException e) {
+											e.printStackTrace();
+										}
+									}
+								});
+							}
+
+						});
+						successAlert.show();
 					}
 				}
 			});

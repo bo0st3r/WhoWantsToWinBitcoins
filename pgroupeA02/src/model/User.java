@@ -26,9 +26,9 @@ public class User implements Serializable {
 	private boolean admin;
 
 	private int partiesWon;
+	private double totalEarningsWon;
 	private int partiesPlayed;
 	private double highestEarningsWon;
-	private double totalEarningsWon;
 
 	/**
 	 * Instantiates an non-admin User object using given arguments. First verify if

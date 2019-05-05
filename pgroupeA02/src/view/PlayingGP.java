@@ -116,7 +116,7 @@ public class PlayingGP extends GridPane {
 			runNewParty(Deck.FILE_NAME);
 		} catch (EmptyQuestionsListException | DeckUnderFilledException | NotEnoughQuestionsException
 				| TooMuchQuestionsException e) {
-			alertPop("A problem occured with the deck : \"main_deck.json\".");
+			alertPop("A problem occured with the deck : \"" + Deck.FILE_NAME + "\".");
 			e.printStackTrace();
 		} catch (ExceedMaxStepsException e1) {
 			// Make the user win the party

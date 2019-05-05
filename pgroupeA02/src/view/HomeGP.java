@@ -5,7 +5,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
@@ -21,9 +20,10 @@ public class HomeGP extends GridPane {
 	private Button btnConnect;
 	private Label lblTitle;
 
-	// Admin button
+	// DEPLACER
 	private Button btnAddQuestion;
 	private int admin = 1;
+	private Button btnEditEarnings;
 
 	// While connected buttons
 	private Button btnProfile;
@@ -64,6 +64,7 @@ public class HomeGP extends GridPane {
 
 		// AddQuestion button
 		add(getBtnAddQuestion(), 4, 8, 2, 1);
+//		add(getBtnEditEarnings(), 4, 9, 2, 1);
 
 		// Connection button
 		add(getBtnConnect(), 9, 0, 2, 1);
@@ -144,9 +145,8 @@ public class HomeGP extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					// hideAllComponent();
-					// getBtnPrevious().setVisible(true);
-
+					setVisible(false);
+					((ProjSP) getParent().getParent()).getTvScoresBP().setVisible(true);
 				}
 			});
 		}
@@ -194,28 +194,36 @@ public class HomeGP extends GridPane {
 			// Hidden if the user is not an admin
 //			btnAddQuestion.setVisible(false);
 
-			Scene secondScene = new Scene(new AddQuestionGP(), 570, 305);
 			btnAddQuestion.setOnAction(new EventHandler<ActionEvent>() {
-
 				@Override
 				public void handle(ActionEvent event) {
-					// Gets CSS file from the main scene
-//					secondScene.getStylesheets().addAll(getScene().getStylesheets());
-//					Stage stage = new Stage();
-//					stage.setTitle("Add a question");
-//					stage.setScene(secondScene);
-//					// Set the main Stage as it's owner
-//					stage.initOwner(getScene().getWindow());
-//					// Disable from acting on the owner stage while this window's open
-//					stage.initModality(Modality.WINDOW_MODAL);
-//					stage.show();
-
 					setVisible(false);
 					((ProjSP) getParent().getParent()).getTvQuestionBP().setVisible(true);
 				}
 			});
 		}
+
 		return btnAddQuestion;
+	}
+
+	public Button getBtnEditEarnings() {
+		if (btnEditEarnings == null) {
+			btnEditEarnings = new Button("Edit the earnings");
+			btnEditEarnings.setPrefHeight(Integer.MAX_VALUE);
+			btnEditEarnings.setPrefWidth(Integer.MAX_VALUE);
+			// Hidden if the user is not an admin
+//			btnEditEarnings.setVisible(false);
+
+			btnEditEarnings.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					setVisible(false);
+					((ProjSP) getParent().getParent()).getTvEarningsBP().setVisible(true);
+				}
+			});
+		}
+
+		return btnEditEarnings;
 	}
 
 	/**
