@@ -388,4 +388,14 @@ public class User implements Serializable {
 				+ ", partiesWon=" + partiesWon + ", partiesPlayed=" + partiesPlayed + ", highestEarningsWon="
 				+ highestEarningsWon + ", totalEarningsWon=" + totalEarningsWon + "]";
 	}
+
+	public User(String pseudo, String password, String email, int partiesWon, int partiesPlayed,
+			double highestEarningsWon, double totalEarningsWon) throws InputSyntaxException {
+		this(pseudo, password, email);
+		this.partiesWon = partiesWon;
+		this.partiesPlayed = partiesPlayed;
+		this.highestEarningsWon = highestEarningsWon;
+		this.totalEarningsWon = totalEarningsWon;
+	}
+	
 }

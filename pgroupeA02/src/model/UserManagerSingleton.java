@@ -8,6 +8,7 @@ import exceptions.DuplicateUserEmailException;
 import exceptions.DuplicateUserException;
 import exceptions.DuplicateUserPseudoException;
 import exceptions.NullUserException;
+import exceptions.UserNotFoundException;
 import utilities.Serialization;
 
 public class UserManagerSingleton implements Serializable {
@@ -231,4 +232,36 @@ public class UserManagerSingleton implements Serializable {
 			return false;
 		return true;
 	}
+	/**
+	 * get User corresponding to the given pseudo from the users field.
+	 * @param the String object containing the user's pseudo.
+	 * @return User's clone
+	 * @throws UserNotFoundException 
+	 */
+	public User getUserByPseudo(String pseudo) {
+		User clone = null;
+		for (User user : users) {
+			if (user.getPseudo().equals(pseudo)) {
+				clone = user.clone();
+//			}else {
+//				throw new UserNotFoundException();
+//				
+			}
+		}
+		return clone;
+	}
+	
+	public boolean updateUser(User oldUser, User newUser) throws DuplicateUserPseudoException, DuplicateUserEmailException, DuplicateUserException {
+		
+		if (newUser.validateEmail(newUser.getEmail()) || newUser.validatePassword(newUser.getPassword())) {
+			removeUserByPseudo(oldUser.getPseudo());
+			addUser(newUser);
+			return true;
+			}
+		return false;
+		
+		
+	}
+	
+
 }

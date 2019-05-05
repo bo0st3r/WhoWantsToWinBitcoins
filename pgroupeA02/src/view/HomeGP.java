@@ -1,5 +1,6 @@
 package view;
 
+import exceptions.UserNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -15,6 +16,8 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Deck;
+import model.User;
+import model.UserManagerSingleton;
 import utilities.Serialization;
 import view.tableviews.TableViewQuestionsBP;
 
@@ -297,9 +300,18 @@ public class HomeGP extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					setVisible(false);
-					((ProjSP) getParent().getParent()).getProfilGridPane().setVisible(true);
-
+					
+							String pseudo = ProjSP.getUserSP().getPseudo();
+						
+							
+							((ProjSP) getParent().getParent()).getProfilGridPane().UserToProfilFields(UserManagerSingleton.getInstance().getUserByPseudo(pseudo));
+							
+							setVisible(false);
+							((ProjSP) getParent().getParent()).getProfilGridPane().setVisible(true);
+							((ProjSP) getParent().getParent()).getProfilGridPane().getBtnPasswordChange().setDisable(false);
+							((ProjSP) getParent().getParent()).getProfilGridPane().getBtnEmailChange().setDisable(false);
+						
+							
 				}
 			});
 		}

@@ -1,9 +1,11 @@
 package view;
 
+import exceptions.UserNotFoundException;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import model.Deck;
+import model.User;
 import utilities.Serialization;
 import view.tableviews.TableViewQuestionsBP;
 
@@ -17,6 +19,7 @@ public class ProjSP extends BorderPane {
 	private PartySP partyStackPane;
 	private ProfilGP profilGridPane;
 	private TableViewQuestionsBP tvQuestionBP;
+	private static User user;
 
 	/*
 	 * Constructor, set homeGridPane visible at first, hide the others panes and set
@@ -30,6 +33,7 @@ public class ProjSP extends BorderPane {
 
 		// Set home visible first
 		getHomeGridPane().setVisible(true);
+		user = null;
 	}
 
 	/*
@@ -84,20 +88,7 @@ public class ProjSP extends BorderPane {
 		return homeGridPane;
 	}
 
-	/*
-	 * If null, instantiates playingGridPane, set it's CSS ID and then returns it.
-	 * 
-	 * @return playingGridPane, a PlayingGridPane object which is the playing page.
-	 */
-//	public PlayingGridPane getPlayingGridPane() {
-//		if (playingGridPane == null) {
-//			playingGridPane = new PlayingGridPane();
-//			playingGridPane.setId("playingGridPane");
-//		}
-//		return playingGridPane;
-//	}
-
-	/*
+	/**
 	 * If null, instantiate aboutGridPane and then returns it.
 	 * 
 	 * @return aboutGridPane, an AboutGridPane object which is the "about" page.
@@ -105,6 +96,7 @@ public class ProjSP extends BorderPane {
 	public AboutGP getAboutGridPane() {
 		if (aboutGridPane == null) {
 			aboutGridPane = new AboutGP();
+			aboutGridPane.setId("rulesPane");
 		}
 		return aboutGridPane;
 	}
@@ -139,7 +131,7 @@ public class ProjSP extends BorderPane {
 	public ProfilGP getProfilGridPane() {
 		if (profilGridPane == null) {
 			profilGridPane = new ProfilGP();
-			profilGridPane.setId("");
+			profilGridPane.setId("profilPane");
 		}
 		return profilGridPane;
 	}
@@ -152,5 +144,18 @@ public class ProjSP extends BorderPane {
 
 		return tvQuestionBP;
 	}
+
+	public void setUserSP(User u ) {
+		this.user = u;
+	}
+
+	public static User getUserSP() {
+		
+			return user;
+		
+	}
+	
+	
+	
 
 }

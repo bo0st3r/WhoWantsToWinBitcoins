@@ -61,8 +61,14 @@ public class RegistrationConnectionGP extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
+					
 					setVisible(false);
 					((ProjSP) getParent().getParent()).getHomeGridPane().setVisible(true);
+					((ProjSP) getParent().getParent()).getHomeGridPane().getBtnDisconnect().setVisible(false);
+					((ProjSP) getParent().getParent()).getHomeGridPane().getBtnProfile().setVisible(false);
+					((ProjSP) getParent().getParent()).getHomeGridPane().getBtnConnect().setVisible(true);
+					
+					
 
 				}
 			});

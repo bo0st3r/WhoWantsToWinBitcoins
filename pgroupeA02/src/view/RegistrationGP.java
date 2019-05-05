@@ -105,6 +105,15 @@ public class RegistrationGP extends GridPane {
 					if (user != null)
 						registerUser(user);
 					System.out.println(UserManagerSingleton.getInstance());
+					((ProjSP) getParent().getParent().getParent()).setUserSP(user);
+					
+					((ProjSP) getParent().getParent().getParent()).getRegistrationConnectionGridPane().setVisible(false);
+					
+					((ProjSP) getParent().getParent().getParent()).getHomeGridPane().setVisible(true);
+					((ProjSP) getParent().getParent().getParent()).getHomeGridPane().getBtnConnect().setVisible(false);
+					((ProjSP) getParent().getParent().getParent()).getHomeGridPane().getBtnDisconnect().setVisible(true);
+					((ProjSP) getParent().getParent().getParent()).getHomeGridPane().getBtnProfile().setVisible(true);
+//					
 				}
 			});
 			;
@@ -448,4 +457,5 @@ public class RegistrationGP extends GridPane {
 			if (message.length() > 0)
 				label.setText(message);
 	}
+
 }
