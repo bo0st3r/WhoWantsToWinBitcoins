@@ -14,8 +14,8 @@ import model.JokerFriend;
 import model.JokerPublic;
 import model.Question;
 
-public class JokerVBox extends VBox {
-	private PlayingGridPane pgp;
+public class JokerVB extends VBox {
+	private PlayingGP pgp;
 	private Joker joker;
 	private boolean cancelJokerResults;
 	private boolean cancelJoker5050;
@@ -28,7 +28,7 @@ public class JokerVBox extends VBox {
 	 * Constructor, set spacings, alignment, instance variables and add the pane
 	 * content.
 	 */
-	public JokerVBox(PlayingGridPane pgp) {
+	public JokerVB(PlayingGP pgp) {
 		// Spacings
 		setPadding(new Insets(10));
 		setSpacing(45);

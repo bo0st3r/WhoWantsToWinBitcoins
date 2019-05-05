@@ -15,7 +15,6 @@ import exceptions.TooMuchQuestionsException;
 public class Party {
 	public static final int NB_STEPS = 15;
 	public static final int NB_STEPS_BY_ROUND = 5;
-	public static final String FILE_NAME = "main_deck";
 
 	private List<Question> chosenQuestions;
 	private Round actualRound;
@@ -52,10 +51,7 @@ public class Party {
 	 *                                       have.
 	 */
 	public Party(Deck deck) throws EmptyQuestionsListException, DeckUnderFilledException, NotEnoughQuestionsException {
-		if (deck.getQuestions().size() == 0)
-			throw new EmptyQuestionsListException();
-		if (deck.getQuestions().size() < 15)
-			throw new DeckUnderFilledException(deck.getQuestions().size());
+		verifyDeckSize(deck);
 
 		List<Question> questionsList = deck.getQuestions();
 		chosenQuestions = new ArrayList<Question>();
@@ -63,6 +59,35 @@ public class Party {
 		Collections.shuffle(questionsList);
 
 		// Adding questions to chosenQuestions
+		chooseQuestions(questionsList);
+
+		// Verify there's exactly 5 questions for each Round
+		verifyChosenQuestions();
+
+		// Sort by rounds order
+		sortQuestionsByRounds();
+
+		rightAnswerIndex = -1;
+		rightAnswer = null;
+
+		actualStep = 0;
+		actualRound = Round.FIRST_ROUND;
+
+		jokerFriendIndex = -1;
+		jokerPublicPercents = new ArrayList<>();
+		joker5050Indexes = new ArrayList<>();
+	}
+
+	public static boolean verifyDeckSize(Deck deck) {
+		if (deck.getQuestions().size() == 0)
+			throw new EmptyQuestionsListException();
+		if (deck.getQuestions().size() < NB_STEPS)
+			throw new DeckUnderFilledException(deck.getQuestions().size());
+
+		return true;
+	}
+
+	public boolean chooseQuestions(List<Question> questionsList) {
 		for (Question q : questionsList) {
 			switch (q.getRound()) {
 
@@ -83,8 +108,10 @@ public class Party {
 			}
 
 		}
+		return true;
+	}
 
-		// Verify there's exactly 5 questions for each Round
+	public boolean verifyChosenQuestions() throws NotEnoughQuestionsException {
 		for (Round r : Round.values()) {
 			if (getNbQuestionsForRound(r) < 5) {
 				throw new NotEnoughQuestionsException(r, getNbQuestionsForRound(r));
@@ -92,19 +119,7 @@ public class Party {
 				throw new TooMuchQuestionsException(r, getNbQuestionsForRound(r));
 			}
 		}
-
-		// Sort by rounds order
-		sortQuestionsByRounds();
-
-		rightAnswerIndex = -1;
-		rightAnswer = null;
-
-		actualStep = 0;
-		actualRound = Round.FIRST_ROUND;
-
-		jokerFriendIndex = -1;
-		jokerPublicPercents = new ArrayList<>();
-		joker5050Indexes = new ArrayList<>();
+		return true;
 	}
 
 	/**

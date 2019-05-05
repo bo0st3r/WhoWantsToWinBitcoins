@@ -18,10 +18,10 @@ import enumerations.Round;
 import exceptions.NotEnoughAnswersException;
 import exceptions.QuestionAlreadyPresentException;
 import model.Deck;
-import model.Earning;
 import model.Question;
 import utilities.Explorer;
 
+@SuppressWarnings("unchecked")
 public class TestDeck {
 	private Deck deck;
 	private List<Question> questions;
@@ -37,7 +37,6 @@ public class TestDeck {
 	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
 		deck = new Deck();

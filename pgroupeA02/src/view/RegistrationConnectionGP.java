@@ -9,12 +9,12 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public class RegistrationConnectionGridPane extends GridPane {
-	private LoginGridPane loginGP;
-	private RegistrationGridPane registrationGP;
+public class RegistrationConnectionGP extends GridPane {
+	private LoginGP loginGP;
+	private RegistrationGP registrationGP;
 	private Button btnHome;
 
-	public RegistrationConnectionGridPane() {
+	public RegistrationConnectionGP() {
 //		this.setGridLinesVisible(true);
 		getStyleClass().add("basic-background");
 
@@ -62,7 +62,7 @@ public class RegistrationConnectionGridPane extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					setVisible(false);
-					((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+					((ProjSP) getParent().getParent()).getHomeGridPane().setVisible(true);
 
 				}
 			});
@@ -70,17 +70,17 @@ public class RegistrationConnectionGridPane extends GridPane {
 		return btnHome;
 	}
 
-	public LoginGridPane getLoginGP() {
+	public LoginGP getLoginGP() {
 		if (loginGP == null) {
-			loginGP = new LoginGridPane();
+			loginGP = new LoginGP();
 			loginGP.setId("loginGP");
 		}
 		return loginGP;
 	}
 
-	public RegistrationGridPane getRegistrationGP() {
+	public RegistrationGP getRegistrationGP() {
 		if (registrationGP == null) {
-			registrationGP = new RegistrationGridPane();
+			registrationGP = new RegistrationGP();
 			registrationGP.setId("registrationGP");
 		}
 		return registrationGP;

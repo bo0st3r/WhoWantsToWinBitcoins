@@ -12,7 +12,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public class LoginGridPane extends GridPane {
+public class LoginGP extends GridPane {
 	private Label lblTitleConnection;
 	private Label lblPseudoConnection;
 	private TextField txtPseudoConnection;
@@ -20,7 +20,7 @@ public class LoginGridPane extends GridPane {
 	private PasswordField pwdPasswordConnection;
 	private Button btnLogin;
 
-	public LoginGridPane() {
+	public LoginGP() {
 //		this.setGridLinesVisible(true);
 
 		// Add columns
@@ -34,15 +34,12 @@ public class LoginGridPane extends GridPane {
 
 		// Set rows
 		double[] sizesRow = { 0, 17, 3, 9.5, 10, 3, 9.5, 9.5, 23.5, 15, 0 };
-		double total = 0;
 		for (int i = 0; i <= sizesRow.length - 1; i++) {
-			total += sizesRow[i];
 			RowConstraints row = new RowConstraints();
 			row.setValignment(VPos.CENTER);
 			row.setPercentHeight(sizesRow[i]);
 			getRowConstraints().add(row);
 		}
-		System.out.println("login : " + total);
 
 		// Connection part
 		add(getLblTitleConnection(), 1, 1, 2, 1);
@@ -126,7 +123,7 @@ public class LoginGridPane extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					setVisible(false);
-					((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+					((ProjSP) getParent().getParent()).getHomeGridPane().setVisible(true);
 				}
 			});
 			;

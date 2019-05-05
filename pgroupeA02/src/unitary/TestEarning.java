@@ -51,6 +51,7 @@ public class TestEarning {
 		amounts = null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testEarning() {
 		assertEquals("Amounts is not empty", amounts.size(), 0);
@@ -189,6 +190,7 @@ public class TestEarning {
 		earning.toString();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testEqualsObject() {
 		amounts.add(a1);
@@ -214,6 +216,7 @@ public class TestEarning {
 		assertNotEquals("Shouldn't be equal cause of noot same class", earning, new Object());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testHashCode() {
 		Earning earn = new Earning();

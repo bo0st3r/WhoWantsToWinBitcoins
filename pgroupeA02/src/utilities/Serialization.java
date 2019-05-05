@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import model.Deck;
 import model.Earning;
 import model.UserManagerSingleton;
-import view.RegistrationConnectionGridPane;
+import view.RegistrationConnectionGP;
 
 public class Serialization {
 	public static final String DATA_DIRECTORY = "data/";
@@ -78,7 +78,7 @@ public class Serialization {
 	 * 
 	 * @param dest     the name of the .json file.
 	 * @param instance the list of users created by
-	 *                 {@link RegistrationConnectionGridPane}.
+	 *                 {@link RegistrationConnectionGP}.
 	 */
 	public static void userManagerSingletonToJson(UserManagerSingleton instance, String dest) {
 		try (ObjectOutputStream oos = new ObjectOutputStream(
@@ -133,7 +133,7 @@ public class Serialization {
 	 * name's depends of the "dest" param passed while calling the method.
 	 * 
 	 * @param dest    the name of the .json file.
-	 * @param earning the Earning object {@link RegistrationConnectionGridPane}.
+	 * @param earning the Earning object {@link RegistrationConnectionGP}.
 	 */
 	public static void earningToJson(Earning earning, String dest) {
 		// Gets the text in JSON format for the deck

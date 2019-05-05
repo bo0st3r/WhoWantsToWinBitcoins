@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.User;
 import model.UserManagerSingleton;
-import view.ProjStackPane;
+import view.ProjSP;
 
 public class MainGame extends Application {
 	public static void main(String[] args) throws DuplicateUserPseudoException, DuplicateUserEmailException,
@@ -20,7 +20,6 @@ public class MainGame extends Application {
 		UserManagerSingleton.getInstance().clearUsers();
 		UserManagerSingleton.getInstance().addUser(new User("admin", "helha", "admin@helha.be", true));
 		UserManagerSingleton.getInstance().addUser(new User("user", "helha", "user@helha.be"));
-		System.out.println(UserManagerSingleton.getInstance());
 		launch(args);
 	}
 
@@ -34,7 +33,7 @@ public class MainGame extends Application {
 			Font.loadFont(getClass().getResource("/fonts/IBMPlexSans-Bold.ttf").toExternalForm(), 10);
 			Font.loadFont(getClass().getResource("/fonts/IBMPlexSans-SemiBold.ttf").toExternalForm(), 10);
 
-			ProjStackPane root = new ProjStackPane();
+			ProjSP root = new ProjSP();
 			root.setId("projStackPane");
 
 			Scene scene = new Scene(root);
@@ -42,10 +41,8 @@ public class MainGame extends Application {
 				@Override
 				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 					if (newValue.doubleValue() <= 1680) {
-						System.out.println("2");
 						root.setStyle("-fx-font-size: 10.0pt;");
 					} else {
-						System.out.println("3");
 						root.setStyle("-fx-font-size: 12.0pt;");
 					}
 				}

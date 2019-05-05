@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import model.Party;
 
-public class PyramidGridPane extends GridPane {
+public class PyramidGP extends GridPane {
 	private List<Label> lblGain;
 	private int pyramidActualStep;
 
@@ -17,7 +17,7 @@ public class PyramidGridPane extends GridPane {
 	 * Constructor. Sets pyramidActualStep value, cols and rows constraints, pane
 	 * content and the pane width.
 	 */
-	public PyramidGridPane() {
+	public PyramidGP() {
 //		setGridLinesVisible(true);
 
 		// First step
@@ -60,7 +60,7 @@ public class PyramidGridPane extends GridPane {
 			lblGain = new ArrayList<>();
 
 			for (int i = Party.NB_STEPS - 1; i >= 0; i--) {
-				lblGain.add(new Label((i + 1) + "\t" + PlayingGridPane.getEarning().getAmount(i)));
+				lblGain.add(new Label((i + 1) + "\t" + PlayingGP.getEarning().getAmount(i)));
 
 				int step = Party.NB_STEPS - 1 - i;
 				lblGain.get(step).setId("textEarningsPyramid");

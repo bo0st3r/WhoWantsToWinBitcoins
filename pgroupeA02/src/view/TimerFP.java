@@ -7,7 +7,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 
-public class TimerFlowPane extends FlowPane {
+public class TimerFP extends FlowPane {
 	private static final int INITIAL_NB_SECONDS = 60;
 	private int nbSeconds;
 	private Label lblTimer;
@@ -15,7 +15,7 @@ public class TimerFlowPane extends FlowPane {
 	/*
 	 * Constructor. Adds the content to the pane.
 	 */
-	public TimerFlowPane() {
+	public TimerFP() {
 		getChildren().add(getLblTimer());
 	}
 
@@ -41,7 +41,7 @@ public class TimerFlowPane extends FlowPane {
 							nbSeconds--;
 						} else if (nbSeconds == 0) {
 							stopTimer();
-							((PartyStackPane) getParent().getParent().getParent()).partyLost();
+							((PartySP) getParent().getParent().getParent()).partyLost();
 						} else {
 							timer.cancel();
 						}

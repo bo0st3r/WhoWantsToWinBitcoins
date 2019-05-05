@@ -9,17 +9,17 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public class PartyLostGridPane extends GridPane {
+public class PartyLeftGP extends GridPane {
 
 	private Label lblTitle;
 	private Label lblEarning;
-	private ImageView imgLostParty;
+	private ImageView imgLeaveParty;
 	private Button btnOk;
 
 	/**
 	 * Constructor, set cols and rows constraints plus add the pane contents.
 	 */
-	public PartyLostGridPane() {
+	public PartyLeftGP() {
 		// Set columns
 		ColumnConstraints c = new ColumnConstraints();
 		c.setPercentWidth(20);
@@ -32,36 +32,30 @@ public class PartyLostGridPane extends GridPane {
 
 		add(getLblEarning(), 2, 4, 3, 1);
 		add(getBtnOk(), 2, 5, 2, 1);
-		add(getLblTitle(), 4, 1, 2, 1);
-
+		add(getLblTitle(), 3, 1, 3, 2);
 	}
 
 	/**
-	 * Returns lblEarning and if null instantiates it plus defines it's ID.
+	 * Returns lblGain and if null instantiates it plus defines it's ID.
 	 */
 	public Label getLblEarning() {
 		if (lblEarning == null) {
 			lblEarning = new Label("You won : ");
-			lblEarning.setId("lblGain");
+
 		}
 		return lblEarning;
 	}
 
 	/**
-	 * Returns imgEndParty and if null instantiates it.
+	 * Returns imgLeaveParty and if null instantiates it.
 	 */
-	public ImageView getImgLostParty() {
-		if (imgLostParty == null) {
-			imgLostParty = new ImageView("victory.png"); // A CHANGER
+	public ImageView getImgLeaveParty() {
+		if (imgLeaveParty == null) {
+			imgLeaveParty = new ImageView("victory.png"); // A CHANGER
 		}
-		return imgLostParty;
+		return imgLeaveParty;
 	}
 
-	/**
-	 * If null instantiate btnOk, then return it. Define it's action when using it.
-	 * 
-	 * @return The Ok Button
-	 */
 	public Button getBtnOk() {
 		if (btnOk == null) {
 			btnOk = new Button("Ok");
@@ -72,7 +66,7 @@ public class PartyLostGridPane extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					// Returns to the home pane
-					((PartyStackPane) getParent().getParent()).returnToHome();
+					((PartySP) getParent().getParent()).returnToHome();
 				}
 			});
 		}
@@ -81,7 +75,7 @@ public class PartyLostGridPane extends GridPane {
 
 	public Label getLblTitle() {
 		if (lblTitle == null) {
-			lblTitle = new Label("You lost... :(");
+			lblTitle = new Label("You have chosen safety.\nGood game !");
 		}
 		return lblTitle;
 	}

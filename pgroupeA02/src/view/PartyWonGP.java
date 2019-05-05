@@ -9,17 +9,17 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public class PartyLeftGridPane extends GridPane {
+public class PartyWonGP extends GridPane {
 
 	private Label lblTitle;
 	private Label lblEarning;
-	private ImageView imgLeaveParty;
+	private ImageView imgWonParty;
 	private Button btnOk;
 
-	/**
+	/*
 	 * Constructor, set cols and rows constraints plus add the pane contents.
 	 */
-	public PartyLeftGridPane() {
+	public PartyWonGP() {
 		// Set columns
 		ColumnConstraints c = new ColumnConstraints();
 		c.setPercentWidth(20);
@@ -32,28 +32,29 @@ public class PartyLeftGridPane extends GridPane {
 
 		add(getLblEarning(), 2, 4, 3, 1);
 		add(getBtnOk(), 2, 5, 2, 1);
-		add(getLblTitle(), 3, 1, 3, 2);
+		add(getLblTitle(), 4, 1, 2, 1);
 	}
 
-	/**
+	/*
 	 * Returns lblGain and if null instantiates it plus defines it's ID.
 	 */
 	public Label getLblEarning() {
 		if (lblEarning == null) {
 			lblEarning = new Label("You won : ");
-
+			lblEarning.setId("lblGain");
 		}
 		return lblEarning;
 	}
 
-	/**
-	 * Returns imgLeaveParty and if null instantiates it.
+	/*
+	 * Returns imgEndParty and if null instantiates it.
 	 */
-	public ImageView getImgLeaveParty() {
-		if (imgLeaveParty == null) {
-			imgLeaveParty = new ImageView("victory.png"); // A CHANGER
+	public ImageView getImgWonParty() {
+		if (imgWonParty == null) {
+			imgWonParty = new ImageView();
+
 		}
-		return imgLeaveParty;
+		return imgWonParty;
 	}
 
 	public Button getBtnOk() {
@@ -66,7 +67,7 @@ public class PartyLeftGridPane extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					// Returns to the home pane
-					((PartyStackPane) getParent().getParent()).returnToHome();
+					((PartySP) getParent().getParent()).returnToHome();
 				}
 			});
 		}
@@ -75,7 +76,7 @@ public class PartyLeftGridPane extends GridPane {
 
 	public Label getLblTitle() {
 		if (lblTitle == null) {
-			lblTitle = new Label("You have chosen safety.\nGood game !");
+			lblTitle = new Label("Congratulation!");
 		}
 		return lblTitle;
 	}

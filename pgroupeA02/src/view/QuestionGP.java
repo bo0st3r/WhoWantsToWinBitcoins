@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import model.Question;
 
-public class QuestionGridPane extends GridPane {
+public class QuestionGP extends GridPane {
 	private Label lblStatement;
 	private Button btnAnswer[];
 	private int answerIndex;
@@ -17,7 +17,7 @@ public class QuestionGridPane extends GridPane {
 	/**
 	 * Constructor. Sets rows and cols constraints and define the pane contents.
 	 */
-	public QuestionGridPane() {
+	public QuestionGP() {
 //		setGridLinesVisible(true);
 
 		// Row constraints
@@ -90,7 +90,7 @@ public class QuestionGridPane extends GridPane {
 					// Set the answer index
 					answerIndex = index;
 
-					PlayingGridPane pgp = ((PartyStackPane) getParent().getParent().getParent()).getPlayingGridPane();
+					PlayingGP pgp = ((PartySP) getParent().getParent().getParent()).getPlayingGridPane();
 
 					btnAnswer[index].setStyle("-fx-opacity:1.0; -fx-font-family:'IBM Plex Sans SemiBold', sans-serif;");
 

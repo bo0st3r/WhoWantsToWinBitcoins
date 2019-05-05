@@ -3,20 +3,23 @@ package view;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import model.Deck;
+import utilities.Serialization;
+import view.tableviews.TableViewQuestionsBP;
 
-public class PartyStackPane extends BorderPane {
+public class PartySP extends BorderPane {
 
 	private StackPane stackPane;
-	private PlayingGridPane playingGridPane;
-	private PartyWonGridPane partyWonGridPane;
-	private PartyLostGridPane partyLostGridPane;
-	private PartyLeftGridPane partyLeftGridPane;
+	private PlayingGP playingGridPane;
+	private PartyWonGP partyWonGridPane;
+	private PartyLostGP partyLostGridPane;
+	private PartyLeftGP partyLeftGridPane;
 
 	/**
 	 * Constructor, set PlayingGridPane visible at first, hide the others panes and
 	 * set stackPane as the center.
 	 */
-	public PartyStackPane() {
+	public PartySP() {
 		setId("partyStackPane");
 		// Center the pane
 		setCenter(getStackPane());
@@ -39,7 +42,7 @@ public class PartyStackPane extends BorderPane {
 		hideAllComponentsInStackPane();
 
 		// Sets the Home pane visible
-		((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+		((ProjSP) getParent().getParent()).getHomeGridPane().setVisible(true);
 	}
 
 	/**
@@ -100,9 +103,9 @@ public class PartyStackPane extends BorderPane {
 	 * 
 	 * @return playingGridPane, a PlayingGridPane object which is the playing page.
 	 */
-	public PlayingGridPane getPlayingGridPane() {
+	public PlayingGP getPlayingGridPane() {
 		if (playingGridPane == null) {
-			playingGridPane = new PlayingGridPane();
+			playingGridPane = new PlayingGP();
 			playingGridPane.setId("playingGridPane");
 		}
 		return playingGridPane;
@@ -113,25 +116,25 @@ public class PartyStackPane extends BorderPane {
 	 * 
 	 * @return partyWonGridPane, a PartyWonGridPane object which is the win page.
 	 */
-	public PartyWonGridPane getPartyWonGridPane() {
+	public PartyWonGP getPartyWonGridPane() {
 		if (partyWonGridPane == null) {
-			partyWonGridPane = new PartyWonGridPane();
+			partyWonGridPane = new PartyWonGP();
 			partyWonGridPane.setId("partyWonGridPane");
 		}
 		return partyWonGridPane;
 	}
 
-	public PartyLostGridPane getPartyLostGridPane() {
+	public PartyLostGP getPartyLostGridPane() {
 		if (partyLostGridPane == null) {
-			partyLostGridPane = new PartyLostGridPane();
+			partyLostGridPane = new PartyLostGP();
 			partyLostGridPane.setId("partyLostGridPane");
 		}
 		return partyLostGridPane;
 	}
 
-	public PartyLeftGridPane getPartyLeftGridPane() {
+	public PartyLeftGP getPartyLeftGridPane() {
 		if (partyLeftGridPane == null) {
-			partyLeftGridPane = new PartyLeftGridPane();
+			partyLeftGridPane = new PartyLeftGP();
 			partyLeftGridPane.setId("partyLeftGridPane");
 		}
 		return partyLeftGridPane;

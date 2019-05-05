@@ -131,7 +131,7 @@
 }
 
 #answerValue{
-	-fx-background-color: /* #ABE5F0*/#222222;
+	-fx-background-color: /* #ABE5F0*/#2d2d2d;
 	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 }
 
@@ -170,7 +170,7 @@
 #earningsPyramid{
 	-fx-background-image:url("/style/images/backgrounds/pyramid_background.jpg");
 	-fx-background-size: stretch;
-	-fx-effect: dropshadow(one-pass-box, black, 2.0, 0.1, 0.0, 0.0);
+	-fx-effect: dropshadow(one-pass-box, #2d2d2d, 2.0, 0.1, 0.0, 0.0);
 }
 
 #textEarningsPyramid{
@@ -228,7 +228,7 @@
 	-fx-background-position:center;
 	-fx-background-repeat: no-repeat;
 	
-	-fx-font-size: 70.0px;
+	-fx-font-size:6.0em;
 	-fx-font-weight:bold;
 	-fx-alignment: center;
 	-fx-text-fill: #fef9e7;
@@ -274,7 +274,74 @@
 }
 
 #okButton{
-	-fx-font-size:1.0em;
 	-fx-alignment:center;
+}
+
+/* TableViews */
+.table-view{
+	-fx-background-color: transparent;
+	-fx-effect:dropshadow(one-pass-box,#2d2d2d,8.0,0.1,0.0,0.0);
+	-fx-padding:5.0em;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: #2d2d2d;
+    -fx-min-height:1.5em;
+}
+
+.table-view .column-header-background .label{
+	-fx-background-color: #2d2d2d;
+    -fx-text-fill: #fef9e7;
+    -fx-min-height:1.5em;
+}
+
+.table-view .column-header {
+	-fx-background-color: #2d2d2d;
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
+    -fx-font-size:1.5em;
+    -fx-min-height:1.7em;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: #fef9e7;
+    -fx-font-size:1.1em;
+}
+
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, #474747;
+    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
+    -fx-padding: 0.2em; /* 0 */
+    -fx-min-height:2.5em;
+    
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #2d2d2d;
+    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #e9bf18;
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 1.0;
+}
+
+.table-view > .virtual-flow > .scroll-bar:vertical,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track-background
+{
+    -fx-background-color: #2d2d2d;
+}
+
+.table-view > .virtual-flow > .scroll-bar > .increment-button, 
+.table-view > .virtual-flow > .scroll-bar > .decrement-button,
+.table-view > .virtual-flow > .scroll-bar:horizontal,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background  {
+    -fx-opacity: 0.0;
 }
 

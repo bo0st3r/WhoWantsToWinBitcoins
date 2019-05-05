@@ -8,13 +8,17 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Deck;
+import utilities.Serialization;
+import view.tableviews.TableViewQuestionsBP;
 
-public class HomeGridPane extends GridPane {
+public class HomeGP extends GridPane {
 	// General
 	private Button btnPlay;
 	private Button btnScoreBoard;
@@ -34,7 +38,7 @@ public class HomeGridPane extends GridPane {
 	/*
 	 * Constructor, sets spacings, rows and cols constraints and adds it's content.
 	 */
-	public HomeGridPane() {
+	public HomeGP() {
 //		this.setGridLinesVisible(true);
 
 		// Spacings
@@ -115,13 +119,13 @@ public class HomeGridPane extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					// Resets the playing pane
-					((ProjStackPane) getParent().getParent()).getPartyStackPane().resetPlayingGridPane();
+					((ProjSP) getParent().getParent()).getPartyStackPane().resetPlayingGridPane();
 
 					// Hides the Home Pane
 					setVisible(false);
 
 					// Shows the PartyStackPane
-					((ProjStackPane) getParent().getParent()).getPartyStackPane().setVisible(true);
+					((ProjSP) getParent().getParent()).getPartyStackPane().setVisible(true);
 				}
 			});
 		}
@@ -174,7 +178,7 @@ public class HomeGridPane extends GridPane {
 				public void handle(ActionEvent event) {
 
 					setVisible(false);
-					((ProjStackPane) getParent().getParent()).getRulesGridPane().setVisible(true);
+					((ProjSP) getParent().getParent()).getRulesGridPane().setVisible(true);
 
 				}
 			});
@@ -194,23 +198,26 @@ public class HomeGridPane extends GridPane {
 			btnAddQuestion.setPrefHeight(Integer.MAX_VALUE);
 			btnAddQuestion.setPrefWidth(Integer.MAX_VALUE);
 			// Hidden if the user is not an admin
-			btnAddQuestion.setVisible(false);
+//			btnAddQuestion.setVisible(false);
 
-			Scene secondScene = new Scene(new AddQuestionGridPane(), 570, 305);
+			Scene secondScene = new Scene(new AddQuestionGP(), 570, 305);
 			btnAddQuestion.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent event) {
 					// Gets CSS file from the main scene
-					secondScene.getStylesheets().addAll(getScene().getStylesheets());
-					Stage stage = new Stage();
-					stage.setTitle("Add a question");
-					stage.setScene(secondScene);
-					// Set the main Stage as it's owner
-					stage.initOwner(getScene().getWindow());
-					// Disable from acting on the owner stage while this window's open
-					stage.initModality(Modality.WINDOW_MODAL);
-					stage.show();
+//					secondScene.getStylesheets().addAll(getScene().getStylesheets());
+//					Stage stage = new Stage();
+//					stage.setTitle("Add a question");
+//					stage.setScene(secondScene);
+//					// Set the main Stage as it's owner
+//					stage.initOwner(getScene().getWindow());
+//					// Disable from acting on the owner stage while this window's open
+//					stage.initModality(Modality.WINDOW_MODAL);
+//					stage.show();
+
+					setVisible(false);
+					((ProjSP) getParent().getParent()).getTvQuestionBP().setVisible(true);
 				}
 			});
 		}
@@ -234,7 +241,7 @@ public class HomeGridPane extends GridPane {
 				public void handle(ActionEvent event) {
 
 					setVisible(false);
-					((ProjStackPane) getParent().getParent()).getAboutGridPane().setVisible(true);
+					((ProjSP) getParent().getParent()).getAboutGridPane().setVisible(true);
 
 				}
 			});
@@ -265,7 +272,7 @@ public class HomeGridPane extends GridPane {
 					if (admin == 1)
 						getBtnAddQuestion().setVisible(true);
 					setVisible(false);
-					((ProjStackPane) getParent().getParent()).getRegistrationConnectionGridPane().setVisible(true);
+					((ProjSP) getParent().getParent()).getRegistrationConnectionGridPane().setVisible(true);
 				}
 			});
 		}
@@ -291,7 +298,7 @@ public class HomeGridPane extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					setVisible(false);
-					((ProjStackPane) getParent().getParent()).getProfilGridPane().setVisible(true);
+					((ProjSP) getParent().getParent()).getProfilGridPane().setVisible(true);
 
 				}
 			});

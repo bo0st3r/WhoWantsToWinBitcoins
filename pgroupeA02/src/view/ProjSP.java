@@ -3,23 +3,26 @@ package view;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import model.Deck;
+import utilities.Serialization;
+import view.tableviews.TableViewQuestionsBP;
 
-public class ProjStackPane extends BorderPane {
+public class ProjSP extends BorderPane {
 
 	private StackPane stackPane;
-	private HomeGridPane homeGridPane;
-	// private PlayingGridPane playingGridPane;
-	private AboutGridPane aboutGridPane;
-	private RulesGridPane rulesGridPane;
-	private RegistrationConnectionGridPane registrationConnectionGridPane;
-	private PartyStackPane partyStackPane;
-	private ProfilGridPane profilGridPane;
+	private HomeGP homeGridPane;
+	private AboutGP aboutGridPane;
+	private RulesGP rulesGridPane;
+	private RegistrationConnectionGP registrationConnectionGridPane;
+	private PartySP partyStackPane;
+	private ProfilGP profilGridPane;
+	private TableViewQuestionsBP tvQuestionBP;
 
 	/*
 	 * Constructor, set homeGridPane visible at first, hide the others panes and set
 	 * stackPane as the center.
 	 */
-	public ProjStackPane() {
+	public ProjSP() {
 		// Center the pane
 		setCenter(getStackPane());
 
@@ -74,9 +77,9 @@ public class ProjStackPane extends BorderPane {
 	 * 
 	 * @return homeGridPane, a HomeGridPane object which is the home page.
 	 */
-	public HomeGridPane getHomeGridPane() {
+	public HomeGP getHomeGridPane() {
 		if (homeGridPane == null) {
-			homeGridPane = new HomeGridPane();
+			homeGridPane = new HomeGP();
 		}
 		return homeGridPane;
 	}
@@ -99,9 +102,9 @@ public class ProjStackPane extends BorderPane {
 	 * 
 	 * @return aboutGridPane, an AboutGridPane object which is the "about" page.
 	 */
-	public AboutGridPane getAboutGridPane() {
+	public AboutGP getAboutGridPane() {
 		if (aboutGridPane == null) {
-			aboutGridPane = new AboutGridPane();
+			aboutGridPane = new AboutGP();
 		}
 		return aboutGridPane;
 	}
@@ -111,34 +114,43 @@ public class ProjStackPane extends BorderPane {
 	 * 
 	 * @return rulesGridPane, an RulesGridPane object which is the rules page.
 	 */
-	public RulesGridPane getRulesGridPane() {
+	public RulesGP getRulesGridPane() {
 		if (rulesGridPane == null) {
-			rulesGridPane = new RulesGridPane();
+			rulesGridPane = new RulesGP();
 			rulesGridPane.setId("rulesPane");
 		}
 		return rulesGridPane;
 	}
 
-	public RegistrationConnectionGridPane getRegistrationConnectionGridPane() {
+	public RegistrationConnectionGP getRegistrationConnectionGridPane() {
 		if (registrationConnectionGridPane == null) {
-			registrationConnectionGridPane = new RegistrationConnectionGridPane();
+			registrationConnectionGridPane = new RegistrationConnectionGP();
 		}
 		return registrationConnectionGridPane;
 	}
 
-	public PartyStackPane getPartyStackPane() {
+	public PartySP getPartyStackPane() {
 		if (partyStackPane == null) {
-			partyStackPane = new PartyStackPane();
+			partyStackPane = new PartySP();
 		}
 		return partyStackPane;
 	}
 
-	public ProfilGridPane getProfilGridPane() {
+	public ProfilGP getProfilGridPane() {
 		if (profilGridPane == null) {
-			profilGridPane = new ProfilGridPane();
+			profilGridPane = new ProfilGP();
 			profilGridPane.setId("");
 		}
 		return profilGridPane;
+	}
+
+	public TableViewQuestionsBP getTvQuestionBP() {
+		if (tvQuestionBP == null) {
+			tvQuestionBP = new TableViewQuestionsBP(Serialization.jsonToDeck(Deck.FILE_NAME));
+			stackPane.getChildren().add(tvQuestionBP);
+		}
+
+		return tvQuestionBP;
 	}
 
 }

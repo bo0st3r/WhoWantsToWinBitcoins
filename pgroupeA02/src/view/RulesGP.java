@@ -11,7 +11,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public class RulesGridPane extends GridPane {
+public class RulesGP extends GridPane {
 
 	private Label lblTitle;
 	private Label lblText;
@@ -22,7 +22,7 @@ public class RulesGridPane extends GridPane {
 	 * Constructor. Set the spacings, cols and rows constraints and define the pane
 	 * content.
 	 */
-	public RulesGridPane() {
+	public RulesGP() {
 		// this.setGridLinesVisible(true);
 		setId("rules");
 
@@ -116,7 +116,7 @@ public class RulesGridPane extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					setVisible(false);
-					((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+					((ProjSP) getParent().getParent()).getHomeGridPane().setVisible(true);
 
 				}
 			});

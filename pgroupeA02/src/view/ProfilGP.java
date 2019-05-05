@@ -13,7 +13,7 @@ import javafx.scene.layout.RowConstraints;
 
 
 
-public class ProfilGridPane extends GridPane{
+public class ProfilGP extends GridPane{
 	
 	private Label lblTitle;
 	private Label lblTitlePseudo;
@@ -36,7 +36,7 @@ public class ProfilGridPane extends GridPane{
 	
 
 	
-	public ProfilGridPane() {
+	public ProfilGP() {
 
 	this.setGridLinesVisible(true);
 
@@ -250,7 +250,7 @@ public class ProfilGridPane extends GridPane{
 				@Override
 				public void handle(ActionEvent event) {
 					setVisible(false);
-					((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+					((ProjSP) getParent().getParent()).getHomeGridPane().setVisible(true);
 
 				}
 			});

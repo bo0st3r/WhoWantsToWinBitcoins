@@ -8,7 +8,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public class AboutGridPane extends GridPane {
+public class AboutGP extends GridPane {
 
 	private Button btnPrevious;
 	private Label lblName;
@@ -16,7 +16,7 @@ public class AboutGridPane extends GridPane {
 	/*
 	 * Constructor. Add rows and cols constraints plus the pane content.
 	 */
-	public AboutGridPane() {
+	public AboutGP() {
 //		this.setGridLinesVisible(true);
 
 		// Set columns
@@ -52,7 +52,7 @@ public class AboutGridPane extends GridPane {
 				public void handle(ActionEvent event) {
 
 					setVisible(false);
-					((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+					((ProjSP) getParent().getParent()).getHomeGridPane().setVisible(true);
 
 				}
 			});

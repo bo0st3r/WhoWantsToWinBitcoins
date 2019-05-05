@@ -27,33 +27,34 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Modality;
+import model.Deck;
 import model.Earning;
 import model.Party;
 import model.Question;
 import utilities.Serialization;
 
-public class PlayingGridPane extends GridPane {
+public class PlayingGP extends GridPane {
 	private static Earning earning;
 	private Party party;
 
 	// Question
-	private QuestionGridPane questionGP;
+	private QuestionGP questionGP;
 
 	// Cash in
 	private Button btnCashIn;
 
 	// Jokers
-	private JokerVBox jokerVB;
+	private JokerVB jokerVB;
 	private Label[] lblJokerResults;
 
 	// Earnings pyramid
-	private PyramidGridPane pyramidGP;
+	private PyramidGP pyramidGP;
 
 	// Validation
 	private ValidationGridPane validationGP;
 
 	// Timer
-	private TimerFlowPane timerFP;
+	private TimerFP timerFP;
 
 	/**
 	 * PlayingGridPane constructor
@@ -63,7 +64,8 @@ public class PlayingGridPane extends GridPane {
 	 * deck does not fit the requirements, it does not run the party and let the
 	 * user know that there has been a problem with the deck.
 	 */
-	public PlayingGridPane() {
+	public PlayingGP() {
+		// Getting the earnings steps
 		earning = new Earning(Earning.FILE_NAME);
 //		setGridLinesVisible(true);
 
@@ -92,10 +94,10 @@ public class PlayingGridPane extends GridPane {
 		add(getQuestionGP(), 1, 6, 7, 5);
 
 		// Timer
-		add(getTimerFP(), 5, 3, 2, 2);
+		add(getTimerFP(), 5, 1, 2, 2);
 
 		// Validation
-		add(getValidationGP(), 3, 1, 5, 4);
+		add(getValidationGP(), 5, 3, 2, 3);
 
 		// Exit button
 		add(getBtnCashIn(), 9, 1);
@@ -111,7 +113,7 @@ public class PlayingGridPane extends GridPane {
 
 		// Starts the party
 		try {
-			runNewParty(Party.FILE_NAME);
+			runNewParty(Deck.FILE_NAME);
 		} catch (EmptyQuestionsListException | DeckUnderFilledException | NotEnoughQuestionsException
 				| TooMuchQuestionsException e) {
 			alertPop("A problem occured with the deck : \"main_deck.json\".");
@@ -191,52 +193,51 @@ public class PlayingGridPane extends GridPane {
 		int rightAnswerIndex = party.getRightAnswerIndex();
 		int actualStep = party.getActualStep();
 
-		// When the player's still playing
-		if (actualStep < Party.NB_STEPS) {
-			// Sets the button showing as right
-			questionGP.getBtnAnswer(answerIndex).setId("answerBtnOk");
+		// Sets the button showing as right
+		questionGP.getBtnAnswer(answerIndex).setId("answerBtnOk");
 
-			// Stops the timer
-			getTimerFP().stopTimer();
+		// Stops the timer
+		getTimerFP().stopTimer();
 
-			// New thread
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					// Pause before going to the next step
-					try {
-						Thread.sleep(1500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-					Platform.runLater(new Runnable() {
-						@Override
-						public void run() {
-							// Runs the timer
-							getTimerFP().runTimer();
-
-							// Get the next question
-							try {
-								getNextQuestion();
-							} catch (ExceedMaxStepsException e) {
-								e.printStackTrace();
-							}
-
-							// Old earnings
-							getPyramidGP().goToNextStep();
-
-							// Reset answers color
-							questionGP.getBtnAnswer(rightAnswerIndex).setId("answerBtn");
-						}
-					});
+		// New thread
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// Pause before going to the next step
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-			}).start();
 
-			// When the player has won
-		} else if (actualStep == Party.NB_STEPS) {
-			endPartyWithResult(true);
-		}
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						// Runs the timer
+						getTimerFP().runTimer();
+
+						try {
+							// Get the next question when the player is still playing
+							if (actualStep < Party.NB_STEPS)
+								getNextQuestion();
+							// When the player has won
+							else
+								endPartyWithResult(true);
+
+						} catch (ExceedMaxStepsException e) {
+							e.printStackTrace();
+						}
+
+						// Old earnings
+						getPyramidGP().goToNextStep();
+
+						// Reset answers color
+						questionGP.getBtnAnswer(rightAnswerIndex).setId("answerBtn");
+					}
+				});
+			}
+		}).start();
+
 	}
 
 	/**
@@ -330,7 +331,7 @@ public class PlayingGridPane extends GridPane {
 		// Won
 		if (value) {
 			// Show the party won pane
-			((PartyStackPane) getParent().getParent()).partyWon();
+			((PartySP) getParent().getParent()).partyWon();
 		}
 
 		// Lost
@@ -346,12 +347,25 @@ public class PlayingGridPane extends GridPane {
 			// Disable btn "Cash in"
 			getBtnCashIn().setDisable(true);
 
-			// Loosing alert
-//			alertPop("Sorry, you're a looser !\n" + "The right answer was\n\n \"" + party.getRightAnswer()
-//					+ "\"\n\n You won : " + getEarningsWhenLost() + " Bitcoins");
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					// Pause before leaving the party
+					try {
+						Thread.sleep(1500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 
-			// Show the party lost pane
-			((PartyStackPane) getParent().getParent()).partyLost();
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							// Show the party lost pane
+							((PartySP) getParent().getParent()).partyLost();
+						}
+					});
+				}
+			}).start();
 		}
 
 	}
@@ -370,9 +384,9 @@ public class PlayingGridPane extends GridPane {
 	 * 
 	 * @return the instance of JokerVBox.
 	 */
-	public JokerVBox getJokerVB() {
+	public JokerVB getJokerVB() {
 		if (jokerVB == null)
-			jokerVB = new JokerVBox(this);
+			jokerVB = new JokerVB(this);
 
 		return jokerVB;
 	}
@@ -382,9 +396,9 @@ public class PlayingGridPane extends GridPane {
 	 * 
 	 * @return the instance of QuestionGridPane.
 	 */
-	public QuestionGridPane getQuestionGP() {
+	public QuestionGP getQuestionGP() {
 		if (questionGP == null)
-			questionGP = new QuestionGridPane();
+			questionGP = new QuestionGP();
 
 		return questionGP;
 	}
@@ -468,9 +482,9 @@ public class PlayingGridPane extends GridPane {
 	 * 
 	 * @return The FimerFlowPane instance.
 	 */
-	public TimerFlowPane getTimerFP() {
+	public TimerFP getTimerFP() {
 		if (timerFP == null) {
-			timerFP = new TimerFlowPane();
+			timerFP = new TimerFP();
 			timerFP.setId("timer");
 			timerFP.setAlignment(Pos.CENTER);
 		}
@@ -487,7 +501,7 @@ public class PlayingGridPane extends GridPane {
 		alert.initModality(Modality.WINDOW_MODAL);
 		alert.showAndWait();
 
-		((ProjStackPane) getParent().getParent()).getHomeGridPane().setVisible(true);
+		((ProjSP) getParent().getParent()).getHomeGridPane().setVisible(true);
 		setVisible(false);
 
 		return alert;
@@ -504,6 +518,7 @@ public class PlayingGridPane extends GridPane {
 			validationGP.setId("validationPane");
 			validationGP.setVisible(false);
 			GridPane.setValignment(validationGP, VPos.CENTER);
+			GridPane.setHalignment(validationGP, HPos.CENTER);
 		}
 		return validationGP;
 	}
@@ -533,7 +548,7 @@ public class PlayingGridPane extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					// Show the party left pane
-					((PartyStackPane) getParent().getParent()).partyLeft();
+					((PartySP) getParent().getParent()).partyLeft();
 
 					getTimerFP().stopTimer();
 				}
@@ -553,9 +568,9 @@ public class PlayingGridPane extends GridPane {
 		if (actualStep > 9) {
 			earn = 0;
 		} else if (actualStep >= 5) {
-			earn = PlayingGridPane.getEarning().getAmount(4);
+			earn = PlayingGP.getEarning().getAmount(4);
 		} else if (actualStep > 0) {
-			earn = PlayingGridPane.getEarning().getAmount(9);
+			earn = PlayingGP.getEarning().getAmount(9);
 		}
 		return earn;
 	}
@@ -569,7 +584,7 @@ public class PlayingGridPane extends GridPane {
 		double earn = 0;
 		for (int i = 13; i >= 0; i--) {
 			if (pyramidGP.getPyramidActualStep() == i) {
-				earn = PlayingGridPane.getEarning().getAmount(13 - i);
+				earn = PlayingGP.getEarning().getAmount(13 - i);
 			}
 		}
 		return earn;
@@ -579,9 +594,9 @@ public class PlayingGridPane extends GridPane {
 	 * If the pyramidGP is null, instantiate it, set it's min height to 0 and it's
 	 * ID to "earningsPyramid". Then shows it in the pane.
 	 */
-	public PyramidGridPane getPyramidGP() {
+	public PyramidGP getPyramidGP() {
 		if (pyramidGP == null) {
-			pyramidGP = new PyramidGridPane();
+			pyramidGP = new PyramidGP();
 			pyramidGP.setMinHeight(0);
 			pyramidGP.setId("earningsPyramid");
 			this.add(getPyramidGP(), 9, 2, 1, 9);

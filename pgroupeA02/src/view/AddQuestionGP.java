@@ -14,7 +14,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import model.Question;
 
-public class AddQuestionGridPane extends GridPane {
+public class AddQuestionGP extends GridPane {
 
 	private TextField txtAuthor;
 	private TextField txtStatement;
@@ -37,7 +37,7 @@ public class AddQuestionGridPane extends GridPane {
 	 * Constructor. Set rows and cols constraints, alignment, spacings and the pane
 	 * contents.
 	 */
-	public AddQuestionGridPane() {
+	public AddQuestionGP() {
 //		this.setGridLinesVisible(true);
 
 		// Alignment

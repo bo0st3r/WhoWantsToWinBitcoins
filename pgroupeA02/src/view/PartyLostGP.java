@@ -9,17 +9,17 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public class PartyWonGridPane extends GridPane {
+public class PartyLostGP extends GridPane {
 
 	private Label lblTitle;
 	private Label lblEarning;
-	private ImageView imgWonParty;
+	private ImageView imgLostParty;
 	private Button btnOk;
 
-	/*
+	/**
 	 * Constructor, set cols and rows constraints plus add the pane contents.
 	 */
-	public PartyWonGridPane() {
+	public PartyLostGP() {
 		// Set columns
 		ColumnConstraints c = new ColumnConstraints();
 		c.setPercentWidth(20);
@@ -33,10 +33,11 @@ public class PartyWonGridPane extends GridPane {
 		add(getLblEarning(), 2, 4, 3, 1);
 		add(getBtnOk(), 2, 5, 2, 1);
 		add(getLblTitle(), 4, 1, 2, 1);
+
 	}
 
-	/*
-	 * Returns lblGain and if null instantiates it plus defines it's ID.
+	/**
+	 * Returns lblEarning and if null instantiates it plus defines it's ID.
 	 */
 	public Label getLblEarning() {
 		if (lblEarning == null) {
@@ -46,17 +47,21 @@ public class PartyWonGridPane extends GridPane {
 		return lblEarning;
 	}
 
-	/*
+	/**
 	 * Returns imgEndParty and if null instantiates it.
 	 */
-	public ImageView getImgWonParty() {
-		if (imgWonParty == null) {
-			imgWonParty = new ImageView();
-
+	public ImageView getImgLostParty() {
+		if (imgLostParty == null) {
+			imgLostParty = new ImageView("victory.png"); // A CHANGER
 		}
-		return imgWonParty;
+		return imgLostParty;
 	}
 
+	/**
+	 * If null instantiate btnOk, then return it. Define it's action when using it.
+	 * 
+	 * @return The Ok Button
+	 */
 	public Button getBtnOk() {
 		if (btnOk == null) {
 			btnOk = new Button("Ok");
@@ -67,7 +72,7 @@ public class PartyWonGridPane extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					// Returns to the home pane
-					((PartyStackPane) getParent().getParent()).returnToHome();
+					((PartySP) getParent().getParent()).returnToHome();
 				}
 			});
 		}
@@ -76,7 +81,7 @@ public class PartyWonGridPane extends GridPane {
 
 	public Label getLblTitle() {
 		if (lblTitle == null) {
-			lblTitle = new Label("Congratulation!");
+			lblTitle = new Label("You lost... :(");
 		}
 		return lblTitle;
 	}

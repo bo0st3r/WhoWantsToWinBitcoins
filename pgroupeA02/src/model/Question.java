@@ -16,11 +16,11 @@ import exceptions.TooMuchAnswersException;
 
 public class Question {
 	public static final int NB_ANSWERS = 4;
-
-	private Map<String, Boolean> choices;
-	private Round round;
+	public static final int STATEMENT_MIN_LENGTH = 10;
 	private String author;
 	private String statement;
+	private Round round;
+	private Map<String, Boolean> choices;
 
 	/**
 	 * Constructor of Question class. The param "choices" just gets instantiated as
@@ -40,7 +40,7 @@ public class Question {
 	 */
 	public Question(String author, String statement, Round round)
 			throws StatementTooShortException, NotARoundException {
-		if (statement.length() < 15)
+		if (statement.length() < STATEMENT_MIN_LENGTH)
 			throw new StatementTooShortException(statement);
 		else
 			this.statement = statement;
@@ -203,10 +203,31 @@ public class Question {
 		return true;
 	}
 
+	/**
+	 * Sets a new statement if the given statement size is higher than
+	 * STATEMENT_MIN_LENGHT.
+	 * 
+	 * @param statement the new statement.
+	 * @throws StatementTooShortException if the statement is size is lower than
+	 *                                    STATEMENT_MIN_LENGHT.
+	 */
 	public void setStatement(String statement) throws StatementTooShortException {
-		if (statement.length() < 15)
+		if (statement.length() < STATEMENT_MIN_LENGTH)
 			throw new StatementTooShortException(statement);
 		this.statement = statement;
+	}
+
+	/**
+	 * Sets a new value for the author name, if the given value is empty it sets the
+	 * author as "Satoshi Nakamoto".
+	 * 
+	 * @param author the new author.
+	 */
+	public void setAuthor(String author) {
+		if (author.isEmpty())
+			this.author = "Satoshi Nakamoto";
+		else
+			this.author = author;
 	}
 
 	public void setRound(Round round) {

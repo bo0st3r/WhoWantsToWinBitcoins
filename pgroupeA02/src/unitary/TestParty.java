@@ -3,7 +3,6 @@ package unitary;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +33,6 @@ public class TestParty {
 	private Party party;
 	private List<Question> chosenQuestions;
 	private Round actualRound;
-	private int actualStep;
-	private int rightAnswerIndex;
-	private String rightAnswer;
-	private int jokerFriendIndex;
-	private List<Double> jokerPublicPercents;
-	private List<Integer> joker5050Indexes;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -52,7 +45,7 @@ public class TestParty {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
-		party = new Party(Serialization.jsonToDeck(Party.FILE_NAME));
+		party = new Party(Serialization.jsonToDeck(Deck.FILE_NAME));
 		chosenQuestions = (List<Question>) Explorer.getField(party, "chosenQuestions");
 		actualRound = (Round) Explorer.getField(party, "actualRound");
 	}
@@ -63,9 +56,10 @@ public class TestParty {
 		chosenQuestions = null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testParty() throws EmptyQuestionsListException, DeckUnderFilledException, NotEnoughQuestionsException {
-		Party party2 = new Party(Serialization.jsonToDeck(Party.FILE_NAME));
+		Party party2 = new Party(Serialization.jsonToDeck(Deck.FILE_NAME));
 		List<Question> chosenQuestions = (List<Question>) Explorer.getField(party2, "chosenQuestions");
 		assertTrue("Should have " + Party.NB_STEPS + " chosen questions", chosenQuestions.size() == Party.NB_STEPS);
 	}
@@ -76,6 +70,7 @@ public class TestParty {
 		party = new Party(new Deck());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test(expected = DeckUnderFilledException.class)
 	public void testPartyDeckUnderFilledException()
 			throws EmptyQuestionsListException, DeckUnderFilledException, NotEnoughQuestionsException {
@@ -99,6 +94,7 @@ public class TestParty {
 		party = new Party(deck);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test(expected = NotEnoughQuestionsException.class)
 	public void testPartyNotEnoughQuestionsException()
 			throws EmptyQuestionsListException, DeckUnderFilledException, NotEnoughQuestionsException {
@@ -291,6 +287,7 @@ public class TestParty {
 		assertTrue("Should be empty", party.getJokerPublicPercents().isEmpty());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testSetJokerPublicPercents() {
 		List<Double> jokerPublicPercents = new ArrayList<>();
@@ -340,6 +337,7 @@ public class TestParty {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testSetJoker5050Indexes() {
 		List<Integer> joker5050Indexes = new ArrayList<>();
@@ -375,6 +373,7 @@ public class TestParty {
 		party.setJoker5050Indexes(joker5050Indexes);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testClearJoker5050Indexes() {
 		List<Integer> joker5050Indexes = (List<Integer>) Explorer.getField(party, "joker5050Indexes");

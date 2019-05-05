@@ -4,11 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
-import java.util.List;
 import java.util.Set;
 
 import org.junit.After;
@@ -22,11 +19,11 @@ import exceptions.DuplicateUserException;
 import exceptions.DuplicateUserPseudoException;
 import exceptions.InputSyntaxException;
 import exceptions.NullUserException;
-import model.Earning;
 import model.User;
 import model.UserManagerSingleton;
 import utilities.Explorer;
 
+@SuppressWarnings("unchecked")
 public class TestUserManagerSingleton {
 	private UserManagerSingleton instance;
 	private Set<User> users;

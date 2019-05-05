@@ -64,17 +64,17 @@ public class TestUser {
 
 	@Test(expected = InputSyntaxException.class)
 	public void testUserInputSyntaxExceptionPseudo() throws InputSyntaxException {
-		User u = new User("use!r", "helha", "la15555@helha.be");
+		new User("use!r", "helha", "la15555@helha.be");
 	}
 
 	@Test(expected = InputSyntaxException.class)
 	public void testUserInputSyntaxExceptionPassword() throws InputSyntaxException {
-		User u = new User("user", "he", "la15555@helha.be");
+		new User("user", "he", "la15555@helha.be");
 	}
 
 	@Test(expected = InputSyntaxException.class)
 	public void testUserInputSyntaxExceptionEmail() throws InputSyntaxException {
-		User u = new User("user", "helha", "la15555@helha.be@qze");
+		new User("user", "helha", "la15555@helha.be@qze");
 	}
 
 	@Test

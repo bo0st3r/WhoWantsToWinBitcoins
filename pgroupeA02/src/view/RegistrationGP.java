@@ -21,7 +21,7 @@ import javafx.scene.layout.RowConstraints;
 import model.User;
 import model.UserManagerSingleton;
 
-public class RegistrationGridPane extends GridPane {
+public class RegistrationGP extends GridPane {
 	private Label lblTitle;
 
 	private Label lblPseudo;
@@ -38,7 +38,7 @@ public class RegistrationGridPane extends GridPane {
 
 	private Button btnRegister;
 
-	public RegistrationGridPane() {
+	public RegistrationGP() {
 //		this.setGridLinesVisible(true);
 
 		// Add columns
@@ -52,15 +52,12 @@ public class RegistrationGridPane extends GridPane {
 
 		// Set rows
 		double[] sizesRow = { 0, 17, 3, 9.5, 10, 3, 9.5, 9.5, 3, 9.5, 11, 15, 0 };
-		double total = 0;
 		for (int i = 0; i <= sizesRow.length - 1; i++) {
-			total += sizesRow[i];
 			RowConstraints row = new RowConstraints();
 			row.setValignment(VPos.CENTER);
 			row.setPercentHeight(sizesRow[i]);
 			getRowConstraints().add(row);
 		}
-		System.out.println("registration : " + total);
 
 		// part
 		add(getLblTitle(), 1, 1, 2, 1);

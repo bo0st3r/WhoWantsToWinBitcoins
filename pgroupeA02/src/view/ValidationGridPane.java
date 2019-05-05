@@ -79,7 +79,7 @@ public class ValidationGridPane extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					PlayingGridPane pgp = (PlayingGridPane) getParent();
+					PlayingGP pgp = (PlayingGP) getParent();
 
 					// Verify the answer
 					try {
@@ -121,7 +121,7 @@ public class ValidationGridPane extends GridPane {
 			btnNo.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					PlayingGridPane pgp = (PlayingGridPane) getParent();
+					PlayingGP pgp = (PlayingGP) getParent();
 
 					int answerIndex = pgp.getQuestionGP().getAnswerIndex();
 					pgp.getQuestionGP().getBtnAnswer(answerIndex).setStyle("");

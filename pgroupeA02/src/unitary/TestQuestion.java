@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
 import java.util.Map;
 
 import org.junit.After;
@@ -23,10 +22,10 @@ import exceptions.NotARoundException;
 import exceptions.RightAnswerAlreadyPresentException;
 import exceptions.StatementTooShortException;
 import exceptions.TooMuchAnswersException;
-import model.Earning;
 import model.Question;
 import utilities.Explorer;
 
+@SuppressWarnings("unchecked")
 public class TestQuestion {
 	private Question question;
 	private static String author;
@@ -45,7 +44,6 @@ public class TestQuestion {
 	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
 		question = new Question(author, statement, round);
