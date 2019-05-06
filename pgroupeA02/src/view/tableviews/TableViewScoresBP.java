@@ -3,8 +3,11 @@ package view.tableviews;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.chart.LineChart.SortingPolicy;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.ResizeFeatures;
 import javafx.util.Callback;
@@ -56,11 +59,15 @@ public class TableViewScoresBP extends TableViewIntrospectionBP<User> {
 			// Get the partiesWon col
 			if (col.getText().equals("PartiesWon")) {
 				colPartiesWon = (TableColumn<User, Integer>) col;
+				colPartiesWon.setSortType(SortType.DESCENDING);
+				colPartiesWon.setSortNode(new Group());
 			} else
 
 			// Get the totalEarnings col
 			if (col.getText().equals("TotalEarningsWon")) {
 				colTotalEarnings = (TableColumn<User, Double>) col;
+				colTotalEarnings.setSortType(SortType.DESCENDING);
+				colTotalEarnings.setSortNode(new Group());
 			}
 		}
 
@@ -74,7 +81,7 @@ public class TableViewScoresBP extends TableViewIntrospectionBP<User> {
 
 		// Sets the ordering of the values
 		if (colPartiesWon != null & colTotalEarnings != null)
-			tv.getSortOrder().setAll(colPartiesWon, colTotalEarnings);
+			tv.getSortOrder().setAll(colTotalEarnings, colPartiesWon);
 
 		tv.setEditable(false);
 		return tv;

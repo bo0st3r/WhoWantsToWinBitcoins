@@ -156,6 +156,31 @@ public class ProjSP extends BorderPane {
 		return tvScoresBP;
 	}
 
+	public void userConnected() {
+		hideAllComponentsInStackPane();
+
+		HomeGP home = getHomeGridPane();
+		home.setVisible(true);
+		home.getBtnConnect().setVisible(false);
+		home.getBtnDisconnect().setVisible(true);
+		home.getBtnProfile().setVisible(true);
+
+		if (USER.isAdmin())
+			home.getBtnManageQuestions().setVisible(true);
+	}
+
+	public void userDisconnected() {
+		setUserSP(null);
+
+		hideAllComponentsInStackPane();
+		HomeGP home = getHomeGridPane();
+		home.setVisible(true);
+		home.getBtnConnect().setVisible(true);
+		home.getBtnDisconnect().setVisible(false);
+		home.getBtnProfile().setVisible(false);
+		home.getBtnManageQuestions().setVisible(false);
+	}
+
 	public static void setUserSP(User user) {
 		USER = user;
 	}

@@ -11,13 +11,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import model.User;
+import model.UserManagerSingleton;
+import utilities.SHA256Hasher;
 
 public class LoginGP extends GridPane {
 	private Label lblTitleConnection;
+
 	private Label lblPseudoConnection;
+	private Label lblPseudoError;
 	private TextField txtPseudoConnection;
+
 	private Label lblPasswordConnection;
+	private Label lblPasswordError;
 	private PasswordField pwdPasswordConnection;
+
 	private Button btnLogin;
 
 	public LoginGP() {
@@ -46,10 +54,12 @@ public class LoginGP extends GridPane {
 
 		// Pseudo
 		add(getLblPseudoConnection(), 1, 3);
+		add(getLblPseudoError(), 1, 3);
 		add(getTxtPseudoConnection(), 1, 4);
 
 		// Password
 		add(getLblPasswordConnection(), 1, 6);
+		add(getLblPasswordError(), 1, 6);
 		add(getPwdPasswordConnection(), 1, 7);
 
 		add(getBtnLogin(), 1, 9, 2, 1);
@@ -111,6 +121,42 @@ public class LoginGP extends GridPane {
 		return pwdPasswordConnection;
 	}
 
+	/**
+	 * If null, instantiates the pseudo error Label and sets it's style. Then
+	 * returns it.
+	 * 
+	 * @return lblPseudoError, the Label object for the pseudo syntax error.
+	 */
+	public Label getLblPseudoError() {
+		if (lblPseudoError == null) {
+			lblPseudoError = new Label("There's no account using this pseudo.");
+			lblPseudoError.getStyleClass().add("input-error");
+			lblPseudoError.setVisible(false);
+			GridPane.setHalignment(lblPseudoError, HPos.RIGHT);
+			GridPane.setValignment(lblPseudoError, VPos.BOTTOM);
+		}
+
+		return lblPseudoError;
+	}
+
+	/**
+	 * If null, instantiates the password error Label and sets it's style. Then
+	 * returns it.
+	 * 
+	 * @return lblPasswordError, the Label object for the pseudo syntax error.
+	 */
+	public Label getLblPasswordError() {
+		if (lblPasswordError == null) {
+			lblPasswordError = new Label("Wrong password entered.");
+			lblPasswordError.getStyleClass().add("input-error");
+			lblPasswordError.setVisible(false);
+			GridPane.setHalignment(lblPasswordError, HPos.RIGHT);
+			GridPane.setValignment(lblPasswordError, VPos.BOTTOM);
+		}
+
+		return lblPasswordError;
+	}
+
 	public Button getBtnLogin() {
 		if (btnLogin == null) {
 			btnLogin = new Button("Login");
@@ -122,12 +168,33 @@ public class LoginGP extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					setVisible(false);
-					((ProjSP) getParent().getParent()).getHomeGridPane().setVisible(true);
-					
-//					((ProjSP) getParent().getParent().getParent()).setUser(user);
-//					getBtnDisconnect().setVisible(true);
-//					getBtnProfile().setVisible(true);
+					String pseudo = getTxtPseudoConnection().getText();
+					User user = UserManagerSingleton.getInstance().getUserByPseudo(pseudo);
+
+					// If it has found an user with this pseudo
+					if (user != null) {
+						getLblPseudoError().setVisible(false);
+
+						String givenPassword = getPwdPasswordConnection().getText();
+						if (givenPassword.length() == 0)
+							return;
+
+						givenPassword = SHA256Hasher.hashString(givenPassword);
+						String userPassword = user.getPassword();
+
+						// Verify that the given password is right
+						if (userPassword.equals(givenPassword)) {
+							getLblPasswordError().setVisible(false);
+							getPwdPasswordConnection().setText("");
+							ProjSP.setUserSP(user);
+							((ProjSP) getParent().getParent().getParent()).userConnected();
+						} else {
+							getLblPasswordError().setVisible(true);
+						}
+					} else {
+						getLblPseudoError().setVisible(true);
+						getLblPasswordError().setVisible(false);
+					}
 				}
 			});
 			;

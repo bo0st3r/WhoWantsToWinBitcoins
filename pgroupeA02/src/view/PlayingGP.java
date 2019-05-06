@@ -31,6 +31,8 @@ import model.Deck;
 import model.Earning;
 import model.Party;
 import model.Question;
+import model.User;
+import model.UserManagerSingleton;
 import utilities.Serialization;
 
 public class PlayingGP extends GridPane {
@@ -221,8 +223,10 @@ public class PlayingGP extends GridPane {
 							if (actualStep < Party.NB_STEPS)
 								getNextQuestion();
 							// When the player has won
-							else
+							else if (actualStep == Party.NB_STEPS) {
 								endPartyWithResult(true);
+								return;
+							}
 
 						} catch (ExceedMaxStepsException e) {
 							e.printStackTrace();
@@ -332,6 +336,26 @@ public class PlayingGP extends GridPane {
 		if (value) {
 			// Show the party won pane
 			((PartySP) getParent().getParent()).partyWon();
+
+			User projUser = ProjSP.getUserSP();
+			if (projUser != null) {
+				double earningsWon = getEarningsWhenLeaving();
+
+				// Increments the user's total earnings
+				projUser.incrementTotalEarningsWon(earningsWon);
+				UserManagerSingleton.getInstance().incrementUserTotalEarningsWon(projUser, earningsWon);
+
+				// Increments the number of parties won
+				projUser.incrementPartiesWon();
+				UserManagerSingleton.getInstance().incrementUserPartiesWon(projUser);
+
+				// If it's new earnings are bigger than it's old biggest earnings, change the
+				// value
+				if (earningsWon > projUser.getHighestEarningsWon()) {
+					projUser.setHighestEarningsWon(earningsWon);
+					UserManagerSingleton.getInstance().setUserHighestEarningsWon(projUser, earningsWon);
+				}
+			}
 		}
 
 		// Lost
@@ -346,6 +370,22 @@ public class PlayingGP extends GridPane {
 			setVisibleValidationGP(false);
 			// Disable btn "Cash in"
 			getBtnCashIn().setDisable(true);
+
+			User projUser = ProjSP.getUserSP();
+			if (projUser != null) {
+				double earningsWon = getEarningsWhenLost();
+
+				// Increments the user's total earnings
+				projUser.incrementTotalEarningsWon(earningsWon);
+				UserManagerSingleton.getInstance().incrementUserTotalEarningsWon(projUser, earningsWon);
+
+				// If it's new earnings are bigger than it's old biggest earnings, change the
+				// value
+				if (earningsWon > projUser.getHighestEarningsWon()) {
+					projUser.setHighestEarningsWon(earningsWon);
+					UserManagerSingleton.getInstance().setUserHighestEarningsWon(projUser, earningsWon);
+				}
+			}
 
 			new Thread(new Runnable() {
 				@Override
@@ -547,10 +587,23 @@ public class PlayingGP extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
+					// Increments the user's total earnings
+					User projUser = ProjSP.getUserSP();
+					if (projUser != null) {
+						double earningsWon = getEarningsWhenLeaving();
+						projUser.incrementTotalEarningsWon(earningsWon);
+						UserManagerSingleton.getInstance().incrementUserTotalEarningsWon(projUser, earningsWon);
+
+						if (earningsWon > projUser.getHighestEarningsWon()) {
+							projUser.setHighestEarningsWon(earningsWon);
+							UserManagerSingleton.getInstance().setUserHighestEarningsWon(projUser, earningsWon);
+						}
+					}
+
 					// Show the party left pane
 					((PartySP) getParent().getParent()).partyLeft();
-
 					getTimerFP().stopTimer();
+
 				}
 			});
 		}

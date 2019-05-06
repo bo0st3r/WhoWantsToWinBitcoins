@@ -86,4 +86,12 @@ public class PartyLostGP extends GridPane {
 		return lblTitle;
 	}
 
+	public void setLblEarningText(double earnings) {
+		if (earnings > 0) {
+			getLblEarning().setText("But you won : " + earnings + " BTC !");
+		} else {
+			getLblEarning().setText("You won nothing...");
+		}
+	}
+
 }

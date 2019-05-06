@@ -204,6 +204,14 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	public void setEmail(String email) throws InputSyntaxException {
+		if (!validateEmail(email))
+			throw new InputSyntaxException("The email '" + email + "' does not fit it's relevant syntax pattern.",
+					EMAIL_SYNTAX_REGEX);
+
+		this.email = email;
+	}
+
 	/**
 	 * Returns the user's email.
 	 * 
@@ -389,13 +397,4 @@ public class User implements Serializable {
 				+ highestEarningsWon + ", totalEarningsWon=" + totalEarningsWon + "]";
 	}
 
-	public User(String pseudo, String password, String email, int partiesWon, int partiesPlayed,
-			double highestEarningsWon, double totalEarningsWon) throws InputSyntaxException {
-		this(pseudo, password, email);
-		this.partiesWon = partiesWon;
-		this.partiesPlayed = partiesPlayed;
-		this.highestEarningsWon = highestEarningsWon;
-		this.totalEarningsWon = totalEarningsWon;
-	}
-	
 }

@@ -40,6 +40,11 @@ public class UserManagerSingleton implements Serializable {
 		return INSTANCE;
 	}
 
+	/**
+	 * Returns the users Set as an List.
+	 * 
+	 * @return the users as a List<User> object.
+	 */
 	public List<User> getUsersAsList() {
 		List<User> usersList = new ArrayList<>();
 		for (User u : users) {
@@ -242,11 +247,13 @@ public class UserManagerSingleton implements Serializable {
 			return false;
 		return true;
 	}
+
 	/**
-	 * get User corresponding to the given pseudo from the users field.
+	 * Returns the User corresponding to the given pseudo from the users field.
+	 * 
 	 * @param the String object containing the user's pseudo.
 	 * @return User's clone
-	 * @throws UserNotFoundException 
+	 * @throws UserNotFoundException
 	 */
 	public User getUserByPseudo(String pseudo) {
 		User clone = null;
@@ -260,18 +267,62 @@ public class UserManagerSingleton implements Serializable {
 		}
 		return clone;
 	}
-	
-	public boolean updateUser(User oldUser, User newUser) throws DuplicateUserPseudoException, DuplicateUserEmailException, DuplicateUserException {
-		
-		if (newUser.validateEmail(newUser.getEmail()) || newUser.validatePassword(newUser.getPassword())) {
-			removeUserByPseudo(oldUser.getPseudo());
-			addUser(newUser);
-			return true;
+
+	public boolean updateUser(User oldUser, User newUser)
+			throws DuplicateUserPseudoException, DuplicateUserEmailException, DuplicateUserException {
+
+		if (User.validateEmail(newUser.getEmail()) || User.validatePassword(newUser.getPassword())) {
+			if (removeUserByPseudo(oldUser.getPseudo())) {
+				addUser(newUser);
+				return true;
 			}
+		}
+
 		return false;
-		
-		
 	}
-	
+
+	public void incrementUserTotalEarningsWon(User user, double increment) {
+		if (increment > 0) {
+			for (User user2 : users) {
+				if (user.equals(user2)) {
+					user2.incrementTotalEarningsWon(increment);
+					Serialization.userManagerSingletonToJson(INSTANCE, FILE_NAME);
+					return;
+				}
+			}
+		}
+	}
+
+	public void incrementUserPartiesWon(User user) {
+		for (User user2 : users) {
+			if (user.equals(user2)) {
+				user2.incrementPartiesWon();
+				Serialization.userManagerSingletonToJson(INSTANCE, FILE_NAME);
+				return;
+			}
+		}
+	}
+
+	public void incrementUserPartiesPlayied(User user) {
+		for (User user2 : users) {
+			if (user.equals(user2)) {
+				user2.incrementPartiesPlayed();
+				Serialization.userManagerSingletonToJson(INSTANCE, FILE_NAME);
+				return;
+			}
+		}
+	}
+
+	public void setUserHighestEarningsWon(User user, double highestEarningsWon) {
+		if (highestEarningsWon >= 0) {
+			for (User user2 : users) {
+				if (user.equals(user2)) {
+					user2.setHighestEarningsWon(highestEarningsWon);
+					Serialization.userManagerSingletonToJson(INSTANCE, FILE_NAME);
+					return;
+				}
+			}
+		}
+	}
 
 }

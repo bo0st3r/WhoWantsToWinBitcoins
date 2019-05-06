@@ -12,17 +12,24 @@
 	-fx-text-fill:#2d2d2d;	
 }
 
+.button-large{
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
+	-fx-min-height: 77.0px;
+	-fx-min-width: 270.9px;
+}
+
 .button-medium{
 	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 	-fx-min-height: 55.0px;
 	-fx-min-width: 193.5px;
 }
 
-.button-large{
+.button-small{
 	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
-	-fx-min-height: 77.0px;
-	-fx-min-width: 270.9px;
+	-fx-min-height: 55.0px;
+	-fx-min-width: 105.5px;
 }
+
 
 .main-button-md{
 	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;

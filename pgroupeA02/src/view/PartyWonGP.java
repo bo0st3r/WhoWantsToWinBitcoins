@@ -40,7 +40,7 @@ public class PartyWonGP extends GridPane {
 	 */
 	public Label getLblEarning() {
 		if (lblEarning == null) {
-			lblEarning = new Label("You won : ");
+			lblEarning = new Label("You won : 1000000 BTC !");
 			lblEarning.setId("lblGain");
 		}
 		return lblEarning;

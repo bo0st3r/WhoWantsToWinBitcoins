@@ -104,16 +104,9 @@ public class RegistrationGP extends GridPane {
 					// If not null, tries to add it to the users database
 					if (user != null)
 						registerUser(user);
-					System.out.println(UserManagerSingleton.getInstance());
-					((ProjSP) getParent().getParent().getParent()).setUserSP(user);
-					
-					((ProjSP) getParent().getParent().getParent()).getRegistrationConnectionGridPane().setVisible(false);
-					
-					((ProjSP) getParent().getParent().getParent()).getHomeGridPane().setVisible(true);
-					((ProjSP) getParent().getParent().getParent()).getHomeGridPane().getBtnConnect().setVisible(false);
-					((ProjSP) getParent().getParent().getParent()).getHomeGridPane().getBtnDisconnect().setVisible(true);
-					((ProjSP) getParent().getParent().getParent()).getHomeGridPane().getBtnProfile().setVisible(true);
-//					
+
+					ProjSP.setUserSP(user);
+					((ProjSP) getParent().getParent().getParent()).userConnected();
 				}
 			});
 			;

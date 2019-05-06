@@ -64,6 +64,8 @@ public class PartySP extends BorderPane {
 	 */
 	public void partyLeft() {
 		hideAllComponentsInStackPane();
+		double earnings = getPlayingGridPane().getEarningsWhenLeaving();
+		getPartyLeftGridPane().setLblEarningText(earnings);
 		getPartyLeftGridPane().setVisible(true);
 	}
 
@@ -80,6 +82,8 @@ public class PartySP extends BorderPane {
 	 */
 	public void partyLost() {
 		hideAllComponentsInStackPane();
+		double earnings = getPlayingGridPane().getEarningsWhenLost();
+		getPartyLostGridPane().setLblEarningText(earnings);
 		getPartyLostGridPane().setVisible(true);
 	}
 

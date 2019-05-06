@@ -1,1 +1,323 @@
-{"questions":[{"author":"Elsa","statement":"Which of these active principles is used to control hypertension?","round":"LAST_ROUND","choices":{"Alprazolam":false,"Bisoprolol":true,"Cetirizine":false,"Hydrocortisone":false}},{"author":"Elsa","statement":"When did the Berlin wall came down?","round":"SECOND_ROUND","choices":{"1987":false,"1990":false,"1989":true,"1988":false}},{"author":"Elsa","statement":"In Belgium, which season starts in June?","round":"FIRST_ROUND","choices":{"Autumn":false,"Winter":false,"Summer":true,"Spring":false}},{"author":"Bastien Decorte","statement":"How is the Bitcoin\u0027s creator called?","round":"SECOND_ROUND","choices":{"Kakashi Naruto":false,"Satoshi Nakamoto":true,"Soraka":false,"Eiichiro Oda":false}},{"author":"Bastien Decorte","statement":"What is the number of strings on a classical guitar?","round":"FIRST_ROUND","choices":{"3":false,"4":false,"5":false,"6":true}},{"author":"Bastien Decorte","statement":"How old is the universe in light years?","round":"LAST_ROUND","choices":{"13.7 million years":false,"13.7 billion years":true,"1.37 billion years":false,"13.7 trillion years":false}},{"author":"Mithirsan MATHYVARNAN","statement":"On which building is Big Ben?","round":"FIRST_ROUND","choices":{"Big Ben is also the building name":false,"Tower Clock":false,"Elizabeth tower":true,"Augustus Tower":false}},{"author":"Mithirsan MATHYVARNAN","statement":"Who created Apple with Steve Jobs?","round":"SECOND_ROUND","choices":{"Steve Wozniak \u0026 Ronald Wayne ":true,"Nobody":false,"Steve Wozniak":false,"Bill Gates ":false}},{"author":"Mithirsan MATHYVARNAN","statement":"How long is the revolution period of Mars?","round":"LAST_ROUND","choices":{"about 365 days and 6 hours ":false,"about 876 days and 2 minutes":false,"about 687 days and 23 hours":true,"1.65x earth\u0027s revolution period":false}},{"author":"Axel Lux","statement":"What is the shape of the Earth?","round":"FIRST_ROUND","choices":{"Spherical":true,"Rectangular":false,"Triangular":false,"Flat":false}},{"author":"Axel Lux","statement":"Which one is the fourth planets of the solar system?","round":"SECOND_ROUND","choices":{"Earth":false,"Mars":true,"Jupiter":false,"Saturn":false}},{"author":"Axel Lux","statement":"What is the name of the biggest star?","round":"LAST_ROUND","choices":{"VY Canis Majoris":false,"the Sun":false,"VV Cephei A":false,"UY Scuti":true}},{"author":"Loïc Laruelle","statement":"Which animal, now extinct, lived in Mauritius Island?","round":"FIRST_ROUND","choices":{"Dodo":true,"Panda-ant":false,"Lyrebird":false,"Blobfish":false}},{"author":"Loïc Laruelle","statement":"The Deadly Hallow are...","round":"FIRST_ROUND","choices":{"An eagle, a seal and a panda":false,"A cloak, a stone and a wand":true,"A shovel, a pickaxe and a torch":false,"A gate, a grave and a burial":false}},{"author":"Loïc Laruelle","statement":"Who wrote Notre-Dame de Paris?","round":"FIRST_ROUND","choices":{"Edgar Poe Allen":false,"Bram Stoker":false,"Mary Shelley":false,"Victor Hugo":true}},{"author":"Loïc Laruelle","statement":"Loki has three children with the jïthunn Angrboba. Fenrir, Hel and...","round":"SECOND_ROUND","choices":{"Thor":false,"Laufey":false,"Jïrmungand":true,"Sleipnir":false}},{"author":"Loïc Laruelle","statement":"Who is the longest real molecule name?","round":"SECOND_ROUND","choices":{"Vitamin B1":false,"Titin":true,"DNA":false,"Nitroglycerin":false}},{"author":"Loïc Laruelle","statement":"What\u0027s the current capital of Kazakhstan?","round":"SECOND_ROUND","choices":{"Astana":false,"Oural":false,"Almaty":false,"Noursoultan":true}},{"author":"Loïc Laruelle","statement":"What\u0027s called a resident of Jerusalem?","round":"LAST_ROUND","choices":{"Jerusan":false,"Jerusalemite":true,"Jerusalemish":false,"Hierosolytain":false}},{"author":"Loïc Laruelle","statement":"Candle is an old unit of measurement and was replaced by...","round":"LAST_ROUND","choices":{"Farad":false,"Candela":true,"Katal":false,"Henry":false}},{"author":"Robin Roekens","statement":"What\u0027s the name of the most famous hedgedog in videogame history?","round":"FIRST_ROUND","choices":{"Pikachu":false,"Sonic":true,"Sora":false,"Mario":false}},{"author":"Robin Roekens","statement":"What kind of chemical reaction occurs inside a Li-ion battery?","round":"SECOND_ROUND","choices":{"combustion":false,"subsitution":false,"acid-base":false,"redox":true}},{"author":"Robin Roekens","statement":"The molecule C8H10N4O2 is commonly known under which name?","round":"LAST_ROUND","choices":{"caffeine":false,"theine":false,"caffeine or theine":true,"water":false}},{"author":"Jimmy","statement":"When did dinosaurs become extinct ?","round":"SECOND_ROUND","choices":{"85 million years ago":false,"70 million years ago":false,"65 million years ago":true,"55 million years ago":false}},{"author":"Jimmy","statement":"What is the \"Zetetic\" ?","round":"LAST_ROUND","choices":{"A line of reasoning":true,"A religion":false,"A cult":false,"A science":false}},{"author":"Jimmy","statement":"What is the name of the princess in the video games franchise \"The legends of Zelda\"?","round":"FIRST_ROUND","choices":{"She has no name":false,"Linkle":false,"Zelda":true,"Zeldo":false}},{"author":"Mehdi","statement":"Which nation has climbed in the final of the football world cup 8 times?","round":"LAST_ROUND","choices":{"Argentina":false,"Brazil":false,"Italy":false,"Germany":true}},{"author":"Mehdi","statement":"What was the name of the first king of Belgium?","round":"FIRST_ROUND","choices":{"Leopold II":false,"Albert I":false,"Albert II":false,"Leopold I ":true}},{"author":"Satoshi Nakamoto","statement":"Qzdqzdqzdqzdqzdqzdqz","round":"LAST_ROUND","choices":{"a":true,"b":false,"c":false,"d":false}},{"author":"Satoshi Nakamoto","statement":"Qzdqzdqzdqzdqzdqzdqzazd","round":"LAST_ROUND","choices":{"a":false,"b":true,"c":false,"d":false}},{"author":"Satoshi Nakamoto","statement":"Qzdqzdqzdqzdqzdqzdqzazdqzdqzd","round":"LAST_ROUND","choices":{"a":false,"b":false,"c":true,"d":false}},{"author":"Satoshi Nakamoto","statement":"Qzdqzdqzdqzdqzdqzdqzazdqzdqzdqzdqzd","round":"FIRST_ROUND","choices":{"a":false,"b":false,"c":true,"d":false}},{"author":"Satoshi Nakamoto","statement":"Qzdqzdqzdqzdqzdqzdqzazdqzdqzdqzdqzdqzdqzd","round":"LAST_ROUND","choices":{"a":false,"b":false,"c":true,"d":false}},{"author":"Satoshi Nakamoto","statement":"Qzdqzdqdzzzzzzzzzzzzzz","round":"FIRST_ROUND","choices":{"a":false,"b":false,"c":false,"qz":true}},{"author":"Satoshi Nakamoto","statement":"Dqzdqzdqzdqzdq","round":"FIRST_ROUND","choices":{"qzdqdz":true,"qzdqzd":false,"aaaa":false,"qzdqzdz":false}},{"author":"Satoshi Nakamoto","statement":"Dqzdqzdqzdqzdqa","round":"FIRST_ROUND","choices":{"qzdqdz":true,"qzdqzd":false,"aaaa":false,"qzdqzdz":false}},{"author":"Satoshi Nakamoto","statement":"2454645645645645645645","round":"LAST_ROUND","choices":{"1":false,"2":true,"3":false,"4":false}},{"author":"Satoshi Nakamoto","statement":"456456456456456456456456","round":"FIRST_ROUND","choices":{"456456456":false,"dzqdqzdqzd":false,"45456456":true,"5644532456":false}},{"author":"Satoshi Nakamoto","statement":"456456456456456456456456qzd","round":"FIRST_ROUND","choices":{"456456456":false,"dzqdqzdqzd":false,"45456456":true,"5644532456":false}},{"author":"azdazd","statement":"Azdazddddddddddddddddd","round":"FIRST_ROUND","choices":{"dqsdsdgr":false,"dzdqzd":true,"ghrtj":false,"tryjtyjtyj":false}},{"author":"Satoshi Nakamoto","statement":"Azdazdazdqzdddddddddddddddddddddddd","round":"FIRST_ROUND","choices":{"dazdazdd":true,"zadazdaz":false,"azdazdazdd":false,"azdazd":false}},{"author":"Satoshi Nakamoto","statement":"Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","round":"FIRST_ROUND","choices":{"5":false,"6":false,"7":true,"+":false}},{"author":"Satoshi Nakamoto","statement":"Zdojhaqikuhdgqozjydgqzkjdgq","round":"FIRST_ROUND","choices":{"1":true,"2":false,"3":false,"4":false}}]}
+{
+	"questions": [
+		{
+			"choices": {
+				"Alprazolam": false,
+				"Bisoprolol": true,
+				"Cetirizine": false,
+				"Hydrocortisone": false
+			},
+			"round": "LAST_ROUND",
+			"author": "Elsa",
+			"statement": "Which of these active principles is used to control hypertension?"
+		},
+		{
+			"choices": {
+				"1987": false,
+				"1990": false,
+				"1989": true,
+				"1988": false
+			},
+			"round": "SECOND_ROUND",
+			"author": "Elsa",
+			"statement": "When did the Berlin wall came down?"
+		},
+		{
+			"choices": {
+				"Autumn": false,
+				"Winter": false,
+				"Summer": true,
+				"Spring": false
+			},
+			"round": "FIRST_ROUND",
+			"author": "Elsa",
+			"statement": "In Belgium, which season starts in June?"
+		},
+		{
+			"choices": {
+				"Kakashi Naruto": false,
+				"Satoshi Nakamoto": true,
+				"Soraka": false,
+				"Eiichiro Oda": false
+			},
+			"round": "SECOND_ROUND",
+			"author": "Bastien Decorte",
+			"statement": "How is the Bitcoin\u0027s creator called?"
+		},
+		{
+			"choices": {
+				"3": false,
+				"4": false,
+				"5": false,
+				"6": true
+			},
+			"round": "FIRST_ROUND",
+			"author": "Bastien Decorte",
+			"statement": "What is the number of strings on a classical guitar?"
+		},
+		{
+			"choices": {
+				"13.7 million years": false,
+				"13.7 billion years": true,
+				"1.37 billion years": false,
+				"13.7 trillion years": false
+			},
+			"round": "LAST_ROUND",
+			"author": "Bastien Decorte",
+			"statement": "How old is the universe in light years?"
+		},
+		{
+			"choices": {
+				"Big Ben is also the building name": false,
+				"Tower Clock": false,
+				"Elizabeth tower": true,
+				"Augustus Tower": false
+			},
+			"round": "FIRST_ROUND",
+			"author": "Mithirsan MATHYVARNAN",
+			"statement": "On which building is Big Ben?"
+		},
+		{
+			"choices": {
+				"Steve Wozniak \u0026 Ronald Wayne ": true,
+				"Nobody": false,
+				"Steve Wozniak": false,
+				"Bill Gates ": false
+			},
+			"round": "SECOND_ROUND",
+			"author": "Mithirsan MATHYVARNAN",
+			"statement": "Who created Apple with Steve Jobs?"
+		},
+		{
+			"choices": {
+				"about 365 days and 6 hours ": false,
+				"about 876 days and 2 minutes": false,
+				"about 687 days and 23 hours": true,
+				"1.65x earth\u0027s revolution period": false
+			},
+			"round": "LAST_ROUND",
+			"author": "Mithirsan MATHYVARNAN",
+			"statement": "How long is the revolution period of Mars?"
+		},
+		{
+			"choices": {
+				"Spherical": true,
+				"Rectangular": false,
+				"Triangular": false,
+				"Flat": false
+			},
+			"round": "FIRST_ROUND",
+			"author": "Axel Lux",
+			"statement": "What is the shape of the Earth?"
+		},
+		{
+			"choices": {
+				"Earth": false,
+				"Mars": true,
+				"Jupiter": false,
+				"Saturn": false
+			},
+			"round": "SECOND_ROUND",
+			"author": "Axel Lux",
+			"statement": "Which one is the fourth planets of the solar system?"
+		},
+		{
+			"choices": {
+				"VY Canis Majoris": false,
+				"the Sun": false,
+				"VV Cephei A": false,
+				"UY Scuti": true
+			},
+			"round": "LAST_ROUND",
+			"author": "Axel Lux",
+			"statement": "What is the name of the biggest star?"
+		},
+		{
+			"choices": {
+				"Dodo": true,
+				"Panda-ant": false,
+				"Lyrebird": false,
+				"Blobfish": false
+			},
+			"round": "FIRST_ROUND",
+			"author": "Loïc Laruelle",
+			"statement": "Which animal, now extinct, lived in Mauritius Island?"
+		},
+		{
+			"choices": {
+				"An eagle, a seal and a panda": false,
+				"A cloak, a stone and a wand": true,
+				"A shovel, a pickaxe and a torch": false,
+				"A gate, a grave and a burial": false
+			},
+			"round": "FIRST_ROUND",
+			"author": "Loïc Laruelle",
+			"statement": "The Deadly Hallow are..."
+		},
+		{
+			"choices": {
+				"Edgar Poe Allen": false,
+				"Bram Stoker": false,
+				"Mary Shelley": false,
+				"Victor Hugo": true
+			},
+			"round": "FIRST_ROUND",
+			"author": "Loïc Laruelle",
+			"statement": "Who wrote Notre-Dame de Paris?"
+		},
+		{
+			"choices": {
+				"Thor": false,
+				"Laufey": false,
+				"Jïrmungand": true,
+				"Sleipnir": false
+			},
+			"round": "SECOND_ROUND",
+			"author": "Loïc Laruelle",
+			"statement": "Loki has three children with the jïthunn Angrboba. Fenrir, Hel and..."
+		},
+		{
+			"choices": {
+				"Vitamin B1": false,
+				"Titin": true,
+				"DNA": false,
+				"Nitroglycerin": false
+			},
+			"round": "SECOND_ROUND",
+			"author": "Loïc Laruelle",
+			"statement": "Who is the longest real molecule name?"
+		},
+		{
+			"choices": {
+				"Astana": false,
+				"Oural": false,
+				"Almaty": false,
+				"Noursoultan": true
+			},
+			"round": "SECOND_ROUND",
+			"author": "Loïc Laruelle",
+			"statement": "What\u0027s the current capital of Kazakhstan?"
+		},
+		{
+			"choices": {
+				"Jerusan": false,
+				"Jerusalemite": true,
+				"Jerusalemish": false,
+				"Hierosolytain": false
+			},
+			"round": "LAST_ROUND",
+			"author": "Loïc Laruelle",
+			"statement": "What\u0027s called a resident of Jerusalem?"
+		},
+		{
+			"choices": {
+				"Farad": false,
+				"Candela": true,
+				"Katal": false,
+				"Henry": false
+			},
+			"round": "LAST_ROUND",
+			"author": "Loïc Laruelle",
+			"statement": "Candle is an old unit of measurement and was replaced by..."
+		},
+		{
+			"choices": {
+				"Pikachu": false,
+				"Sonic": true,
+				"Sora": false,
+				"Mario": false
+			},
+			"round": "FIRST_ROUND",
+			"author": "Robin Roekens",
+			"statement": "What\u0027s the name of the most famous hedgedog in videogame history?"
+		},
+		{
+			"choices": {
+				"combustion": false,
+				"subsitution": false,
+				"acid-base": false,
+				"redox": true
+			},
+			"round": "SECOND_ROUND",
+			"author": "Robin Roekens",
+			"statement": "What kind of chemical reaction occurs inside a Li-ion battery?"
+		},
+		{
+			"choices": {
+				"caffeine": false,
+				"theine": false,
+				"caffeine or theine": true,
+				"water": false
+			},
+			"round": "LAST_ROUND",
+			"author": "Robin Roekens",
+			"statement": "The molecule C8H10N4O2 is commonly known under which name?"
+		},
+		{
+			"author": "Jimmy",
+			"round": "SECOND_ROUND",
+			"statement": "When did dinosaurs become extinct ?",
+			"choices": {
+				"85 million years ago": false,
+				"70 million years ago": false,
+				"65 million years ago": true,
+				"55 million years ago": false
+			}
+		},
+		{
+			"author": "Jimmy",
+			"round": "LAST_ROUND",
+			"statement": "What is the \"Zetetic\" ?",
+			"choices": {
+				"A line of reasoning": true,
+				"A religion": false,
+				"A cult": false,
+				"A science": false
+			}
+		},
+		{
+			"author": "Jimmy",
+			"round": "FIRST_ROUND",
+			"statement": "What is the name of the princess in the video games franchise \"The legends of Zelda\"?",
+			"choices": {
+				"She has no name": false,
+				"Linkle": false,
+				"Zelda": true,
+				"Zeldo": false
+			}
+		},
+		{
+			"author": "Mehdi",
+			"round": "SECOND_ROUND",
+			"statement": "In which year did the famous chef Paul Bocuse die?",
+			"choices": {
+				"1998": false,
+				"2008": false,
+				"2018 ": true,
+				"1988": false
+			}
+		},
+		{
+			"author": "Mehdi",
+			"round": "LAST_ROUND",
+			"statement": "Which nation has climbed in the final of the football world cup 8 times?",
+			"choices": {
+				"Argentina": false,
+				"Brazil": false,
+				"Italy": false,
+				"Germany": true
+			}
+		},
+		{
+			"author": "Mehdi",
+			"round": "FIRST_ROUND",
+			"statement": "What was the name of the first king of Belgium?",
+			"choices": {
+				"Leopold II": false,
+				"Albert I": false,
+				"Albert II": false,
+				"Leopold I ": true
+			}
+		}
+	]
+}

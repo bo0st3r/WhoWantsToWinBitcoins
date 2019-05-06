@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import model.User;
 import model.UserManagerSingleton;
 
 public class HomeGP extends GridPane {
@@ -22,8 +23,7 @@ public class HomeGP extends GridPane {
 	private Label lblTitle;
 
 	// DEPLACER
-	private Button btnAddQuestion;
-	private int admin = 1;
+	private Button btnManageQuestions;
 	private Button btnEditEarnings;
 
 	// While connected buttons
@@ -64,7 +64,7 @@ public class HomeGP extends GridPane {
 		add(getBtnRules(), 4, 7, 2, 1);
 
 		// AddQuestion button
-		add(getBtnAddQuestion(), 4, 8, 2, 1);
+		add(getBtnManageQuestions(), 4, 8, 2, 1);
 //		add(getBtnEditEarnings(), 4, 9, 2, 1);
 
 		// Connection button
@@ -114,6 +114,13 @@ public class HomeGP extends GridPane {
 			btnPlay.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
+					// Increments the users parties played
+					User projUser = ProjSP.getUserSP();
+					if (projUser != null) {
+						projUser.incrementPartiesPlayed();
+						UserManagerSingleton.getInstance().incrementUserPartiesPlayied(projUser);
+					}
+
 					// Resets the playing pane
 					((ProjSP) getParent().getParent()).getPartyStackPane().resetPlayingGridPane();
 
@@ -147,6 +154,7 @@ public class HomeGP extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					setVisible(false);
+					((ProjSP) getParent().getParent()).getTvScoresBP().getTv().refresh();
 					((ProjSP) getParent().getParent()).getTvScoresBP().setVisible(true);
 				}
 			});
@@ -187,15 +195,15 @@ public class HomeGP extends GridPane {
 	 * 
 	 * @return btnAddQuestion, a Button object.
 	 */
-	public Button getBtnAddQuestion() {
-		if (btnAddQuestion == null) {
-			btnAddQuestion = new Button("Add a question");
-			btnAddQuestion.setPrefHeight(Integer.MAX_VALUE);
-			btnAddQuestion.setPrefWidth(Integer.MAX_VALUE);
-			// Hidden if the user is not an admin
-//			btnAddQuestion.setVisible(false);
+	public Button getBtnManageQuestions() {
+		if (btnManageQuestions == null) {
+			btnManageQuestions = new Button("Manage questions");
+			btnManageQuestions.setPrefHeight(Integer.MAX_VALUE);
+			btnManageQuestions.setPrefWidth(Integer.MAX_VALUE);
+			btnManageQuestions.getStyleClass().add("main-button-md");
+			btnManageQuestions.setVisible(false);
 
-			btnAddQuestion.setOnAction(new EventHandler<ActionEvent>() {
+			btnManageQuestions.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
 					setVisible(false);
@@ -204,7 +212,7 @@ public class HomeGP extends GridPane {
 			});
 		}
 
-		return btnAddQuestion;
+		return btnManageQuestions;
 	}
 
 	public Button getBtnEditEarnings() {
@@ -269,11 +277,6 @@ public class HomeGP extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					getBtnConnect().setVisible(false);
-					getBtnDisconnect().setVisible(true);
-					getBtnProfile().setVisible(true);
-					if (admin == 1)
-						getBtnAddQuestion().setVisible(true);
 					setVisible(false);
 					((ProjSP) getParent().getParent()).getRegistrationConnectionGridPane().setVisible(true);
 				}
@@ -304,7 +307,7 @@ public class HomeGP extends GridPane {
 					String pseudo = ProjSP.getUserSP().getPseudo();
 
 					((ProjSP) getParent().getParent()).getProfilGridPane()
-							.UserToProfilFields(UserManagerSingleton.getInstance().getUserByPseudo(pseudo));
+							.fillFieldsWithUser(UserManagerSingleton.getInstance().getUserByPseudo(pseudo));
 
 					setVisible(false);
 					((ProjSP) getParent().getParent()).getProfilGridPane().setVisible(true);
@@ -338,10 +341,7 @@ public class HomeGP extends GridPane {
 
 				@Override
 				public void handle(ActionEvent event) {
-					getBtnConnect().setVisible(true);
-					getBtnDisconnect().setVisible(false);
-					getBtnProfile().setVisible(false);
-					getBtnAddQuestion().setVisible(false);
+					((ProjSP) getParent().getParent()).userDisconnected();
 				}
 			});
 		}

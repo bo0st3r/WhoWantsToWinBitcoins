@@ -46,14 +46,8 @@ public class PartyLeftGP extends GridPane {
 		return lblEarning;
 	}
 
-	/**
-	 * Returns imgLeaveParty and if null instantiates it.
-	 */
-	public ImageView getImgLeaveParty() {
-		if (imgLeaveParty == null) {
-			imgLeaveParty = new ImageView("victory.png"); // A CHANGER
-		}
-		return imgLeaveParty;
+	public void setLblEarningText(double earnings) {
+		getLblEarning().setText("You won : " + earnings + " BTC !");
 	}
 
 	public Button getBtnOk() {
