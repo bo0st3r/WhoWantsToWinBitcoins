@@ -4,10 +4,8 @@ import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import model.Deck;
-import model.Earning;
 import model.User;
 import utilities.Serialization;
-import view.tableviews.TableViewEarningsBP;
 import view.tableviews.TableViewQuestionsBP;
 import view.tableviews.TableViewScoresBP;
 
@@ -21,7 +19,7 @@ public class ProjSP extends BorderPane {
 	private PartySP partyStackPane;
 	private ProfilGP profilGridPane;
 	private TableViewQuestionsBP tvQuestionBP;
-	private TableViewEarningsBP tvEarningsBP;
+//	private TableViewEarningsBP tvEarningsBP;
 	private TableViewScoresBP tvScoresBP;
 	private static User USER;
 
@@ -136,15 +134,15 @@ public class ProjSP extends BorderPane {
 		return tvQuestionBP;
 	}
 
-	public TableViewEarningsBP getTvEarningsBP() {
-		if (tvEarningsBP == null) {
-			tvEarningsBP = new TableViewEarningsBP(Serialization.jsonToEarning(Earning.FILE_NAME));
-			tvEarningsBP.getStyleClass().add("basic-background");
-			stackPane.getChildren().add(tvEarningsBP);
-		}
-
-		return tvEarningsBP;
-	}
+//	public TableViewEarningsBP getTvEarningsBP() {
+//		if (tvEarningsBP == null) {
+//			tvEarningsBP = new TableViewEarningsBP(Serialization.jsonToEarning(Earning.FILE_NAME));
+//			tvEarningsBP.getStyleClass().add("basic-background");
+//			stackPane.getChildren().add(tvEarningsBP);
+//		}
+//
+//		return tvEarningsBP;
+//	}
 
 	public TableViewScoresBP getTvScoresBP() {
 		if (tvScoresBP == null) {

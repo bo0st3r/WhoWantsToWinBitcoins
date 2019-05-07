@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
@@ -21,8 +20,8 @@ import model.Party;
 import model.Question;
 import utilities.Serialization;
 import view.AddQuestionGP;
-import view.ProjSP;
 import view.AlertError;
+import view.ProjSP;
 
 public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 	private AddQuestionGP addQuestionGP;

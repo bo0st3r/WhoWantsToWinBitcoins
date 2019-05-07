@@ -76,7 +76,13 @@
 
 .title-medium{
 	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
-	-fx-font-size:2.5em;
+	-fx-font-size:2.4em;
+	-fx-text-fill:#2d2d2d;
+}
+
+.title-small{
+	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
+	-fx-font-size:1.8em;
 	-fx-text-fill:#2d2d2d;
 }
 
@@ -293,10 +299,10 @@
 	-fx-wrap-text: true ;	
 }
  
-#partyWonGridPane{
+#partyWon{
 	-fx-font-size: 3.0em;
 	-fx-font-weight: bold;
-	-fx-background-image:url("/style/images/backgrounds/btn_background.jpg");
+	-fx-background-image:url("/style/images/backgrounds/basic_background_yellow.jpg");
 }
 
 #okButton{

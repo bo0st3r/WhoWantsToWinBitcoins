@@ -20,7 +20,7 @@ public class MainGame extends Application {
 //		UserManagerSingleton.getInstance().clearUsers();
 //		UserManagerSingleton.getInstance().addUser(new User("admin", "helha", "admin@helha.be", true));
 //		UserManagerSingleton.getInstance().addUser(new User("user", "helha", "user@helha.be"));
-		System.out.println(UserManagerSingleton.getInstance());
+
 		launch(args);
 	}
 
@@ -54,7 +54,9 @@ public class MainGame extends Application {
 			primaryStage.setTitle("Who wants to win Bitcoins?");
 			primaryStage.setMaxWidth(1920);
 			primaryStage.setMinWidth(1440);
-			primaryStage.setWidth(1440);
+			primaryStage.setWidth(1920);
+			primaryStage.setHeight(1080);
+			primaryStage.setMaximized(true);
 
 			// Allows the stage to always keep the 16/9 aspect ratio
 			primaryStage.minHeightProperty().bind(primaryStage.widthProperty().multiply(0.5625));

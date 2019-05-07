@@ -2,11 +2,12 @@ package view;
 
 import java.text.DecimalFormat;
 
-import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import model.Joker;
 import model.Joker5050;
@@ -20,9 +21,9 @@ public class JokerVB extends VBox {
 	private boolean cancelJokerResults;
 	private boolean cancelJoker5050;
 
-	private Button btnJokerPublic;
-	private Button btnJokerFriend;
-	private Button btnJoker5050;
+	private ImageView btnJokerPublic;
+	private ImageView btnJokerFriend;
+	private ImageView btnJoker5050;
 
 	/*
 	 * Constructor, set spacings, alignment, instance variables and add the pane
@@ -54,14 +55,32 @@ public class JokerVB extends VBox {
 	 * 
 	 * @return btnJokerPublic, the Button object used for the public joker.
 	 */
-	public Button getBtnJokerPublic() {
+	public ImageView getBtnJokerPublic() {
 		if (btnJokerPublic == null) {
-			btnJokerPublic = new Button("Ask the public");
-			btnJokerPublic.getStyleClass().add("btnJoker");
+			btnJokerPublic = new ImageView(new Image("/style/images/BasicPublic.png"));
+			btnJokerPublic.setOnMouseEntered(new EventHandler<Event>() {
 
-			btnJokerPublic.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
-				public void handle(ActionEvent arg0) {
+				public void handle(Event event) {
+					btnJokerPublic.setImage(new Image("/style/images/ClicPublic.png"));
+					
+				}
+			});
+			btnJokerPublic.setOnMouseExited(new EventHandler<Event>() {
+
+				@Override
+				public void handle(Event event) {
+					btnJokerPublic.setImage(new Image("/style/images/BasicPublic.png"));
+					
+				}
+			});
+			//btnJokerPublic.getStyleClass().add("btnJoker");
+
+			btnJokerPublic.setOnMouseClicked(new EventHandler<Event>() {
+
+				@Override
+				public void handle(Event event) {
+					
 					setCancelJokerResults(true);
 					joker.setStrategy(new JokerPublic());
 					joker.useJoker(pgp.getParty());
@@ -75,8 +94,12 @@ public class JokerVB extends VBox {
 					pgp.setVisibleLblJokerResults(true);
 
 					btnJokerPublic.setDisable(true);
+					btnJokerPublic.setStyle("-fx-opacity:0.6;");
+					
+					
 				}
 			});
+							
 		}
 		return btnJokerPublic;
 	}
@@ -89,14 +112,31 @@ public class JokerVB extends VBox {
 	 * 
 	 * @return btnJokerFriend, the Button object used for the friend joker.
 	 */
-	public Button getBtnJokerFriend() {
+	public ImageView getBtnJokerFriend() {
 		if (btnJokerFriend == null) {
-			btnJokerFriend = new Button("Call a friend");
-			btnJokerFriend.getStyleClass().add("btnJoker");
+			btnJokerFriend = new ImageView(new Image("/style/images/BasicFriend.png"));
+			btnJokerFriend.setOnMouseEntered(new EventHandler<Event>() {
 
-			btnJokerFriend.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
-				public void handle(ActionEvent arg0) {
+				public void handle(Event event) {
+					btnJokerFriend.setImage(new Image("/style/images/ClicFriend.png"));
+					
+				}
+			});
+			btnJokerFriend.setOnMouseExited(new EventHandler<Event>() {
+
+				@Override
+				public void handle(Event event) {
+					btnJokerFriend.setImage(new Image("/style/images/BasicFriend.png"));
+					
+				}
+			});
+			//btnJokerFriend.getStyleClass().add("btnJoker");
+
+			btnJokerFriend.setOnMouseClicked(new EventHandler<Event>() {
+
+				@Override
+				public void handle(Event event) {
 					setCancelJokerResults(true);
 					joker.setStrategy(new JokerFriend());
 					joker.useJoker(pgp.getParty());
@@ -104,6 +144,7 @@ public class JokerVB extends VBox {
 					pgp.getQuestionGP().getBtnAnswer(pgp.getParty().getJokerFriendIndex()).setId("answerJokerFriend");
 
 					btnJokerFriend.setDisable(true);
+					btnJokerFriend.setStyle("-fx-opacity:0.6;");
 				}
 			});
 		}
@@ -118,15 +159,27 @@ public class JokerVB extends VBox {
 	 * 
 	 * @return btnJoker5050, the Button object used for the 50/50 joker.
 	 */
-	public Button getBtnJoker5050() {
+	public ImageView getBtnJoker5050() {
 		if (btnJoker5050 == null) {
-			btnJoker5050 = new Button("50/50");
-			btnJoker5050.getStyleClass().add("btnJoker");
-
-			btnJoker5050.setOnAction(new EventHandler<ActionEvent>() {
+			btnJoker5050 = new ImageView(new Image("/style/images/Basic5050.png"));
+			btnJoker5050.setOnMouseEntered(new EventHandler<Event>() {
 
 				@Override
-				public void handle(ActionEvent arg0) {
+				public void handle(Event event) {
+					btnJoker5050.setImage(new Image("/style/images/Clic5050.png"));
+				}
+			});
+			btnJoker5050.setOnMouseExited(new EventHandler<Event>() {
+
+				@Override
+				public void handle(Event event) {
+					btnJoker5050.setImage(new Image("/style/images/Basic5050.png"));
+				}
+			});
+
+			btnJoker5050.setOnMouseClicked(new EventHandler<Event>() {
+				@Override
+				public void handle(Event event) {
 					setCancelJoker5050(true);
 
 					joker.setStrategy(new Joker5050());
@@ -138,6 +191,7 @@ public class JokerVB extends VBox {
 					}
 
 					btnJoker5050.setDisable(true);
+					btnJoker5050.setStyle("-fx-opacity:0.6;");
 				}
 			});
 		}

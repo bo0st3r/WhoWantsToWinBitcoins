@@ -22,9 +22,8 @@ public class HomeGP extends GridPane {
 	private Button btnConnect;
 	private Label lblTitle;
 
-	// DEPLACER
 	private Button btnManageQuestions;
-	private Button btnEditEarnings;
+//	private Button btnEditEarnings;
 
 	// While connected buttons
 	private Button btnProfile;
@@ -215,25 +214,25 @@ public class HomeGP extends GridPane {
 		return btnManageQuestions;
 	}
 
-	public Button getBtnEditEarnings() {
-		if (btnEditEarnings == null) {
-			btnEditEarnings = new Button("Edit the earnings");
-			btnEditEarnings.setPrefHeight(Integer.MAX_VALUE);
-			btnEditEarnings.setPrefWidth(Integer.MAX_VALUE);
-			// Hidden if the user is not an admin
-//			btnEditEarnings.setVisible(false);
-
-			btnEditEarnings.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					setVisible(false);
-					((ProjSP) getParent().getParent()).getTvEarningsBP().setVisible(true);
-				}
-			});
-		}
-
-		return btnEditEarnings;
-	}
+//	public Button getBtnEditEarnings() {
+//		if (btnEditEarnings == null) {
+//			btnEditEarnings = new Button("Edit the earnings");
+//			btnEditEarnings.setPrefHeight(Integer.MAX_VALUE);
+//			btnEditEarnings.setPrefWidth(Integer.MAX_VALUE);
+//			// Hidden if the user is not an admin
+////			btnEditEarnings.setVisible(false);
+//
+//			btnEditEarnings.setOnAction(new EventHandler<ActionEvent>() {
+//				@Override
+//				public void handle(ActionEvent event) {
+//					setVisible(false);
+//					((ProjSP) getParent().getParent()).getTvEarningsBP().setVisible(true);
+//				}
+//			});
+//		}
+//
+//		return btnEditEarnings;
+//	}
 
 	/**
 	 * Returns btnAbout, if null instantiates it, sets it's ID and action when

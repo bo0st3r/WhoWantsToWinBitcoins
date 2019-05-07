@@ -3,9 +3,6 @@ package view;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import model.Deck;
-import utilities.Serialization;
-import view.tableviews.TableViewQuestionsBP;
 
 public class PartySP extends BorderPane {
 
@@ -23,7 +20,7 @@ public class PartySP extends BorderPane {
 		setId("partyStackPane");
 		// Center the pane
 		setCenter(getStackPane());
-
+		
 		hideAllComponentsInStackPane();
 	}
 
@@ -97,8 +94,9 @@ public class PartySP extends BorderPane {
 	public StackPane getStackPane() {
 		if (stackPane == null) {
 			stackPane = new StackPane();
-			stackPane.getChildren().addAll(getPartyLostGridPane(), getPartyWonGridPane(), getPartyLeftGridPane());
+//			stackPane.getChildren().addAll(getPartyLostGridPane(), getPartyWonGridPane(), getPartyLeftGridPane());
 		}
+		
 		return stackPane;
 	}
 
@@ -123,7 +121,8 @@ public class PartySP extends BorderPane {
 	public PartyWonGP getPartyWonGridPane() {
 		if (partyWonGridPane == null) {
 			partyWonGridPane = new PartyWonGP();
-			partyWonGridPane.setId("partyWonGridPane");
+			partyWonGridPane.setId("partyWon");
+			getStackPane().getChildren().add(partyWonGridPane);
 		}
 		return partyWonGridPane;
 	}
@@ -132,6 +131,7 @@ public class PartySP extends BorderPane {
 		if (partyLostGridPane == null) {
 			partyLostGridPane = new PartyLostGP();
 			partyLostGridPane.setId("partyLostGridPane");
+			getStackPane().getChildren().add(partyLostGridPane);
 		}
 		return partyLostGridPane;
 	}
@@ -140,6 +140,7 @@ public class PartySP extends BorderPane {
 		if (partyLeftGridPane == null) {
 			partyLeftGridPane = new PartyLeftGP();
 			partyLeftGridPane.setId("partyLeftGridPane");
+			getStackPane().getChildren().add(partyLeftGridPane);
 		}
 		return partyLeftGridPane;
 	}

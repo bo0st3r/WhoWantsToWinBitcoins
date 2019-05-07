@@ -2,6 +2,8 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -20,19 +22,21 @@ public class PartyLostGP extends GridPane {
 	 * Constructor, set cols and rows constraints plus add the pane contents.
 	 */
 	public PartyLostGP() {
+//		setGridLinesVisible(true);
+
 		// Set columns
 		ColumnConstraints c = new ColumnConstraints();
 		c.setPercentWidth(20);
-		getColumnConstraints().addAll(c, c, c, c, c, c);
+		getColumnConstraints().addAll(c, c, c, c, c);
 
 		// Set rows
 		RowConstraints r = new RowConstraints();
 		r.setPercentHeight(20);
-		getRowConstraints().addAll(r, r, r, r, r, r);
+		getRowConstraints().addAll(r, r, r, r, r);
 
-		add(getLblEarning(), 2, 4, 3, 1);
-		add(getBtnOk(), 2, 5, 2, 1);
-		add(getLblTitle(), 4, 1, 2, 1);
+		add(getLblTitle(), 1, 0, 3, 2);
+		add(getLblEarning(), 1, 3, 3, 1);
+		add(getBtnOk(), 1, 4, 3, 1);
 
 	}
 
@@ -43,6 +47,8 @@ public class PartyLostGP extends GridPane {
 		if (lblEarning == null) {
 			lblEarning = new Label("You won : ");
 			lblEarning.setId("lblGain");
+			lblEarning.getStyleClass().add("title-small");
+			GridPane.setHalignment(lblEarning, HPos.CENTER);
 		}
 		return lblEarning;
 	}
@@ -64,9 +70,12 @@ public class PartyLostGP extends GridPane {
 	 */
 	public Button getBtnOk() {
 		if (btnOk == null) {
-			btnOk = new Button("Ok");
+			btnOk = new Button("Go home");
 			btnOk.setId("okButton");
-			btnOk.setPrefWidth(Integer.MAX_VALUE);
+			btnOk.getStyleClass().add("button-medium");
+			GridPane.setHalignment(btnOk, HPos.CENTER);
+//			btnOk.setPrefWidth(Integer.MAX_VALUE);
+
 			btnOk.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -82,6 +91,10 @@ public class PartyLostGP extends GridPane {
 	public Label getLblTitle() {
 		if (lblTitle == null) {
 			lblTitle = new Label("You lost... :(");
+			lblTitle.getStyleClass().add("title-medium");
+			lblTitle.setStyle("-fx-text-fill:#d82811;");
+			GridPane.setHalignment(lblTitle, HPos.CENTER);
+			GridPane.setValignment(lblTitle, VPos.BOTTOM);
 		}
 		return lblTitle;
 	}
@@ -90,7 +103,7 @@ public class PartyLostGP extends GridPane {
 		if (earnings > 0) {
 			getLblEarning().setText("But you won : " + earnings + " BTC !");
 		} else {
-			getLblEarning().setText("You won nothing...");
+			getLblEarning().setText("You won nothing.");
 		}
 	}
 

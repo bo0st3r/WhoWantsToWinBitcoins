@@ -36,7 +36,7 @@ import model.UserManagerSingleton;
 import utilities.Serialization;
 
 public class PlayingGP extends GridPane {
-	private static Earning earning;
+	private static Earning EARNING;
 	private Party party;
 
 	// Question
@@ -68,7 +68,7 @@ public class PlayingGP extends GridPane {
 	 */
 	public PlayingGP() {
 		// Getting the earnings steps
-		earning = new Earning(Earning.FILE_NAME);
+		EARNING = new Earning(Earning.FILE_NAME);
 //		setGridLinesVisible(true);
 
 		// Set columns
@@ -339,7 +339,7 @@ public class PlayingGP extends GridPane {
 
 			User projUser = ProjSP.getUserSP();
 			if (projUser != null) {
-				double earningsWon = getEarningsWhenLeaving();
+				double earningsWon = getEarningsWhenWon();
 
 				// Increments the user's total earnings
 				projUser.incrementTotalEarningsWon(earningsWon);
@@ -416,7 +416,7 @@ public class PlayingGP extends GridPane {
 	 * @return the instance of Earning.
 	 */
 	public static Earning getEarning() {
-		return earning;
+		return EARNING;
 	}
 
 	/**
@@ -621,9 +621,9 @@ public class PlayingGP extends GridPane {
 		if (actualStep > 9) {
 			earn = 0;
 		} else if (actualStep >= 5) {
-			earn = PlayingGP.getEarning().getAmount(4);
+			earn = getEarning().getAmount(4);
 		} else if (actualStep > 0) {
-			earn = PlayingGP.getEarning().getAmount(9);
+			earn = getEarning().getAmount(9);
 		}
 		return earn;
 	}
@@ -637,10 +637,14 @@ public class PlayingGP extends GridPane {
 		double earn = 0;
 		for (int i = 13; i >= 0; i--) {
 			if (pyramidGP.getPyramidActualStep() == i) {
-				earn = PlayingGP.getEarning().getAmount(13 - i);
+				earn = getEarning().getAmount(13 - i);
 			}
 		}
 		return earn;
+	}
+
+	public double getEarningsWhenWon() {
+		return getEarning().getAmount(Party.NB_STEPS - 1);
 	}
 
 	/**
