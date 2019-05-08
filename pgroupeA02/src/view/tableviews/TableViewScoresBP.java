@@ -15,6 +15,12 @@ import view.ProjSP;
 public class TableViewScoresBP extends TableViewIntrospectionBP<User> {
 	private Button btnHome;
 
+	/**
+	 * Constructor. Instantiates this object using it's super constructor with the
+	 * UserManagerSingleton instance and adds the button Home to the bottomHB.
+	 * 
+	 * @param deck the Deck object containing the List of questions.
+	 */
 	public TableViewScoresBP() {
 		super(UserManagerSingleton.getInstance().getUsersAsList(), User.class);
 
@@ -83,10 +89,10 @@ public class TableViewScoresBP extends TableViewIntrospectionBP<User> {
 	}
 
 	/**
-	 * If null instantiate btnHome, then returns it. Defines it's action when using
-	 * it.
+	 * If null instantiates btnHome, then returns it. This button allows to get back
+	 * to the home pane.
 	 * 
-	 * @return The "home" Button object.
+	 * @return btnHome, the "home" Button object.
 	 */
 	public Button getBtnHome() {
 		if (btnHome == null) {
@@ -103,5 +109,14 @@ public class TableViewScoresBP extends TableViewIntrospectionBP<User> {
 			});
 		}
 		return btnHome;
+	}
+
+	/**
+	 * Sets the list with the new users list using the UserManagerSingleton instance
+	 * and then refreshes the tv items.
+	 */
+	public void refreshUsersList() {
+		setList(UserManagerSingleton.getInstance().getUsersAsList());
+		refreshTvItems();
 	}
 }

@@ -31,6 +31,12 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 	private Button btnAdd;
 	private Button btnTable;
 
+	/**
+	 * Constructor. Instantiates this object using it's super constructor and adds
+	 * the buttons Home, Delete and Add to the bottomHB.
+	 * 
+	 * @param deck the Deck object containing the List of questions.
+	 */
 	public TableViewQuestionsBP(Deck deck) {
 		super(deck.getQuestions(), Question.class);
 		this.deck = deck;
@@ -79,6 +85,13 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 		return tv;
 	}
 
+	/**
+	 * Sets how the "Round" column should work. Allows to change the round field of
+	 * a Question object using a ComboBox.
+	 * 
+	 * @param col the Round column.
+	 * @param tv  the TableView.
+	 */
 	public void handleRound(TableColumn<Question, Round> col, TableView<Question> tv) {
 		col.setCellFactory(ComboBoxTableCell.<Question, Round>forTableColumn(Round.values()));
 		col.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Question, Round>>() {
@@ -127,6 +140,13 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 		});
 	}
 
+	/**
+	 * Sets how the "Statement" column should work. Allows to change the statement
+	 * field of a Question object using a TextField.
+	 * 
+	 * @param col the Statement column.
+	 * @param tv  the TableView.
+	 */
 	private void handleStatement(TableColumn<Question, String> col, TableView<Question> tv) {
 		// Sorts by statement order
 
@@ -179,6 +199,13 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 		});
 	}
 
+	/**
+	 * Sets how the "Author" column should work. Allows to change the author field
+	 * of a Question object using a TextField.
+	 * 
+	 * @param col the Author column.
+	 * @param tv  the TableView.
+	 */
 	private void handleAuthor(TableColumn<Question, String> col, TableView<Question> tv) {
 		col.setCellFactory(TextFieldTableCell.<Question>forTableColumn());
 		col.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Question, String>>() {
@@ -218,10 +245,10 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 	}
 
 	/**
-	 * If null instantiate btnHome, then returns it. Defines it's action when using
-	 * it.
+	 * If null instantiates btnHome, then returns it. This button allows to get back
+	 * to the home pane.
 	 * 
-	 * @return The "home" Button object.
+	 * @return btnHome, the "home" Button object.
 	 */
 	public Button getBtnHome() {
 		if (btnHome == null) {
@@ -241,6 +268,12 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 		return btnHome;
 	}
 
+	/**
+	 * If null instantiates btnHome, then returns it. Allows the user to delete the
+	 * selected Question.
+	 * 
+	 * @return btnDelete, the "delete" Button object.
+	 */
 	public Button getBtnDelete() {
 		if (btnDelete == null) {
 			btnDelete = new Button("Delete");
@@ -262,6 +295,12 @@ public class TableViewQuestionsBP extends TableViewIntrospectionBP<Question> {
 		return btnDelete;
 	}
 
+	/**
+	 * If null instantiates btnAdd, then returns it. Allows the user to show the
+	 * pane used to add a question to the deck.
+	 * 
+	 * @return btnAdd, the "add" Button object.
+	 */
 	public Button getBtnAdd() {
 		if (btnAdd == null) {
 			btnAdd = new Button("Add");

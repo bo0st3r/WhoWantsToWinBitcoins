@@ -19,6 +19,13 @@ public class TableViewIntrospectionBP<T> extends BorderPane {
 	private Class<T> clType;
 	private HBox bottomHB;
 
+	/**
+	 * Constructor. Sets the list and clType fields using the given param. Sets the
+	 * pane style, set the TableView as center and a HBox as the bottom.
+	 * 
+	 * @param list   the list used for the TableView.
+	 * @param clType the class of the objects contained by the list.
+	 */
 	public TableViewIntrospectionBP(List<T> list, Class<T> clType) {
 		if (list.size() > 0)
 			this.list = list;
@@ -30,6 +37,14 @@ public class TableViewIntrospectionBP<T> extends BorderPane {
 		setBottom(getBottomHB());
 	}
 
+	/**
+	 * Returns the tv field. If null instantiates it and, using introspection, gets
+	 * a TableView showing every non-static declared fields from the clType Class.
+	 * Columns resize policy is unconstrained.
+	 * 
+	 * 
+	 * @return the TableView object using the list objects as generic type.
+	 */
 	public TableView<T> getTv() {
 		if (tv == null) {
 			tv = new TableView<T>();
@@ -63,6 +78,11 @@ public class TableViewIntrospectionBP<T> extends BorderPane {
 		return tv;
 	}
 
+	/**
+	 * Returns bottomHB, if null instantiates it and sets it's style.
+	 * 
+	 * @return bottomHB, a HBox object.
+	 */
 	public HBox getBottomHB() {
 		if (bottomHB == null) {
 			bottomHB = new HBox();
@@ -73,7 +93,29 @@ public class TableViewIntrospectionBP<T> extends BorderPane {
 		return bottomHB;
 	}
 
+	/**
+	 * Returns the list field.
+	 * 
+	 * @return list, a generic List.
+	 */
 	public List<T> getList() {
 		return list;
+	}
+
+	/**
+	 * Sets a new list.
+	 * 
+	 * @param list the new list.
+	 */
+	public void setList(List<T> list) {
+		this.list = list;
+	}
+
+	/**
+	 * Refreshes the tv items list.
+	 */
+	public void refreshTvItems() {
+		ObservableList<T> data = FXCollections.observableList(list);
+		tv.setItems(data);
 	}
 }

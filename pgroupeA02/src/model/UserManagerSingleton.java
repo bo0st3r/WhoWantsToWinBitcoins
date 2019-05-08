@@ -268,6 +268,16 @@ public class UserManagerSingleton implements Serializable {
 		return clone;
 	}
 
+	/**
+	 * Returns if the users list contains the given user.
+	 * 
+	 * @param user the user to search for.
+	 * @return if he's present.
+	 */
+	public boolean containsUser(User user) {
+		return users.contains(user);
+	}
+
 	public boolean updateUser(User oldUser, User newUser)
 			throws DuplicateUserPseudoException, DuplicateUserEmailException, DuplicateUserException {
 

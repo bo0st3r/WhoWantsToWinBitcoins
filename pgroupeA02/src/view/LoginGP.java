@@ -186,6 +186,7 @@ public class LoginGP extends GridPane {
 						if (userPassword.equals(givenPassword)) {
 							getLblPasswordError().setVisible(false);
 							getPwdPasswordConnection().setText("");
+							System.out.println(user);
 							ProjSP.setUserSP(user);
 							((ProjSP) getParent().getParent().getParent()).userConnected();
 						} else {

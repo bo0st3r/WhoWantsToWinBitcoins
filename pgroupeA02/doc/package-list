@@ -1,5 +1,7 @@
 enumerations
 exceptions
-modele
-utilitaires
+model
+unitary
+utilities
 view
+view.tableviews

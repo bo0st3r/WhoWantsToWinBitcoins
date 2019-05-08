@@ -153,6 +153,8 @@ public class HomeGP extends GridPane {
 				@Override
 				public void handle(ActionEvent event) {
 					setVisible(false);
+					((ProjSP) getParent().getParent()).getTvScoresBP().refreshUsersList();
+					((ProjSP) getParent().getParent()).getTvScoresBP().refreshTvItems();
 					((ProjSP) getParent().getParent()).getTvScoresBP().getTv().refresh();
 					((ProjSP) getParent().getParent()).getTvScoresBP().setVisible(true);
 				}

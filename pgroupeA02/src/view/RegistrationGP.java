@@ -99,14 +99,21 @@ public class RegistrationGP extends GridPane {
 				public void handle(ActionEvent event) {
 					// Hide all the error labels and tries to create the user
 					hideErrorLbls();
+
 					// Creates the user
 					User user = createUser();
-					// If not null, tries to add it to the users database
-					if (user != null)
-						registerUser(user);
+
+					// Returns if created user's null
+					if (user == null)
+						return;
+
+					// Returns if it didn't add the user to the users
+					if (!registerUser(user))
+						return;
 
 					ProjSP.setUserSP(user);
 					((ProjSP) getParent().getParent().getParent()).userConnected();
+					System.out.println(user);
 				}
 			});
 			;
@@ -149,10 +156,11 @@ public class RegistrationGP extends GridPane {
 	 * displays a error message above the concerned field.
 	 * 
 	 * @param user the user to add.
+	 * @param the  result.
 	 */
-	public void registerUser(User user) {
+	public boolean registerUser(User user) {
 		try {
-			UserManagerSingleton.getInstance().addUser(user);
+			return UserManagerSingleton.getInstance().addUser(user);
 		} catch (DuplicateUserPseudoException e) {
 			setLblText(getLblPseudoError(), "This pseudo is already taken.");
 			getLblPseudoError().setVisible(true);
@@ -174,6 +182,8 @@ public class RegistrationGP extends GridPane {
 
 			e.printStackTrace();
 		}
+
+		return false;
 	}
 
 	/**

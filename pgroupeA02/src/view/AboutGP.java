@@ -20,7 +20,7 @@ public class AboutGP extends GridPane {
 	 * Constructor. Add rows and cols constraints plus the pane content.
 	 */
 	public AboutGP() {
-		this.setGridLinesVisible(true);
+//		this.setGridLinesVisible(true);
 
 		// Set columns
 		ColumnConstraints c = new ColumnConstraints();

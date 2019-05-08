@@ -19,7 +19,6 @@ public class ProjSP extends BorderPane {
 	private PartySP partyStackPane;
 	private ProfilGP profilGridPane;
 	private TableViewQuestionsBP tvQuestionBP;
-//	private TableViewEarningsBP tvEarningsBP;
 	private TableViewScoresBP tvScoresBP;
 	private static User USER;
 

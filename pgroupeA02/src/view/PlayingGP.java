@@ -285,6 +285,7 @@ public class PlayingGP extends GridPane {
 			if (choice.getValue()) {
 				party.setRightAnswer(answer);
 				party.setRightAnswerIndex(index);
+				System.out.println(party.getRightAnswer());
 			}
 
 			index++;

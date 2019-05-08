@@ -49,7 +49,7 @@ public class ProfilGP extends GridPane {
 	private Label lblEmailError;
 
 	public ProfilGP() {
-		this.setGridLinesVisible(true);
+//		this.setGridLinesVisible(true);
 		this.setHgap(8);
 		this.setVgap(8);
 

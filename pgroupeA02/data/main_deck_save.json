@@ -199,9 +199,9 @@
 			}
 		},
 		{
-			"author": "Duyck NathanaÃ«l*",
+			"author": "Duyck NathanaÃ«l",
 			"round": "SECOND_ROUND",
-			"statement": "What is Europeâ€™s highest volcano?*",
+			"statement": "What is Europeâ€™s highest volcano?",
 			"choices": {
 				"Etna": true,
 				"Vesuvius": false,
@@ -210,9 +210,9 @@
 			}
 		},
 		{
-			"author": "Duyck NathanaÃ«l*",
+			"author": "Duyck NathanaÃ«l",
 			"round": "FIRST_ROUND",
-			"statement": "What planet shares its name with a cartoon dog?*",
+			"statement": "What planet shares its name with a cartoon dog?",
 			"choices": {
 				"Pluto": true,
 				"Jupiter": false,
@@ -221,9 +221,9 @@
 			}
 		},
 		{
-			"author": "Duyck NathanaÃ«l*",
+			"author": "Duyck NathanaÃ«l",
 			"round": "LAST_ROUND",
-			"statement": "The Cathode Ray Tube is used in what?*",
+			"statement": "The Cathode Ray Tube is used in what?",
 			"choices": {
 				"Light bulb": false,
 				"Television": true,
@@ -232,8 +232,8 @@
 			}
 		},
 		{
-			"author": "*François",
-			"statement": "Which of these U.S President appeared on the television series “Laugh-In”?",
+			"author": "FranÃ§ois",
+			"statement": "Which of these U.S President appeared on the television series Laugh-In?",
 			"round": "LAST_ROUND",
 			"choices": {
 				"Lyndon Johnson": false,
@@ -243,7 +243,7 @@
 			}
 		},
 		{
-			"author": "*François",
+			"author": "FranÃ§ois",
 			"statement": "Which of the following is not a monotheistic religion ?",
 			"round": "FIRST_ROUND",
 			"choices": {
@@ -254,7 +254,7 @@
 			}
 		},
 		{
-			"author": "*François",
+			"author": "FranÃ§ois",
 			"statement": "Which drink is made from leaves of a plant",
 			"round": "FIRST_ROUND",
 			"choices": {
@@ -265,7 +265,7 @@
 			}
 		},
 		{
-			"author": "*Eliot",
+			"author": "Eliot",
 			"statement": "Which of the following men does not have a chemical element named for him?",
 			"round": "SECOND_ROUND",
 			"choices": {
@@ -276,7 +276,7 @@
 			}
 		},
 		{
-			"author": "*Eliot",
+			"author": "Eliot",
 			"statement": "Which continent is Ghana located in ?",
 			"round": "SECOND_ROUND",
 			"choices": {
@@ -287,7 +287,7 @@
 			}
 		},
 		{
-			"author": "*Eliot",
+			"author": "Eliot",
 			"statement": "Which organ produces a liquid known as bile ?",
 			"round": "SECOND_ROUND",
 			"choices": {
@@ -298,7 +298,7 @@
 			}
 		},
 		{
-			"author": "*Pierre",
+			"author": "Pierre",
 			"statement": "What does it mean CPU ?",
 			"round": "FIRST_ROUND",
 			"choices": {
@@ -309,7 +309,7 @@
 			}
 		},
 		{
-			"author": "*Pierre",
+			"author": "Pierre",
 			"statement": "Which organ is affected by hepatits C ?",
 			"round": "LAST_ROUND",
 			"choices": {
@@ -320,7 +320,7 @@
 			}
 		},
 		{
-			"author": "*Pierre",
+			"author": "Pierre",
 			"statement": "In what year was the earth divided into 24 time zones ?",
 			"round": "LAST_ROUND",
 			"choices": {
@@ -331,7 +331,7 @@
 			}
 		},
 		{
-			"author": "Loïc Laruelle",
+			"author": "LoÃ¯c Laruelle",
 			"statement": "Which animal, now extinct, lived in Mauritius Island?",
 			"round": "FIRST_ROUND",
 			"choices": {
@@ -342,7 +342,7 @@
 			}
 		},
 		{
-			"author": "Loïc Laruelle",
+			"author": "LoÃ¯c Laruelle",
 			"statement": "The Deadly Hallow are...",
 			"round": "FIRST_ROUND",
 			"choices": {
@@ -353,7 +353,7 @@
 			}
 		},
 		{
-			"author": "Loïc Laruelle",
+			"author": "LoÃ¯c Laruelle",
 			"statement": "Who wrote Notre-Dame de Paris?",
 			"round": "FIRST_ROUND",
 			"choices": {
@@ -364,18 +364,18 @@
 			}
 		},
 		{
-			"author": "Loïc Laruelle",
-			"statement": "Loki has three children with the jöthunn Angrboba. Fenrir, Hel and...",
+			"author": "LoÃ¯c Laruelle",
+			"statement": "Loki has three children with the jÃ¶thunn Angrboba. Fenrir, Hel and...",
 			"round": "SECOND_ROUND",
 			"choices": {
 				"Thor": false,
 				"Laufey": false,
 				"Sleipnir": false,
-				"Jörmungand": true
+				"JÃ¶rmungand": true
 			}
 		},
 		{
-			"author": "Loïc Laruelle",
+			"author": "LoÃ¯c Laruelle",
 			"statement": "Who is the longest real molecule name?",
 			"round": "SECOND_ROUND",
 			"choices": {
@@ -386,7 +386,7 @@
 			}
 		},
 		{
-			"author": "Loïc Laruelle",
+			"author": "LoÃ¯c Laruelle",
 			"statement": "What\u0027s the current capital of Kazakhstan?",
 			"round": "SECOND_ROUND",
 			"choices": {
@@ -397,7 +397,7 @@
 			}
 		},
 		{
-			"author": "Loïc Laruelle",
+			"author": "LoÃ¯c Laruelle",
 			"statement": "What\u0027s called a resident of Jerusalem?",
 			"round": "LAST_ROUND",
 			"choices": {
@@ -408,7 +408,7 @@
 			}
 		},
 		{
-			"author": "Loïc Laruelle",
+			"author": "LoÃ¯c Laruelle",
 			"statement": "Candle is an old unit of measurement and was replaced by...",
 			"round": "LAST_ROUND",
 			"choices": {
@@ -782,7 +782,7 @@
 			}
 		},
 		{
-			"author": "Fabio Gioé",
+			"author": "Fabio GioÃ©",
 			"round": "FIRST_ROUND",
 			"statement": "The city of Rio de Janeiro lies on which ocean ?",
 			"choices": {
@@ -793,7 +793,7 @@
 			}
 		},
 		{
-			"author": "Fabio Gioé",
+			"author": "Fabio GioÃ©",
 			"round": "SECOND_ROUND",
 			"statement": "In which field is Roland Mouret a famous name?",
 			"choices": {
@@ -804,73 +804,7 @@
 			}
 		},
 		{
-			"author": "Fabio Gioé",
-			"round": "LAST_ROUND",
-			"statement": "What kind of musical work is Liberty Bell by John Philip Sousa",
-			"choices": {
-				"Polka": false,
-				"March": true,
-				"Nocturne ": false,
-				"Waltz": false
-			}
-		},
-		{
-			"author": "Pagnieau",
-			"round": "FIRST_ROUND",
-			"statement": "In the movie Lord of Ring what kind of race is Gimli",
-			"choices": {
-				"Dwarf": true,
-				"Hobbit": false,
-				"Wookiee": false,
-				"Elf": false
-			}
-		},
-		{
-			"author": "Pagnieau",
-			"round": "SECOND_ROUND",
-			"statement": "What does GPS stand for?",
-			"choices": {
-				"Global Positioning System": true,
-				"Geographical Precise System": false,
-				"General Positioning System": false,
-				"Geographical Positioning System": false
-			}
-		},
-		{
-			"author": "Pagnieau",
-			"round": "LAST_ROUND",
-			"statement": "In Harry Potter, which of these characters is nicknamed the Half-Blood Prince",
-			"choices": {
-				"Harry Potter": false,
-				"Albus Dumbledore": false,
-				"Severus Snape": true,
-				"Lord Voldemort": false
-			}
-		},
-		{
-			"author": "Fabio Gioé",
-			"round": "FIRST_ROUND",
-			"statement": "The city of Rio de Janeiro lies on which ocean ?",
-			"choices": {
-				"Indian": false,
-				"Arctic": false,
-				"Pacific": false,
-				"Atlantic": true
-			}
-		},
-		{
-			"author": "Fabio Gioé",
-			"round": "SECOND_ROUND",
-			"statement": "In which field is Roland Mouret a famous name?",
-			"choices": {
-				"Tennis": false,
-				"Fashion Design": true,
-				"Wether forecasting": false,
-				"Hair style": false
-			}
-		},
-		{
-			"author": "Fabio Gioé",
+			"author": "Fabio GioÃ©",
 			"round": "LAST_ROUND",
 			"statement": "What kind of musical work is Liberty Bell by John Philip Sousa",
 			"choices": {
@@ -888,13 +822,13 @@
 				"To use it like a radar": false,
 				"To clean themselves": false,
 				"To keep their balance": true,
-				"To show you they’re happy": false
+				"To show you they're happy": false
 			}
 		},
 		{
 			"author": "Corentin",
 			"round": "SECOND_ROUND",
-			"statement": "What’s the largest breed of cat ?",
+			"statement": "What's the largest breed of cat ?",
 			"choices": {
 				"Savannah": false,
 				"Maine coon": true,
@@ -949,7 +883,7 @@
 		{
 			"author": "Kevin",
 			"round": "FIRST_ROUND",
-			"statement": "Where’s Paris ?",
+			"statement": "Where's Paris ?",
 			"choices": {
 				"In China": false,
 				"In France": true,
@@ -971,7 +905,7 @@
 		{
 			"author": "Kevin",
 			"round": "LAST_ROUND",
-			"statement": "What country isn’t part of the European Union ?",
+			"statement": "What country isn't part of the European Union ?",
 			"choices": {
 				"Turkey": true,
 				"Belgium": false,
