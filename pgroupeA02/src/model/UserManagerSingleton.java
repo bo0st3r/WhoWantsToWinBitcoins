@@ -281,14 +281,10 @@ public class UserManagerSingleton implements Serializable {
 	public boolean updateUser(User oldUser, User newUser)
 			throws DuplicateUserPseudoException, DuplicateUserEmailException, DuplicateUserException {
 
-		if (User.validateEmail(newUser.getEmail()) || User.validatePassword(newUser.getPassword())) {
-			if (removeUserByPseudo(oldUser.getPseudo())) {
-				addUser(newUser);
-				return true;
-			}
-		}
-
-		return false;
+		if (removeUserByPseudo(oldUser.getPseudo()))
+			return addUser(newUser);
+		else
+			return addUser(oldUser);
 	}
 
 	public void incrementUserTotalEarningsWon(User user, double increment) {

@@ -53,7 +53,7 @@ public class SHA256Hasher {
 	}
 
 	/**
-	 * Compare if the given string size is equal to SHA-256 hash size.
+	 * Tests if the given string size is equal to SHA-256 hash size.
 	 * 
 	 * @param hashed String, the presumed hashed string.
 	 * @return boolean, if hashed has the right size.

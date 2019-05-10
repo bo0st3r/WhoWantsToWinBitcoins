@@ -216,7 +216,7 @@ public class TestQuestion {
 
 	@Test(expected = StatementTooShortException.class)
 	public void testSetStatementStatementTooShortException() throws StatementTooShortException {
-		question.setStatement("Should fail");
+		question.setStatement("Fail");
 	}
 
 	@Test

@@ -18,7 +18,6 @@ public class MainGame extends Application {
 //		UserManagerSingleton.getInstance().clearUsers();
 //		UserManagerSingleton.getInstance().addUser(new User("admin", "helha", "admin@helha.be", true));
 //		UserManagerSingleton.getInstance().addUser(new User("user", "helha", "user@helha.be"));
-
 		launch(args);
 	}
 

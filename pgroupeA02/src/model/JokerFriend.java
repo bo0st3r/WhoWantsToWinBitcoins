@@ -18,11 +18,11 @@ public class JokerFriend implements JokerStrategy {
 	}
 
 	/**
-	 * JokerStrategy pattern method, generate an index who will be used to display the JokerFriend result. A rate
-	 * will be picked depending on the actual round. The higher the round is, the
-	 * lower the rate will be. Then generates a random number between 0 and 1, if
-	 * this number is lower than the picked round then the index will be the right
-	 * answer index.
+	 * JokerStrategy pattern method, generate an index who will be used to display
+	 * the JokerFriend result. A rate will be picked depending on the actual round.
+	 * The higher the round is, the lower the rate will be. Then generates a random
+	 * number between 0 and 1, if this number is lower than the picked round then
+	 * the index will be the right answer index.
 	 * 
 	 * (non-Javadoc)
 	 * 

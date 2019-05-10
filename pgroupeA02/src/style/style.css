@@ -148,6 +148,9 @@
 	-fx-font-family:'IBM Plex Sans SemiBold', sans-serif;
 	-fx-font-size:2.0em;
 	-fx-font-weight:bold;
+	-fx-wrap-text:true;
+	-fx-label-padding: 1.2em;
+	-fx-text-alignment: center;
 }
 
 #answerValue{
