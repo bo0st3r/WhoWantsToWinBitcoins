@@ -38,6 +38,9 @@ import utilities.Serialization;
 public class PlayingGP extends GridPane {
 	private static Earning EARNING;
 	private Party party;
+	
+	/*for presentation*/
+	private Label lblGoodAnswer;
 
 	// Question
 	private QuestionGP questionGP;
@@ -112,6 +115,8 @@ public class PlayingGP extends GridPane {
 		add(getLblJokerResults(1), 3, 10);
 		add(getLblJokerResults(2), 7, 8);
 		add(getLblJokerResults(3), 7, 10);
+		
+		add(getLblGoodAnswer(), 6, 5, 2, 1);
 
 		// Starts the party
 		try {
@@ -286,6 +291,8 @@ public class PlayingGP extends GridPane {
 				party.setRightAnswer(answer);
 				party.setRightAnswerIndex(index);
 				System.out.println(party.getRightAnswer());
+				getLblGoodAnswer().setText(party.getRightAnswer());
+				
 			}
 
 			index++;
@@ -661,4 +668,17 @@ public class PlayingGP extends GridPane {
 		}
 		return pyramidGP;
 	}
+	/*FOR PRESENTATION*/
+
+	public Label getLblGoodAnswer() {
+		if(lblGoodAnswer == null) {
+			lblGoodAnswer = new Label("");
+			//lblGoodAnswer.setId("answerForPresentation");
+			GridPane.setValignment(getLblGoodAnswer(), VPos.BOTTOM);
+			GridPane.setHalignment(getLblGoodAnswer(), HPos.RIGHT);
+		}
+		return lblGoodAnswer;
+	}
+	
+	
 }
